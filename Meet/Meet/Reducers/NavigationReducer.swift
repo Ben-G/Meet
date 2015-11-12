@@ -10,10 +10,17 @@ import UIKit
 
 struct NavigationReducer {
   
-  func navigateToViewController(var state: AppState, targetViewController: UIViewController) -> AppState {
-    state.navigationState.currentViewController = targetViewController
+    func navigateToViewController(var state: AppState, targetViewController: UIViewController) -> AppState {
+        state.navigationState.currentViewController = targetViewController
+
+        return state
+    }
     
-    return state
-  }
+    func setNavigationState(var state: AppState, targetViewController: UIViewController) -> AppState {
+        state.navigationState.currentViewController = targetViewController
+        
+        return state
+    }
+
   
 }

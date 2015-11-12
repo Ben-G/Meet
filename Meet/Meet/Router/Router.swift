@@ -8,17 +8,31 @@
 
 import UIKit
 
-struct Router {
+class Router: NSObject {
+    var navigationActionCreator = NavigationActionCreator()
     let rootViewController: UIViewController
     
-    init() {
-        let tabBarViewController = UITabBarController()
-        let contactsViewController = UIViewController()
-        let addContactViewController = UIViewController()
+    override init() {
+        let tabBarController = UITabBarController()
+        let contactsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ContactsViewController")
+        let addContactViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("AddContactViewController")
         
-        tabBarViewController.viewControllers = [contactsViewController, addContactViewController]
-        rootViewController = tabBarViewController
+        tabBarController.viewControllers = [contactsViewController, addContactViewController]
+        rootViewController = tabBarController
+        
+        super.init()
+        
+        mainStore.dispatch { self.navigationActionCreator.setCurrentViewController(contactsViewController) }
+        tabBarController.delegate = self
     }
+}
+
+extension Router: UITabBarControllerDelegate {
+    
+    @objc func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
+        mainStore.dispatch { self.navigationActionCreator.setCurrentViewController(viewController) }
+    }
+    
 }
 
 func transitionFrom(vc1: UIViewController, to vc2: UIViewController) -> RouteTransition {
