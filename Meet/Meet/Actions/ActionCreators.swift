@@ -22,7 +22,7 @@ struct NavigationActionCreator {
         }
     }
     
-    func naviateToViewControllerCompleted(viewController: UIViewController) -> ActionCreator {
+    func navigateToViewControllerCompleted(viewController: UIViewController) -> ActionCreator {
         return { _ in
             return .CompleteNavigationTo(viewController)
         }

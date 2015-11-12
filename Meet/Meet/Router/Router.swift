@@ -50,7 +50,10 @@ extension Router: StoreSubscriber {
                 switch transition {
                 case .TabBarSelect:
                     rootViewController.selectedViewController = toViewController
-                    mainStore.dispatch { self.navigationActionCreator.naviateToViewControllerCompleted(toViewController) }
+                    mainStore.dispatch { self.navigationActionCreator.navigateToViewControllerCompleted(toViewController) }
+                case .Modal:
+                    fromViewController.presentViewController(toViewController, animated: true, completion: nil)
+                    mainStore.dispatch { self.navigationActionCreator.navigateToViewControllerCompleted(toViewController) }
                 default: break
                 }
         }
@@ -67,6 +70,10 @@ func transitionFrom(vc1: UIViewController, to vc2: UIViewController) -> RouteTra
     
     if (vc1 is AddContactViewController) && (vc2 is ContactListViewController) {
         return .TabBarSelect
+    }
+    
+    if (vc1 is AddContactViewController) && (vc2 is SearchTwitterViewController) {
+        return .Modal
     }
     
     return .None

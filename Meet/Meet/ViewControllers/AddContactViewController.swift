@@ -10,4 +10,10 @@ import UIKit
 
 class AddContactViewController: UIViewController {
   
+    @IBAction func addTwitterButtonTapped(sender: AnyObject) {
+        // TODO: Should not be instantiated here
+        let searchTwitterViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("SearchTwitterViewController")
+        
+        mainStore.dispatch { NavigationActionCreator().navigateToViewController(searchTwitterViewController) }
+    }
 }

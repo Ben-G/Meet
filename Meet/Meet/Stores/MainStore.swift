@@ -26,10 +26,14 @@ class MainStore: Store {
     }
     
     func dispatch(actionCreatorProvider: ActionCreatorProvider) {
-        let action = actionCreatorProvider()(state: appState, store: self)
-        
-        if let action = action {
-            appState = reducer.handleAction(appState, action: action)
+        // dispatch this asynchronously to make sure that all receivers receive new state
+        // before state is modified
+        dispatch_async(dispatch_get_main_queue()) {
+            let action = actionCreatorProvider()(state: self.appState, store: self)
+            
+            if let action = action {
+                self.appState = self.reducer.handleAction(self.appState, action: action)
+            }
         }
     }
 
