@@ -16,4 +16,16 @@ struct NavigationActionCreator {
         }
     }
     
+    func navigateToViewController(viewController: UIViewController) -> ActionCreator {
+        return { _ in
+            return .NavigateTo(viewController)
+        }
+    }
+    
+    func naviateToViewControllerCompleted(viewController: UIViewController) -> ActionCreator {
+        return { _ in
+            return .CompleteNavigationTo(viewController)
+        }
+    }
+    
 }

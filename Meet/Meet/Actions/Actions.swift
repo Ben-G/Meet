@@ -9,6 +9,7 @@
 import UIKit
 
 enum Action {
-    case Navigate(UIViewController)
+    case NavigateTo(UIViewController)
+    case CompleteNavigationTo(UIViewController)
     case SetNavigationState(UIViewController)
 }

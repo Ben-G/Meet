@@ -9,7 +9,7 @@
         <!--Meet-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="ContactsViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="Meet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ContactsViewController" id="BYZ-38-t0r" customClass="ContactListViewController" customModule="Meet" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -29,7 +29,7 @@
         <!--Contacts-->
         <scene sceneID="KZn-MS-4AI">
             <objects>
-                <viewController storyboardIdentifier="AddContactViewController" id="tmC-Au-bX5" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddContactViewController" id="tmC-Au-bX5" customClass="AddContactViewController" customModule="Meet" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Qz6-hr-wFe"/>
                         <viewControllerLayoutGuide type="bottom" id="zqI-ma-bgK"/>

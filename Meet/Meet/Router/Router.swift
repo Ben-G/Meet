@@ -10,9 +10,12 @@ import UIKit
 
 class Router: NSObject {
     var navigationActionCreator = NavigationActionCreator()
-    let rootViewController: UIViewController
+    var store: Store
     
-    override init() {
+    let rootViewController: UITabBarController
+    
+    init(store: Store) {
+        self.store = store
         let tabBarController = UITabBarController()
         let contactsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ContactsViewController")
         let addContactViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("AddContactViewController")
@@ -24,28 +27,58 @@ class Router: NSObject {
         
         mainStore.dispatch { self.navigationActionCreator.setCurrentViewController(contactsViewController) }
         tabBarController.delegate = self
+        self.store.subscribe(self)
     }
 }
 
 extension Router: UITabBarControllerDelegate {
     
-    @objc func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
-        mainStore.dispatch { self.navigationActionCreator.setCurrentViewController(viewController) }
+    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
+        mainStore.dispatch { self.navigationActionCreator.navigateToViewController(viewController) }
+        
+        return false
+    }
+    
+}
+
+extension Router: StoreSubscriber {
+    
+    func newState(state: AppState) {
+        if let fromViewController = state.navigationState.currentViewController,
+            toViewController = state.navigationState.transitionToViewController {
+                let transition = transitionFrom(fromViewController, to: toViewController)
+                switch transition {
+                case .TabBarSelect:
+                    rootViewController.selectedViewController = toViewController
+                    mainStore.dispatch { self.navigationActionCreator.naviateToViewControllerCompleted(toViewController) }
+                default: break
+                }
+        }
     }
     
 }
 
 func transitionFrom(vc1: UIViewController, to vc2: UIViewController) -> RouteTransition {
-  let transition = (vc1, vc2)
-  
-  switch transition {
-  case is (ContactListViewController, AddContactViewController):
-      return .TabBarSelect
-  case is (AddContactViewController, ContactListViewController):
-      return .TabBarSelect
-  default:
-      return .None
-  }
+//    let transition = (vc1, vc2)
+    
+    if (vc1 is ContactListViewController) && (vc2 is AddContactViewController) {
+        return .TabBarSelect
+    }
+    
+    if (vc1 is AddContactViewController) && (vc2 is ContactListViewController) {
+        return .TabBarSelect
+    }
+    
+    return .None
+    
+//      switch transition {
+//      case is (ContactListViewController, AddContactViewController):
+//          return .TabBarSelect
+//      case is (AddContactViewController, ContactListViewController):
+//          return .TabBarSelect
+//      default:
+//          return .None
+//      }
 }
 
 enum RouteTransition {

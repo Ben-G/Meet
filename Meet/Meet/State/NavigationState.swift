@@ -9,5 +9,6 @@
 import UIKit
 
 struct NavigationState {
-  var currentViewController: UIViewController?
+    var currentViewController: UIViewController?
+    var transitionToViewController: UIViewController?
 }

@@ -11,8 +11,17 @@ import UIKit
 struct NavigationReducer {
   
     func navigateToViewController(var state: AppState, targetViewController: UIViewController) -> AppState {
-        state.navigationState.currentViewController = targetViewController
+        state.navigationState.transitionToViewController = targetViewController
 
+        return state
+    }
+    
+    func completeNavigationToViewController(var state: AppState, completedTransitionViewController: UIViewController) -> AppState {
+        if (state.navigationState.transitionToViewController == completedTransitionViewController) {
+            state.navigationState.currentViewController = completedTransitionViewController
+            state.navigationState.transitionToViewController = nil
+        }
+        
         return state
     }
     

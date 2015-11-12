@@ -16,6 +16,10 @@ struct MainReducer: Reducer {
         switch action {
         case .SetNavigationState(let viewController):
             return navigationReducer.setNavigationState(state, targetViewController: viewController)
+        case .NavigateTo(let viewController):
+            return navigationReducer.navigateToViewController(state, targetViewController: viewController)
+        case .CompleteNavigationTo(let viewController):
+            return navigationReducer.completeNavigationToViewController(state, completedTransitionViewController: viewController)
         default:
             return state
         }

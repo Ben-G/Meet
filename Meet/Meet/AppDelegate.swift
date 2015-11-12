@@ -8,8 +8,9 @@
 
 import UIKit
 
-let router = Router()
+
 let mainStore = MainStore()
+let router = Router(store: mainStore)
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
