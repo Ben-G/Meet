@@ -22,6 +22,11 @@ class EmailIntroViewController: UIViewController {
     
         store.dispatch { self.navigationActionCreator.presentViewController(mailComposerViewController!) }
     }
+    
+    @IBAction func cancelButtonTapped(sender: AnyObject) {
+        store.dispatch { self.navigationActionCreator.dismissViewController(presentingViewController: self.presentingViewController!) }
+    }
+    
 }
 
 extension EmailIntroViewController: MFMailComposeViewControllerDelegate, UINavigationControllerDelegate {

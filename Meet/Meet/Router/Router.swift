@@ -17,15 +17,15 @@ class Router: NSObject {
     init(store: Store) {
         self.store = store
         let tabBarController = UITabBarController()
-        let contactsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ContactsViewController")
         let addContactViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("AddContactViewController")
+        let contactsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ContactsViewController")
         
-        tabBarController.viewControllers = [contactsViewController, addContactViewController]
+        tabBarController.viewControllers = [addContactViewController, contactsViewController]
         rootViewController = tabBarController
         
         super.init()
         
-        mainStore.dispatch { self.navigationActionCreator.setCurrentViewController(contactsViewController) }
+        mainStore.dispatch { self.navigationActionCreator.setCurrentViewController(addContactViewController) }
         tabBarController.delegate = self
         self.store.subscribe(self)
     }

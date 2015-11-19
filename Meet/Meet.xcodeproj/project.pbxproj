@@ -17,7 +17,6 @@
 		62D3B6ED1BF3AC5E0056D509 /* NavigationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B6EC1BF3AC5E0056D509 /* NavigationState.swift */; };
 		62D3B6F01BF3AD720056D509 /* NavigationReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B6EF1BF3AD720056D509 /* NavigationReducer.swift */; };
 		62D3B6F31BF3B2AE0056D509 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B6F21BF3B2AE0056D509 /* Router.swift */; };
-		62D3B6F61BF3B7110056D509 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B6F51BF3B7110056D509 /* ViewController.swift */; };
 		62D3B6F81BF3B72E0056D509 /* ContactListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B6F71BF3B72E0056D509 /* ContactListViewController.swift */; };
 		62D3B6FA1BF3B73A0056D509 /* AddContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B6F91BF3B73A0056D509 /* AddContactViewController.swift */; };
 		62D3B6FD1BF445570056D509 /* MainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B6FC1BF445570056D509 /* MainStore.swift */; };
@@ -62,7 +61,6 @@
 		62D3B6EC1BF3AC5E0056D509 /* NavigationState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationState.swift; sourceTree = "<group>"; };
 		62D3B6EF1BF3AD720056D509 /* NavigationReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationReducer.swift; sourceTree = "<group>"; };
 		62D3B6F21BF3B2AE0056D509 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
-		62D3B6F51BF3B7110056D509 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		62D3B6F71BF3B72E0056D509 /* ContactListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactListViewController.swift; sourceTree = "<group>"; };
 		62D3B6F91BF3B73A0056D509 /* AddContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddContactViewController.swift; sourceTree = "<group>"; };
 		62D3B6FC1BF445570056D509 /* MainStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainStore.swift; sourceTree = "<group>"; };
@@ -183,7 +181,6 @@
 		62D3B6F41BF3B7110056D509 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				62D3B6F51BF3B7110056D509 /* ViewController.swift */,
 				62D3B6F71BF3B72E0056D509 /* ContactListViewController.swift */,
 				62D3B6F91BF3B73A0056D509 /* AddContactViewController.swift */,
 				62D3B7051BF457C40056D509 /* SearchTwitterViewController.swift */,
@@ -341,7 +338,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				62D3B7041BF44C190056D509 /* ActionCreators.swift in Sources */,
-				62D3B6F61BF3B7110056D509 /* ViewController.swift in Sources */,
 				62D3B6EB1BF3A9870056D509 /* AppState.swift in Sources */,
 				62D3B7021BF4485C0056D509 /* MainReducer.swift in Sources */,
 				62D3B6ED1BF3AC5E0056D509 /* NavigationState.swift in Sources */,
@@ -580,6 +576,7 @@
 				62D3B6E21BF2FAA80056D509 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		62D3B6E31BF2FAA80056D509 /* Build configuration list for PBXNativeTarget "MeetTests" */ = {
 			isa = XCConfigurationList;
@@ -588,6 +585,7 @@
 				62D3B6E51BF2FAA80056D509 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		62D3B6E61BF2FAA80056D509 /* Build configuration list for PBXNativeTarget "MeetUITests" */ = {
 			isa = XCConfigurationList;
@@ -596,6 +594,7 @@
 				62D3B6E81BF2FAA80056D509 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

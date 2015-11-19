@@ -35,6 +35,11 @@ struct NavigationReducer {
             state.navigationState.currentViewController = completedTransitionViewController
             state.navigationState.transitionToViewController = nil
             state.navigationState.presentationType = nil
+            
+            // TODO: most likely should not live here
+            if let tabBarController = state.navigationState.currentViewController as? UITabBarController {
+                state.navigationState.currentViewController = tabBarController.selectedViewController
+            }
         }
         
         return state
