@@ -10,10 +10,19 @@ import UIKit
 
 class AddContactViewController: UIViewController {
   
+    var store = mainStore
+    var navigationActionCreator = NavigationActionCreator()
+    
+    @IBAction func emailIntroButtonTapped(sender: AnyObject) {
+        let emailIntroViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("EmailIntroViewController")
+        
+        store.dispatch { self.navigationActionCreator.navigateToViewController(emailIntroViewController) }
+    }
+    
     @IBAction func addTwitterButtonTapped(sender: AnyObject) {
         // TODO: Should not be instantiated here
         let searchTwitterViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("SearchTwitterViewController")
         
-        mainStore.dispatch { NavigationActionCreator().navigateToViewController(searchTwitterViewController) }
+        store.dispatch { self.navigationActionCreator.navigateToViewController(searchTwitterViewController) }
     }
 }

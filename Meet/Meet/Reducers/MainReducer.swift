@@ -20,8 +20,10 @@ struct MainReducer: Reducer {
             return navigationReducer.navigateToViewController(state, targetViewController: viewController)
         case .CompleteNavigationTo(let viewController):
             return navigationReducer.completeNavigationToViewController(state, completedTransitionViewController: viewController)
-        default:
-            return state
+        case .PresentViewController(let viewController):
+            return navigationReducer.presentViewController(state, targetViewController: viewController)
+        case .DismissViewController(let viewController):
+            return navigationReducer.dismissViewController(state, parentViewController: viewController)
         }
     }
     

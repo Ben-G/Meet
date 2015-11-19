@@ -16,10 +16,25 @@ struct NavigationReducer {
         return state
     }
     
+    func presentViewController(var state: AppState, targetViewController: UIViewController) -> AppState {
+        state.navigationState.transitionToViewController = targetViewController
+        state.navigationState.presentationType = .Custom(.Modal)
+        
+        return state
+    }
+    
+    func dismissViewController(var state: AppState, parentViewController: UIViewController) -> AppState {
+        state.navigationState.presentationType = .Custom(.Dismiss)
+        state.navigationState.transitionToViewController = parentViewController
+        
+        return state
+    }
+    
     func completeNavigationToViewController(var state: AppState, completedTransitionViewController: UIViewController) -> AppState {
         if (state.navigationState.transitionToViewController == completedTransitionViewController) {
             state.navigationState.currentViewController = completedTransitionViewController
             state.navigationState.transitionToViewController = nil
+            state.navigationState.presentationType = nil
         }
         
         return state

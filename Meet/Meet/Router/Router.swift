@@ -46,7 +46,15 @@ extension Router: StoreSubscriber {
     func newState(state: AppState) {
         if let fromViewController = state.navigationState.currentViewController,
             toViewController = state.navigationState.transitionToViewController {
-                let transition = transitionFrom(fromViewController, to: toViewController)
+                
+                let transition: RouteTransition
+                // TODO: Cleanup nil-coalescing workaround
+                if case .Custom(let customPresentation) = state.navigationState.presentationType ?? .Default {
+                    transition = customPresentation
+                } else {
+                    transition = transitionFrom(fromViewController, to: toViewController)
+                }
+                
                 switch transition {
                 case .TabBarSelect:
                     rootViewController.selectedViewController = toViewController
@@ -54,6 +62,13 @@ extension Router: StoreSubscriber {
                 case .Modal:
                     fromViewController.presentViewController(toViewController, animated: true, completion: nil)
                     mainStore.dispatch { self.navigationActionCreator.navigateToViewControllerCompleted(toViewController) }
+                case .Dismiss:
+                    toViewController.dismissViewControllerAnimated(true, completion: nil)
+                    mainStore.dispatch { self.navigationActionCreator.navigateToViewControllerCompleted(toViewController) }
+                case .Push:
+                    rootViewController.navigationController?.pushViewController(toViewController, animated: true)
+
+                    // TODO: remove default
                 default: break
                 }
         }
@@ -76,6 +91,10 @@ func transitionFrom(vc1: UIViewController, to vc2: UIViewController) -> RouteTra
         return .Modal
     }
     
+    if (vc1 is AddContactViewController) && (vc2 is EmailIntroViewController) {
+        return .Modal
+    }
+    
     return .None
     
 //      switch transition {
@@ -93,5 +112,6 @@ enum RouteTransition {
   case Pop
   case TabBarSelect
   case Modal
+  case Dismiss
   case None
 }

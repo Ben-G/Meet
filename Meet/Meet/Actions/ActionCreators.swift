@@ -16,6 +16,18 @@ struct NavigationActionCreator {
         }
     }
     
+    func presentViewController(viewController: UIViewController) -> ActionCreator {
+        return { _ in
+            return .PresentViewController(viewController)
+        }
+    }
+    
+    func dismissViewController(presentingViewController presentingViewController: UIViewController) -> ActionCreator {
+        return { _ in
+            return .DismissViewController(presentingViewController)
+        }
+    }
+    
     func navigateToViewController(viewController: UIViewController) -> ActionCreator {
         return { _ in
             return .NavigateTo(viewController)

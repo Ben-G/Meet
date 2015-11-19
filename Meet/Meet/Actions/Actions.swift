@@ -12,4 +12,6 @@ enum Action {
     case NavigateTo(UIViewController)
     case CompleteNavigationTo(UIViewController)
     case SetNavigationState(UIViewController)
+    case PresentViewController(UIViewController)
+    case DismissViewController(UIViewController)
 }
