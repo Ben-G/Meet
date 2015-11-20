@@ -6,10 +6,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Meet-->
+        <!--Contacts-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="ContactsViewController" id="BYZ-38-t0r" customClass="ContactListViewController" customModule="Meet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ContactsViewController" id="BYZ-38-t0r" userLabel="Contacts" customClass="ContactListViewController" customModule="Meet" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -33,7 +33,7 @@
                             <constraint firstItem="oxM-ZQ-Iog" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="wmF-qY-8ET"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Meet" id="DZn-ip-GeB"/>
+                    <tabBarItem key="tabBarItem" title="Meet" id="DZn-ip-GeB" userLabel="Contacts"/>
                     <connections>
                         <outlet property="tableView" destination="oxM-ZQ-Iog" id="yuI-0N-WyS"/>
                     </connections>
@@ -42,10 +42,10 @@
             </objects>
             <point key="canvasLocation" x="1026" y="-145"/>
         </scene>
-        <!--Contacts-->
+        <!--Meet-->
         <scene sceneID="KZn-MS-4AI">
             <objects>
-                <viewController storyboardIdentifier="AddContactViewController" id="tmC-Au-bX5" customClass="AddContactViewController" customModule="Meet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddContactViewController" id="tmC-Au-bX5" userLabel="Meet" customClass="AddContactViewController" customModule="Meet" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Qz6-hr-wFe"/>
                         <viewControllerLayoutGuide type="bottom" id="zqI-ma-bgK"/>
@@ -92,7 +92,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Contacts" id="EAl-TI-jOg"/>
+                    <tabBarItem key="tabBarItem" title="Contacts" id="EAl-TI-jOg" userLabel="Meet"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I88-xM-3Sw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -1,1 +1,2 @@
 github "Ben-G/ListKit"
+github "ReactiveCocoa/ReactiveCocoa" "v4.0.0-alpha.3"

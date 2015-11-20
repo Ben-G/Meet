@@ -8,6 +8,7 @@
 
 import UIKit
 import ListKit
+import ReactiveCocoa
 
 class ContactTableViewCell: UITableViewCell, ListKitCellProtocol {
     var model: Contact? {
@@ -30,7 +31,6 @@ class ContactListViewController: UIViewController, StoreSubscriber {
         didSet {
             if let contacts = contacts {
                 dataSource.array = contacts
-                tableView.reloadData()
             }
         }
     }
@@ -38,6 +38,7 @@ class ContactListViewController: UIViewController, StoreSubscriber {
     override func viewWillAppear(animated: Bool) {
         tableView.dataSource = self
         store.subscribe(self)
+        tableView.reloadData()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -63,7 +64,11 @@ extension ContactListViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         let contactID = dataSource.array[indexPath.row].identifier
-        store.dispatch { self.dataMutationActionCreator.deleteContact(contactID) }
+        let signal = store.dispatch { self.dataMutationActionCreator.deleteContact(contactID) }
+        
+        signal.observeNext { appState in
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+        }
     }
     
 }

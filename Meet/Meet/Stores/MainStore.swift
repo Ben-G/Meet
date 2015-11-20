@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ReactiveCocoa
 
 class MainStore: Store {
     
@@ -32,15 +33,21 @@ class MainStore: Store {
 //        }
     }
     
-    func dispatch(actionCreatorProvider: ActionCreatorProvider) {
+    func dispatch(actionCreatorProvider: ActionCreatorProvider) -> Signal<AppState, NoError> {
         // dispatch this asynchronously to make sure that all receivers receive new state
         // before state is modified
-        dispatch_async(dispatch_get_main_queue()) {
-            let action = actionCreatorProvider()(state: self.appState, store: self)
-            
-            if let action = action {
-                self.appState = self.reducer.handleAction(self.appState, action: action)
+        return Signal { observer in
+            dispatch_async(dispatch_get_main_queue()) {
+                let action = actionCreatorProvider()(state: self.appState, store: self)
+                
+                if let action = action {
+                    self.appState = self.reducer.handleAction(self.appState, action: action)
+                    observer.sendNext(self.appState)
+                    observer.sendCompleted()
+                }
             }
+            
+            return nil
         }
     }
 
@@ -50,7 +57,7 @@ protocol Store {
     var reducer: Reducer { get set }
     
     func subscribe(subscriber: StoreSubscriber)
-    func dispatch(actionCreatorProvider: ActionCreatorProvider)
+    func dispatch(actionCreatorProvider: ActionCreatorProvider) -> Signal<AppState, NoError>
 }
 
 typealias ActionCreatorProvider = () -> ActionCreator
