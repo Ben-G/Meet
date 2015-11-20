@@ -11,6 +11,7 @@ import Foundation
 struct MainReducer: Reducer {
     
     var navigationReducer = NavigationReducer()
+    var dataMutationReducer = DataMutationReducer()
     
     func handleAction(state: AppState, action: Action) -> AppState {
         switch action {
@@ -24,6 +25,8 @@ struct MainReducer: Reducer {
             return navigationReducer.presentViewController(state, targetViewController: viewController)
         case .DismissViewController(let viewController):
             return navigationReducer.dismissViewController(state, parentViewController: viewController)
+        case .CreateContactFromEmail(let email):
+            return dataMutationReducer.createContact(state, email: email)
         }
     }
     

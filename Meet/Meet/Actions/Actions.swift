@@ -9,9 +9,13 @@
 import UIKit
 
 enum Action {
+    // Navigation
     case NavigateTo(UIViewController)
     case CompleteNavigationTo(UIViewController)
     case SetNavigationState(UIViewController)
     case PresentViewController(UIViewController)
     case DismissViewController(UIViewController)
+    
+    // Data Mutation
+    case CreateContactFromEmail(String)
 }

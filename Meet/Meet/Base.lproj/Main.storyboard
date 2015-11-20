@@ -17,8 +17,21 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oxM-ZQ-Iog">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="oxM-ZQ-Iog" secondAttribute="bottom" id="QoY-Tg-Ojn"/>
+                            <constraint firstItem="oxM-ZQ-Iog" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Rcz-En-kdH"/>
+                            <constraint firstAttribute="trailing" secondItem="oxM-ZQ-Iog" secondAttribute="trailing" id="shV-ZV-iT4"/>
+                            <constraint firstItem="oxM-ZQ-Iog" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="wmF-qY-8ET"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Meet" id="DZn-ip-GeB"/>
                 </viewController>

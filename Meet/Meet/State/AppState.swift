@@ -27,4 +27,5 @@ import Foundation
 
 struct AppState {
   var navigationState = NavigationState()
+  var dataState = DataState()
 }
