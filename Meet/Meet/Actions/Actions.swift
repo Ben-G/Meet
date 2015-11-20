@@ -18,4 +18,5 @@ enum Action {
     
     // Data Mutation
     case CreateContactFromEmail(String)
+    case DeleteContact(Int)
 }

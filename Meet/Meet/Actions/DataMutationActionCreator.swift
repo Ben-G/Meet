@@ -16,4 +16,10 @@ struct DataMutationActionCreator {
         }
     }
     
+    func deleteContact(contactID: Int) -> ActionCreator {
+        return { _ in
+            return .DeleteContact(contactID)
+        }
+    }
+    
 }

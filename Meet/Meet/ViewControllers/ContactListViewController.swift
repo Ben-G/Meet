@@ -20,7 +20,10 @@ class ContactTableViewCell: UITableViewCell, ListKitCellProtocol {
 class ContactListViewController: UIViewController, StoreSubscriber {
   
     @IBOutlet var tableView: UITableView!
+
     var store = mainStore
+    var dataMutationActionCreator = DataMutationActionCreator()
+    
     var dataSource = ArrayDataSource(array: [], cellType: ContactTableViewCell.self)
 
     var contacts: [Contact]? {
@@ -33,7 +36,7 @@ class ContactListViewController: UIViewController, StoreSubscriber {
     }
     
     override func viewWillAppear(animated: Bool) {
-        tableView.dataSource = dataSource
+        tableView.dataSource = self
         store.subscribe(self)
     }
     
@@ -45,4 +48,22 @@ class ContactListViewController: UIViewController, StoreSubscriber {
         contacts = state.dataState.contacts
     }
 
+}
+
+extension ContactListViewController: UITableViewDataSource {
+
+   
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        return self.dataSource.tableView(tableView, cellForRowAtIndexPath: indexPath)
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataSource.tableView(tableView, numberOfRowsInSection: section)
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        let contactID = dataSource.array[indexPath.row].identifier
+        store.dispatch { self.dataMutationActionCreator.deleteContact(contactID) }
+    }
+    
 }

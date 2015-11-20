@@ -18,4 +18,11 @@ struct DataMutationReducer {
         return state
     }
     
+    func deleteContact(var state: AppState, identifier: Int) -> AppState {
+        // TODO: remove dummy implementation
+        state.dataState.contacts.removeLast()
+        
+        return state
+    }
+    
 }

@@ -27,6 +27,8 @@ struct MainReducer: Reducer {
             return navigationReducer.dismissViewController(state, parentViewController: viewController)
         case .CreateContactFromEmail(let email):
             return dataMutationReducer.createContact(state, email: email)
+        case .DeleteContact(let identifier):
+            return dataMutationReducer.deleteContact(state, identifier: identifier)
         }
     }
     

@@ -12,11 +12,13 @@ class AddContactViewController: UIViewController {
   
     var store = mainStore
     var navigationActionCreator = NavigationActionCreator()
+    var dataMutationActionCreator = DataMutationActionCreator()
     
     @IBAction func emailIntroButtonTapped(sender: AnyObject) {
         let emailIntroViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("EmailIntroViewController")
         
-        store.dispatch { self.navigationActionCreator.navigateToViewController(emailIntroViewController) }
+//        store.dispatch { self.navigationActionCreator.navigateToViewController(emailIntroViewController) }
+        store.dispatch { self.dataMutationActionCreator.createNewContact("Benjamin.Encz@gmail.com") }
     }
     
     @IBAction func addTwitterButtonTapped(sender: AnyObject) {
