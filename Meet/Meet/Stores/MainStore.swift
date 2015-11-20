@@ -25,6 +25,13 @@ class MainStore: Store {
         subscriber.newState(appState)
     }
     
+    func unsubscribe(subscriber: StoreSubscriber) {
+        // TODO: implement `unsubscribe`
+//        if let index = subscribers.indexOf(subscriber) {
+//            subscribers.removeAtIndex(index)
+//        }
+    }
+    
     func dispatch(actionCreatorProvider: ActionCreatorProvider) {
         // dispatch this asynchronously to make sure that all receivers receive new state
         // before state is modified
@@ -56,4 +63,3 @@ protocol StoreSubscriber {
 protocol Reducer {
     func handleAction(state: AppState, action: Action) -> AppState
 }
-

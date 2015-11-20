@@ -34,6 +34,9 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Meet" id="DZn-ip-GeB"/>
+                    <connections>
+                        <outlet property="tableView" destination="oxM-ZQ-Iog" id="yuI-0N-WyS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
