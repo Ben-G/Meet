@@ -15,6 +15,14 @@
 		626DA43E1BFEAC6F00988FC0 /* ListKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 626DA43D1BFEAC6F00988FC0 /* ListKit.framework */; };
 		626DA4431BFF943300988FC0 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 626DA4401BFF943300988FC0 /* ReactiveCocoa.framework */; };
 		626DA4441BFF943300988FC0 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 626DA4411BFF943300988FC0 /* Result.framework */; };
+		626DA4471BFFE02F00988FC0 /* SwifteriOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 626DA4461BFFE02F00988FC0 /* SwifteriOS.framework */; };
+		626DA44A1BFFE06C00988FC0 /* TwitterClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626DA4491BFFE06C00988FC0 /* TwitterClient.swift */; };
+		626DA44C1BFFE1AF00988FC0 /* SSKeychain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 626DA44B1BFFE1AF00988FC0 /* SSKeychain.framework */; };
+		626DA44F1BFFE44400988FC0 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626DA44E1BFFE44400988FC0 /* Authentication.swift */; };
+		626DA4511BFFEDBE00988FC0 /* TwitterAPIActionCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626DA4501BFFEDBE00988FC0 /* TwitterAPIActionCreator.swift */; };
+		626DA4531BFFEE6400988FC0 /* TwitterAPIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626DA4521BFFEE6400988FC0 /* TwitterAPIState.swift */; };
+		626DA4551BFFEF5B00988FC0 /* TwitterAPIReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626DA4541BFFEF5B00988FC0 /* TwitterAPIReducer.swift */; };
+		626DA4571C000FAE00988FC0 /* TwitterKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 626DA4561C000FAE00988FC0 /* TwitterKeys.plist */; };
 		62D3B6BC1BF2FAA80056D509 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B6BB1BF2FAA80056D509 /* AppDelegate.swift */; };
 		62D3B6C11BF2FAA80056D509 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D3B6BF1BF2FAA80056D509 /* Main.storyboard */; };
 		62D3B6C31BF2FAA80056D509 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62D3B6C21BF2FAA80056D509 /* Assets.xcassets */; };
@@ -33,6 +41,8 @@
 		62D3B7041BF44C190056D509 /* NavigationActionCreators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B7031BF44C190056D509 /* NavigationActionCreators.swift */; };
 		62D3B7061BF457C40056D509 /* SearchTwitterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B7051BF457C40056D509 /* SearchTwitterViewController.swift */; };
 		62D3B7301BFC58430056D509 /* EmaiIIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B72F1BFC58430056D509 /* EmaiIIntroViewController.swift */; };
+		62F43A831C022FCD0067E132 /* AppDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F43A821C022FCD0067E132 /* AppDelegateTests.swift */; };
+		62F43A841C0230D90067E132 /* SwifteriOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 626DA4461BFFE02F00988FC0 /* SwifteriOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +84,14 @@
 		626DA43D1BFEAC6F00988FC0 /* ListKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ListKit.framework; path = Carthage/Build/iOS/ListKit.framework; sourceTree = SOURCE_ROOT; };
 		626DA4401BFF943300988FC0 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = SOURCE_ROOT; };
 		626DA4411BFF943300988FC0 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = SOURCE_ROOT; };
+		626DA4461BFFE02F00988FC0 /* SwifteriOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwifteriOS.framework; path = Carthage/Build/iOS/SwifteriOS.framework; sourceTree = SOURCE_ROOT; };
+		626DA4491BFFE06C00988FC0 /* TwitterClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterClient.swift; sourceTree = "<group>"; };
+		626DA44B1BFFE1AF00988FC0 /* SSKeychain.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SSKeychain.framework; path = Carthage/Build/iOS/SSKeychain.framework; sourceTree = SOURCE_ROOT; };
+		626DA44E1BFFE44400988FC0 /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
+		626DA4501BFFEDBE00988FC0 /* TwitterAPIActionCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterAPIActionCreator.swift; sourceTree = "<group>"; };
+		626DA4521BFFEE6400988FC0 /* TwitterAPIState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterAPIState.swift; sourceTree = "<group>"; };
+		626DA4541BFFEF5B00988FC0 /* TwitterAPIReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterAPIReducer.swift; sourceTree = "<group>"; };
+		626DA4561C000FAE00988FC0 /* TwitterKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TwitterKeys.plist; sourceTree = "<group>"; };
 		62D3B6B81BF2FAA80056D509 /* Meet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62D3B6BB1BF2FAA80056D509 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		62D3B6C01BF2FAA80056D509 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -98,6 +116,7 @@
 		62D3B7031BF44C190056D509 /* NavigationActionCreators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationActionCreators.swift; sourceTree = "<group>"; };
 		62D3B7051BF457C40056D509 /* SearchTwitterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTwitterViewController.swift; sourceTree = "<group>"; };
 		62D3B72F1BFC58430056D509 /* EmaiIIntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmaiIIntroViewController.swift; sourceTree = "<group>"; };
+		62F43A821C022FCD0067E132 /* AppDelegateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegateTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +126,9 @@
 			files = (
 				626DA4431BFF943300988FC0 /* ReactiveCocoa.framework in Frameworks */,
 				626DA43E1BFEAC6F00988FC0 /* ListKit.framework in Frameworks */,
+				626DA44C1BFFE1AF00988FC0 /* SSKeychain.framework in Frameworks */,
 				626DA4441BFF943300988FC0 /* Result.framework in Frameworks */,
+				626DA4471BFFE02F00988FC0 /* SwifteriOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +136,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62F43A841C0230D90067E132 /* SwifteriOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,11 +162,31 @@
 		626DA4361BFEA4A700988FC0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				626DA44B1BFFE1AF00988FC0 /* SSKeychain.framework */,
+				626DA4461BFFE02F00988FC0 /* SwifteriOS.framework */,
 				626DA4401BFF943300988FC0 /* ReactiveCocoa.framework */,
 				626DA4411BFF943300988FC0 /* Result.framework */,
 				626DA43D1BFEAC6F00988FC0 /* ListKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		626DA4481BFFE06100988FC0 /* Clients */ = {
+			isa = PBXGroup;
+			children = (
+				626DA44D1BFFE43800988FC0 /* Auth */,
+				626DA4491BFFE06C00988FC0 /* TwitterClient.swift */,
+			);
+			path = Clients;
+			sourceTree = "<group>";
+		};
+		626DA44D1BFFE43800988FC0 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				626DA4561C000FAE00988FC0 /* TwitterKeys.plist */,
+				626DA44E1BFFE44400988FC0 /* Authentication.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		62D3B6AF1BF2FAA80056D509 = {
@@ -171,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				626DA4361BFEA4A700988FC0 /* Frameworks */,
+				626DA4481BFFE06100988FC0 /* Clients */,
 				626DA42B1BFE71B700988FC0 /* Models */,
 				62D3B6FE1BF446270056D509 /* Actions */,
 				62D3B6FB1BF4454D0056D509 /* Stores */,
@@ -190,6 +233,7 @@
 		62D3B6CF1BF2FAA80056D509 /* MeetTests */ = {
 			isa = PBXGroup;
 			children = (
+				62F43A811C022F820067E132 /* AppDelegate */,
 				62D3B6D01BF2FAA80056D509 /* MeetTests.swift */,
 				62D3B6D21BF2FAA80056D509 /* Info.plist */,
 			);
@@ -211,6 +255,7 @@
 				62D3B6EA1BF3A9870056D509 /* AppState.swift */,
 				62D3B6EC1BF3AC5E0056D509 /* NavigationState.swift */,
 				626DA4341BFE9E1C00988FC0 /* DataState.swift */,
+				626DA4521BFFEE6400988FC0 /* TwitterAPIState.swift */,
 			);
 			path = State;
 			sourceTree = "<group>";
@@ -221,6 +266,7 @@
 				62D3B6EF1BF3AD720056D509 /* NavigationReducer.swift */,
 				62D3B7011BF4485C0056D509 /* MainReducer.swift */,
 				626DA4321BFE9DA400988FC0 /* DataMutationReducer.swift */,
+				626DA4541BFFEF5B00988FC0 /* TwitterAPIReducer.swift */,
 			);
 			path = Reducers;
 			sourceTree = "<group>";
@@ -258,8 +304,17 @@
 				62D3B6FF1BF446310056D509 /* Actions.swift */,
 				62D3B7031BF44C190056D509 /* NavigationActionCreators.swift */,
 				626DA42E1BFE916200988FC0 /* DataMutationActionCreator.swift */,
+				626DA4501BFFEDBE00988FC0 /* TwitterAPIActionCreator.swift */,
 			);
 			path = Actions;
+			sourceTree = "<group>";
+		};
+		62F43A811C022F820067E132 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				62F43A821C022FCD0067E132 /* AppDelegateTests.swift */,
+			);
+			path = AppDelegate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -370,6 +425,7 @@
 			files = (
 				62D3B6C61BF2FAA80056D509 /* LaunchScreen.storyboard in Resources */,
 				62D3B6C31BF2FAA80056D509 /* Assets.xcassets in Resources */,
+				626DA4571C000FAE00988FC0 /* TwitterKeys.plist in Resources */,
 				62D3B6C11BF2FAA80056D509 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -400,6 +456,8 @@
 				"$(SRCROOT)/Carthage/Build/iOS/ListKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ReactiveCocoa.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwifteriOS.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SSKeychain.framework",
 			);
 			outputPaths = (
 			);
@@ -416,7 +474,9 @@
 			files = (
 				62D3B7041BF44C190056D509 /* NavigationActionCreators.swift in Sources */,
 				62D3B6EB1BF3A9870056D509 /* AppState.swift in Sources */,
+				626DA4531BFFEE6400988FC0 /* TwitterAPIState.swift in Sources */,
 				62D3B7021BF4485C0056D509 /* MainReducer.swift in Sources */,
+				626DA44F1BFFE44400988FC0 /* Authentication.swift in Sources */,
 				626DA4351BFE9E1C00988FC0 /* DataState.swift in Sources */,
 				626DA4331BFE9DA400988FC0 /* DataMutationReducer.swift in Sources */,
 				626DA42F1BFE916200988FC0 /* DataMutationActionCreator.swift in Sources */,
@@ -425,11 +485,14 @@
 				62D3B6FD1BF445570056D509 /* MainStore.swift in Sources */,
 				626DA4311BFE94BC00988FC0 /* Model.swift in Sources */,
 				626DA42D1BFE8CC700988FC0 /* Contact.swift in Sources */,
+				626DA4511BFFEDBE00988FC0 /* TwitterAPIActionCreator.swift in Sources */,
 				62D3B7061BF457C40056D509 /* SearchTwitterViewController.swift in Sources */,
+				626DA4551BFFEF5B00988FC0 /* TwitterAPIReducer.swift in Sources */,
 				62D3B7001BF446310056D509 /* Actions.swift in Sources */,
 				62D3B6F31BF3B2AE0056D509 /* Router.swift in Sources */,
 				62D3B6FA1BF3B73A0056D509 /* AddContactViewController.swift in Sources */,
 				62D3B6F81BF3B72E0056D509 /* ContactListViewController.swift in Sources */,
+				626DA44A1BFFE06C00988FC0 /* TwitterClient.swift in Sources */,
 				62D3B6BC1BF2FAA80056D509 /* AppDelegate.swift in Sources */,
 				62D3B7301BFC58430056D509 /* EmaiIIntroViewController.swift in Sources */,
 			);
@@ -439,6 +502,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62F43A831C022FCD0067E132 /* AppDelegateTests.swift in Sources */,
 				62D3B6D11BF2FAA80056D509 /* MeetTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -603,6 +667,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = MeetTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.digi-tales.MeetTests";
@@ -615,6 +683,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = MeetTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.digi-tales.MeetTests";

@@ -13,6 +13,7 @@ class AddContactViewController: UIViewController {
     var store = mainStore
     var navigationActionCreator = NavigationActionCreator()
     var dataMutationActionCreator = DataMutationActionCreator()
+    var twitterAPIActionCreator = TwitterAPIActionCreator()
     
     @IBAction func emailIntroButtonTapped(sender: AnyObject) {
         let emailIntroViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("EmailIntroViewController")
@@ -25,6 +26,10 @@ class AddContactViewController: UIViewController {
         // TODO: Should not be instantiated here
         let searchTwitterViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("SearchTwitterViewController")
         
-        store.dispatch { self.navigationActionCreator.navigateToViewController(searchTwitterViewController) }
+        store.dispatch { self.twitterAPIActionCreator.authenticateUser() }.observeNext { _ in
+            self.store.dispatch {
+                self.navigationActionCreator.navigateToViewController(searchTwitterViewController)
+            }
+        }
     }
 }

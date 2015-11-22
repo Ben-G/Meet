@@ -1,2 +1,4 @@
 github "Ben-G/ListKit"
 github "ReactiveCocoa/ReactiveCocoa" "v4.0.0-alpha.3"
+github "mattdonnelly/Swifter" "b785b1feb9edc83740d4d7dc46c1d27d0df33839"
+github "soffes/sskeychain"

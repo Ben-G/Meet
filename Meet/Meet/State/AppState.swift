@@ -26,6 +26,7 @@ import Foundation
 */
 
 struct AppState {
-  var navigationState = NavigationState()
-  var dataState = DataState()
+    var navigationState = NavigationState()
+    var dataState = DataState()
+    var twitterAPIState = TwitterAPIState()
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwifteriOS
 
 enum Action {
     // Navigation
@@ -19,4 +20,7 @@ enum Action {
     // Data Mutation
     case CreateContactFromEmail(String)
     case DeleteContact(Int)
+    
+    // Twitter API
+    case SetTwitterClient(Swifter)
 }

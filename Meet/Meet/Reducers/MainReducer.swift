@@ -12,6 +12,7 @@ struct MainReducer: Reducer {
     
     var navigationReducer = NavigationReducer()
     var dataMutationReducer = DataMutationReducer()
+    var twitterClientReducer = TwitterAPIReducer()
     
     func handleAction(state: AppState, action: Action) -> AppState {
         switch action {
@@ -29,6 +30,8 @@ struct MainReducer: Reducer {
             return dataMutationReducer.createContact(state, email: email)
         case .DeleteContact(let identifier):
             return dataMutationReducer.deleteContact(state, identifier: identifier)
+        case .SetTwitterClient(let swifter):
+            return twitterClientReducer.setTwitterClient(state, swifter: swifter)
         }
     }
     
