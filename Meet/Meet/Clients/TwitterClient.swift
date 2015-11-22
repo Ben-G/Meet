@@ -23,11 +23,11 @@ struct TwitterClient {
     
     static var cachedSwifter: Swifter?
     
-    static func login() -> Signal<Swifter, TwitterAuthenticationError> {
+    static func login() -> SignalProducer<Swifter, TwitterAuthenticationError> {
         let accountType = ACAccountStore().accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
         let accountStore = ACAccountStore()
         
-        return Signal { observer in
+        return SignalProducer<Swifter, TwitterAuthenticationError> { observer, _ in
             
             if let cachedSwifter = self.cachedSwifter {
                 observer.sendNext(cachedSwifter)
@@ -59,8 +59,6 @@ struct TwitterClient {
                     }, openQueryURL: nil)
                 }
             }
-            
-            return nil
         }
     }
     

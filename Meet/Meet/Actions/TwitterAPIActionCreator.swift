@@ -19,8 +19,14 @@ struct TwitterAPIActionCreator {
         
             return Signal<ActionCreator, NoError> { observer in
                 if state.twitterAPIState.swifter == nil {
-                    self.twitterClient.login().observeNext { swifter in
-                        observer.sendNext(self.setTwitterClient(swifter))
+                    
+                    self.twitterClient.login().start { event in
+                        switch event {
+                        case let .Next(swifter):
+                            observer.sendNext(self.setTwitterClient(swifter))
+                        default:
+                            print("oh")
+                        }
                     }
                 }
                 

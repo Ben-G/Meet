@@ -35,15 +35,15 @@ class MainStore: Store {
     
     func dispatch(actionCreatorProvider: ActionCreatorProvider) -> Signal<AppState, NoError> {
         return Signal { observer in
-    
-            let action = actionCreatorProvider()(state: self.appState, store: self)
-            
-            if let action = action {
-                self.appState = self.reducer.handleAction(self.appState, action: action)
-                observer.sendNext(self.appState)
-                observer.sendCompleted()
+            dispatch_async(dispatch_get_main_queue()) {
+                let action = actionCreatorProvider()(state: self.appState, store: self)
+                
+                if let action = action {
+                    self.appState = self.reducer.handleAction(self.appState, action: action)
+                    observer.sendNext(self.appState)
+                    observer.sendCompleted()
+                }
             }
-            
             return nil
         }
     }
@@ -85,6 +85,7 @@ protocol Store {
 
 typealias ActionCreatorProvider = () -> ActionCreator
 typealias AsyncActionCreatorProvider = () -> AsyncActionCreator
+
 typealias ActionCreator = (state: AppState, store: MainStore) -> Action?
 typealias AsyncActionCreator = (state: AppState, store: MainStore) -> Signal<ActionCreator,NoError>?
 
