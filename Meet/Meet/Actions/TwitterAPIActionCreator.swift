@@ -8,18 +8,24 @@
 
 import Foundation
 import SwifteriOS
+import ReactiveCocoa
 
 struct TwitterAPIActionCreator {
     
-    func authenticateUser() -> ActionCreator {
+    var twitterClient = TwitterClient.self
+    
+    func authenticateUser() -> AsyncActionCreator {
         return { state, store in
-            if state.twitterAPIState.swifter == nil {
-                TwitterClient.login().observeNext { swifter in
-                    store.dispatch { self.setTwitterClient(swifter) }
+        
+            return Signal<ActionCreator, NoError> { observer in
+                if state.twitterAPIState.swifter == nil {
+                    self.twitterClient.login().observeNext { swifter in
+                        observer.sendNext(self.setTwitterClient(swifter))
+                    }
                 }
+                
+                return nil
             }
-            
-            return nil
         }
     }
     
