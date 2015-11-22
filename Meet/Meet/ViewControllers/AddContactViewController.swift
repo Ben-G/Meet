@@ -25,13 +25,21 @@ class AddContactViewController: UIViewController, StoreSubscriber {
     var dataMutationActionCreator = DataMutationActionCreator()
     var twitterAPIActionCreator = TwitterAPIActionCreator()
     
-    var pendingActions: [PendingAction] = []
+    var pendingActions: [PendingAction] = [] { didSet {
+            // check to see if aciton can be resolved with current state
+            resolvePendingActions(store.appState)
+        }
+    }
     
     override func viewWillAppear(animated: Bool) {
         store.subscribe(self)
     }
     
     func newState(state: AppState) {
+        resolvePendingActions(state)
+    }
+    
+    func resolvePendingActions(state: AppState) {
         for var i = 0; i < pendingActions.count; i++ {
             let pendingAction = pendingActions[i]
             let resolved = pendingAction.resolve(state)

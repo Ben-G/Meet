@@ -122,7 +122,13 @@
                                     <constraint firstAttribute="height" constant="64" id="05T-H8-yxb"/>
                                 </constraints>
                                 <items>
-                                    <navigationItem title="Title" id="b9L-79-FpI"/>
+                                    <navigationItem title="Title" id="b9L-79-FpI">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="iVH-aa-RCD">
+                                            <connections>
+                                                <action selector="cancelButtonTapped:" destination="SDe-YQ-u2H" id="alR-jf-Lub"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uNT-dW-CqZ">

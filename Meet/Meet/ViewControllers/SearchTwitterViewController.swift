@@ -10,6 +10,11 @@ import UIKit
 
 class SearchTwitterViewController: UIViewController {
 
+    var store = mainStore
+    var navigationActionCreator = NavigationActionCreator()
     
+    @IBAction func cancelButtonTapped(sender: AnyObject) {
+        store.dispatch { self.navigationActionCreator.dismissViewController(presentingViewController: self.presentingViewController!) }
+    }
     
 }
