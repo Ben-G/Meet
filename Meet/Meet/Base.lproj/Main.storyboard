@@ -134,10 +134,13 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uNT-dW-CqZ">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="64" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uNT-dW-CqZ">
                                 <rect key="frame" x="0.0" y="108" width="600" height="492"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="delegate" destination="SDe-YQ-u2H" id="uom-2b-rWc"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <animations/>
@@ -155,6 +158,9 @@
                             <constraint firstItem="F7H-P2-KVP" firstAttribute="top" secondItem="uNT-dW-CqZ" secondAttribute="bottom" id="sbM-Jc-M2w"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="uNT-dW-CqZ" id="zGs-Lv-5Zy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sfy-oc-YSa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

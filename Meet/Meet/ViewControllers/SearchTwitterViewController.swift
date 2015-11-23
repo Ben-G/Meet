@@ -11,14 +11,26 @@ import ListKit
 
 class SearchTwitterViewController: UIViewController, StoreSubscriber {
 
+    @IBOutlet var tableView: UITableView!
+    
     var store = mainStore
+    var dataSource = ArrayDataSource(cellType: TwitterUserTableViewCell.self, nib: UINib(nibName: "TwitterUserTableViewCell", bundle: nil))
+
     var navigationActionCreator = NavigationActionCreator()
     var twitterAPIActionCreator = TwitterAPIActionCreator()
     
     var users: [TwitterUser]? {
         didSet {
-            print(users)
+            if let users = users {
+                dataSource.array = users
+                tableView.reloadData()
+            }
         }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        store.subscribe(self)
+        tableView.dataSource = dataSource
     }
     
     func newState(state: AppState) {
