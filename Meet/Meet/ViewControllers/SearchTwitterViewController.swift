@@ -18,3 +18,13 @@ class SearchTwitterViewController: UIViewController {
     }
     
 }
+
+extension SearchTwitterViewController: UISearchBarDelegate {
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        TwitterClient.findUsers(searchText).startWithNext { users in
+            print(users)
+        }
+    }
+    
+}

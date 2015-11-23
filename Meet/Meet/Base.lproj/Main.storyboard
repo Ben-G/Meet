@@ -114,6 +114,9 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <animations/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="SDe-YQ-u2H" id="B76-8H-hSt"/>
+                                </connections>
                             </searchBar>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kXH-63-3ST">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>

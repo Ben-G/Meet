@@ -12,6 +12,7 @@ import SwifteriOS
 import UIKit
 import SSKeychain
 import ReactiveCocoa
+import Unbox
 
 // TODO: Overhaul this
 
@@ -60,6 +61,29 @@ struct TwitterClient {
                 }
             }
         }
+    }
+    
+    static func findUsers(searchString: String) -> SignalProducer<[TwitterUser], TwitterAuthenticationError> {
+        return SignalProducer { observer, disposables in
+            login().startWithNext { swifter in
+                swifter.getUsersSearchWithQuery(searchString, page: 0, count: 5, includeEntities: false, success: { (users) -> Void in
+                    if let users = users {
+                        let twitterUsers = users.map { TwitterUser(json: $0) }
+                        observer.sendNext(twitterUsers)
+                    }
+                    }, failure: { (error) -> Void in
+                        
+                })
+            }
+        }
+        
+//        return login().map { swifter in
+//            swifter.getUsersSearchWithQuery("benjaminencz", page: 0, count: 5, includeEntities: false,  success: { users in
+//                return users
+//                }, failure: { (error) -> Void in
+//                    
+//            }).start()
+//        }
     }
     
 }
