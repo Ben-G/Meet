@@ -35,6 +35,23 @@ struct TwitterAPIActionCreator {
         }
     }
     
+    func searchUsers(searchTerm: String) -> ActionCreator {
+        return { state, store in
+            
+            self.twitterClient.findUsers(searchTerm).startWithNext { users in
+                store.dispatch { self.setUserSearchResults(users) }
+            }
+            
+            return (action: nil)
+        }
+    }
+    
+    func setUserSearchResults(searchResults: [TwitterUser]) -> ActionCreator {
+        return { _ in
+            return .SetUserSearchResults(searchResults)
+        }
+    }
+    
     func setTwitterClient(swifter: Swifter) -> ActionCreator {
         return { _ in
             return .SetTwitterClient(swifter)

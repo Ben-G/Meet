@@ -12,4 +12,5 @@ import SwifteriOS
 struct TwitterAPIState {
     var swifter: Swifter?
     var error: TwitterAuthenticationError?
+    var userSearchResults: [TwitterUser]?
 }

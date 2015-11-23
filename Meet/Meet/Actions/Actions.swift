@@ -23,4 +23,5 @@ enum Action {
     
     // Twitter API
     case SetTwitterClient(Swifter)
+    case SetUserSearchResults([TwitterUser])
 }

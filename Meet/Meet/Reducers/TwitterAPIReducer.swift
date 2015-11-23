@@ -17,4 +17,10 @@ struct TwitterAPIReducer {
         return state
     }
     
+    func setUserSearchResults(var state: AppState, userSearchResults: [TwitterUser]) -> AppState {
+        state.twitterAPIState.userSearchResults = userSearchResults
+        
+        return state
+    }
+    
 }

@@ -7,11 +7,23 @@
 //
 
 import UIKit
+import ListKit
 
-class SearchTwitterViewController: UIViewController {
+class SearchTwitterViewController: UIViewController, StoreSubscriber {
 
     var store = mainStore
     var navigationActionCreator = NavigationActionCreator()
+    var twitterAPIActionCreator = TwitterAPIActionCreator()
+    
+    var users: [TwitterUser]? {
+        didSet {
+            print(users)
+        }
+    }
+    
+    func newState(state: AppState) {
+        users = state.twitterAPIState.userSearchResults
+    }
     
     @IBAction func cancelButtonTapped(sender: AnyObject) {
         store.dispatch { self.navigationActionCreator.dismissViewController(presentingViewController: self.presentingViewController!) }
@@ -22,9 +34,7 @@ class SearchTwitterViewController: UIViewController {
 extension SearchTwitterViewController: UISearchBarDelegate {
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        TwitterClient.findUsers(searchText).startWithNext { users in
-            print(users)
-        }
+        store.dispatch { self.twitterAPIActionCreator.searchUsers(searchText) }
     }
     
 }
