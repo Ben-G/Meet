@@ -72,7 +72,7 @@ struct TwitterClient {
                         observer.sendNext(twitterUsers)
                     }
                     }, failure: { (error) -> Void in
-                        
+                        observer.sendNext([])
                 })
             }
         }

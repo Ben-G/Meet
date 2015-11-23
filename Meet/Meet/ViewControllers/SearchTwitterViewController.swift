@@ -38,6 +38,7 @@ class SearchTwitterViewController: UIViewController, StoreSubscriber {
     }
     
     @IBAction func cancelButtonTapped(sender: AnyObject) {
+        store.dispatch { self.twitterAPIActionCreator.setUserSearchResults([]) }
         store.dispatch { self.navigationActionCreator.dismissViewController(presentingViewController: self.presentingViewController!) }
     }
     

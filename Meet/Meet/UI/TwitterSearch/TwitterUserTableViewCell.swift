@@ -8,6 +8,7 @@
 
 import UIKit
 import ListKit
+import WebImage
 
 class TwitterUserTableViewCell: UITableViewCell, ListKitCellProtocol {
     
@@ -19,6 +20,7 @@ class TwitterUserTableViewCell: UITableViewCell, ListKitCellProtocol {
         didSet {
             nameLabel.text = model?.name
             usernameLabel.text = model?.username
+            profilePictureImageView.sd_setImageWithURL(model?.profilePictureURL)
         }
     }
     

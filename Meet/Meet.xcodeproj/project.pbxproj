@@ -45,6 +45,7 @@
 		62D492801C02C38A00607938 /* Unbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62D4927F1C02C38A00607938 /* Unbox.framework */; };
 		62D492841C02D2C000607938 /* TwitterUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62D492831C02D2C000607938 /* TwitterUserTableViewCell.xib */; };
 		62D492861C02D2E400607938 /* TwitterUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D492851C02D2E400607938 /* TwitterUserTableViewCell.swift */; };
+		62D492881C02DAAD00607938 /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62D492871C02DAAD00607938 /* WebImage.framework */; };
 		62F43A831C022FCD0067E132 /* AppDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F43A821C022FCD0067E132 /* AppDelegateTests.swift */; };
 		62F43A841C0230D90067E132 /* SwifteriOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 626DA4461BFFE02F00988FC0 /* SwifteriOS.framework */; };
 /* End PBXBuildFile section */
@@ -124,6 +125,7 @@
 		62D4927F1C02C38A00607938 /* Unbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Unbox.framework; path = Carthage/Build/iOS/Unbox.framework; sourceTree = SOURCE_ROOT; };
 		62D492831C02D2C000607938 /* TwitterUserTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwitterUserTableViewCell.xib; sourceTree = "<group>"; };
 		62D492851C02D2E400607938 /* TwitterUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterUserTableViewCell.swift; sourceTree = "<group>"; };
+		62D492871C02DAAD00607938 /* WebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebImage.framework; path = Carthage/Build/iOS/WebImage.framework; sourceTree = SOURCE_ROOT; };
 		62F43A821C022FCD0067E132 /* AppDelegateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegateTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -136,6 +138,7 @@
 				626DA43E1BFEAC6F00988FC0 /* ListKit.framework in Frameworks */,
 				626DA44C1BFFE1AF00988FC0 /* SSKeychain.framework in Frameworks */,
 				62D492801C02C38A00607938 /* Unbox.framework in Frameworks */,
+				62D492881C02DAAD00607938 /* WebImage.framework in Frameworks */,
 				626DA4441BFF943300988FC0 /* Result.framework in Frameworks */,
 				626DA4471BFFE02F00988FC0 /* SwifteriOS.framework in Frameworks */,
 			);
@@ -172,6 +175,7 @@
 		626DA4361BFEA4A700988FC0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				62D492871C02DAAD00607938 /* WebImage.framework */,
 				62D4927F1C02C38A00607938 /* Unbox.framework */,
 				626DA44B1BFFE1AF00988FC0 /* SSKeychain.framework */,
 				626DA4461BFFE02F00988FC0 /* SwifteriOS.framework */,
@@ -489,6 +493,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/SwifteriOS.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SSKeychain.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Unbox.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/WebImage.framework",
 			);
 			outputPaths = (
 			);
