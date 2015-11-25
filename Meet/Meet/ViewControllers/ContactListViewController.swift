@@ -66,6 +66,7 @@ extension ContactListViewController: UITableViewDataSource {
         let contactID = dataSource.array[indexPath.row].identifier
         let signal = store.dispatch { self.dataMutationActionCreator.deleteContact(contactID) }
         
+        // TODO: Consider implementing this as a pending action, or alternatively as an extension on UITableView using Dwift: https://github.com/jflinter/Dwifft or https://github.com/brutella/simplediff-swift
         signal.observeNext { appState in
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
         }
