@@ -22,4 +22,10 @@ struct DataMutationActionCreator {
         }
     }
     
+    func setContacts(contacts: [Contact]) -> ActionCreator {
+        return { _ in
+            return .SetContacts(contacts)
+        }
+    }
+    
 }

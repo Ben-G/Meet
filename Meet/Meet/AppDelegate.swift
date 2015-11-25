@@ -23,6 +23,8 @@ public class SwifterWrapper {
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    var persistenceAdapter = PersistenceAdapter(store: mainStore)
+    
   var window: UIWindow?
 
   var swifter: SwifterWrapper.Type = SwifterWrapper.self

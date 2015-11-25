@@ -25,4 +25,10 @@ struct DataMutationReducer {
         return state
     }
     
+    func setContacts(var state: AppState, contacts: [Contact]) -> AppState {
+        state.dataState.contacts = contacts
+        
+        return state
+    }
+    
 }

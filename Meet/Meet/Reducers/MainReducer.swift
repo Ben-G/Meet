@@ -30,6 +30,8 @@ struct MainReducer: Reducer {
             return dataMutationReducer.createContact(state, email: email)
         case .DeleteContact(let identifier):
             return dataMutationReducer.deleteContact(state, identifier: identifier)
+        case .SetContacts(let contacts):
+            return dataMutationReducer.setContacts(state, contacts: contacts)
         case .SetTwitterClient(let swifter):
             return twitterClientReducer.setTwitterClient(state, swifter: swifter)
         case .SetUserSearchResults(let users):

@@ -20,6 +20,7 @@ enum Action {
     // Data Mutation
     case CreateContactFromEmail(String)
     case DeleteContact(Int)
+    case SetContacts([Contact])
     
     // Twitter API
     case SetTwitterClient(Swifter)

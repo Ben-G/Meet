@@ -23,6 +23,8 @@
 		626DA4531BFFEE6400988FC0 /* TwitterAPIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626DA4521BFFEE6400988FC0 /* TwitterAPIState.swift */; };
 		626DA4551BFFEF5B00988FC0 /* TwitterAPIReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626DA4541BFFEF5B00988FC0 /* TwitterAPIReducer.swift */; };
 		626DA4571C000FAE00988FC0 /* TwitterKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 626DA4561C000FAE00988FC0 /* TwitterKeys.plist */; };
+		62CCBA571C058A5200B4F000 /* Contact+Coding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62CCBA561C058A5200B4F000 /* Contact+Coding.swift */; };
+		62CCBA591C058CD100B4F000 /* PersistenceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62CCBA581C058CD100B4F000 /* PersistenceAdapter.swift */; };
 		62D3B6BC1BF2FAA80056D509 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B6BB1BF2FAA80056D509 /* AppDelegate.swift */; };
 		62D3B6C11BF2FAA80056D509 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D3B6BF1BF2FAA80056D509 /* Main.storyboard */; };
 		62D3B6C31BF2FAA80056D509 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62D3B6C21BF2FAA80056D509 /* Assets.xcassets */; };
@@ -97,6 +99,8 @@
 		626DA4521BFFEE6400988FC0 /* TwitterAPIState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterAPIState.swift; sourceTree = "<group>"; };
 		626DA4541BFFEF5B00988FC0 /* TwitterAPIReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterAPIReducer.swift; sourceTree = "<group>"; };
 		626DA4561C000FAE00988FC0 /* TwitterKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TwitterKeys.plist; sourceTree = "<group>"; };
+		62CCBA561C058A5200B4F000 /* Contact+Coding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Contact+Coding.swift"; sourceTree = "<group>"; };
+		62CCBA581C058CD100B4F000 /* PersistenceAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceAdapter.swift; sourceTree = "<group>"; };
 		62D3B6B81BF2FAA80056D509 /* Meet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62D3B6BB1BF2FAA80056D509 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		62D3B6C01BF2FAA80056D509 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -204,6 +208,15 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
+		62CCBA551C058A2000B4F000 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				62CCBA561C058A5200B4F000 /* Contact+Coding.swift */,
+				62CCBA581C058CD100B4F000 /* PersistenceAdapter.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
 		62D3B6AF1BF2FAA80056D509 = {
 			isa = PBXGroup;
 			children = (
@@ -228,6 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				626DA4361BFEA4A700988FC0 /* Frameworks */,
+				62CCBA551C058A2000B4F000 /* Persistence */,
 				626DA4481BFFE06100988FC0 /* Clients */,
 				62D492811C02D2A200607938 /* UI */,
 				626DA42B1BFE71B700988FC0 /* Models */,
@@ -520,6 +534,8 @@
 				62D3B6ED1BF3AC5E0056D509 /* NavigationState.swift in Sources */,
 				62D3B6F01BF3AD720056D509 /* NavigationReducer.swift in Sources */,
 				62D3B6FD1BF445570056D509 /* MainStore.swift in Sources */,
+				62CCBA591C058CD100B4F000 /* PersistenceAdapter.swift in Sources */,
+				62CCBA571C058A5200B4F000 /* Contact+Coding.swift in Sources */,
 				626DA4311BFE94BC00988FC0 /* Model.swift in Sources */,
 				626DA42D1BFE8CC700988FC0 /* Contact.swift in Sources */,
 				626DA4511BFFEDBE00988FC0 /* TwitterAPIActionCreator.swift in Sources */,
