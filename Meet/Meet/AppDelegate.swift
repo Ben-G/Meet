@@ -10,6 +10,7 @@ import UIKit
 import SwifteriOS
 
 let mainStore = MainStore()
+var persistenceAdapter = PersistenceAdapter()
 let router = Router(store: mainStore)
 
 public class SwifterWrapper {
@@ -22,8 +23,6 @@ public class SwifterWrapper {
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    var persistenceAdapter = PersistenceAdapter(store: mainStore)
     
   var window: UIWindow?
 
@@ -36,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window?.makeKeyAndVisible()
     
     mainStore.subscribe(self)
+    persistenceAdapter.store = mainStore
     
     return true
   }

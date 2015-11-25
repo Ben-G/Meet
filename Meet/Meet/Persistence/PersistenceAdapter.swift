@@ -10,16 +10,14 @@ import Foundation
 
 class PersistenceAdapter: StoreSubscriber {
     
-    let store: Store
+    // Need to bind store late to avoid cyclycal references
+    var store: Store? { didSet {
+            store?.subscribe(self)
+        }
+    }
     var dataMutationActionCreator = DataMutationActionCreator()
     
-    init(store: Store) {
-        self.store = store
-        hydrateStore()
-        self.store.subscribe(self)
-    }
-    
-    func hydrateStore() {
+    func hydrateStore() -> [Contact]? {
         if let path = filePath() {
             do {
                 let data = NSData(contentsOfURL: path)
@@ -28,12 +26,13 @@ class PersistenceAdapter: StoreSubscriber {
                     let contacts = array?.map { Contact(dictionary: $0 as! NSDictionary)! }
                     
                     if let contacts = contacts {
-                        store.dispatch { self.dataMutationActionCreator.setContacts(contacts) }
+                        return contacts
                     }
                 }
             }
-            catch {/* error handling here */}
         }
+        
+        return nil
     }
     
     func newState(state: AppState) {

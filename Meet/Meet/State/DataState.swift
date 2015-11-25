@@ -9,5 +9,5 @@
 import Foundation
 
 struct DataState {
-    var contacts: [Contact] = []
+    var contacts: [Contact] = persistenceAdapter.hydrateStore() ?? []
 }
