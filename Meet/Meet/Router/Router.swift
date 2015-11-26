@@ -34,7 +34,7 @@ class Router: NSObject {
 extension Router: UITabBarControllerDelegate {
     
     func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
-        mainStore.dispatch { self.navigationActionCreator.navigateToViewController(viewController) }
+        store.dispatch { self.navigationActionCreator.navigateToViewController(viewController) }
         
         return false
     }
@@ -58,13 +58,13 @@ extension Router: StoreSubscriber {
                 switch transition {
                 case .TabBarSelect:
                     rootViewController.selectedViewController = toViewController
-                    mainStore.dispatch { self.navigationActionCreator.navigateToViewControllerCompleted(toViewController) }
+                    store.dispatch { self.navigationActionCreator.navigateToViewControllerCompleted(toViewController) }
                 case .Modal:
                     fromViewController.presentViewController(toViewController, animated: true, completion: nil)
-                    mainStore.dispatch { self.navigationActionCreator.navigateToViewControllerCompleted(toViewController) }
+                    store.dispatch { self.navigationActionCreator.navigateToViewControllerCompleted(toViewController) }
                 case .Dismiss:
                     toViewController.dismissViewControllerAnimated(true, completion: nil)
-                    mainStore.dispatch { self.navigationActionCreator.navigateToViewControllerCompleted(toViewController) }
+                    store.dispatch { self.navigationActionCreator.navigateToViewControllerCompleted(toViewController) }
                 case .Push:
                     rootViewController.navigationController?.pushViewController(toViewController, animated: true)
 
