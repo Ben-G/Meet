@@ -101,6 +101,13 @@ public protocol Store {
     func dispatch(actionCreatorProvider: ActionCreatorProvider) -> Signal<StoreAppStateType, NoError>
 }
 
+//public protocol AnyStore {
+//    
+//    func dispatch(actionCreatorProvider: AsyncActionCreatorProvider) -> Signal<StoreAppStateType, NoError>
+//    func dispatch(actionCreatorProvider: ActionCreatorProvider) -> Signal<StoreAppStateType, NoError>
+//
+//}
+
 public protocol AppStateProtocol {
     init()
 }
@@ -112,7 +119,7 @@ public protocol Reducer {
     func handleAction(state: StateType, action: ActionType) -> StateType
 }
 
-public final class AnyReducer<StateType: AppStateProtocol, ActionType: ActionProtocol>: Reducer {
+public final class AnyReducer<StateType: AppStateProtocol, ActionType: NavigationActions>: Reducer {
     let reducer: _ReducerBoxBase<StateType, ActionType>
     
     init<T: Reducer where T.StateType == StateType, T.ActionType == ActionType>(_ reducer: T) {
@@ -124,10 +131,10 @@ public final class AnyReducer<StateType: AppStateProtocol, ActionType: ActionPro
     }
 }
 
-class _ReducerBox<ReducerType: Reducer>: _ReducerBoxBase<ReducerType.StateType, ReducerType.ActionType> {
+public class _ReducerBox<ReducerType: Reducer>: _ReducerBoxBase<ReducerType.StateType, ReducerType.ActionType> {
     let base: ReducerType
     
-    init(_ base: ReducerType) {
+    public init(_ base: ReducerType) {
         self.base = base
     }
     

@@ -11,7 +11,7 @@ import SwiftFlowReactiveCocoaExtensions
 
 struct NavigationActionCreator {
     
-    typealias ActionCreator = (state: NavigationState, store: Store) -> NavigationActions?
+    typealias ActionCreator = (state: NavigationState, store: NavigationStore) -> NavigationActions?
     
     func setCurrentViewController(viewController: UIViewController) -> ActionCreator {
         return { _ in

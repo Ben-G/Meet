@@ -11,11 +11,11 @@ import SwiftFlowReactiveCocoaExtensions
 
 class Router: NSObject {
     var navigationActionCreator = NavigationActionCreator()
-    var store: Store
+    var store: NavigationStore
     
     let rootViewController: UITabBarController
     
-    init(store: Store) {
+    init(store: NavigationStore) {
         self.store = store
         let tabBarController = UITabBarController()
         let addContactViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("AddContactViewController")
@@ -44,7 +44,7 @@ extension Router: UITabBarControllerDelegate {
 
 extension Router: StoreSubscriber {
     
-    func newState(state: AppState) {
+    func newState(state: NavigationStateProtocol) {
         if let fromViewController = state.navigationState.currentViewController,
             toViewController = state.navigationState.transitionToViewController {
                 
@@ -80,21 +80,21 @@ extension Router: StoreSubscriber {
 func transitionFrom(vc1: UIViewController, to vc2: UIViewController) -> RouteTransition {
 //    let transition = (vc1, vc2)
     
-    if (vc1 is ContactListViewController) && (vc2 is AddContactViewController) {
-        return .TabBarSelect
-    }
-    
-    if (vc1 is AddContactViewController) && (vc2 is ContactListViewController) {
-        return .TabBarSelect
-    }
-    
-    if (vc1 is AddContactViewController) && (vc2 is SearchTwitterViewController) {
-        return .Modal
-    }
-    
-    if (vc1 is AddContactViewController) && (vc2 is EmailIntroViewController) {
-        return .Modal
-    }
+//    if (vc1 is ContactListViewController) && (vc2 is AddContactViewController) {
+//        return .TabBarSelect
+//    }
+//    
+//    if (vc1 is AddContactViewController) && (vc2 is ContactListViewController) {
+//        return .TabBarSelect
+//    }
+//    
+//    if (vc1 is AddContactViewController) && (vc2 is SearchTwitterViewController) {
+//        return .Modal
+//    }
+//    
+//    if (vc1 is AddContactViewController) && (vc2 is EmailIntroViewController) {
+//        return .Modal
+//    }
     
     return .None
     
