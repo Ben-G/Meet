@@ -84,10 +84,9 @@ class MainStore<T: AppStateProtocol, A: ActionProtocol>: Store {
     
 }
 
-protocol Store {
+public protocol Store {
     typealias StoreAppStateType: AppStateProtocol
     typealias StoreActionType: ActionProtocol
-    
     typealias StoreActionCreator = (state: AppStateProtocol, store: Self) -> StoreActionType?
     typealias StoreAsyncActionCreator = (state: AppStateProtocol, store: Self) -> Signal<StoreActionCreator,NoError>?
     
@@ -102,31 +101,25 @@ protocol Store {
     func dispatch(actionCreatorProvider: ActionCreatorProvider) -> Signal<StoreAppStateType, NoError>
 }
 
-protocol AppStateProtocol {
+public protocol AppStateProtocol {
     init()
 }
 
-protocol StoreSubscriber {
-    typealias AppStateType
-    
-    func newState(state: AppStateType)
-}
-
-protocol Reducer {
+public protocol Reducer {
     typealias StateType: AppStateProtocol
     typealias ActionType: ActionProtocol
     
     func handleAction(state: StateType, action: ActionType) -> StateType
 }
 
-final class AnyReducer<StateType: AppStateProtocol, ActionType: ActionProtocol>: Reducer {
+public final class AnyReducer<StateType: AppStateProtocol, ActionType: ActionProtocol>: Reducer {
     let reducer: _ReducerBoxBase<StateType, ActionType>
     
     init<T: Reducer where T.StateType == StateType, T.ActionType == ActionType>(_ reducer: T) {
         self.reducer = _ReducerBox(reducer)
     }
     
-    func handleAction(state: StateType, action: ActionType) -> StateType {
+    public func handleAction(state: StateType, action: ActionType) -> StateType {
         return reducer.handleAction(state, action: action)
     }
 }
@@ -146,35 +139,5 @@ class _ReducerBox<ReducerType: Reducer>: _ReducerBoxBase<ReducerType.StateType, 
 class _ReducerBoxBase<StateType: AppStateProtocol, ActionType: ActionProtocol>: Reducer {
     func handleAction(state: StateType, action: ActionType) -> StateType {
         fatalError()
-    }
-}
-
-final class AnyStoreSubscriber<SubscriberType>: StoreSubscriber {
-    let subscriber: _AnySubscriberBoxBase<SubscriberType>
-    
-    init<T: StoreSubscriber where T.AppStateType == SubscriberType>(_ subscriber: T) {
-        self.subscriber = _AnySubscriberBox(subscriber)
-    }
-    
-    func newState(state: SubscriberType) {
-        subscriber.newState(state)
-    }
-}
-
-class _AnySubscriberBoxBase<T>: StoreSubscriber {
-    func newState(state: T) {
-        fatalError()
-    }
-}
-
-class _AnySubscriberBox<SubscriberType: StoreSubscriber>: _AnySubscriberBoxBase<SubscriberType.AppStateType> {
-    let base: SubscriberType
-    
-    init(_ base: SubscriberType) {
-        self.base = base
-    }
-    
-    override func newState(state: SubscriberType.AppStateType) {
-        base.newState(state)
     }
 }

@@ -19,3 +19,7 @@ struct NavigationState {
     var transitionToViewController: UIViewController?
     var presentationType: NavigationPresentationType?
 }
+
+protocol NavigationStateProtocol {
+    var navigationState: NavigationState { get set }
+}

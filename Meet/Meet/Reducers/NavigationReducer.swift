@@ -10,27 +10,27 @@ import UIKit
 
 struct NavigationReducer {
   
-    func navigateToViewController(var state: AppState, targetViewController: UIViewController) -> AppState {
+    func navigateToViewController(var state: NavigationStateProtocol, targetViewController: UIViewController) -> NavigationStateProtocol {
         state.navigationState.transitionToViewController = targetViewController
 
         return state
     }
     
-    func presentViewController(var state: AppState, targetViewController: UIViewController) -> AppState {
+    func presentViewController(var state: NavigationStateProtocol, targetViewController: UIViewController) -> NavigationStateProtocol {
         state.navigationState.transitionToViewController = targetViewController
         state.navigationState.presentationType = .Custom(.Modal)
         
         return state
     }
     
-    func dismissViewController(var state: AppState, parentViewController: UIViewController) -> AppState {
+    func dismissViewController(var state: NavigationStateProtocol, parentViewController: UIViewController) -> NavigationStateProtocol {
         state.navigationState.presentationType = .Custom(.Dismiss)
         state.navigationState.transitionToViewController = parentViewController
         
         return state
     }
     
-    func completeNavigationToViewController(var state: AppState, completedTransitionViewController: UIViewController) -> AppState {
+    func completeNavigationToViewController(var state: NavigationStateProtocol, completedTransitionViewController: UIViewController) -> NavigationStateProtocol {
         if (state.navigationState.transitionToViewController == completedTransitionViewController) {
             state.navigationState.currentViewController = completedTransitionViewController
             state.navigationState.transitionToViewController = nil
@@ -45,7 +45,7 @@ struct NavigationReducer {
         return state
     }
     
-    func setNavigationState(var state: AppState, targetViewController: UIViewController) -> AppState {
+    func setNavigationState(var state: NavigationStateProtocol, targetViewController: UIViewController) -> NavigationStateProtocol {
         state.navigationState.currentViewController = targetViewController
         
         return state

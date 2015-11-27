@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftFlowReactiveCocoaExtensions
 
 class Router: NSObject {
     var navigationActionCreator = NavigationActionCreator()
