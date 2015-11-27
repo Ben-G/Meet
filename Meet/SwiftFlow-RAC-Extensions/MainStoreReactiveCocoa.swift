@@ -10,7 +10,13 @@ import Foundation
 import ReactiveCocoa
 import SwiftFlow
 
-class MainStore<T: AppStateProtocol>: Store {
+class MainStore<T: AppStateProtocol, A: ActionProtocol>: Store {
+    
+    typealias ActionCreator = (state: AppStateProtocol, store: MainStore) -> A?
+    typealias AsyncActionCreator = (state: AppStateProtocol, store: MainStore) -> Signal<ActionCreator,NoError>?
+    
+    typealias ActionCreatorProvider = () -> ActionCreator
+    typealias AsyncActionCreatorProvider = () -> AsyncActionCreator
     
     var appState = T() {
         didSet {
@@ -18,10 +24,10 @@ class MainStore<T: AppStateProtocol>: Store {
         }
     }
     
-    var reducer: Reducer
+    var reducer: AnyReducer<T, A>
     private var subscribers: [AnyStoreSubscriber<T>] = []
     
-    init(reducer: Reducer) {
+    init(reducer: AnyReducer<T, A>) {
         self.reducer = reducer
     }
     
@@ -43,7 +49,7 @@ class MainStore<T: AppStateProtocol>: Store {
                 let action = actionCreatorProvider()(state: self.appState, store: self)
                 
                 if let action = action {
-                    self.appState = self.reducer.handleAction(self.appState, action: action)
+//                    self.appState = self.reducer.handleAction(self.appState, action: action)
                     observer.sendNext(self.appState)
                     observer.sendCompleted()
                 }
@@ -64,7 +70,7 @@ class MainStore<T: AppStateProtocol>: Store {
                     actionProviderSignal.observeNext { actionProvider in
                         let action = actionProvider(state: self.appState, store: self)
                         if let action = action {
-                            self.appState = self.reducer.handleAction(self.appState, action: action)
+//                            self.appState = self.reducer.handleAction(self.appState, action: action)
                             observer.sendNext(self.appState)
                             observer.sendCompleted()
                         }
@@ -79,33 +85,22 @@ class MainStore<T: AppStateProtocol>: Store {
 }
 
 protocol Store {
-    typealias AppStateType: AppStateProtocol
+    typealias StoreAppStateType: AppStateProtocol
+    typealias StoreActionType: ActionProtocol
     
-    var reducer: Reducer { get set }
+    typealias StoreActionCreator = (state: AppStateProtocol, store: Self) -> StoreActionType?
+    typealias StoreAsyncActionCreator = (state: AppStateProtocol, store: Self) -> Signal<StoreActionCreator,NoError>?
     
-    func subscribe(subscriber: AnyStoreSubscriber<AppStateType>)
-    func dispatch(actionCreatorProvider: AsyncActionCreatorProvider) -> Signal<AppStateType, NoError>
+    typealias ActionCreatorProvider = () -> StoreActionCreator
+    typealias AsyncActionCreatorProvider = () -> StoreAsyncActionCreator
     
-    func dispatch(actionCreatorProvider: ActionCreatorProvider) -> Signal<AppStateType, NoError>
+    var reducer: AnyReducer<StoreAppStateType, StoreActionType> { get set }
+    
+    func subscribe(subscriber: AnyStoreSubscriber<StoreAppStateType>)
+    func dispatch(actionCreatorProvider: AsyncActionCreatorProvider) -> Signal<StoreAppStateType, NoError>
+    
+    func dispatch(actionCreatorProvider: ActionCreatorProvider) -> Signal<StoreAppStateType, NoError>
 }
-
-struct ActionCreatorTHing<U> {
-    func test<T: Store where T.AppStateType == U>(state: U, store: T) -> ActionProtocol? {
-    
-    }
-}
-
-func doSomething<T>(t: T) {
-    
-}
-
-typealias ActionCreator = (state: AppStateProtocol, store: Store) -> ActionProtocol?
-typealias AsyncActionCreator = (state: AppStateProtocol, store: Store) -> Signal<ActionCreator,NoError>?
-
-typealias ActionCreatorProvider = () -> ActionCreator
-typealias AsyncActionCreatorProvider = () -> AsyncActionCreator
-
-
 
 protocol AppStateProtocol {
     init()
@@ -118,7 +113,40 @@ protocol StoreSubscriber {
 }
 
 protocol Reducer {
-    func handleAction(state: AppStateProtocol, action: ActionProtocol) -> AppStateProtocol
+    typealias StateType: AppStateProtocol
+    typealias ActionType: ActionProtocol
+    
+    func handleAction(state: StateType, action: ActionType) -> StateType
+}
+
+final class AnyReducer<StateType: AppStateProtocol, ActionType: ActionProtocol>: Reducer {
+    let reducer: _ReducerBoxBase<StateType, ActionType>
+    
+    init<T: Reducer where T.StateType == StateType, T.ActionType == ActionType>(_ reducer: T) {
+        self.reducer = _ReducerBox(reducer)
+    }
+    
+    func handleAction(state: StateType, action: ActionType) -> StateType {
+        return reducer.handleAction(state, action: action)
+    }
+}
+
+class _ReducerBox<ReducerType: Reducer>: _ReducerBoxBase<ReducerType.StateType, ReducerType.ActionType> {
+    let base: ReducerType
+    
+    init(_ base: ReducerType) {
+        self.base = base
+    }
+    
+    override func handleAction(state: ReducerType.StateType, action: ReducerType.ActionType) -> ReducerType.StateType {
+        return base.handleAction(state, action: action)
+    }
+}
+
+class _ReducerBoxBase<StateType: AppStateProtocol, ActionType: ActionProtocol>: Reducer {
+    func handleAction(state: StateType, action: ActionType) -> StateType {
+        fatalError()
+    }
 }
 
 final class AnyStoreSubscriber<SubscriberType>: StoreSubscriber {
