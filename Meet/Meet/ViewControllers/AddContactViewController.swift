@@ -25,7 +25,6 @@ class AddContactViewController: UIViewController, StoreSubscriber {
   
     var store = mainStore
     var navigationActionCreator = NavigationActionCreator()
-    var dataMutationActionCreator = DataMutationActionCreator()
     var twitterAPIActionCreator = TwitterAPIActionCreator()
     
     var pendingActions: [PendingAction] = [] { didSet {
@@ -62,7 +61,7 @@ class AddContactViewController: UIViewController, StoreSubscriber {
         let emailIntroViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("EmailIntroViewController")
         
 //        store.dispatch { self.navigationActionCreator.navigateToViewController(emailIntroViewController) }
-        store.dispatch { self.dataMutationActionCreator.createNewContact("Benjamin.Encz@gmail.com") }
+        store.dispatch(DataMutationAction.CreateContactFromEmail("Benjamin.Encz@gmail.com"))
     }
     
     @IBAction func addTwitterButtonTapped(sender: AnyObject) {

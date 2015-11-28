@@ -17,7 +17,6 @@ class PersistenceAdapter: StoreSubscriber {
             store?.subscribe(self)
         }
     }
-    var dataMutationActionCreator = DataMutationActionCreator()
     
     func hydrateStore() -> [Contact]? {
         if let path = filePath() {

@@ -16,7 +16,6 @@ class EmailIntroViewController: UIViewController {
 
     var store = mainStore
     var navigationActionCreator = NavigationActionCreator()
-    var dataMutationActionCreator = DataMutationActionCreator()
     
     @IBAction func emailIntroButtonTapped(sender: AnyObject) {
         mailComposerViewController = MFMailComposeViewController()
@@ -38,7 +37,7 @@ extension EmailIntroViewController: MFMailComposeViewControllerDelegate, UINavig
         if (result == MFMailComposeResultCancelled) {
             store.dispatch { self.navigationActionCreator.dismissViewController(presentingViewController: self) }
         } else if (result == MFMailComposeResultSent) {
-            store.dispatch { self.dataMutationActionCreator.createNewContact("Benjamin.Encz@gmail.com") }
+            store.dispatch(DataMutationAction.CreateContactFromEmail("Benjamin.Encz@gmail.com"))
             store.dispatch { self.navigationActionCreator.dismissViewController(presentingViewController: self) }
         }
     }

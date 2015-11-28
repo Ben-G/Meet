@@ -38,6 +38,17 @@ public class MainStore: Store {
         //        }
     }
     
+    public func dispatch(action: ActionProtocol) -> Signal<AppStateProtocol, NoError> {
+        return Signal { observer in
+            dispatch_async(dispatch_get_main_queue()) {
+                self.appState = self.reducer._handleAction(self.appState, action: action)
+                observer.sendNext(self.appState)
+                observer.sendCompleted()
+            }
+            return nil
+        }
+    }
+    
     public func dispatch(actionCreatorProvider: ActionCreatorProvider) -> Signal<AppStateProtocol, NoError> {
         return Signal { observer in
             dispatch_async(dispatch_get_main_queue()) {
@@ -86,6 +97,7 @@ public protocol Store {
     func dispatch(actionCreatorProvider: AsyncActionCreatorProvider) -> Signal<AppStateProtocol, NoError>
     
     func dispatch(actionCreatorProvider: ActionCreatorProvider) -> Signal<AppStateProtocol, NoError>
+    func dispatch(action: ActionProtocol) -> Signal<AppStateProtocol, NoError>
 }
 
 public typealias ActionCreator = (state: AppStateProtocol, store: Store) -> ActionProtocol?

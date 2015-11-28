@@ -22,7 +22,6 @@
 		6267DD9C1C07B2530080BF30 /* MainStoreReactiveCocoa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6267DD741C07AE190080BF30 /* MainStoreReactiveCocoa.swift */; };
 		6267DD9D1C07B2690080BF30 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 626DA4401BFF943300988FC0 /* ReactiveCocoa.framework */; };
 		626DA42D1BFE8CC700988FC0 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626DA42C1BFE8CC700988FC0 /* Contact.swift */; };
-		626DA42F1BFE916200988FC0 /* DataMutationActionCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626DA42E1BFE916200988FC0 /* DataMutationActionCreator.swift */; };
 		626DA4311BFE94BC00988FC0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626DA4301BFE94BC00988FC0 /* Model.swift */; };
 		626DA4331BFE9DA400988FC0 /* DataMutationReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626DA4321BFE9DA400988FC0 /* DataMutationReducer.swift */; };
 		626DA4351BFE9E1C00988FC0 /* DataState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626DA4341BFE9E1C00988FC0 /* DataState.swift */; };
@@ -133,7 +132,6 @@
 		6267DD921C07B2480080BF30 /* SwiftFlowReactiveCocoaExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftFlowReactiveCocoaExtensions.h; sourceTree = "<group>"; };
 		6267DD941C07B2490080BF30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		626DA42C1BFE8CC700988FC0 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
-		626DA42E1BFE916200988FC0 /* DataMutationActionCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataMutationActionCreator.swift; sourceTree = "<group>"; };
 		626DA4301BFE94BC00988FC0 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		626DA4321BFE9DA400988FC0 /* DataMutationReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataMutationReducer.swift; sourceTree = "<group>"; };
 		626DA4341BFE9E1C00988FC0 /* DataState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataState.swift; sourceTree = "<group>"; };
@@ -432,7 +430,6 @@
 			isa = PBXGroup;
 			children = (
 				62D3B6FF1BF446310056D509 /* Actions.swift */,
-				626DA42E1BFE916200988FC0 /* DataMutationActionCreator.swift */,
 				626DA4501BFFEDBE00988FC0 /* TwitterAPIActionCreator.swift */,
 			);
 			path = Actions;
@@ -775,7 +772,6 @@
 				626DA44F1BFFE44400988FC0 /* Authentication.swift in Sources */,
 				626DA4351BFE9E1C00988FC0 /* DataState.swift in Sources */,
 				626DA4331BFE9DA400988FC0 /* DataMutationReducer.swift in Sources */,
-				626DA42F1BFE916200988FC0 /* DataMutationActionCreator.swift in Sources */,
 				62CCBA591C058CD100B4F000 /* PersistenceAdapter.swift in Sources */,
 				62CCBA571C058A5200B4F000 /* Contact+Coding.swift in Sources */,
 				626DA4311BFE94BC00988FC0 /* Model.swift in Sources */,
