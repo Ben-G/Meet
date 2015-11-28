@@ -7,15 +7,16 @@
 //
 
 import UIKit
+import SwiftFlow
 import SwiftFlowReactiveCocoaExtensions
 
-class Router: NSObject {
+public class Router: NSObject {
     var navigationActionCreator = NavigationActionCreator()
-    var store: NavigationStore
+    var store: AnyStore<NavigationState>
     
     let rootViewController: UITabBarController
     
-    init(store: NavigationStore) {
+    init(store: AnyStore<NavigationState>) {
         self.store = store
         let tabBarController = UITabBarController()
         let addContactViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("AddContactViewController")
@@ -26,7 +27,7 @@ class Router: NSObject {
         
         super.init()
         
-        mainStore.dispatch { self.navigationActionCreator.setCurrentViewController(addContactViewController) }
+        store.dispatch { self.navigationActionCreator.setCurrentViewController(addContactViewController) }
         tabBarController.delegate = self
         self.store.subscribe(self)
     }
@@ -34,7 +35,7 @@ class Router: NSObject {
 
 extension Router: UITabBarControllerDelegate {
     
-    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
+    public func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
         store.dispatch { self.navigationActionCreator.navigateToViewController(viewController) }
         
         return false
@@ -44,13 +45,13 @@ extension Router: UITabBarControllerDelegate {
 
 extension Router: StoreSubscriber {
     
-    func newState(state: NavigationStateProtocol) {
-        if let fromViewController = state.navigationState.currentViewController,
-            toViewController = state.navigationState.transitionToViewController {
+    public func newState(state: NavigationState) {
+        if let fromViewController = state.currentViewController,
+            toViewController = state.transitionToViewController {
                 
                 let transition: RouteTransition
                 // TODO: Cleanup nil-coalescing workaround
-                if case .Custom(let customPresentation) = state.navigationState.presentationType ?? .Default {
+                if case .Custom(let customPresentation) = state.presentationType ?? .Default {
                     transition = customPresentation
                 } else {
                     transition = transitionFrom(fromViewController, to: toViewController)

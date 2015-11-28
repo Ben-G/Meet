@@ -8,8 +8,9 @@
 
 import UIKit
 import SwifteriOS
+import SwiftFlow
 
-enum Action {
+enum Action: ActionProtocol {
 
     
     // Data Mutation

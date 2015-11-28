@@ -7,8 +7,12 @@
 //
 
 import Foundation
+import SwiftFlow
+import SwiftFlowReactiveCocoaExtensions
 
 struct DataMutationActionCreator {
+    
+    typealias ActionCreator = (state: AppState, store: AnyStore<AppState>) -> Action?
 
     func createNewContact(email: String) -> ActionCreator {
         return { _ in

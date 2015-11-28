@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import SwiftFlow
 import SwiftFlowReactiveCocoaExtensions
 
-struct NavigationActionCreator {
+public struct NavigationActionCreator {
     
-    typealias ActionCreator = (state: NavigationState, store: NavigationStore) -> NavigationActions?
+    public init() {}
+    
+    typealias ActionCreator = (state: NavigationState, store: AnyStore<NavigationState>) -> NavigationActions?
     
     func setCurrentViewController(viewController: UIViewController) -> ActionCreator {
         return { _ in

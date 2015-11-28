@@ -8,8 +8,11 @@
 
 import UIKit
 import SwifteriOS
+import SwiftFlow
+import SwiftFlowReactiveCocoaExtensions
+import SwiftFlowRouter
 
-let mainStore = MainStore()
+let mainStore = MainStore<AppState>(reducer: AnyReducer(MainReducer<AppState>()))
 var persistenceAdapter = PersistenceAdapter()
 let router = Router(store: mainStore)
 

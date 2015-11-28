@@ -9,7 +9,7 @@
 import Foundation
 import SwiftFlow
 
-enum NavigationActions: ActionProtocol {
+public enum NavigationActions: ActionProtocol {
     // Navigation
     case NavigateTo(UIViewController)
     case CompleteNavigationTo(UIViewController)
