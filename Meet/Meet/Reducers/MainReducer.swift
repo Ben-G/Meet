@@ -8,17 +8,17 @@
 
 import Foundation
 
-public struct MainReducer: Reducer {
+public struct MainReducer: AnyReducer {
     
-    var reducers: [Reducer]
+    var reducers: [AnyReducer]
     
-    public init(_ reducers: [Reducer]) {
+    public init(_ reducers: [AnyReducer]) {
         self.reducers = reducers
     }
     
-    public func handleAction(var state: AppStateProtocol, action: ActionProtocol) -> AppStateProtocol {
+    public func handleAnyAction(var state: AppStateProtocol, action: ActionProtocol) -> AppStateProtocol {
         reducers.forEach { reducer in
-            state = reducer.handleAction(state, action: action)
+            state = reducer.handleAnyAction(state, action: action)
         }
         
         return state

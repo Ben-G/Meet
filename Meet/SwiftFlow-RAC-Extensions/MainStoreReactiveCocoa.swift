@@ -18,10 +18,10 @@ public class MainStore: Store {
         }
     }
     
-    public var reducer: Reducer
+    public var reducer: AnyReducer
     private var subscribers: [StoreSubscriber] = []
     
-    public init(reducer: Reducer, appState: AppStateProtocol) {
+    public init(reducer: AnyReducer, appState: AppStateProtocol) {
         self.reducer = reducer
         self.appState = appState
     }
@@ -44,7 +44,7 @@ public class MainStore: Store {
                 let action = actionCreatorProvider()(state: self.appState, store: self)
                 
                 if let action = action {
-                    self.appState = self.reducer.handleAction(self.appState, action: action)
+                    self.appState = self.reducer.handleAnyAction(self.appState, action: action)
                     observer.sendNext(self.appState)
                     observer.sendCompleted()
                 }
@@ -64,7 +64,7 @@ public class MainStore: Store {
                     actionProviderSignal.observeNext { actionProvider in
                         let action = actionProvider(state: self.appState, store: self)
                         if let action = action {
-                            self.appState = self.reducer.handleAction(self.appState, action: action)
+                            self.appState = self.reducer.handleAnyAction(self.appState, action: action)
                             observer.sendNext(self.appState)
                             observer.sendCompleted()
                         }
@@ -79,7 +79,7 @@ public class MainStore: Store {
 }
 
 public protocol Store {
-    var reducer: Reducer { get set }
+    var reducer: AnyReducer { get set }
     var appState: AppStateProtocol { get }
     
     func subscribe(subscriber: StoreSubscriber)

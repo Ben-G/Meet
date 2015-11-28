@@ -18,6 +18,6 @@ public protocol StoreSubscriber {
     func newState(state: AppStateProtocol)
 }
 
-public protocol Reducer {
-    func handleAction(state: AppStateProtocol, action: ActionProtocol) -> AppStateProtocol
+public protocol AnyReducer {
+    func handleAnyAction(state: AppStateProtocol, action: ActionProtocol) -> AppStateProtocol
 }

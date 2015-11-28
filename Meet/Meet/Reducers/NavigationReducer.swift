@@ -10,11 +10,11 @@ import UIKit
 import SwiftFlow
 import SwiftFlowReactiveCocoaExtensions
 
-public struct NavigationReducer: TypedReducer {
+public struct NavigationReducer: Reducer {
     
     public init() {}
     
-    public func handleTypedAction(state: HasNavigationState, action: NavigationAction) -> HasNavigationState {
+    public func handleAction(state: HasNavigationState, action: NavigationAction) -> HasNavigationState {
         switch action {
         case .SetNavigationState(let viewController):
             return setNavigationState(state, targetViewController: viewController)

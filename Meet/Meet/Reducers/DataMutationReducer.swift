@@ -12,19 +12,17 @@ import SwiftFlowReactiveCocoaExtensions
 
 struct DataMutationReducer: Reducer {
 
-    func handleAction(state: AppStateProtocol, action: ActionProtocol) -> AppStateProtocol {
-        return withSpecificTypes(state, action: action) { (state: HasDataState, action: DataMutationAction) in
-            switch action {
-            case .CreateContactFromEmail(let email):
-                return createContact(state, email: email)
-            case .DeleteContact(let identifier):
-                return deleteContact(state, identifier: identifier)
-            case .SetContacts(let contacts):
-                return setContacts(state, contacts: contacts)
-            }
+    func handleAction(state: HasDataState, action: DataMutationAction) -> HasDataState {
+        switch action {
+        case .CreateContactFromEmail(let email):
+            return createContact(state, email: email)
+        case .DeleteContact(let identifier):
+            return deleteContact(state, identifier: identifier)
+        case .SetContacts(let contacts):
+            return setContacts(state, contacts: contacts)
         }
     }
-    
+
     func createContact(var state: HasDataState, email: String) -> HasDataState {
         let newContactID = state.dataState.contacts.count + 1
         let newContact = Contact(identifier: newContactID, emailAddress: email)
