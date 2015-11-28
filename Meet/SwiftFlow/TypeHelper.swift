@@ -15,6 +15,21 @@ public func withSpecificTypes<StateType, ActionType: ActionProtocol>(state: AppS
     return function(state: s, action: a) as! AppStateProtocol
 }
 
+public protocol StoreSubscriber: AnyStoreSubscriber {
+    typealias StateType
+    
+    func newState(state: StateType)
+    
+}
+
+extension StoreSubscriber {
+    public func _newState(state: AppStateProtocol) {
+        if let typedState = state as? StateType {
+            newState(typedState)
+        }
+    }
+}
+
 public protocol Reducer: AnyReducer {
     typealias ActionType: ActionProtocol
     typealias StateType
@@ -24,7 +39,7 @@ public protocol Reducer: AnyReducer {
 
 extension Reducer {
     
-    public func handleAnyAction(state: AppStateProtocol, action: ActionProtocol) -> AppStateProtocol {
+    public func _handleAction(state: AppStateProtocol, action: ActionProtocol) -> AppStateProtocol {
         return withSpecificTypes(state, action: action, function: handleAction)
     }
     

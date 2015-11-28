@@ -42,10 +42,8 @@ extension Router: UITabBarControllerDelegate {
 }
 
 extension Router: StoreSubscriber {
-  public func newState(maybeState: AppStateProtocol) {
-        
-        guard let state = maybeState as? HasNavigationState else { return }
-        
+  public func newState(state: HasNavigationState) {
+                
         if let fromViewController = state.navigationState.currentViewController,
             toViewController = state.navigationState.transitionToViewController {
                 

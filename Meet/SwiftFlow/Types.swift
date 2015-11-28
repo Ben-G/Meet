@@ -14,10 +14,10 @@ public protocol AppStateProtocol {
     init()
 }
 
-public protocol StoreSubscriber {
-    func newState(state: AppStateProtocol)
+public protocol AnyStoreSubscriber {
+    func _newState(state: AppStateProtocol)
 }
 
 public protocol AnyReducer {
-    func handleAnyAction(state: AppStateProtocol, action: ActionProtocol) -> AppStateProtocol
+    func _handleAction(state: AppStateProtocol, action: ActionProtocol) -> AppStateProtocol
 }

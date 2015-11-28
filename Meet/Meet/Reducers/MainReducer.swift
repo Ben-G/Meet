@@ -16,9 +16,9 @@ public struct MainReducer: AnyReducer {
         self.reducers = reducers
     }
     
-    public func handleAnyAction(var state: AppStateProtocol, action: ActionProtocol) -> AppStateProtocol {
+    public func _handleAction(var state: AppStateProtocol, action: ActionProtocol) -> AppStateProtocol {
         reducers.forEach { reducer in
-            state = reducer.handleAnyAction(state, action: action)
+            state = reducer._handleAction(state, action: action)
         }
         
         return state

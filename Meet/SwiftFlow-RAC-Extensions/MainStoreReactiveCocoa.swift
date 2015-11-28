@@ -14,24 +14,24 @@ public class MainStore: Store {
     
     private (set) public var appState: AppStateProtocol {
         didSet {
-            subscribers.forEach { $0.newState(appState) }
+            subscribers.forEach { $0._newState(appState) }
         }
     }
     
     public var reducer: AnyReducer
-    private var subscribers: [StoreSubscriber] = []
+    private var subscribers: [AnyStoreSubscriber] = []
     
     public init(reducer: AnyReducer, appState: AppStateProtocol) {
         self.reducer = reducer
         self.appState = appState
     }
 
-    public func subscribe(subscriber: StoreSubscriber) {
+    public func subscribe(subscriber: AnyStoreSubscriber) {
         subscribers.append(subscriber)
-        subscriber.newState(appState)
+        subscriber._newState(appState)
     }
     
-    public func unsubscribe(subscriber: StoreSubscriber) {
+    public func unsubscribe(subscriber: AnyStoreSubscriber) {
         // TODO: implement `unsubscribe`
         //        if let index = subscribers.indexOf(subscriber) {
         //            subscribers.removeAtIndex(index)
@@ -44,7 +44,7 @@ public class MainStore: Store {
                 let action = actionCreatorProvider()(state: self.appState, store: self)
                 
                 if let action = action {
-                    self.appState = self.reducer.handleAnyAction(self.appState, action: action)
+                    self.appState = self.reducer._handleAction(self.appState, action: action)
                     observer.sendNext(self.appState)
                     observer.sendCompleted()
                 }
@@ -64,7 +64,7 @@ public class MainStore: Store {
                     actionProviderSignal.observeNext { actionProvider in
                         let action = actionProvider(state: self.appState, store: self)
                         if let action = action {
-                            self.appState = self.reducer.handleAnyAction(self.appState, action: action)
+                            self.appState = self.reducer._handleAction(self.appState, action: action)
                             observer.sendNext(self.appState)
                             observer.sendCompleted()
                         }
@@ -82,7 +82,7 @@ public protocol Store {
     var reducer: AnyReducer { get set }
     var appState: AppStateProtocol { get }
     
-    func subscribe(subscriber: StoreSubscriber)
+    func subscribe(subscriber: AnyStoreSubscriber)
     func dispatch(actionCreatorProvider: AsyncActionCreatorProvider) -> Signal<AppStateProtocol, NoError>
     
     func dispatch(actionCreatorProvider: ActionCreatorProvider) -> Signal<AppStateProtocol, NoError>

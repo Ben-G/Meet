@@ -36,9 +36,7 @@ class SearchTwitterViewController: UIViewController, StoreSubscriber {
         tableView.dataSource = dataSource
     }
     
-    func newState(maybeState: AppStateProtocol) {
-        guard let state = maybeState as? AppState else { return }
-
+    func newState(state: AppState) {
         users = state.twitterAPIState.userSearchResults
     }
     
