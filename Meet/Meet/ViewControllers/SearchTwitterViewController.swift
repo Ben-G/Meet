@@ -8,6 +8,8 @@
 
 import UIKit
 import ListKit
+import SwiftFlowReactiveCocoaExtensions
+import SwiftFlowRouter
 
 class SearchTwitterViewController: UIViewController, StoreSubscriber {
 
@@ -33,7 +35,9 @@ class SearchTwitterViewController: UIViewController, StoreSubscriber {
         tableView.dataSource = dataSource
     }
     
-    func newState(state: AppState) {
+    func newState(maybeState: AppStateProtocol) {
+        guard let state = maybeState as? AppState else { return }
+
         users = state.twitterAPIState.userSearchResults
     }
     

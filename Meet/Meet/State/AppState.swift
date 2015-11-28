@@ -7,7 +7,9 @@
 //
 
 import Foundation
-
+import SwiftFlow
+import SwiftFlowRouter
+import SwiftFlowReactiveCocoaExtensions
 
 /*
   1. Which View Controller did the tab bar select? // more general: navigation state?
@@ -25,7 +27,7 @@ import Foundation
 
 */
 
-struct AppState {
+struct AppState: AppStateProtocol, HasNavigationState, HasDataState, HasTwitterAPIState {
     var navigationState = NavigationState()
     var dataState = DataState()
     var twitterAPIState = TwitterAPIState()

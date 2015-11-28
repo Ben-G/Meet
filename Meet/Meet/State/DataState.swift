@@ -11,3 +11,7 @@ import Foundation
 struct DataState {
     var contacts: [Contact] = persistenceAdapter.hydrateStore() ?? []
 }
+
+protocol HasDataState {
+    var dataState: DataState { get set }
+}

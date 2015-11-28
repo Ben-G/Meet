@@ -9,35 +9,37 @@
 import UIKit
 import SwiftFlowReactiveCocoaExtensions
 
-struct NavigationActionCreator {
+public struct NavigationActionCreator {
     
-    func setCurrentViewController(viewController: UIViewController) -> ActionCreator {
+    public init() {}
+    
+    public func setCurrentViewController(viewController: UIViewController) -> ActionCreator {
         return { _ in
-            return .SetNavigationState(viewController)
+            return NavigationAction.SetNavigationState(viewController)
         }
     }
     
-    func presentViewController(viewController: UIViewController) -> ActionCreator {
+    public func presentViewController(viewController: UIViewController) -> ActionCreator {
         return { _ in
-            return .PresentViewController(viewController)
+            return NavigationAction.PresentViewController(viewController)
         }
     }
     
-    func dismissViewController(presentingViewController presentingViewController: UIViewController) -> ActionCreator {
+    public func dismissViewController(presentingViewController presentingViewController: UIViewController) -> ActionCreator {
         return { _ in
-            return .DismissViewController(presentingViewController)
+            return NavigationAction.DismissViewController(presentingViewController)
         }
     }
     
-    func navigateToViewController(viewController: UIViewController) -> ActionCreator {
+    public func navigateToViewController(viewController: UIViewController) -> ActionCreator {
         return { _ in
-            return .NavigateTo(viewController)
+            return NavigationAction.NavigateTo(viewController)
         }
     }
     
-    func navigateToViewControllerCompleted(viewController: UIViewController) -> ActionCreator {
+    public func navigateToViewControllerCompleted(viewController: UIViewController) -> ActionCreator {
         return { _ in
-            return .CompleteNavigationTo(viewController)
+            return NavigationAction.CompleteNavigationTo(viewController)
         }
     }
     

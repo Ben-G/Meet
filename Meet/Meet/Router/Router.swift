@@ -7,33 +7,32 @@
 //
 
 import UIKit
+import SwiftFlowReactiveCocoaExtensions
 
-class Router: NSObject {
+public typealias TransitionProvider = (UIViewController, to: UIViewController) -> RouteTransition
+
+public class Router: NSObject {
     var navigationActionCreator = NavigationActionCreator()
     var store: Store
+    var transitionFrom: TransitionProvider
     
-    let rootViewController: UITabBarController
+    public let rootViewController: UITabBarController
     
-    init(store: Store) {
+    public init(store: Store, rootViewController: UITabBarController, transitionProvider: TransitionProvider) {
         self.store = store
-        let tabBarController = UITabBarController()
-        let addContactViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("AddContactViewController")
-        let contactsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ContactsViewController")
-        
-        tabBarController.viewControllers = [addContactViewController, contactsViewController]
-        rootViewController = tabBarController
+        self.rootViewController = rootViewController
+        self.transitionFrom = transitionProvider
         
         super.init()
         
-        mainStore.dispatch { self.navigationActionCreator.setCurrentViewController(addContactViewController) }
-        tabBarController.delegate = self
+        rootViewController.delegate = self
         self.store.subscribe(self)
     }
 }
 
 extension Router: UITabBarControllerDelegate {
     
-    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
+    public func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
         store.dispatch { self.navigationActionCreator.navigateToViewController(viewController) }
         
         return false
@@ -42,8 +41,10 @@ extension Router: UITabBarControllerDelegate {
 }
 
 extension Router: StoreSubscriber {
-    
-    func newState(state: AppState) {
+  public func newState(maybeState: AppStateProtocol) {
+        
+        guard let state = maybeState as? HasNavigationState else { return }
+        
         if let fromViewController = state.navigationState.currentViewController,
             toViewController = state.navigationState.transitionToViewController {
                 
@@ -76,38 +77,7 @@ extension Router: StoreSubscriber {
     
 }
 
-func transitionFrom(vc1: UIViewController, to vc2: UIViewController) -> RouteTransition {
-//    let transition = (vc1, vc2)
-    
-    if (vc1 is ContactListViewController) && (vc2 is AddContactViewController) {
-        return .TabBarSelect
-    }
-    
-    if (vc1 is AddContactViewController) && (vc2 is ContactListViewController) {
-        return .TabBarSelect
-    }
-    
-    if (vc1 is AddContactViewController) && (vc2 is SearchTwitterViewController) {
-        return .Modal
-    }
-    
-    if (vc1 is AddContactViewController) && (vc2 is EmailIntroViewController) {
-        return .Modal
-    }
-    
-    return .None
-    
-//      switch transition {
-//      case is (ContactListViewController, AddContactViewController):
-//          return .TabBarSelect
-//      case is (AddContactViewController, ContactListViewController):
-//          return .TabBarSelect
-//      default:
-//          return .None
-//      }
-}
-
-enum RouteTransition {
+public enum RouteTransition {
   case Push
   case Pop
   case TabBarSelect

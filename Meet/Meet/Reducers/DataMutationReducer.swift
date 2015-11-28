@@ -7,10 +7,26 @@
 //
 
 import Foundation
+import SwiftFlow
+import SwiftFlowReactiveCocoaExtensions
 
-struct DataMutationReducer {
+struct DataMutationReducer: Reducer {
 
-    func createContact(var state: AppState, email: String) -> AppState {
+    func handleAction(state: AppStateProtocol, action: ActionProtocol) -> AppStateProtocol {
+        guard let a = action as? DataMutationAction else { return state }
+        guard let s = state as? HasDataState else { return state }
+        
+        switch a {
+            case .CreateContactFromEmail(let email):
+                return createContact(s, email: email) as! AppStateProtocol
+            case .DeleteContact(let identifier):
+                return deleteContact(s, identifier: identifier) as! AppStateProtocol
+            case .SetContacts(let contacts):
+                return setContacts(s, contacts: contacts) as! AppStateProtocol
+        }
+    }
+    
+    func createContact(var state: HasDataState, email: String) -> HasDataState {
         let newContactID = state.dataState.contacts.count + 1
         let newContact = Contact(identifier: newContactID, emailAddress: email)
         state.dataState.contacts.append(newContact)
@@ -18,14 +34,14 @@ struct DataMutationReducer {
         return state
     }
     
-    func deleteContact(var state: AppState, identifier: Int) -> AppState {
+    func deleteContact(var state: HasDataState, identifier: Int) -> HasDataState {
         // TODO: remove dummy implementation
         state.dataState.contacts.removeLast()
         
         return state
     }
     
-    func setContacts(var state: AppState, contacts: [Contact]) -> AppState {
+    func setContacts(var state: HasDataState, contacts: [Contact]) -> HasDataState {
         state.dataState.contacts = contacts
         
         return state

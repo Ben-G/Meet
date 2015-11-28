@@ -14,3 +14,7 @@ struct TwitterAPIState {
     var error: TwitterAuthenticationError?
     var userSearchResults: [TwitterUser]?
 }
+
+protocol HasTwitterAPIState {
+    var twitterAPIState: TwitterAPIState { get set }
+}

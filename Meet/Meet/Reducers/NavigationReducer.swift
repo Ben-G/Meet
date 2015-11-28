@@ -7,30 +7,52 @@
 //
 
 import UIKit
+import SwiftFlow
+import SwiftFlowReactiveCocoaExtensions
 
-struct NavigationReducer {
+public struct NavigationReducer: Reducer {
+    
+    public init() {}
+    
+    public func handleAction(state: AppStateProtocol, action: ActionProtocol) -> AppStateProtocol {
+        guard let a = action as? NavigationAction else { return state }
+        guard let s = state as? HasNavigationState else { return state }
+        
+        switch a {
+            case .SetNavigationState(let viewController):
+                return setNavigationState(s, targetViewController: viewController) as! AppStateProtocol
+            case .NavigateTo(let viewController):
+                return navigateToViewController(s, targetViewController: viewController) as! AppStateProtocol
+            case .CompleteNavigationTo(let viewController):
+                return completeNavigationToViewController(s, completedTransitionViewController: viewController) as! AppStateProtocol
+            case .PresentViewController(let viewController):
+                return presentViewController(s, targetViewController: viewController) as! AppStateProtocol
+            case .DismissViewController(let viewController):
+                return dismissViewController(s, parentViewController: viewController) as! AppStateProtocol
+        }
+    }
   
-    func navigateToViewController(var state: AppState, targetViewController: UIViewController) -> AppState {
+    func navigateToViewController(var state: HasNavigationState, targetViewController: UIViewController) -> HasNavigationState {
         state.navigationState.transitionToViewController = targetViewController
 
         return state
     }
     
-    func presentViewController(var state: AppState, targetViewController: UIViewController) -> AppState {
+    func presentViewController(var state: HasNavigationState, targetViewController: UIViewController) -> HasNavigationState {
         state.navigationState.transitionToViewController = targetViewController
         state.navigationState.presentationType = .Custom(.Modal)
         
         return state
     }
     
-    func dismissViewController(var state: AppState, parentViewController: UIViewController) -> AppState {
+    func dismissViewController(var state: HasNavigationState, parentViewController: UIViewController) -> HasNavigationState {
         state.navigationState.presentationType = .Custom(.Dismiss)
         state.navigationState.transitionToViewController = parentViewController
         
         return state
     }
     
-    func completeNavigationToViewController(var state: AppState, completedTransitionViewController: UIViewController) -> AppState {
+    func completeNavigationToViewController(var state: HasNavigationState, completedTransitionViewController: UIViewController) -> HasNavigationState {
         if (state.navigationState.transitionToViewController == completedTransitionViewController) {
             state.navigationState.currentViewController = completedTransitionViewController
             state.navigationState.transitionToViewController = nil
@@ -45,7 +67,7 @@ struct NavigationReducer {
         return state
     }
     
-    func setNavigationState(var state: AppState, targetViewController: UIViewController) -> AppState {
+    func setNavigationState(var state: HasNavigationState, targetViewController: UIViewController) -> HasNavigationState {
         state.navigationState.currentViewController = targetViewController
         
         return state

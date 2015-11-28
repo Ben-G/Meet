@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SwiftFlowReactiveCocoaExtensions
+import SwiftFlowRouter
 
 struct PendingAction {
     let action: (AppState) -> Bool
@@ -27,7 +29,9 @@ class AddContactViewController: UIViewController, StoreSubscriber {
     
     var pendingActions: [PendingAction] = [] { didSet {
             // check to see if aciton can be resolved with current state
-            resolvePendingActions(store.appState)
+            guard let state = store.appState as? AppState else { return }
+        
+            resolvePendingActions(state)
         }
     }
     
@@ -35,7 +39,9 @@ class AddContactViewController: UIViewController, StoreSubscriber {
         store.subscribe(self)
     }
     
-    func newState(state: AppState) {
+    func newState(maybeState: AppStateProtocol) {
+        guard let state = maybeState as? AppState else { return }
+        
         resolvePendingActions(state)
     }
     

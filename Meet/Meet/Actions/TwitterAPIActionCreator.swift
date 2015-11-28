@@ -9,13 +9,16 @@
 import Foundation
 import SwifteriOS
 import ReactiveCocoa
+import SwiftFlowReactiveCocoaExtensions
 
 struct TwitterAPIActionCreator {
     
     var twitterClient = TwitterClient.self
     
     func authenticateUser() -> AsyncActionCreator {
-        return { state, store in
+        return { maybeState, store in
+            
+            guard let state = maybeState as? AppState else { return nil }
         
             return Signal<ActionCreator, NoError> { observer in
                 if state.twitterAPIState.swifter == nil {
@@ -48,13 +51,13 @@ struct TwitterAPIActionCreator {
     
     func setUserSearchResults(searchResults: [TwitterUser]) -> ActionCreator {
         return { _ in
-            return .SetUserSearchResults(searchResults)
+            return TwitterAPIAction.SetUserSearchResults(searchResults)
         }
     }
     
     func setTwitterClient(swifter: Swifter) -> ActionCreator {
         return { _ in
-            return .SetTwitterClient(swifter)
+            return TwitterAPIAction.SetTwitterClient(swifter)
         }
     }
     

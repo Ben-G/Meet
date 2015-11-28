@@ -8,21 +8,15 @@
 
 import UIKit
 import SwifteriOS
+import SwiftFlow
 
-enum Action {
-    // Navigation
-    case NavigateTo(UIViewController)
-    case CompleteNavigationTo(UIViewController)
-    case SetNavigationState(UIViewController)
-    case PresentViewController(UIViewController)
-    case DismissViewController(UIViewController)
-    
-    // Data Mutation
+enum TwitterAPIAction: ActionProtocol {
+    case SetTwitterClient(Swifter)
+    case SetUserSearchResults([TwitterUser])
+}
+
+enum DataMutationAction: ActionProtocol {
     case CreateContactFromEmail(String)
     case DeleteContact(Int)
     case SetContacts([Contact])
-    
-    // Twitter API
-    case SetTwitterClient(Swifter)
-    case SetUserSearchResults([TwitterUser])
 }

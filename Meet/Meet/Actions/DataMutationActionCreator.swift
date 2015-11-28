@@ -7,24 +7,25 @@
 //
 
 import Foundation
+import SwiftFlowReactiveCocoaExtensions
 
 struct DataMutationActionCreator {
 
     func createNewContact(email: String) -> ActionCreator {
         return { _ in
-            return .CreateContactFromEmail(email)
+            return DataMutationAction.CreateContactFromEmail(email)
         }
     }
     
     func deleteContact(contactID: Int) -> ActionCreator {
         return { _ in
-            return .DeleteContact(contactID)
+            return DataMutationAction.DeleteContact(contactID)
         }
     }
     
     func setContacts(contacts: [Contact]) -> ActionCreator {
         return { _ in
-            return .SetContacts(contacts)
+            return DataMutationAction.SetContacts(contacts)
         }
     }
     

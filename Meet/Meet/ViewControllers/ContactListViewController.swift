@@ -9,6 +9,7 @@
 import UIKit
 import ListKit
 import ReactiveCocoa
+import SwiftFlowReactiveCocoaExtensions
 
 class ContactTableViewCell: UITableViewCell, ListKitCellProtocol {
     var model: Contact? {
@@ -45,7 +46,9 @@ class ContactListViewController: UIViewController, StoreSubscriber {
         store.unsubscribe(self)
     }
     
-    func newState(state: AppState) {
+    func newState(maybeState: AppStateProtocol) {
+        guard let state = maybeState as? AppState else { return }
+        
         contacts = state.dataState.contacts
     }
 

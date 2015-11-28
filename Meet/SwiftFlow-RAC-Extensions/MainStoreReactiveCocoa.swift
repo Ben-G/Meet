@@ -10,34 +10,35 @@ import Foundation
 import ReactiveCocoa
 import SwiftFlow
 
-class MainStore<T: AppStateProtocol>: Store {
+public class MainStore: Store {
     
-    var appState = T() {
+    private (set) public var appState: AppStateProtocol {
         didSet {
             subscribers.forEach { $0.newState(appState) }
         }
     }
     
-    var reducer: Reducer
-    private var subscribers: [AnyStoreSubscriber<T>] = []
+    public var reducer: Reducer
+    private var subscribers: [StoreSubscriber] = []
     
-    init(reducer: Reducer) {
+    public init(reducer: Reducer, appState: AppStateProtocol) {
         self.reducer = reducer
+        self.appState = appState
     }
-    
-    func subscribe(subscriber: AnyStoreSubscriber<T>) {
+
+    public func subscribe(subscriber: StoreSubscriber) {
         subscribers.append(subscriber)
         subscriber.newState(appState)
     }
     
-    func unsubscribe(subscriber: AnyStoreSubscriber<T>) {
+    public func unsubscribe(subscriber: StoreSubscriber) {
         // TODO: implement `unsubscribe`
         //        if let index = subscribers.indexOf(subscriber) {
         //            subscribers.removeAtIndex(index)
         //        }
     }
     
-    func dispatch(actionCreatorProvider: ActionCreatorProvider) -> Signal<T, NoError> {
+    public func dispatch(actionCreatorProvider: ActionCreatorProvider) -> Signal<AppStateProtocol, NoError> {
         return Signal { observer in
             dispatch_async(dispatch_get_main_queue()) {
                 let action = actionCreatorProvider()(state: self.appState, store: self)
@@ -52,8 +53,7 @@ class MainStore<T: AppStateProtocol>: Store {
         }
     }
     
-    
-    func dispatch(actionCreatorProvider: AsyncActionCreatorProvider) -> Signal<T, NoError> {
+  public func dispatch(actionCreatorProvider: AsyncActionCreatorProvider) -> Signal<AppStateProtocol, NoError> {
         // dispatch this asynchronously to make sure that all receivers receive new state
         // before state is modified
         return Signal { observer in
@@ -78,75 +78,32 @@ class MainStore<T: AppStateProtocol>: Store {
     
 }
 
-protocol Store {
-    typealias AppStateType: AppStateProtocol
-    
+public protocol Store {
     var reducer: Reducer { get set }
+    var appState: AppStateProtocol { get }
     
-    func subscribe(subscriber: AnyStoreSubscriber<AppStateType>)
-    func dispatch(actionCreatorProvider: AsyncActionCreatorProvider) -> Signal<AppStateType, NoError>
+    func subscribe(subscriber: StoreSubscriber)
+    func dispatch(actionCreatorProvider: AsyncActionCreatorProvider) -> Signal<AppStateProtocol, NoError>
     
-    func dispatch(actionCreatorProvider: ActionCreatorProvider) -> Signal<AppStateType, NoError>
+    func dispatch(actionCreatorProvider: ActionCreatorProvider) -> Signal<AppStateProtocol, NoError>
 }
 
-struct ActionCreatorTHing<U> {
-    func test<T: Store where T.AppStateType == U>(state: U, store: T) -> ActionProtocol? {
-    
-    }
-}
+public typealias ActionCreator = (state: AppStateProtocol, store: Store) -> ActionProtocol?
+public typealias AsyncActionCreator = (state: AppStateProtocol, store: Store) -> Signal<ActionCreator,NoError>?
 
-func doSomething<T>(t: T) {
-    
-}
+public typealias ActionCreatorProvider = () -> ActionCreator
+public typealias AsyncActionCreatorProvider = () -> AsyncActionCreator
 
-typealias ActionCreator = (state: AppStateProtocol, store: Store) -> ActionProtocol?
-typealias AsyncActionCreator = (state: AppStateProtocol, store: Store) -> Signal<ActionCreator,NoError>?
-
-typealias ActionCreatorProvider = () -> ActionCreator
-typealias AsyncActionCreatorProvider = () -> AsyncActionCreator
-
-
-
-protocol AppStateProtocol {
+public protocol AppStateProtocol {
     init()
 }
 
-protocol StoreSubscriber {
-    typealias AppStateType
-    
-    func newState(state: AppStateType)
+public protocol SubStateProtocol {}
+
+public protocol StoreSubscriber {
+    func newState(state: AppStateProtocol)
 }
 
-protocol Reducer {
+public protocol Reducer {    
     func handleAction(state: AppStateProtocol, action: ActionProtocol) -> AppStateProtocol
-}
-
-final class AnyStoreSubscriber<SubscriberType>: StoreSubscriber {
-    let subscriber: _AnySubscriberBoxBase<SubscriberType>
-    
-    init<T: StoreSubscriber where T.AppStateType == SubscriberType>(_ subscriber: T) {
-        self.subscriber = _AnySubscriberBox(subscriber)
-    }
-    
-    func newState(state: SubscriberType) {
-        subscriber.newState(state)
-    }
-}
-
-class _AnySubscriberBoxBase<T>: StoreSubscriber {
-    func newState(state: T) {
-        fatalError()
-    }
-}
-
-class _AnySubscriberBox<SubscriberType: StoreSubscriber>: _AnySubscriberBoxBase<SubscriberType.AppStateType> {
-    let base: SubscriberType
-    
-    init(_ base: SubscriberType) {
-        self.base = base
-    }
-    
-    override func newState(state: SubscriberType.AppStateType) {
-        base.newState(state)
-    }
 }

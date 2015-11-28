@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftFlowReactiveCocoaExtensions
 
 class PersistenceAdapter: StoreSubscriber {
     
@@ -35,7 +36,9 @@ class PersistenceAdapter: StoreSubscriber {
         return nil
     }
     
-    func newState(state: AppState) {
+    func newState(maybeState: AppStateProtocol) {
+        guard let state = maybeState as? AppState else { return }
+        
         let contacts = state.dataState.contacts
         let contactList = contacts.map { $0.dictionaryRepresentation() }
         let data = NSKeyedArchiver.archivedDataWithRootObject(contactList)

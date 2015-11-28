@@ -14,8 +14,14 @@ enum NavigationPresentationType {
     case Custom(RouteTransition)
 }
 
-struct NavigationState {
+public struct NavigationState {
+    public init() {}
+    
     var currentViewController: UIViewController?
     var transitionToViewController: UIViewController?
     var presentationType: NavigationPresentationType?
+}
+
+public protocol HasNavigationState {
+    var navigationState: NavigationState { get set }
 }
