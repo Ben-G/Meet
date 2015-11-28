@@ -14,7 +14,7 @@ public class MainStore: Store {
     
     private (set) public var appState: AppStateProtocol {
         didSet {
-            subscribers.forEach { $0._newState(appState) }
+//            subscribers.forEach { $0._newState(appState) }
         }
     }
     
@@ -28,14 +28,15 @@ public class MainStore: Store {
 
     public func subscribe(subscriber: AnyStoreSubscriber) {
         subscribers.append(subscriber)
-        subscriber._newState(appState)
+//        subscriber._newState(appState)
     }
     
     public func unsubscribe(subscriber: AnyStoreSubscriber) {
-        // TODO: implement `unsubscribe`
-        //        if let index = subscribers.indexOf(subscriber) {
-        //            subscribers.removeAtIndex(index)
-        //        }
+        let index = subscribers.indexOf { return $0 === subscriber }
+        
+        if let index = index {
+            subscribers.removeAtIndex(index)
+        }
     }
     
     public func dispatch(action: ActionProtocol) -> Signal<AppStateProtocol, NoError> {

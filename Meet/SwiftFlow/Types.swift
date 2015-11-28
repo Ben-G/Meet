@@ -14,7 +14,7 @@ public protocol AppStateProtocol {
     init()
 }
 
-public protocol AnyStoreSubscriber {
+public protocol AnyStoreSubscriber: class {
     func _newState(state: AppStateProtocol)
 }
 
