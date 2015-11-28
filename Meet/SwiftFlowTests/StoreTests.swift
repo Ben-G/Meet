@@ -33,10 +33,10 @@ struct TestReducer: Reducer {
 }
 
 class TestStoreSubscriber: StoreSubscriber {
-    var receivedState: TestAppState?
+    var receivedStates: [TestAppState] = []
     
     func newState(state: TestAppState) {
-        receivedState = state
+        receivedStates.append(state)
     }
 }
 
@@ -53,19 +53,50 @@ class StoreTests: XCTestCase {
     }
     
     func testDispatchesInitialValueUponSubscription() {
-        let expectation = expectationWithDescription("Sets initial value")
-        
+        let expectation = expectationWithDescription("Sends initial value")
         store = MainStore(reducer: reducer, appState: TestAppState())
-
         let subscriber = TestStoreSubscriber()
         
         store.dispatch(TestAction.SetValue(3)).observeNext { newState in
-            if (subscriber.receivedState?.testValue == 3) {
+            if (subscriber.receivedStates.last?.testValue == 3) {
                 expectation.fulfill()
             }
         }
         
         store.subscribe(subscriber)
+        
+        waitForExpectationsWithTimeout(2.0, handler: nil)
+    }
+    
+    func testDoesNotDispatchValuesWhenUnsubscribed() {
+        let expectation = expectationWithDescription("Sends subsequent values")
+        store = MainStore(reducer: reducer, appState: TestAppState())
+        let subscriber = TestStoreSubscriber()
+        
+        store.dispatch(TestAction.SetValue(5))
+        store.subscribe(subscriber)
+        store.dispatch(TestAction.SetValue(10))
+        
+        // Let Run Loop Run so that dispatched actions can be performed
+        NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate.distantFuture())
+        
+        store.unsubscribe(subscriber)
+        // Following value is missed due to not being subscribed:
+        store.dispatch(TestAction.SetValue(15))
+        store.dispatch(TestAction.SetValue(25))
+
+        // Let Run Loop Run so that dispatched actions can be performed
+        NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate.distantFuture())
+        
+        store.subscribe(subscriber)
+        
+        store.dispatch(TestAction.SetValue(20)).observeNext { newState in
+            if (subscriber.receivedStates[subscriber.receivedStates.count - 1].testValue == 20
+                && subscriber.receivedStates[subscriber.receivedStates.count - 2].testValue == 25
+                 && subscriber.receivedStates[subscriber.receivedStates.count - 3].testValue == 10) {
+                    expectation.fulfill()
+            }
+        }
         
         waitForExpectationsWithTimeout(2.0, handler: nil)
     }
