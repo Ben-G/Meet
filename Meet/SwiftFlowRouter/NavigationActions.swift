@@ -10,7 +10,7 @@ import Foundation
 import SwiftFlow
 import SwiftFlowReactiveCocoaExtensions
 
-enum NavigationAction: ActionProtocol {
+public enum NavigationAction: ActionProtocol {
     case NavigateTo(UIViewController)
     case CompleteNavigationTo(UIViewController)
     case SetNavigationState(UIViewController)

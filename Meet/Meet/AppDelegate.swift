@@ -12,7 +12,7 @@ import SwiftFlow
 import SwiftFlowRouter
 import SwiftFlowReactiveCocoaExtensions
 
-let mainStore = MainStore(reducer: MainReducer(), appState: AppState())
+let mainStore = MainStore(reducer: MainReducer([NavigationReducer(), DataMutationReducer(), TwitterAPIReducer()]), appState: AppState())
 var persistenceAdapter = PersistenceAdapter()
 
 public class SwifterWrapper {

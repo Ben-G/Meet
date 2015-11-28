@@ -14,3 +14,18 @@ public func withSpecificTypes<StateType, ActionType: ActionProtocol>(state: AppS
     
     return function(state: s, action: a) as! AppStateProtocol
 }
+
+public protocol TypedReducer: Reducer {
+    typealias ActionType: ActionProtocol
+    typealias StateType
+    
+    func handleTypedAction(state: StateType, action: ActionType) -> StateType
+}
+
+extension TypedReducer {
+    
+    public func handleAction(state: AppStateProtocol, action: ActionProtocol) -> AppStateProtocol {
+        return withSpecificTypes(state, action: action, function: handleTypedAction)
+    }
+    
+}

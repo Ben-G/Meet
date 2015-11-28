@@ -11,22 +11,6 @@ import SwiftFlow
 import SwiftFlowRouter
 import SwiftFlowReactiveCocoaExtensions
 
-/*
-  1. Which View Controller did the tab bar select? // more general: navigation state?
-*/
-
-/*
-
-  state = [
-      NavigationState,
-      TwitterSearchViewState,
-      ContactListState,
-      ContactDetailNoteState
-  ]
-
-
-*/
-
 struct AppState: AppStateProtocol, HasNavigationState, HasDataState, HasTwitterAPIState {
     var navigationState = NavigationState()
     var dataState = DataState()
