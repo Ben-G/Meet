@@ -10,6 +10,7 @@ import UIKit
 import ListKit
 import SwiftFlowReactiveCocoaExtensions
 import SwiftFlowRouter
+import SwiftFlow
 
 class SearchTwitterViewController: UIViewController, StoreSubscriber {
 

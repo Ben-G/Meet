@@ -14,14 +14,13 @@ import SwiftFlowReactiveCocoaExtensions
 struct TwitterAPIReducer: Reducer {
     
     func handleAction(state: AppStateProtocol, action: ActionProtocol) -> AppStateProtocol {
-        guard let s = state as? HasTwitterAPIState else { return  state }
-        guard let a = action as? TwitterAPIAction else { return state }
-        
-        switch a {
-        case .SetTwitterClient(let swifter):
-            return setTwitterClient(s, swifter: swifter) as! AppStateProtocol
-        case .SetUserSearchResults(let users):
-            return setUserSearchResults(s, userSearchResults: users) as! AppStateProtocol
+        return withSpecificTypes(state, action: action) { (state: HasTwitterAPIState, action: TwitterAPIAction) in
+            switch action {
+            case .SetTwitterClient(let swifter):
+                return setTwitterClient(state, swifter: swifter)
+            case .SetUserSearchResults(let users):
+                return setUserSearchResults(state, userSearchResults: users)
+            }
         }
     }
     

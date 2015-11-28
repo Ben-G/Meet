@@ -15,20 +15,19 @@ public struct NavigationReducer: Reducer {
     public init() {}
     
     public func handleAction(state: AppStateProtocol, action: ActionProtocol) -> AppStateProtocol {
-        guard let a = action as? NavigationAction else { return state }
-        guard let s = state as? HasNavigationState else { return state }
-        
-        switch a {
+        return withSpecificTypes(state, action: action) { (state: HasNavigationState, action: NavigationAction) in
+            switch action {
             case .SetNavigationState(let viewController):
-                return setNavigationState(s, targetViewController: viewController) as! AppStateProtocol
+                return setNavigationState(state, targetViewController: viewController)
             case .NavigateTo(let viewController):
-                return navigateToViewController(s, targetViewController: viewController) as! AppStateProtocol
+                return navigateToViewController(state, targetViewController: viewController)
             case .CompleteNavigationTo(let viewController):
-                return completeNavigationToViewController(s, completedTransitionViewController: viewController) as! AppStateProtocol
+                return completeNavigationToViewController(state, completedTransitionViewController: viewController)
             case .PresentViewController(let viewController):
-                return presentViewController(s, targetViewController: viewController) as! AppStateProtocol
+                return presentViewController(state, targetViewController: viewController)
             case .DismissViewController(let viewController):
-                return dismissViewController(s, parentViewController: viewController) as! AppStateProtocol
+                return dismissViewController(state, parentViewController: viewController)
+            }
         }
     }
   

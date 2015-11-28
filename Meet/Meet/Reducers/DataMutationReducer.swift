@@ -13,16 +13,15 @@ import SwiftFlowReactiveCocoaExtensions
 struct DataMutationReducer: Reducer {
 
     func handleAction(state: AppStateProtocol, action: ActionProtocol) -> AppStateProtocol {
-        guard let a = action as? DataMutationAction else { return state }
-        guard let s = state as? HasDataState else { return state }
-        
-        switch a {
+        return withSpecificTypes(state, action: action) { (state: HasDataState, action: DataMutationAction) in
+            switch action {
             case .CreateContactFromEmail(let email):
-                return createContact(s, email: email) as! AppStateProtocol
+                return createContact(state, email: email)
             case .DeleteContact(let identifier):
-                return deleteContact(s, identifier: identifier) as! AppStateProtocol
+                return deleteContact(state, identifier: identifier)
             case .SetContacts(let contacts):
-                return setContacts(s, contacts: contacts) as! AppStateProtocol
+                return setContacts(state, contacts: contacts)
+            }
         }
     }
     

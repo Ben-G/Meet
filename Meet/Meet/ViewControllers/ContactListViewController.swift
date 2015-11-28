@@ -9,6 +9,7 @@
 import UIKit
 import ListKit
 import ReactiveCocoa
+import SwiftFlow
 import SwiftFlowReactiveCocoaExtensions
 
 class ContactTableViewCell: UITableViewCell, ListKitCellProtocol {

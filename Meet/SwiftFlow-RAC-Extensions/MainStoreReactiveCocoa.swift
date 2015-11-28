@@ -94,16 +94,3 @@ public typealias AsyncActionCreator = (state: AppStateProtocol, store: Store) ->
 public typealias ActionCreatorProvider = () -> ActionCreator
 public typealias AsyncActionCreatorProvider = () -> AsyncActionCreator
 
-public protocol AppStateProtocol {
-    init()
-}
-
-public protocol SubStateProtocol {}
-
-public protocol StoreSubscriber {
-    func newState(state: AppStateProtocol)
-}
-
-public protocol Reducer {    
-    func handleAction(state: AppStateProtocol, action: ActionProtocol) -> AppStateProtocol
-}

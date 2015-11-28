@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftFlow
 import SwiftFlowReactiveCocoaExtensions
 
 class PersistenceAdapter: StoreSubscriber {

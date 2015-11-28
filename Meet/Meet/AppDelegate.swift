@@ -8,6 +8,7 @@
 
 import UIKit
 import SwifteriOS
+import SwiftFlow
 import SwiftFlowRouter
 import SwiftFlowReactiveCocoaExtensions
 
