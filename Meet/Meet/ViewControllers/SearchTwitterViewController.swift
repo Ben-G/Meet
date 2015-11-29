@@ -16,16 +16,17 @@ class SearchTwitterViewController: UIViewController, StoreSubscriber {
 
     @IBOutlet var tableView: UITableView!
     
+    var errorView: NetworkErrorView?
     var store = mainStore
     var dataSource = ArrayDataSource(cellType: TwitterUserTableViewCell.self, nib: UINib(nibName: "TwitterUserTableViewCell", bundle: nil))
-    var errorDataSource: ErrorDataSource!
 
     var twitterAPIActionCreator = TwitterAPIActionCreator()
+    
+    var searchText: String?
     
     var users: [TwitterUser]? {
         didSet {
             if let users = users {
-                tableView.dataSource = dataSource
                 dataSource.array = users
                 tableView.reloadData()
             }
@@ -35,8 +36,18 @@ class SearchTwitterViewController: UIViewController, StoreSubscriber {
     var error: TwitterSearchError? {
         didSet {
             if let error = error {
-                tableView.dataSource = errorDataSource
-                tableView.reloadData()
+                if (errorView == nil) {
+                    let loadedView = NSBundle.mainBundle().loadNibNamed("NetworkErrorView", owner: self, options: nil)[0] as! NetworkErrorView
+                    errorView = loadedView
+                    errorView?.retryFunction = { self.retrySearch($0) }
+                    errorView!.center = view.center
+                    view.addSubview(errorView!)
+                }
+            } else {
+                if let errorView = errorView {
+                    self.errorView?.removeFromSuperview()
+                    self.errorView = nil
+                }
             }
         }
     }
@@ -44,11 +55,6 @@ class SearchTwitterViewController: UIViewController, StoreSubscriber {
     override func viewWillAppear(animated: Bool) {
         store.subscribe(self)
         tableView.dataSource = dataSource
-        errorDataSource = ErrorDataSource(tableView: tableView)
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        errorDataSource = nil
     }
     
     func newState(state: AppState) {
@@ -69,31 +75,18 @@ class SearchTwitterViewController: UIViewController, StoreSubscriber {
         store.dispatch( NavigationAction.DismissViewController(presentingViewController: self.presentingViewController!) )
     }
     
+
+    func retrySearch() {
+        store.dispatch( self.twitterAPIActionCreator.searchUsers(searchText!) )
+    }
+    
 }
 
 extension SearchTwitterViewController: UISearchBarDelegate {
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        self.searchText = searchText
         store.dispatch( self.twitterAPIActionCreator.searchUsers(searchText) )
-    }
-    
-}
-
-class ErrorDataSource: NSObject, UITableViewDataSource {
-    
-    init(tableView: UITableView) {
-        let nib = UINib(nibName: "TwitterSearchErrorTableViewCell", bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: "TwitterSearchErrorCell")
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("TwitterSearchErrorCell", forIndexPath: indexPath)
-        
-        return cell
     }
     
 }

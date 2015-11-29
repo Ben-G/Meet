@@ -37,6 +37,8 @@
 		6292BEC41C0BAA4100CC1B8E /* TwitterSearchErrorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6292BEC31C0BAA4100CC1B8E /* TwitterSearchErrorTableViewCell.xib */; };
 		6292BEC51C0BAE7900CC1B8E /* libSDWebImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 628B30B81C0B9BCB00E2213D /* libSDWebImage.a */; };
 		6292BEC91C0BAED300CC1B8E /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6292BEC81C0BAED300CC1B8E /* ImageIO.framework */; };
+		6292BECC1C0BB27E00CC1B8E /* NetworkErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6292BECB1C0BB27E00CC1B8E /* NetworkErrorView.xib */; };
+		6292BED01C0BB78100CC1B8E /* NetworkErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6292BECF1C0BB78100CC1B8E /* NetworkErrorView.swift */; };
 		629E0BE71C09322E0065D495 /* NavigationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629E0BE61C09322E0065D495 /* NavigationActions.swift */; };
 		629E0BEF1C0951760065D495 /* TypeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629E0BEE1C0951760065D495 /* TypeHelper.swift */; };
 		629E0BF11C0951900065D495 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629E0BF01C0951900065D495 /* Types.swift */; };
@@ -425,6 +427,8 @@
 		6292BEC31C0BAA4100CC1B8E /* TwitterSearchErrorTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwitterSearchErrorTableViewCell.xib; sourceTree = "<group>"; };
 		6292BEC61C0BAE9900CC1B8E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6292BEC81C0BAED300CC1B8E /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		6292BECB1C0BB27E00CC1B8E /* NetworkErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetworkErrorView.xib; sourceTree = "<group>"; };
+		6292BECF1C0BB78100CC1B8E /* NetworkErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkErrorView.swift; sourceTree = "<group>"; };
 		629E0BE61C09322E0065D495 /* NavigationActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationActions.swift; sourceTree = "<group>"; };
 		629E0BEE1C0951760065D495 /* TypeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeHelper.swift; sourceTree = "<group>"; };
 		629E0BF01C0951900065D495 /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
@@ -703,6 +707,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		6292BECA1C0BB27200CC1B8E /* NetworkError */ = {
+			isa = PBXGroup;
+			children = (
+				6292BECB1C0BB27E00CC1B8E /* NetworkErrorView.xib */,
+				6292BECF1C0BB78100CC1B8E /* NetworkErrorView.swift */,
+			);
+			path = NetworkError;
+			sourceTree = "<group>";
+		};
 		62BBE79A1C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding */ = {
 			isa = PBXGroup;
 			children = (
@@ -835,6 +848,7 @@
 		62D492811C02D2A200607938 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				6292BECA1C0BB27200CC1B8E /* NetworkError */,
 				62D492821C02D2A200607938 /* TwitterSearch */,
 			);
 			path = UI;
@@ -1429,6 +1443,7 @@
 				62D3B6C61BF2FAA80056D509 /* LaunchScreen.storyboard in Resources */,
 				62D492841C02D2C000607938 /* TwitterUserTableViewCell.xib in Resources */,
 				6292BEC41C0BAA4100CC1B8E /* TwitterSearchErrorTableViewCell.xib in Resources */,
+				6292BECC1C0BB27E00CC1B8E /* NetworkErrorView.xib in Resources */,
 				62D3B6C31BF2FAA80056D509 /* Assets.xcassets in Resources */,
 				626DA4571C000FAE00988FC0 /* TwitterKeys.plist in Resources */,
 				62D3B6C11BF2FAA80056D509 /* Main.storyboard in Resources */,
@@ -1537,6 +1552,7 @@
 				62D3B7001BF446310056D509 /* Actions.swift in Sources */,
 				62D3B6FA1BF3B73A0056D509 /* AddContactViewController.swift in Sources */,
 				62D3B6F81BF3B72E0056D509 /* ContactListViewController.swift in Sources */,
+				6292BED01C0BB78100CC1B8E /* NetworkErrorView.swift in Sources */,
 				626DA44A1BFFE06C00988FC0 /* TwitterClient.swift in Sources */,
 				62D3B6BC1BF2FAA80056D509 /* AppDelegate.swift in Sources */,
 				62D3B7301BFC58430056D509 /* EmaiIIntroViewController.swift in Sources */,
