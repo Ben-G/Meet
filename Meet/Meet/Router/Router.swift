@@ -13,7 +13,6 @@ import SwiftFlowReactiveCocoaExtensions
 public typealias TransitionProvider = (UIViewController, to: UIViewController) -> RouteTransition
 
 public class Router: NSObject {
-    var navigationActionCreator = NavigationActionCreator()
     var store: Store
     var transitionFrom: TransitionProvider
     
@@ -34,7 +33,7 @@ public class Router: NSObject {
 extension Router: UITabBarControllerDelegate {
     
     public func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
-        store.dispatch( self.navigationActionCreator.navigateToViewController(viewController) )
+        store.dispatch( NavigationAction.NavigateTo(viewController) )
         
         return false
     }
@@ -58,13 +57,13 @@ extension Router: StoreSubscriber {
                 switch transition {
                 case .TabBarSelect:
                     rootViewController.selectedViewController = toViewController
-                    store.dispatch(self.navigationActionCreator.navigateToViewControllerCompleted(toViewController))
+                    store.dispatch( NavigationAction.CompleteNavigationTo(toViewController) )
                 case .Modal:
                     fromViewController.presentViewController(toViewController, animated: true, completion: nil)
-                    store.dispatch(self.navigationActionCreator.navigateToViewControllerCompleted(toViewController))
+                    store.dispatch( NavigationAction.CompleteNavigationTo(toViewController) )
                 case .Dismiss:
                     toViewController.dismissViewControllerAnimated(true, completion: nil)
-                    store.dispatch(self.navigationActionCreator.navigateToViewControllerCompleted(toViewController))
+                    store.dispatch( NavigationAction.CompleteNavigationTo(toViewController) )
                 case .Push:
                     rootViewController.navigationController?.pushViewController(toViewController, animated: true)
 

@@ -24,7 +24,6 @@ struct PendingAction {
 class AddContactViewController: UIViewController, StoreSubscriber {
   
     var store = mainStore
-    var navigationActionCreator = NavigationActionCreator()
     var twitterAPIActionCreator = TwitterAPIActionCreator()
     
     var pendingActions: [PendingAction] = [] { didSet {
@@ -72,7 +71,7 @@ class AddContactViewController: UIViewController, StoreSubscriber {
                 let searchTwitterViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("SearchTwitterViewController")
                 
                 self.store.dispatch (
-                    self.navigationActionCreator.navigateToViewController(searchTwitterViewController)
+                    NavigationAction.NavigateTo(searchTwitterViewController)
                 )
                 return true
             } else {

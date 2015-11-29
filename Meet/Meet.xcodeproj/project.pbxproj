@@ -11,7 +11,6 @@
 		6267DD4A1C07A0A90080BF30 /* SwiftFlowRouter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD431C07A0A90080BF30 /* SwiftFlowRouter.framework */; };
 		6267DD4B1C07A0A90080BF30 /* SwiftFlowRouter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD431C07A0A90080BF30 /* SwiftFlowRouter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6267DD4F1C07A1550080BF30 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B6F21BF3B2AE0056D509 /* Router.swift */; };
-		6267DD501C07A2150080BF30 /* NavigationActionCreators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B7031BF44C190056D509 /* NavigationActionCreators.swift */; };
 		6267DD591C07ADA10080BF30 /* SwiftFlow.h in Headers */ = {isa = PBXBuildFile; fileRef = 6267DD581C07ADA10080BF30 /* SwiftFlow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6267DD5D1C07ADA10080BF30 /* SwiftFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD561C07ADA10080BF30 /* SwiftFlow.framework */; };
 		6267DD5E1C07ADA10080BF30 /* SwiftFlow.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD561C07ADA10080BF30 /* SwiftFlow.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -199,7 +198,6 @@
 		62D3B6FC1BF445570056D509 /* MainStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainStore.swift; path = ../Meet/Stores/MainStore.swift; sourceTree = "<group>"; };
 		62D3B6FF1BF446310056D509 /* Actions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Actions.swift; sourceTree = "<group>"; };
 		62D3B7011BF4485C0056D509 /* MainReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainReducer.swift; path = ../Meet/Reducers/MainReducer.swift; sourceTree = "<group>"; };
-		62D3B7031BF44C190056D509 /* NavigationActionCreators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NavigationActionCreators.swift; path = ../Meet/Actions/NavigationActionCreators.swift; sourceTree = "<group>"; };
 		62D3B7051BF457C40056D509 /* SearchTwitterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTwitterViewController.swift; sourceTree = "<group>"; };
 		62D3B72F1BFC58430056D509 /* EmaiIIntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmaiIIntroViewController.swift; sourceTree = "<group>"; };
 		62D4927D1C02C1B200607938 /* TwitterUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterUser.swift; sourceTree = "<group>"; };
@@ -288,7 +286,6 @@
 			isa = PBXGroup;
 			children = (
 				62D3B6EC1BF3AC5E0056D509 /* NavigationState.swift */,
-				62D3B7031BF44C190056D509 /* NavigationActionCreators.swift */,
 				62D3B6F21BF3B2AE0056D509 /* Router.swift */,
 				6267DD451C07A0A90080BF30 /* SwiftFlowRouter.h */,
 				6267DD471C07A0A90080BF30 /* Info.plist */,
@@ -885,7 +882,6 @@
 			files = (
 				629E0BE71C09322E0065D495 /* NavigationActions.swift in Sources */,
 				629E0BE81C0933400065D495 /* NavigationState.swift in Sources */,
-				6267DD501C07A2150080BF30 /* NavigationActionCreators.swift in Sources */,
 				629E0BED1C0934EF0065D495 /* NavigationReducer.swift in Sources */,
 				6267DD4F1C07A1550080BF30 /* Router.swift in Sources */,
 			);
@@ -1451,6 +1447,7 @@
 				62BBE7A41C0ACE5A004D6822 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		62D3B6B31BF2FAA80056D509 /* Build configuration list for PBXProject "Meet" */ = {
 			isa = XCConfigurationList;

@@ -19,7 +19,6 @@ class SearchTwitterViewController: UIViewController, StoreSubscriber {
     var store = mainStore
     var dataSource = ArrayDataSource(cellType: TwitterUserTableViewCell.self, nib: UINib(nibName: "TwitterUserTableViewCell", bundle: nil))
 
-    var navigationActionCreator = NavigationActionCreator()
     var twitterAPIActionCreator = TwitterAPIActionCreator()
     
     var users: [TwitterUser]? {
@@ -42,7 +41,7 @@ class SearchTwitterViewController: UIViewController, StoreSubscriber {
     
     @IBAction func cancelButtonTapped(sender: AnyObject) {
         store.dispatch( TwitterAPIAction.SetUserSearchResults([]) )
-        store.dispatch( self.navigationActionCreator.dismissViewController(presentingViewController: self.presentingViewController!) )
+        store.dispatch( NavigationAction.DismissViewController(presentingViewController: self.presentingViewController!) )
     }
     
 }

@@ -15,5 +15,5 @@ public enum NavigationAction: ActionType {
     case CompleteNavigationTo(UIViewController)
     case SetNavigationState(UIViewController)
     case PresentViewController(UIViewController)
-    case DismissViewController(UIViewController)
+    case DismissViewController(presentingViewController: UIViewController)
 }

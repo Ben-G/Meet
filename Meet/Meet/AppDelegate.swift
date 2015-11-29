@@ -30,7 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
 
    var router: Router!
-    var navigationActionCreator = NavigationActionCreator()
     
   var swifter: SwifterWrapper.Type = SwifterWrapper.self
     
@@ -43,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     tabBarController.viewControllers = [addContactViewController, contactsViewController]
     
     router = Router(store: mainStore, rootViewController: tabBarController, transitionProvider: transitionFrom)
-    mainStore.dispatch ( self.navigationActionCreator.setCurrentViewController(addContactViewController) )
+    mainStore.dispatch ( NavigationAction.SetNavigationState(addContactViewController) )
 
     window = UIWindow(frame: UIScreen.mainScreen().bounds)
     window?.rootViewController = router.rootViewController

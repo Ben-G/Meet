@@ -15,17 +15,16 @@ var mailComposerViewController: MFMailComposeViewController?
 class EmailIntroViewController: UIViewController {
 
     var store = mainStore
-    var navigationActionCreator = NavigationActionCreator()
     
     @IBAction func emailIntroButtonTapped(sender: AnyObject) {
         mailComposerViewController = MFMailComposeViewController()
         mailComposerViewController?.mailComposeDelegate = self
     
-        store.dispatch( self.navigationActionCreator.presentViewController(mailComposerViewController!) )
+        store.dispatch( NavigationAction.PresentViewController(mailComposerViewController!) )
     }
     
     @IBAction func cancelButtonTapped(sender: AnyObject) {
-        store.dispatch( self.navigationActionCreator.dismissViewController(presentingViewController: self.presentingViewController!) )
+        store.dispatch( NavigationAction.DismissViewController(presentingViewController: self.presentingViewController!) )
     }
     
 }
@@ -36,12 +35,12 @@ extension EmailIntroViewController: MFMailComposeViewControllerDelegate, UINavig
         
         if (result == MFMailComposeResultCancelled) {
             store.dispatch(
-                self.navigationActionCreator.dismissViewController(presentingViewController: self)
+                NavigationAction.DismissViewController(presentingViewController: self)
             )
         } else if (result == MFMailComposeResultSent) {
             store.dispatch( DataMutationAction.CreateContactFromEmail("Benjamin.Encz@gmail.com") )
             store.dispatch(
-                self.navigationActionCreator.dismissViewController(presentingViewController: self)
+                NavigationAction.DismissViewController(presentingViewController: self)
             )
         }
     }
