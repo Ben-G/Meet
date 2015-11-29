@@ -9,7 +9,7 @@
 import Foundation
 
 public class MainStore: Store {
-    private (set) public var appState: AppStateProtocol {
+    private (set) public var appState: StateType {
         didSet {
             subscribers.forEach { $0._newState(appState) }
         }
@@ -18,7 +18,7 @@ public class MainStore: Store {
     private var reducer: AnyReducer
     private var subscribers: [AnyStoreSubscriber] = []
     
-    public init(reducer: AnyReducer, appState: AppStateProtocol) {
+    public init(reducer: AnyReducer, appState: StateType) {
         self.reducer = reducer
         self.appState = appState
     }
@@ -36,7 +36,7 @@ public class MainStore: Store {
         }
     }
     
-    public func dispatch(action: ActionProtocol) {
+    public func dispatch(action: ActionType) {
         dispatch(action, callback: nil)
     }
     
@@ -48,7 +48,7 @@ public class MainStore: Store {
         dispatch(asyncActionCreatorProvider, callback: nil)
     }
     
-    public func dispatch(action: ActionProtocol, callback: DispatchCallback?)  {
+    public func dispatch(action: ActionType, callback: DispatchCallback?)  {
         // Dispatch Asynchronously so that each subscriber receives the latest state
         // Without Async a receiver could immediately be called and emit a new state
         dispatch_async(dispatch_get_main_queue()) {
@@ -74,11 +74,3 @@ public class MainStore: Store {
     }
 
 }
-
-
-//extension MainStore {
-//    /// This Method is only exposed for subclasses of `MainStore`, you should never call it directly
-//    public func _setAppStateProtected(appState: AppStateProtocol) {
-//        self.appState = appState
-//    }
-//}

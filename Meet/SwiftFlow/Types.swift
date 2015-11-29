@@ -8,16 +8,16 @@
 
 import Foundation
 
-public protocol ActionProtocol {}
+public protocol ActionType {}
 
-public protocol AppStateProtocol {
+public protocol StateType {
     init()
 }
 
 public protocol AnyStoreSubscriber: class {
-    func _newState(state: AppStateProtocol)
+    func _newState(state: StateType)
 }
 
 public protocol AnyReducer {
-    func _handleAction(state: AppStateProtocol, action: ActionProtocol) -> AppStateProtocol
+    func _handleAction(state: StateType, action: ActionType) -> StateType
 }

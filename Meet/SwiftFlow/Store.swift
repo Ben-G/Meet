@@ -9,22 +9,22 @@
 import Foundation
 
 public protocol Store {
-    var appState: AppStateProtocol { get }
+    var appState: StateType { get }
     
     func subscribe(subscriber: AnyStoreSubscriber)
     func unsubscribe(subscriber: AnyStoreSubscriber)
     
-    func dispatch(action: ActionProtocol)
+    func dispatch(action: ActionType)
     func dispatch(actionCreatorProvider: ActionCreator)
     func dispatch(actionCreatorProvider: AsyncActionCreator)
 
-    func dispatch(action: ActionProtocol, callback: DispatchCallback?)
+    func dispatch(action: ActionType, callback: DispatchCallback?)
     func dispatch(actionCreatorProvider: ActionCreator, callback: DispatchCallback?)
     func dispatch(asyncActionCreatorProvider: AsyncActionCreator, callback: DispatchCallback?)
 }
 
-public typealias DispatchCallback = (AppStateProtocol) -> Void
-public typealias ActionCreator = (state: AppStateProtocol, store: Store) -> ActionProtocol?
+public typealias DispatchCallback = (StateType) -> Void
+public typealias ActionCreator = (state: StateType, store: Store) -> ActionType?
 
 /// AsyncActionCreators allow the developer to wait for the completion of an async action
-public typealias AsyncActionCreator = (state: AppStateProtocol, store: Store, actionCreatorCallback: ActionCreator -> Void) -> Void
+public typealias AsyncActionCreator = (state: StateType, store: Store, actionCreatorCallback: ActionCreator -> Void) -> Void

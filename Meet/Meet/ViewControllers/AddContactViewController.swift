@@ -39,7 +39,7 @@ class AddContactViewController: UIViewController, StoreSubscriber {
         store.subscribe(self)
     }
     
-    func newState(maybeState: AppStateProtocol) {
+    func newState(maybeState: StateType) {
         guard let state = maybeState as? AppState else { return }
         
         resolvePendingActions(state)

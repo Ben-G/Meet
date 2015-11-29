@@ -8,38 +8,38 @@
 
 import Foundation
 
-public func withSpecificTypes<StateType, ActionType: ActionProtocol>(state: AppStateProtocol, action: ActionProtocol, @noescape function: (state: StateType, action: ActionType) -> StateType) -> AppStateProtocol {
-    guard let a = action as? ActionType else { return state }
-    guard let s = state as? StateType else { return state }
+public func withSpecificTypes<SpecificStateType, SpecificActionType: ActionType>(state: StateType, action: ActionType, @noescape function: (state: SpecificStateType, action: SpecificActionType) -> SpecificStateType) -> StateType {
+    guard let a = action as? SpecificActionType else { return state }
+    guard let s = state as? SpecificStateType else { return state }
     
-    return function(state: s, action: a) as! AppStateProtocol
+    return function(state: s, action: a) as! StateType
 }
 
 public protocol StoreSubscriber: AnyStoreSubscriber {
-    typealias StateType
+    typealias StoreSubscriberStateType
     
-    func newState(state: StateType)
+    func newState(state: StoreSubscriberStateType)
     
 }
 
 extension StoreSubscriber {
-    public func _newState(state: AppStateProtocol) {
-        if let typedState = state as? StateType {
+    public func _newState(state: StateType) {
+        if let typedState = state as? StoreSubscriberStateType {
             newState(typedState)
         }
     }
 }
 
 public protocol Reducer: AnyReducer {
-    typealias ActionType: ActionProtocol
-    typealias StateType
+    typealias ReducerActionType: ActionType
+    typealias ReducerStateType
     
-    func handleAction(state: StateType, action: ActionType) -> StateType
+    func handleAction(state: ReducerStateType, action: ReducerActionType) -> ReducerStateType
 }
 
 extension Reducer {
     
-    public func _handleAction(state: AppStateProtocol, action: ActionProtocol) -> AppStateProtocol {
+    public func _handleAction(state: StateType, action: ActionType) -> StateType {
         return withSpecificTypes(state, action: action, function: handleAction)
     }
     

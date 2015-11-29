@@ -67,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: StoreSubscriber {
     
-    func newState(maybeState: AppStateProtocol) {
+    func newState(maybeState: StateType) {
         guard let state = maybeState as? AppState else { return }
 
         print(state)

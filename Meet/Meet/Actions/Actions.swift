@@ -10,12 +10,12 @@ import UIKit
 import SwifteriOS
 import SwiftFlow
 
-enum TwitterAPIAction: ActionProtocol {
+enum TwitterAPIAction: ActionType {
     case SetTwitterClient(Swifter)
     case SetUserSearchResults([TwitterUser])
 }
 
-enum DataMutationAction: ActionProtocol {
+enum DataMutationAction: ActionType {
     case CreateContactFromEmail(String)
     case DeleteContact(Int)
     case SetContacts([Contact])

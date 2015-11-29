@@ -36,7 +36,7 @@ class PersistenceAdapter: StoreSubscriber {
         return nil
     }
     
-    func newState(maybeState: AppStateProtocol) {
+    func newState(maybeState: StateType) {
         guard let state = maybeState as? AppState else { return }
         
         let contacts = state.dataState.contacts

@@ -11,7 +11,7 @@ import SwiftFlow
 import SwiftFlowRouter
 import SwiftFlowReactiveCocoaExtensions
 
-struct AppState: AppStateProtocol, HasNavigationState, HasDataState, HasTwitterAPIState {
+struct AppState: StateType, HasNavigationState, HasDataState, HasTwitterAPIState {
     var navigationState = NavigationState()
     var dataState = DataState()
     var twitterAPIState = TwitterAPIState()

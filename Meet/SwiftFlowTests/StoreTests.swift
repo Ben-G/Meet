@@ -9,7 +9,7 @@
 import XCTest
 @testable import SwiftFlow
 
-struct TestAppState: AppStateProtocol {
+struct TestAppState: StateType {
     var testValue: Int?
     
     init() {
@@ -17,7 +17,7 @@ struct TestAppState: AppStateProtocol {
     }
 }
 
-enum TestAction: ActionProtocol {
+enum TestAction: ActionType {
     case SetValue(Int)
 }
 
