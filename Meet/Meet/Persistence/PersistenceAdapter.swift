@@ -14,7 +14,13 @@ public protocol Coding {
     func dictionaryRepresentation() -> NSDictionary
 }
 
-public class PersistenceAdapter<DataState: Coding>: StoreSubscriber {
+public protocol Persistable {
+    typealias DataState
+    
+    func persistableState() -> DataState
+}
+
+public class PersistenceAdapter<DataStateType: Coding, AppState: Persistable where AppState.DataState == DataStateType>: StoreSubscriber {
     
     public init() {}
     
@@ -24,14 +30,14 @@ public class PersistenceAdapter<DataState: Coding>: StoreSubscriber {
         }
     }
     
-    public func hydrateStore() -> DataState? {
+    public func hydrateStore() -> DataStateType? {
         if let path = filePath() {
             do {
                 let data = NSData(contentsOfURL: path)
                 if let data = data {
                     let state = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? NSDictionary
                     if let state = state {
-                        return DataState(dictionary: state)
+                        return DataStateType(dictionary: state)
                     } else {
                         return nil
                     }                    
@@ -42,8 +48,9 @@ public class PersistenceAdapter<DataState: Coding>: StoreSubscriber {
         return nil
     }
     
-    public func newState(state: DataState) {
-        let data = NSKeyedArchiver.archivedDataWithRootObject(state.dictionaryRepresentation())
+    public func newState(state: AppState) {
+        let dataState = state.persistableState()
+        let data = NSKeyedArchiver.archivedDataWithRootObject(dataState.dictionaryRepresentation())
     
         if let path = filePath()  {
             do {
