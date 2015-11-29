@@ -40,11 +40,11 @@ public class MainStore: Store {
         dispatch(action, callback: nil)
     }
     
-    public func dispatch(actionCreatorProvider: ActionCreatorProvider) {
+    public func dispatch(actionCreatorProvider: ActionCreator) {
         dispatch(actionCreatorProvider, callback: nil)
     }
     
-    public func dispatch(asyncActionCreatorProvider: AsyncActionCreatorProvider) {
+    public func dispatch(asyncActionCreatorProvider: AsyncActionCreator) {
         dispatch(asyncActionCreatorProvider, callback: nil)
     }
     
@@ -57,15 +57,15 @@ public class MainStore: Store {
         }
     }
     
-    public func dispatch(actionCreatorProvider: ActionCreatorProvider, callback: DispatchCallback?) {
-        let action = actionCreatorProvider()(state: self.appState, store: self)
+    public func dispatch(actionCreatorProvider: ActionCreator, callback: DispatchCallback?) {
+        let action = actionCreatorProvider(state: self.appState, store: self)
         if let action = action {
             dispatch(action, callback: callback)
         }
     }
     
-    public func dispatch(actionCreatorProvider: AsyncActionCreatorProvider, callback: DispatchCallback?) {
-        actionCreatorProvider()(state: self.appState, store: self) { actionProvider in
+    public func dispatch(actionCreatorProvider: AsyncActionCreator, callback: DispatchCallback?) {
+        actionCreatorProvider(state: self.appState, store: self) { actionProvider in
             let action = actionProvider(state: self.appState, store: self)
             if let action = action {
                 self.dispatch(action, callback: callback)

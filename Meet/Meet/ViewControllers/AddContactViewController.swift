@@ -71,9 +71,9 @@ class AddContactViewController: UIViewController, StoreSubscriber {
             if state.twitterAPIState.swifter != nil {
                 let searchTwitterViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("SearchTwitterViewController")
                 
-                self.store.dispatch {
+                self.store.dispatch (
                     self.navigationActionCreator.navigateToViewController(searchTwitterViewController)
-                }
+                )
                 return true
             } else {
                 return false

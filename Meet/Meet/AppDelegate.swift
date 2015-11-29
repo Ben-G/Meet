@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     tabBarController.viewControllers = [addContactViewController, contactsViewController]
     
     router = Router(store: mainStore, rootViewController: tabBarController, transitionProvider: transitionFrom)
-    mainStore.dispatch { self.navigationActionCreator.setCurrentViewController(addContactViewController) }
+    mainStore.dispatch ( self.navigationActionCreator.setCurrentViewController(addContactViewController) )
 
     window = UIWindow(frame: UIScreen.mainScreen().bounds)
     window?.rootViewController = router.rootViewController

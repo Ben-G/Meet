@@ -11,9 +11,9 @@ import ReactiveCocoa
 import SwiftFlow
 
 public protocol ReactiveCocoaStore {
-    func dispatchReactive(actionCreatorProvider: AsyncActionCreatorProvider) -> Signal<AppStateProtocol, NoError>
+    func dispatchReactive(asyncActionCreator: AsyncActionCreator) -> Signal<AppStateProtocol, NoError>
     func dispatchReactive(SignalAsyncActionCreator: SignalAsyncActionCreator) -> Signal<AppStateProtocol, NoError>?
-    func dispatchReactive(actionCreatorProvider: ActionCreatorProvider) -> Signal<AppStateProtocol, NoError>
+    func dispatchReactive(actionCreator: ActionCreator) -> Signal<AppStateProtocol, NoError>
     func dispatchReactive(action: ActionProtocol) -> Signal<AppStateProtocol, NoError>
 }
 
@@ -32,9 +32,9 @@ public class MainStoreReactiveCocoa: MainStore, ReactiveCocoaStore {
         }
     }
     
-    public func dispatchReactive(actionCreatorProvider: ActionCreatorProvider) -> Signal<AppStateProtocol, NoError> {
+    public func dispatchReactive(actionCreator: ActionCreator) -> Signal<AppStateProtocol, NoError> {
         return Signal { observer in
-            super.dispatch(actionCreatorProvider) { newState in
+            super.dispatch(actionCreator) { newState in
                 observer.sendNext(newState)
                 observer.sendCompleted()
             }
@@ -43,9 +43,9 @@ public class MainStoreReactiveCocoa: MainStore, ReactiveCocoaStore {
         }
     }
     
-  public func dispatchReactive(actionCreatorProvider: AsyncActionCreatorProvider) -> Signal<AppStateProtocol, NoError> {
+  public func dispatchReactive(asyncActionCreator: AsyncActionCreator) -> Signal<AppStateProtocol, NoError> {
         return Signal { observer in
-            super.dispatch(actionCreatorProvider) { newState in
+            super.dispatch(asyncActionCreator) { newState in
                 observer.sendNext(newState)
                 observer.sendCompleted()
             }
@@ -56,7 +56,7 @@ public class MainStoreReactiveCocoa: MainStore, ReactiveCocoaStore {
     
     public func dispatchReactive(signalAsyncActionCreator: SignalAsyncActionCreator) -> Signal<AppStateProtocol, NoError>? {
         return signalAsyncActionCreator(state: appState, store: self)?.flatMap(FlattenStrategy.Concat, transform: { actionCreator in
-            return self.dispatchReactive { actionCreator }
+            return self.dispatchReactive(actionCreator)
         })
     }
     

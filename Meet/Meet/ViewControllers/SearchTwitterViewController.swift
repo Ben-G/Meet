@@ -42,7 +42,7 @@ class SearchTwitterViewController: UIViewController, StoreSubscriber {
     
     @IBAction func cancelButtonTapped(sender: AnyObject) {
         store.dispatch( TwitterAPIAction.SetUserSearchResults([]) )
-        store.dispatch { self.navigationActionCreator.dismissViewController(presentingViewController: self.presentingViewController!) }
+        store.dispatch( self.navigationActionCreator.dismissViewController(presentingViewController: self.presentingViewController!) )
     }
     
 }
@@ -50,7 +50,7 @@ class SearchTwitterViewController: UIViewController, StoreSubscriber {
 extension SearchTwitterViewController: UISearchBarDelegate {
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        store.dispatch { self.twitterAPIActionCreator.searchUsers(searchText) }
+        store.dispatch( self.twitterAPIActionCreator.searchUsers(searchText) )
     }
     
 }
