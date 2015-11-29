@@ -84,11 +84,11 @@ struct SpaceShip: Unboxable {
     }
 }
 
-enum SpaceShipType: UnboxableEnum {
+enum SpaceShipType: Int, UnboxableEnum {
     case Apollo
     case Sputnik
 
-    static func unboxFallbackValue() {
+    static func unboxFallbackValue() -> SpaceShipType {
         return .Apollo
     }
 }
@@ -175,6 +175,10 @@ struct UniqueIdentifier: UnboxableByTransform {
     }
 }
 ```
+
+### Array support
+
+If the JSON you want to unbox comes in the format of a root `Array`, you can also easily unbox it into an array of models in one go using the exact same `Unbox()` API.
 
 ### Built-in enum support
 
