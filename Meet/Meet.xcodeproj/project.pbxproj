@@ -46,6 +46,7 @@
 		629E0BEF1C0951760065D495 /* TypeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629E0BEE1C0951760065D495 /* TypeHelper.swift */; };
 		629E0BF11C0951900065D495 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629E0BF01C0951900065D495 /* Types.swift */; };
 		629E0BF21C09555D0065D495 /* MainReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B7011BF4485C0056D509 /* MainReducer.swift */; };
+		62BBE78F1C0A6FA3004D6822 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BBE78E1C0A6FA3004D6822 /* Store.swift */; };
 		62CCBA571C058A5200B4F000 /* Contact+Coding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62CCBA561C058A5200B4F000 /* Contact+Coding.swift */; };
 		62CCBA591C058CD100B4F000 /* PersistenceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62CCBA581C058CD100B4F000 /* PersistenceAdapter.swift */; };
 		62D3B6BC1BF2FAA80056D509 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B6BB1BF2FAA80056D509 /* AppDelegate.swift */; };
@@ -162,6 +163,7 @@
 		629E0BE61C09322E0065D495 /* NavigationActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationActions.swift; sourceTree = "<group>"; };
 		629E0BEE1C0951760065D495 /* TypeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeHelper.swift; sourceTree = "<group>"; };
 		629E0BF01C0951900065D495 /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
+		62BBE78E1C0A6FA3004D6822 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		62CCBA561C058A5200B4F000 /* Contact+Coding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Contact+Coding.swift"; sourceTree = "<group>"; };
 		62CCBA581C058CD100B4F000 /* PersistenceAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceAdapter.swift; sourceTree = "<group>"; };
 		62D3B6B81BF2FAA80056D509 /* Meet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meet.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -286,6 +288,7 @@
 				6267DD5A1C07ADA10080BF30 /* Info.plist */,
 				629E0BEE1C0951760065D495 /* TypeHelper.swift */,
 				629E0BF01C0951900065D495 /* Types.swift */,
+				62BBE78E1C0A6FA3004D6822 /* Store.swift */,
 			);
 			path = SwiftFlow;
 			sourceTree = "<group>";
@@ -825,6 +828,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62BBE78F1C0A6FA3004D6822 /* Store.swift in Sources */,
 				629E0BF11C0951900065D495 /* Types.swift in Sources */,
 				6267DD621C07ADAD0080BF30 /* MainStore.swift in Sources */,
 				629E0BEF1C0951760065D495 /* TypeHelper.swift in Sources */,
@@ -1321,6 +1325,7 @@
 				627B05EA1C09700D00481356 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		62D3B6B31BF2FAA80056D509 /* Build configuration list for PBXProject "Meet" */ = {
 			isa = XCConfigurationList;

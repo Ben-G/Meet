@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SwiftFlowReactiveCocoaExtensions
+import SwiftFlow
 
 public struct NavigationActionCreator {
     
