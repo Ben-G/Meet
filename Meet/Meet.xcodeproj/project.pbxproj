@@ -39,6 +39,9 @@
 		6292BEC91C0BAED300CC1B8E /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6292BEC81C0BAED300CC1B8E /* ImageIO.framework */; };
 		6292BECC1C0BB27E00CC1B8E /* NetworkErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6292BECB1C0BB27E00CC1B8E /* NetworkErrorView.xib */; };
 		6292BED01C0BB78100CC1B8E /* NetworkErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6292BECF1C0BB78100CC1B8E /* NetworkErrorView.swift */; };
+		6292BED11C0BC17600CC1B8E /* SwiftFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD561C07ADA10080BF30 /* SwiftFlow.framework */; };
+		6292BED21C0BC17D00CC1B8E /* SwiftFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD561C07ADA10080BF30 /* SwiftFlow.framework */; };
+		6292BED31C0BC18100CC1B8E /* SwiftFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD561C07ADA10080BF30 /* SwiftFlow.framework */; };
 		629E0BE71C09322E0065D495 /* NavigationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629E0BE61C09322E0065D495 /* NavigationActions.swift */; };
 		629E0BEF1C0951760065D495 /* TypeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629E0BEE1C0951760065D495 /* TypeHelper.swift */; };
 		629E0BF11C0951900065D495 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629E0BF01C0951900065D495 /* Types.swift */; };
@@ -347,6 +350,27 @@
 			remoteGlobalIDString = 57A4D2411BA13D7A00F7D4B1;
 			remoteInfo = "ReactiveCocoa-tvOS";
 		};
+		6292BED41C0BC40F00CC1B8E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 62D3B6B01BF2FAA80056D509 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6267DD551C07ADA10080BF30;
+			remoteInfo = SwiftFlow;
+		};
+		6292BED61C0BC41A00CC1B8E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 62D3B6B01BF2FAA80056D509 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6267DD551C07ADA10080BF30;
+			remoteInfo = SwiftFlow;
+		};
+		6292BED81C0BC41F00CC1B8E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 62D3B6B01BF2FAA80056D509 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6267DD551C07ADA10080BF30;
+			remoteInfo = SwiftFlow;
+		};
 		62BBE79E1C0ACE59004D6822 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 62D3B6B01BF2FAA80056D509 /* Project object */;
@@ -473,6 +497,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6292BED31C0BC18100CC1B8E /* SwiftFlow.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -487,6 +512,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6292BED11C0BC17600CC1B8E /* SwiftFlow.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,6 +528,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6292BED21C0BC17D00CC1B8E /* SwiftFlow.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -922,6 +949,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				6292BED91C0BC41F00CC1B8E /* PBXTargetDependency */,
 			);
 			name = SwiftFlowRouter;
 			productName = SwiftFlowRouter;
@@ -958,6 +986,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				6292BED51C0BC40F00CC1B8E /* PBXTargetDependency */,
 			);
 			name = SwiftFlowReactiveCocoaExtensions;
 			productName = SwiftFlowReactiveCocoaExtensions;
@@ -995,6 +1024,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				6292BED71C0BC41A00CC1B8E /* PBXTargetDependency */,
 			);
 			name = SwiftFlowPersistenceNSCoding;
 			productName = SwiftFlowPersistenceNSCoding;
@@ -1598,6 +1628,21 @@
 			isa = PBXTargetDependency;
 			target = 6267DD551C07ADA10080BF30 /* SwiftFlow */;
 			targetProxy = 627B05E61C09700D00481356 /* PBXContainerItemProxy */;
+		};
+		6292BED51C0BC40F00CC1B8E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6267DD551C07ADA10080BF30 /* SwiftFlow */;
+			targetProxy = 6292BED41C0BC40F00CC1B8E /* PBXContainerItemProxy */;
+		};
+		6292BED71C0BC41A00CC1B8E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6267DD551C07ADA10080BF30 /* SwiftFlow */;
+			targetProxy = 6292BED61C0BC41A00CC1B8E /* PBXContainerItemProxy */;
+		};
+		6292BED91C0BC41F00CC1B8E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6267DD551C07ADA10080BF30 /* SwiftFlow */;
+			targetProxy = 6292BED81C0BC41F00CC1B8E /* PBXContainerItemProxy */;
 		};
 		62BBE79F1C0ACE59004D6822 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

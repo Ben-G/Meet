@@ -8,7 +8,6 @@
 
 import UIKit
 import SwiftFlow
-import SwiftFlowReactiveCocoaExtensions
 
 public struct NavigationReducer: Reducer {
     

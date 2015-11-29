@@ -8,7 +8,6 @@
 
 import UIKit
 import SwiftFlow
-import SwiftFlowReactiveCocoaExtensions
 
 public typealias TransitionProvider = (UIViewController, to: UIViewController) -> RouteTransition
 

@@ -8,7 +8,6 @@
 
 import Foundation
 import SwiftFlow
-import SwiftFlowReactiveCocoaExtensions
 
 public enum NavigationAction: ActionType {
     case NavigateTo(UIViewController)
