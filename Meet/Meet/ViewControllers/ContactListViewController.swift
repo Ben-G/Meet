@@ -46,9 +46,7 @@ class ContactListViewController: UIViewController, StoreSubscriber {
         store.unsubscribe(self)
     }
     
-    func newState(maybeState: AppStateProtocol) {
-        guard let state = maybeState as? AppState else { return }
-        
+    func newState(state: HasDataState) {
         contacts = state.dataState.contacts
     }
 
@@ -67,10 +65,10 @@ extension ContactListViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         let contactID = dataSource.array[indexPath.row].identifier
-        let signal = store.dispatchReactive( DataMutationAction.DeleteContact(contactID) )
         
         // TODO: Consider implementing this as a pending action, or alternatively as an extension on UITableView using Dwift: https://github.com/jflinter/Dwifft or https://github.com/brutella/simplediff-swift
-        signal.observeNext { appState in
+        
+        store.dispatch( DataMutationAction.DeleteContact(contactID) ) { appState in
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
         }
     }
