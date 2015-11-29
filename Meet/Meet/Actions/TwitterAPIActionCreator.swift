@@ -9,13 +9,14 @@
 import Foundation
 import SwifteriOS
 import ReactiveCocoa
+import SwiftFlow
 import SwiftFlowReactiveCocoaExtensions
 
 struct TwitterAPIActionCreator {
     
     var twitterClient = TwitterClient.self
     
-    func authenticateUser() -> AsyncActionCreator {
+    func authenticateUser() -> SignalAsyncActionCreator {
         return { maybeState, store in
             
             guard let state = maybeState as? AppState else { return nil }

@@ -10,9 +10,18 @@ import Foundation
 import ReactiveCocoa
 import SwiftFlow
 
+public protocol ReactiveCocoaStore {
+    func dispatchReactive(actionCreatorProvider: AsyncActionCreatorProvider) -> Signal<AppStateProtocol, NoError>
+    func dispatchReactive(SignalAsyncActionCreator: SignalAsyncActionCreator) -> Signal<AppStateProtocol, NoError>?
+    func dispatchReactive(actionCreatorProvider: ActionCreatorProvider) -> Signal<AppStateProtocol, NoError>
+    func dispatchReactive(action: ActionProtocol) -> Signal<AppStateProtocol, NoError>
+}
+
+public typealias SignalAsyncActionCreator = (state: AppStateProtocol, store: Store) -> Signal<ActionCreator,NoError>?
+
 public class MainStoreReactiveCocoa: MainStore, ReactiveCocoaStore {
     
-    public func dispatch(action: ActionProtocol) -> Signal<AppStateProtocol, NoError> {
+    public func dispatchReactive(action: ActionProtocol) -> Signal<AppStateProtocol, NoError> {
         return Signal { observer in
             super.dispatch(action) { newState in
                 observer.sendNext(newState)
@@ -23,7 +32,7 @@ public class MainStoreReactiveCocoa: MainStore, ReactiveCocoaStore {
         }
     }
     
-    public func dispatch(actionCreatorProvider: ActionCreatorProvider) -> Signal<AppStateProtocol, NoError> {
+    public func dispatchReactive(actionCreatorProvider: ActionCreatorProvider) -> Signal<AppStateProtocol, NoError> {
         return Signal { observer in
             super.dispatch(actionCreatorProvider) { newState in
                 observer.sendNext(newState)
@@ -34,7 +43,7 @@ public class MainStoreReactiveCocoa: MainStore, ReactiveCocoaStore {
         }
     }
     
-  public func dispatch(actionCreatorProvider: AsyncActionCreatorProvider) -> Signal<AppStateProtocol, NoError> {
+  public func dispatchReactive(actionCreatorProvider: AsyncActionCreatorProvider) -> Signal<AppStateProtocol, NoError> {
         return Signal { observer in
             super.dispatch(actionCreatorProvider) { newState in
                 observer.sendNext(newState)
@@ -45,17 +54,10 @@ public class MainStoreReactiveCocoa: MainStore, ReactiveCocoaStore {
         }
     }
     
-}
-
-public protocol ReactiveCocoaStore {
-    func dispatch(actionCreatorProvider: AsyncActionCreatorProvider) -> Signal<AppStateProtocol, NoError>
+    public func dispatchReactive(signalAsyncActionCreator: SignalAsyncActionCreator) -> Signal<AppStateProtocol, NoError>? {
+        return signalAsyncActionCreator(state: appState, store: self)?.flatMap(FlattenStrategy.Concat, transform: { actionCreator in
+            return self.dispatchReactive { actionCreator }
+        })
+    }
     
-    func dispatch(actionCreatorProvider: ActionCreatorProvider) -> Signal<AppStateProtocol, NoError>
-    func dispatch(action: ActionProtocol) -> Signal<AppStateProtocol, NoError>
 }
-
-//public typealias ActionCreator = (state: AppStateProtocol, store: Store) -> ActionProtocol?
-//public typealias AsyncActionCreator = (state: AppStateProtocol, store: Store) -> Signal<ActionCreator,NoError>?
-//
-//public typealias ActionCreatorProvider = () -> ActionCreator
-//public typealias AsyncActionCreatorProvider = () -> AsyncActionCreator

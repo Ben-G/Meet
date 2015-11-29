@@ -35,18 +35,16 @@
 		626DA4531BFFEE6400988FC0 /* TwitterAPIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626DA4521BFFEE6400988FC0 /* TwitterAPIState.swift */; };
 		626DA4551BFFEF5B00988FC0 /* TwitterAPIReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626DA4541BFFEF5B00988FC0 /* TwitterAPIReducer.swift */; };
 		626DA4571C000FAE00988FC0 /* TwitterKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 626DA4561C000FAE00988FC0 /* TwitterKeys.plist */; };
-		627B05E31C09700D00481356 /* StoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627B05E21C09700D00481356 /* StoreTests.swift */; };
 		627B05E51C09700D00481356 /* SwiftFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD561C07ADA10080BF30 /* SwiftFlow.framework */; };
 		627B05EB1C09715D00481356 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 626DA4401BFF943300988FC0 /* ReactiveCocoa.framework */; };
 		629E0BE71C09322E0065D495 /* NavigationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629E0BE61C09322E0065D495 /* NavigationActions.swift */; };
 		629E0BE81C0933400065D495 /* NavigationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B6EC1BF3AC5E0056D509 /* NavigationState.swift */; };
-		629E0BE91C0933700065D495 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 626DA4401BFF943300988FC0 /* ReactiveCocoa.framework */; };
-		629E0BEA1C0933700065D495 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 626DA4401BFF943300988FC0 /* ReactiveCocoa.framework */; };
 		629E0BED1C0934EF0065D495 /* NavigationReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B6EF1BF3AD720056D509 /* NavigationReducer.swift */; };
 		629E0BEF1C0951760065D495 /* TypeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629E0BEE1C0951760065D495 /* TypeHelper.swift */; };
 		629E0BF11C0951900065D495 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629E0BF01C0951900065D495 /* Types.swift */; };
 		629E0BF21C09555D0065D495 /* MainReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B7011BF4485C0056D509 /* MainReducer.swift */; };
 		62BBE78F1C0A6FA3004D6822 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BBE78E1C0A6FA3004D6822 /* Store.swift */; };
+		62BBE7931C0ABB3A004D6822 /* StoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627B05E21C09700D00481356 /* StoreTests.swift */; };
 		62CCBA571C058A5200B4F000 /* Contact+Coding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62CCBA561C058A5200B4F000 /* Contact+Coding.swift */; };
 		62CCBA591C058CD100B4F000 /* PersistenceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62CCBA581C058CD100B4F000 /* PersistenceAdapter.swift */; };
 		62D3B6BC1BF2FAA80056D509 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B6BB1BF2FAA80056D509 /* AppDelegate.swift */; };
@@ -203,7 +201,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				629E0BEA1C0933700065D495 /* ReactiveCocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,7 +208,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				629E0BE91C0933700065D495 /* ReactiveCocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -848,7 +844,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				627B05E31C09700D00481356 /* StoreTests.swift in Sources */,
+				62BBE7931C0ABB3A004D6822 /* StoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

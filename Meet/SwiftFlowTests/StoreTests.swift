@@ -8,7 +8,6 @@
 
 import XCTest
 @testable import SwiftFlow
-@testable import SwiftFlowReactiveCocoaExtensions
 
 struct TestAppState: AppStateProtocol {
     var testValue: Int?
@@ -57,7 +56,7 @@ class StoreTests: XCTestCase {
         store = MainStore(reducer: reducer, appState: TestAppState())
         let subscriber = TestStoreSubscriber()
         
-        store.dispatch(TestAction.SetValue(3)).observeNext { newState in
+        store.dispatch(TestAction.SetValue(3)) { newState in
             if (subscriber.receivedStates.last?.testValue == 3) {
                 expectation.fulfill()
             }
@@ -90,7 +89,7 @@ class StoreTests: XCTestCase {
         
         store.subscribe(subscriber)
         
-        store.dispatch(TestAction.SetValue(20)).observeNext { newState in
+        store.dispatch(TestAction.SetValue(20)) { newState in
             if (subscriber.receivedStates[subscriber.receivedStates.count - 1].testValue == 20
                 && subscriber.receivedStates[subscriber.receivedStates.count - 2].testValue == 25
                  && subscriber.receivedStates[subscriber.receivedStates.count - 3].testValue == 10) {

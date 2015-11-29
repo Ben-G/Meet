@@ -67,7 +67,7 @@ extension ContactListViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         let contactID = dataSource.array[indexPath.row].identifier
-        let signal = store.dispatch( DataMutationAction.DeleteContact(contactID))
+        let signal = store.dispatchReactive( DataMutationAction.DeleteContact(contactID) )
         
         // TODO: Consider implementing this as a pending action, or alternatively as an extension on UITableView using Dwift: https://github.com/jflinter/Dwifft or https://github.com/brutella/simplediff-swift
         signal.observeNext { appState in
