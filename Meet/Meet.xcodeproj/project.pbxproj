@@ -16,7 +16,6 @@
 		6267DD931C07B2480080BF30 /* SwiftFlowReactiveCocoaExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6267DD921C07B2480080BF30 /* SwiftFlowReactiveCocoaExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6267DD971C07B2490080BF30 /* SwiftFlowReactiveCocoaExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD901C07B2480080BF30 /* SwiftFlowReactiveCocoaExtensions.framework */; };
 		6267DD981C07B2490080BF30 /* SwiftFlowReactiveCocoaExtensions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD901C07B2480080BF30 /* SwiftFlowReactiveCocoaExtensions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6267DD9C1C07B2530080BF30 /* MainStoreReactiveCocoa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6267DD741C07AE190080BF30 /* MainStoreReactiveCocoa.swift */; };
 		6267DD9D1C07B2690080BF30 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 626DA4401BFF943300988FC0 /* ReactiveCocoa.framework */; };
 		626DA42D1BFE8CC700988FC0 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626DA42C1BFE8CC700988FC0 /* Contact.swift */; };
 		626DA4311BFE94BC00988FC0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626DA4301BFE94BC00988FC0 /* Model.swift */; };
@@ -68,6 +67,7 @@
 		62E58D281C0AF46400FE505E /* PersistenceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E58D271C0AF46400FE505E /* PersistenceAdapter.swift */; };
 		62F43A831C022FCD0067E132 /* AppDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F43A821C022FCD0067E132 /* AppDelegateTests.swift */; };
 		62F43A841C0230D90067E132 /* SwifteriOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 626DA4461BFFE02F00988FC0 /* SwifteriOS.framework */; };
+		62FF6BD41C0B94CF003CF5A8 /* MainStoreReactiveCocoa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FF6BD31C0B94CF003CF5A8 /* MainStoreReactiveCocoa.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,7 +146,6 @@
 		6267DD561C07ADA10080BF30 /* SwiftFlow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftFlow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6267DD581C07ADA10080BF30 /* SwiftFlow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftFlow.h; sourceTree = "<group>"; };
 		6267DD5A1C07ADA10080BF30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6267DD741C07AE190080BF30 /* MainStoreReactiveCocoa.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainStoreReactiveCocoa.swift; path = "../SwiftFlow-RAC-Extensions/MainStoreReactiveCocoa.swift"; sourceTree = "<group>"; };
 		6267DD901C07B2480080BF30 /* SwiftFlowReactiveCocoaExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftFlowReactiveCocoaExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6267DD921C07B2480080BF30 /* SwiftFlowReactiveCocoaExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftFlowReactiveCocoaExtensions.h; sourceTree = "<group>"; };
 		6267DD941C07B2490080BF30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -206,6 +205,7 @@
 		62E58D251C0AF45500FE505E /* MainStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainStore.swift; sourceTree = "<group>"; };
 		62E58D271C0AF46400FE505E /* PersistenceAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceAdapter.swift; sourceTree = "<group>"; };
 		62F43A821C022FCD0067E132 /* AppDelegateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegateTests.swift; sourceTree = "<group>"; };
+		62FF6BD31C0B94CF003CF5A8 /* MainStoreReactiveCocoa.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainStoreReactiveCocoa.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -312,7 +312,7 @@
 		6267DD911C07B2480080BF30 /* SwiftFlowReactiveCocoaExtensions */ = {
 			isa = PBXGroup;
 			children = (
-				6267DD741C07AE190080BF30 /* MainStoreReactiveCocoa.swift */,
+				62FF6BD31C0B94CF003CF5A8 /* MainStoreReactiveCocoa.swift */,
 				6267DD921C07B2480080BF30 /* SwiftFlowReactiveCocoaExtensions.h */,
 				6267DD941C07B2490080BF30 /* Info.plist */,
 			);
@@ -903,7 +903,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6267DD9C1C07B2530080BF30 /* MainStoreReactiveCocoa.swift in Sources */,
+				62FF6BD41C0B94CF003CF5A8 /* MainStoreReactiveCocoa.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1121,6 +1121,7 @@
 		6267DD9A1C07B2490080BF30 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1136,6 +1137,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "de.benjamin-encz.SwiftFlowReactiveCocoaExtensions";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1144,6 +1146,7 @@
 		6267DD9B1C07B2490080BF30 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
