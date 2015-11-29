@@ -48,6 +48,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window?.rootViewController = router.rootViewController
     window?.makeKeyAndVisible()
     
+    let action = DataMutationAction.DeleteContact(5).dictionaryRepresentation()
+    print(action)
+    
     mainStore.subscribe(self)
     persistenceAdapter.store = mainStore
     
