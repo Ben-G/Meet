@@ -16,26 +16,20 @@ struct TwitterAPIActionCreator {
     
     var twitterClient = TwitterClient.self
     
-    func authenticateUser() -> SignalAsyncActionCreator {
-        return { maybeState, store in
+    func authenticateUser() -> AsyncActionCreator {
+        return { maybeState, store, callback in
             
-            guard let state = maybeState as? AppState else { return nil }
-        
-            return Signal<ActionCreator, NoError> { observer in
+            guard let state = maybeState as? AppState else { return }
                 if state.twitterAPIState.swifter == nil {
-                    
                     self.twitterClient.login().start { event in
                         switch event {
                         case let .Next(swifter):
-                            observer.sendNext(self.setTwitterClient(swifter))
+                            callback(self.setTwitterClient(swifter))
                         default:
                             print("oh")
                         }
                     }
                 }
-                
-                return nil
-            }
         }
     }
     

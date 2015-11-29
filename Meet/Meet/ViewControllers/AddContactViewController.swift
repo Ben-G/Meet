@@ -81,6 +81,6 @@ class AddContactViewController: UIViewController, StoreSubscriber {
         
         pendingActions.append(navigateToTwitterViewController)
         
-        store.dispatchReactive( self.twitterAPIActionCreator.authenticateUser() )
+        store.dispatch ( self.twitterAPIActionCreator.authenticateUser() )
     }
 }
