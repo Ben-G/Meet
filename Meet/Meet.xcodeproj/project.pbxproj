@@ -34,6 +34,9 @@
 		628B30F41C0B9C2C00E2213D /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 628B30A41C0B9BBE00E2213D /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		628B30F51C0B9C3400E2213D /* ListKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 628B30911C0B9BB300E2213D /* ListKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6292BEC11C0B9E1900CC1B8E /* ReactiveCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6292BEB61C0B9E0D00CC1B8E /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6292BEC41C0BAA4100CC1B8E /* TwitterSearchErrorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6292BEC31C0BAA4100CC1B8E /* TwitterSearchErrorTableViewCell.xib */; };
+		6292BEC51C0BAE7900CC1B8E /* libSDWebImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 628B30B81C0B9BCB00E2213D /* libSDWebImage.a */; };
+		6292BEC91C0BAED300CC1B8E /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6292BEC81C0BAED300CC1B8E /* ImageIO.framework */; };
 		629E0BE71C09322E0065D495 /* NavigationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629E0BE61C09322E0065D495 /* NavigationActions.swift */; };
 		629E0BEF1C0951760065D495 /* TypeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629E0BEE1C0951760065D495 /* TypeHelper.swift */; };
 		629E0BF11C0951900065D495 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629E0BF01C0951900065D495 /* Types.swift */; };
@@ -419,6 +422,9 @@
 		628B30CE1C0B9BE500E2213D /* Swifter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Swifter.xcodeproj; path = Carthage/Checkouts/Swifter/Swifter.xcodeproj; sourceTree = SOURCE_ROOT; };
 		628B30DD1C0B9BEF00E2213D /* Unbox.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Unbox.xcodeproj; path = Carthage/Checkouts/Unbox/Unbox.xcodeproj; sourceTree = SOURCE_ROOT; };
 		6292BEAC1C0B9E0D00CC1B8E /* ReactiveCocoa.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactiveCocoa.xcodeproj; path = Carthage/Checkouts/ReactiveCocoa/ReactiveCocoa.xcodeproj; sourceTree = SOURCE_ROOT; };
+		6292BEC31C0BAA4100CC1B8E /* TwitterSearchErrorTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwitterSearchErrorTableViewCell.xib; sourceTree = "<group>"; };
+		6292BEC61C0BAE9900CC1B8E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6292BEC81C0BAED300CC1B8E /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		629E0BE61C09322E0065D495 /* NavigationActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationActions.swift; sourceTree = "<group>"; };
 		629E0BEE1C0951760065D495 /* TypeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeHelper.swift; sourceTree = "<group>"; };
 		629E0BF01C0951900065D495 /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
@@ -499,6 +505,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6292BEC91C0BAED300CC1B8E /* ImageIO.framework in Frameworks */,
+				6292BEC51C0BAE7900CC1B8E /* libSDWebImage.a in Frameworks */,
 				6267DD5D1C07ADA10080BF30 /* SwiftFlow.framework in Frameworks */,
 				62BBE7A01C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding.framework in Frameworks */,
 				6267DD4A1C07A0A90080BF30 /* SwiftFlowRouter.framework in Frameworks */,
@@ -716,6 +724,8 @@
 		62D3B6AF1BF2FAA80056D509 = {
 			isa = PBXGroup;
 			children = (
+				6292BEC81C0BAED300CC1B8E /* ImageIO.framework */,
+				6292BEC61C0BAE9900CC1B8E /* CoreGraphics.framework */,
 				62D3B6BA1BF2FAA80056D509 /* Meet */,
 				62D3B6CF1BF2FAA80056D509 /* MeetTests */,
 				62D3B6DA1BF2FAA80056D509 /* MeetUITests */,
@@ -835,6 +845,7 @@
 			children = (
 				62D492831C02D2C000607938 /* TwitterUserTableViewCell.xib */,
 				62D492851C02D2E400607938 /* TwitterUserTableViewCell.swift */,
+				6292BEC31C0BAA4100CC1B8E /* TwitterSearchErrorTableViewCell.xib */,
 			);
 			path = TwitterSearch;
 			sourceTree = "<group>";
@@ -1417,6 +1428,7 @@
 			files = (
 				62D3B6C61BF2FAA80056D509 /* LaunchScreen.storyboard in Resources */,
 				62D492841C02D2C000607938 /* TwitterUserTableViewCell.xib in Resources */,
+				6292BEC41C0BAA4100CC1B8E /* TwitterSearchErrorTableViewCell.xib in Resources */,
 				62D3B6C31BF2FAA80056D509 /* Assets.xcassets in Resources */,
 				626DA4571C000FAE00988FC0 /* TwitterKeys.plist in Resources */,
 				62D3B6C11BF2FAA80056D509 /* Main.storyboard in Resources */,
@@ -1857,6 +1869,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1895,6 +1908,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
