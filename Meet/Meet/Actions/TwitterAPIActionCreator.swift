@@ -36,8 +36,15 @@ struct TwitterAPIActionCreator {
     func searchUsers(searchTerm: String) -> ActionCreator {
         return { state, store in
             
-            self.twitterClient.findUsers(searchTerm).startWithNext { users in
-                store.dispatch( TwitterAPIAction.SetUserSearchResults(users) )
+            self.twitterClient.findUsers(searchTerm).start { event in
+                switch event {
+                case let .Next(users):
+                    store.dispatch( TwitterAPIAction.SetUserSearchResults(.Success(users)) )
+                case let .Failed(error):
+                    store.dispatch( TwitterAPIAction.SetUserSearchResults(.Failure(error)) )
+                default:
+                    break
+                }
             }
             
             return (action: nil)

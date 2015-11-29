@@ -43,7 +43,7 @@ public class MainStoreReactiveCocoa: MainStore, ReactiveCocoaStore {
         }
     }
     
-  public func dispatchReactive(asyncActionCreator: AsyncActionCreator) -> Signal<StateType, NoError> {
+    public func dispatchReactive(asyncActionCreator: AsyncActionCreator) -> Signal<StateType, NoError> {
         return Signal { observer in
             super.dispatch(asyncActionCreator) { newState in
                 observer.sendNext(newState)

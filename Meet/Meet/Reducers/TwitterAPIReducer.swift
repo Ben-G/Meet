@@ -10,6 +10,7 @@ import Foundation
 import SwifteriOS
 import SwiftFlow
 import SwiftFlowReactiveCocoaExtensions
+import Result
 
 struct TwitterAPIReducer: Reducer {
     
@@ -17,8 +18,8 @@ struct TwitterAPIReducer: Reducer {
         switch action {
         case .SetTwitterClient(let swifter):
             return setTwitterClient(state, swifter: swifter)
-        case .SetUserSearchResults(let users):
-            return setUserSearchResults(state, userSearchResults: users)
+        case .SetUserSearchResults(let result):
+            return setUserSearchResults(state, userSearchResults: result)
         }
     }
         
@@ -28,7 +29,7 @@ struct TwitterAPIReducer: Reducer {
         return state
     }
     
-    func setUserSearchResults(var state: HasTwitterAPIState, userSearchResults: [TwitterUser]) -> HasTwitterAPIState {
+    func setUserSearchResults(var state: HasTwitterAPIState, userSearchResults: Result<[TwitterUser], TwitterSearchError>) -> HasTwitterAPIState {
         state.twitterAPIState.userSearchResults = userSearchResults
         
         return state

@@ -9,10 +9,11 @@
 import UIKit
 import SwifteriOS
 import SwiftFlow
+import Result
 
 enum TwitterAPIAction: ActionType {
     case SetTwitterClient(Swifter)
-    case SetUserSearchResults([TwitterUser])
+    case SetUserSearchResults(Result<[TwitterUser], TwitterSearchError>)
 }
 
 enum DataMutationAction: ActionType {

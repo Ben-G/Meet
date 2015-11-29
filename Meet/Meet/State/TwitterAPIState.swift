@@ -7,12 +7,12 @@
 //
 
 import Foundation
+import Result
 import SwifteriOS
 
 struct TwitterAPIState {
     var swifter: Swifter?
-    var error: TwitterAuthenticationError?
-    var userSearchResults: [TwitterUser]?
+    var userSearchResults: Result<[TwitterUser], TwitterSearchError>?
 }
 
 protocol HasTwitterAPIState {

@@ -20,6 +20,12 @@ enum TwitterAuthenticationError: ErrorType {
     case NotAuthenticated
 }
 
+enum TwitterSearchError: ErrorType {
+    case NotAuthenticated
+    case NoInternetConnection
+    case UnknownError
+}
+
 struct TwitterClient {
     
     static var cachedSwifter: Swifter?
@@ -63,7 +69,7 @@ struct TwitterClient {
         }
     }
     
-    static func findUsers(searchString: String) -> SignalProducer<[TwitterUser], TwitterAuthenticationError> {
+    static func findUsers(searchString: String) -> SignalProducer<[TwitterUser], TwitterSearchError> {
         return SignalProducer { observer, disposables in
             login().startWithNext { swifter in
                 swifter.getUsersSearchWithQuery(searchString, page: 0, count: 5, includeEntities: false, success: { (users) -> Void in
@@ -72,18 +78,14 @@ struct TwitterClient {
                         observer.sendNext(twitterUsers)
                     }
                     }, failure: { (error) -> Void in
-                        observer.sendNext([])
+                        if (error.code == NSURLErrorNotConnectedToInternet) {
+                            observer.sendFailed(.NoInternetConnection)
+                        } else {
+                            observer.sendFailed(.UnknownError)
+                        }
                 })
             }
         }
-        
-//        return login().map { swifter in
-//            swifter.getUsersSearchWithQuery("benjaminencz", page: 0, count: 5, includeEntities: false,  success: { users in
-//                return users
-//                }, failure: { (error) -> Void in
-//                    
-//            }).start()
-//        }
     }
     
 }
