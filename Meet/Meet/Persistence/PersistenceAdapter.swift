@@ -8,27 +8,33 @@
 
 import Foundation
 import SwiftFlow
-import SwiftFlowReactiveCocoaExtensions
 
-class PersistenceAdapter: StoreSubscriber {
+public protocol Coding {
+    init?(dictionary: NSDictionary)
+    func dictionaryRepresentation() -> NSDictionary
+}
+
+public class PersistenceAdapter<DataState: Coding>: StoreSubscriber {
+    
+    public init() {}
     
     // Need to bind store late to avoid cyclycal references
-    var store: Store? { didSet {
+    public var store: Store? { didSet {
             store?.subscribe(self)
         }
     }
     
-    func hydrateStore() -> [Contact]? {
+    public func hydrateStore() -> DataState? {
         if let path = filePath() {
             do {
                 let data = NSData(contentsOfURL: path)
                 if let data = data {
-                    let array = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? NSArray
-                    let contacts = array?.map { Contact(dictionary: $0 as! NSDictionary)! }
-                    
-                    if let contacts = contacts {
-                        return contacts
-                    }
+                    let state = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? NSDictionary
+                    if let state = state {
+                        return DataState(dictionary: state)
+                    } else {
+                        return nil
+                    }                    
                 }
             }
         }
@@ -36,12 +42,8 @@ class PersistenceAdapter: StoreSubscriber {
         return nil
     }
     
-    func newState(maybeState: StateType) {
-        guard let state = maybeState as? AppState else { return }
-        
-        let contacts = state.dataState.contacts
-        let contactList = contacts.map { $0.dictionaryRepresentation() }
-        let data = NSKeyedArchiver.archivedDataWithRootObject(contactList)
+    public func newState(state: DataState) {
+        let data = NSKeyedArchiver.archivedDataWithRootObject(state.dictionaryRepresentation())
     
         if let path = filePath()  {
             do {

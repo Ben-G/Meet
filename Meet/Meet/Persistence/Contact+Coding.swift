@@ -7,11 +7,7 @@
 //
 
 import Foundation
-
-protocol Coding {
-    init?(dictionary: NSDictionary)
-    func dictionaryRepresentation() -> NSDictionary
-}
+import SwiftFlowPersistenceNSCoding
 
 extension Contact: Coding {
     

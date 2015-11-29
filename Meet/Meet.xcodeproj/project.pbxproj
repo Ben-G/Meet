@@ -45,8 +45,11 @@
 		629E0BF21C09555D0065D495 /* MainReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B7011BF4485C0056D509 /* MainReducer.swift */; };
 		62BBE78F1C0A6FA3004D6822 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BBE78E1C0A6FA3004D6822 /* Store.swift */; };
 		62BBE7931C0ABB3A004D6822 /* StoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627B05E21C09700D00481356 /* StoreTests.swift */; };
+		62BBE79C1C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 62BBE79B1C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		62BBE7A01C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BBE7991C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding.framework */; };
+		62BBE7A11C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 62BBE7991C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		62BBE7A51C0ACE72004D6822 /* PersistenceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62CCBA581C058CD100B4F000 /* PersistenceAdapter.swift */; };
 		62CCBA571C058A5200B4F000 /* Contact+Coding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62CCBA561C058A5200B4F000 /* Contact+Coding.swift */; };
-		62CCBA591C058CD100B4F000 /* PersistenceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62CCBA581C058CD100B4F000 /* PersistenceAdapter.swift */; };
 		62D3B6BC1BF2FAA80056D509 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B6BB1BF2FAA80056D509 /* AppDelegate.swift */; };
 		62D3B6C11BF2FAA80056D509 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D3B6BF1BF2FAA80056D509 /* Main.storyboard */; };
 		62D3B6C31BF2FAA80056D509 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62D3B6C21BF2FAA80056D509 /* Assets.xcassets */; };
@@ -97,6 +100,13 @@
 			remoteGlobalIDString = 6267DD551C07ADA10080BF30;
 			remoteInfo = SwiftFlow;
 		};
+		62BBE79E1C0ACE59004D6822 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 62D3B6B01BF2FAA80056D509 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 62BBE7981C0ACE59004D6822;
+			remoteInfo = SwiftFlowPersistenceNSCoding;
+		};
 		62D3B6CD1BF2FAA80056D509 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 62D3B6B01BF2FAA80056D509 /* Project object */;
@@ -121,6 +131,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				6267DD5E1C07ADA10080BF30 /* SwiftFlow.framework in Embed Frameworks */,
+				62BBE7A11C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding.framework in Embed Frameworks */,
 				6267DD4B1C07A0A90080BF30 /* SwiftFlowRouter.framework in Embed Frameworks */,
 				6267DD981C07B2490080BF30 /* SwiftFlowReactiveCocoaExtensions.framework in Embed Frameworks */,
 			);
@@ -162,8 +173,11 @@
 		629E0BEE1C0951760065D495 /* TypeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeHelper.swift; sourceTree = "<group>"; };
 		629E0BF01C0951900065D495 /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		62BBE78E1C0A6FA3004D6822 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		62BBE7991C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftFlowPersistenceNSCoding.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		62BBE79B1C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftFlowPersistenceNSCoding.h; sourceTree = "<group>"; };
+		62BBE79D1C0ACE59004D6822 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62CCBA561C058A5200B4F000 /* Contact+Coding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Contact+Coding.swift"; sourceTree = "<group>"; };
-		62CCBA581C058CD100B4F000 /* PersistenceAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceAdapter.swift; sourceTree = "<group>"; };
+		62CCBA581C058CD100B4F000 /* PersistenceAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersistenceAdapter.swift; path = ../Meet/Persistence/PersistenceAdapter.swift; sourceTree = "<group>"; };
 		62D3B6B81BF2FAA80056D509 /* Meet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62D3B6BB1BF2FAA80056D509 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		62D3B6C01BF2FAA80056D509 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -228,6 +242,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		62BBE7951C0ACE59004D6822 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		62D3B6B51BF2FAA80056D509 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -235,6 +256,7 @@
 				6267DD5D1C07ADA10080BF30 /* SwiftFlow.framework in Frameworks */,
 				626DA43E1BFEAC6F00988FC0 /* ListKit.framework in Frameworks */,
 				626DA44C1BFFE1AF00988FC0 /* SSKeychain.framework in Frameworks */,
+				62BBE7A01C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding.framework in Frameworks */,
 				6267DD4A1C07A0A90080BF30 /* SwiftFlowRouter.framework in Frameworks */,
 				62D492801C02C38A00607938 /* Unbox.framework in Frameworks */,
 				6267DD971C07B2490080BF30 /* SwiftFlowReactiveCocoaExtensions.framework in Frameworks */,
@@ -350,11 +372,20 @@
 			path = SwiftFlowTests;
 			sourceTree = "<group>";
 		};
+		62BBE79A1C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding */ = {
+			isa = PBXGroup;
+			children = (
+				62CCBA581C058CD100B4F000 /* PersistenceAdapter.swift */,
+				62BBE79B1C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding.h */,
+				62BBE79D1C0ACE59004D6822 /* Info.plist */,
+			);
+			path = SwiftFlowPersistenceNSCoding;
+			sourceTree = "<group>";
+		};
 		62CCBA551C058A2000B4F000 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
 				62CCBA561C058A5200B4F000 /* Contact+Coding.swift */,
-				62CCBA581C058CD100B4F000 /* PersistenceAdapter.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -369,6 +400,7 @@
 				6267DD571C07ADA10080BF30 /* SwiftFlow */,
 				6267DD911C07B2480080BF30 /* SwiftFlowReactiveCocoaExtensions */,
 				627B05E11C09700D00481356 /* SwiftFlowTests */,
+				62BBE79A1C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding */,
 				62D3B6B91BF2FAA80056D509 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -383,6 +415,7 @@
 				6267DD561C07ADA10080BF30 /* SwiftFlow.framework */,
 				6267DD901C07B2480080BF30 /* SwiftFlowReactiveCocoaExtensions.framework */,
 				627B05E01C09700D00481356 /* SwiftFlowTests.xctest */,
+				62BBE7991C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -519,6 +552,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		62BBE7961C0ACE59004D6822 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				62BBE79C1C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -595,6 +636,24 @@
 			productReference = 627B05E01C09700D00481356 /* SwiftFlowTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		62BBE7981C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 62BBE7A21C0ACE5A004D6822 /* Build configuration list for PBXNativeTarget "SwiftFlowPersistenceNSCoding" */;
+			buildPhases = (
+				62BBE7941C0ACE59004D6822 /* Sources */,
+				62BBE7951C0ACE59004D6822 /* Frameworks */,
+				62BBE7961C0ACE59004D6822 /* Headers */,
+				62BBE7971C0ACE59004D6822 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SwiftFlowPersistenceNSCoding;
+			productName = SwiftFlowPersistenceNSCoding;
+			productReference = 62BBE7991C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		62D3B6B71BF2FAA80056D509 /* Meet */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 62D3B6E01BF2FAA80056D509 /* Build configuration list for PBXNativeTarget "Meet" */;
@@ -611,6 +670,7 @@
 				6267DD491C07A0A90080BF30 /* PBXTargetDependency */,
 				6267DD5C1C07ADA10080BF30 /* PBXTargetDependency */,
 				6267DD961C07B2490080BF30 /* PBXTargetDependency */,
+				62BBE79F1C0ACE59004D6822 /* PBXTargetDependency */,
 			);
 			name = Meet;
 			productName = Meet;
@@ -675,6 +735,9 @@
 					627B05DF1C09700D00481356 = {
 						CreatedOnToolsVersion = 7.1.1;
 					};
+					62BBE7981C0ACE59004D6822 = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
 					62D3B6B71BF2FAA80056D509 = {
 						CreatedOnToolsVersion = 7.1;
 					};
@@ -708,6 +771,7 @@
 				6267DD551C07ADA10080BF30 /* SwiftFlow */,
 				6267DD8F1C07B2480080BF30 /* SwiftFlowReactiveCocoaExtensions */,
 				627B05DF1C09700D00481356 /* SwiftFlowTests */,
+				62BBE7981C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding */,
 			);
 		};
 /* End PBXProject section */
@@ -735,6 +799,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		627B05DE1C09700D00481356 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		62BBE7971C0ACE59004D6822 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -848,6 +919,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		62BBE7941C0ACE59004D6822 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				62BBE7A51C0ACE72004D6822 /* PersistenceAdapter.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		62D3B6B41BF2FAA80056D509 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -858,7 +937,6 @@
 				626DA44F1BFFE44400988FC0 /* Authentication.swift in Sources */,
 				626DA4351BFE9E1C00988FC0 /* DataState.swift in Sources */,
 				626DA4331BFE9DA400988FC0 /* DataMutationReducer.swift in Sources */,
-				62CCBA591C058CD100B4F000 /* PersistenceAdapter.swift in Sources */,
 				62CCBA571C058A5200B4F000 /* Contact+Coding.swift in Sources */,
 				626DA4311BFE94BC00988FC0 /* Model.swift in Sources */,
 				626DA42D1BFE8CC700988FC0 /* Contact.swift in Sources */,
@@ -914,6 +992,11 @@
 			isa = PBXTargetDependency;
 			target = 6267DD551C07ADA10080BF30 /* SwiftFlow */;
 			targetProxy = 627B05E61C09700D00481356 /* PBXContainerItemProxy */;
+		};
+		62BBE79F1C0ACE59004D6822 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 62BBE7981C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding */;
+			targetProxy = 62BBE79E1C0ACE59004D6822 /* PBXContainerItemProxy */;
 		};
 		62D3B6CE1BF2FAA80056D509 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1110,6 +1193,44 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.benjamin-encz.SwiftFlowTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		62BBE7A31C0ACE5A004D6822 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = SwiftFlowPersistenceNSCoding/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.benjamin-encz.SwiftFlowPersistenceNSCoding";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		62BBE7A41C0ACE5A004D6822 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = SwiftFlowPersistenceNSCoding/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.benjamin-encz.SwiftFlowPersistenceNSCoding";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -1322,6 +1443,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		62BBE7A21C0ACE5A004D6822 /* Build configuration list for PBXNativeTarget "SwiftFlowPersistenceNSCoding" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				62BBE7A31C0ACE5A004D6822 /* Debug */,
+				62BBE7A41C0ACE5A004D6822 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		62D3B6B31BF2FAA80056D509 /* Build configuration list for PBXProject "Meet" */ = {
 			isa = XCConfigurationList;

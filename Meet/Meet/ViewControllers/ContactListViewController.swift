@@ -46,8 +46,8 @@ class ContactListViewController: UIViewController, StoreSubscriber {
         store.unsubscribe(self)
     }
     
-    func newState(state: HasDataState) {
-        contacts = state.dataState.contacts
+    func newState(state: DataState) {
+        contacts = state.contacts
     }
 
 }

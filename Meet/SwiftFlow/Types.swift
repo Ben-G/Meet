@@ -12,7 +12,11 @@ public protocol ActionType {}
 
 public protocol StateType {
     init()
+    
+    var otherStates: [Any] { get }
 }
+
+public protocol SubStateType {}
 
 public protocol AnyStoreSubscriber: class {
     func _newState(state: StateType)

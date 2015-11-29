@@ -27,6 +27,13 @@ extension StoreSubscriber {
         if let typedState = state as? StoreSubscriberStateType {
             newState(typedState)
         }
+        
+        // otherwise iteratate over other states
+        state.otherStates.forEach {
+            if let typedState = $0 as? StoreSubscriberStateType {
+                newState(typedState)
+            }
+        }
     }
 }
 

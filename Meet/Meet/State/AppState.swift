@@ -13,6 +13,10 @@ import SwiftFlowReactiveCocoaExtensions
 
 struct AppState: StateType, HasNavigationState, HasDataState, HasTwitterAPIState {
     var navigationState = NavigationState()
-    var dataState = DataState()
+    var dataState = persistenceAdapter.hydrateStore() ?? DataState()
     var twitterAPIState = TwitterAPIState()
+    
+    private (set) var otherStates: [Any] = [DataState()]
+    
+    init() { }
 }
