@@ -16,11 +16,7 @@ import Unbox
 
 // TODO: Overhaul this
 
-enum TwitterAuthenticationError: ErrorType {
-    case NotAuthenticated
-}
-
-enum TwitterSearchError: ErrorType {
+enum TwitterAPIError: ErrorType {
     case NotAuthenticated
     case NoInternetConnection
     case UnknownError
@@ -30,11 +26,11 @@ struct TwitterClient {
     
     static var cachedSwifter: Swifter?
     
-    static func login() -> SignalProducer<Swifter, TwitterAuthenticationError> {
+    static func login() -> SignalProducer<Swifter, TwitterAPIError> {
         let accountType = ACAccountStore().accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
         let accountStore = ACAccountStore()
         
-        return SignalProducer<Swifter, TwitterAuthenticationError> { observer, _ in
+        return SignalProducer<Swifter, TwitterAPIError> { observer, _ in
             
             if let cachedSwifter = self.cachedSwifter {
                 observer.sendNext(cachedSwifter)
@@ -44,7 +40,13 @@ struct TwitterClient {
             accountStore.requestAccessToAccountsWithType(accountType, options: nil) { (t:Bool, e:NSError!) -> Void in
                 
                 let (consumerKey, consumerSecret) = Authentication.retrieveApplicationAuthPair()
-                let nativeAccount = ACAccountStore().accountsWithAccountType(accountType).last as? ACAccount
+                let accounts = ACAccountStore().accountsWithAccountType(accountType)
+                
+                var nativeAccount: ACAccount? = nil
+                
+                if let accounts = accounts where accounts.count > 0 {
+                    nativeAccount = accounts.last as? ACAccount
+                }
                 
                 if let nativeAccount = nativeAccount {
                     let swifter = Swifter(account: nativeAccount)
@@ -69,7 +71,7 @@ struct TwitterClient {
         }
     }
     
-    static func findUsers(searchString: String) -> SignalProducer<[TwitterUser], TwitterSearchError> {
+    static func findUsers(searchString: String) -> SignalProducer<[TwitterUser], TwitterAPIError> {
         return SignalProducer { observer, disposables in
             login().startWithNext { swifter in
                 swifter.getUsersSearchWithQuery(searchString, page: 0, count: 5, includeEntities: false, success: { (users) -> Void in

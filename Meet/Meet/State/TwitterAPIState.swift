@@ -12,7 +12,7 @@ import SwifteriOS
 
 struct TwitterAPIState {
     var swifter: Swifter?
-    var userSearchResults: Result<[TwitterUser], TwitterSearchError>?
+    var userSearchResults: Result<[TwitterUser], TwitterAPIError>?
 }
 
 protocol HasTwitterAPIState {

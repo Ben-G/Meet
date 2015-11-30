@@ -33,7 +33,7 @@ class SearchTwitterViewController: UIViewController, StoreSubscriber {
         }
     }
     
-    var error: TwitterSearchError? {
+    var error: TwitterAPIError? {
         didSet {
             if let error = error {
                 if (errorView == nil) {

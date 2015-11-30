@@ -13,7 +13,7 @@ import Result
 
 enum TwitterAPIAction: ActionType {
     case SetTwitterClient(Swifter)
-    case SetUserSearchResults(Result<[TwitterUser], TwitterSearchError>)
+    case SetUserSearchResults(Result<[TwitterUser], TwitterAPIError>)
 }
 
 enum DataMutationAction: ActionType {

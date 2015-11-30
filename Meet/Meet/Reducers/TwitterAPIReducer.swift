@@ -29,7 +29,7 @@ struct TwitterAPIReducer: Reducer {
         return state
     }
     
-    func setUserSearchResults(var state: HasTwitterAPIState, userSearchResults: Result<[TwitterUser], TwitterSearchError>) -> HasTwitterAPIState {
+    func setUserSearchResults(var state: HasTwitterAPIState, userSearchResults: Result<[TwitterUser], TwitterAPIError>) -> HasTwitterAPIState {
         state.twitterAPIState.userSearchResults = userSearchResults
         
         return state
