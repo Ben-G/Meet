@@ -35,13 +35,13 @@
 		628B30F51C0B9C3400E2213D /* ListKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 628B30911C0B9BB300E2213D /* ListKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6292BEC11C0B9E1900CC1B8E /* ReactiveCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6292BEB61C0B9E0D00CC1B8E /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6292BEC41C0BAA4100CC1B8E /* TwitterSearchErrorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6292BEC31C0BAA4100CC1B8E /* TwitterSearchErrorTableViewCell.xib */; };
-		6292BEC51C0BAE7900CC1B8E /* libSDWebImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 628B30B81C0B9BCB00E2213D /* libSDWebImage.a */; };
 		6292BEC91C0BAED300CC1B8E /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6292BEC81C0BAED300CC1B8E /* ImageIO.framework */; };
 		6292BECC1C0BB27E00CC1B8E /* NetworkErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6292BECB1C0BB27E00CC1B8E /* NetworkErrorView.xib */; };
 		6292BED01C0BB78100CC1B8E /* NetworkErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6292BECF1C0BB78100CC1B8E /* NetworkErrorView.swift */; };
 		6292BED11C0BC17600CC1B8E /* SwiftFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD561C07ADA10080BF30 /* SwiftFlow.framework */; };
 		6292BED21C0BC17D00CC1B8E /* SwiftFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD561C07ADA10080BF30 /* SwiftFlow.framework */; };
 		6292BED31C0BC18100CC1B8E /* SwiftFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD561C07ADA10080BF30 /* SwiftFlow.framework */; };
+		6292BEDA1C0BC64300CC1B8E /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6292BEBA1C0B9E0D00CC1B8E /* ReactiveCocoa.framework */; };
 		629E0BE71C09322E0065D495 /* NavigationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629E0BE61C09322E0065D495 /* NavigationActions.swift */; };
 		629E0BEF1C0951760065D495 /* TypeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629E0BEE1C0951760065D495 /* TypeHelper.swift */; };
 		629E0BF11C0951900065D495 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629E0BF01C0951900065D495 /* Types.swift */; };
@@ -512,6 +512,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6292BEDA1C0BC64300CC1B8E /* ReactiveCocoa.framework in Frameworks */,
 				6292BED11C0BC17600CC1B8E /* SwiftFlow.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -537,7 +538,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6292BEC91C0BAED300CC1B8E /* ImageIO.framework in Frameworks */,
-				6292BEC51C0BAE7900CC1B8E /* libSDWebImage.a in Frameworks */,
 				6267DD5D1C07ADA10080BF30 /* SwiftFlow.framework in Frameworks */,
 				62BBE7A01C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding.framework in Frameworks */,
 				6267DD4A1C07A0A90080BF30 /* SwiftFlowRouter.framework in Frameworks */,
