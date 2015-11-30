@@ -13,8 +13,16 @@ import SwiftFlowRouter
 
 class AddContactViewController: UIViewController, StoreSubscriber {
   
+    @IBOutlet var locationIndicatorView: LocationIndicatorView!
     var store = mainStore
     var twitterAPIActionCreator = TwitterAPIActionCreator()
+    var locationServiceActionCreator = LocationServiceActionCreator()
+    
+    override func viewDidLoad() {
+        locationIndicatorView.locationServiceRequestedCallback = { [unowned self] view in
+            self.store.dispatch( self.locationServiceActionCreator.retrieveLocation() )
+        }
+    }
     
     override func viewWillAppear(animated: Bool) {
         store.subscribe(self)

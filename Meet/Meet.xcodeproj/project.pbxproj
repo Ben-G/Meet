@@ -43,6 +43,12 @@
 		6292BED31C0BC18100CC1B8E /* SwiftFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD561C07ADA10080BF30 /* SwiftFlow.framework */; };
 		6292BEDA1C0BC64300CC1B8E /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6292BEBA1C0B9E0D00CC1B8E /* ReactiveCocoa.framework */; };
 		6292BEDC1C0BCEE100CC1B8E /* libSDWebImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 628B30B81C0B9BCB00E2213D /* libSDWebImage.a */; };
+		6292BEDF1C0C041B00CC1B8E /* LocationIndicatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6292BEDE1C0C041B00CC1B8E /* LocationIndicatorView.xib */; };
+		6292BEE11C0C07B100CC1B8E /* LocationIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6292BEE01C0C07B100CC1B8E /* LocationIndicatorView.swift */; };
+		6292BEE31C0C0FCA00CC1B8E /* LocationServiceState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6292BEE21C0C0FCA00CC1B8E /* LocationServiceState.swift */; };
+		6292BEE51C0C102D00CC1B8E /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6292BEE41C0C102C00CC1B8E /* Location.swift */; };
+		6292BEE71C0C131E00CC1B8E /* LocationServiceActionCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6292BEE61C0C131E00CC1B8E /* LocationServiceActionCreator.swift */; };
+		6292BEEA1C0C162000CC1B8E /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6292BEE91C0C162000CC1B8E /* LocationService.swift */; };
 		629E0BE71C09322E0065D495 /* NavigationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629E0BE61C09322E0065D495 /* NavigationActions.swift */; };
 		629E0BEF1C0951760065D495 /* TypeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629E0BEE1C0951760065D495 /* TypeHelper.swift */; };
 		629E0BF11C0951900065D495 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629E0BF01C0951900065D495 /* Types.swift */; };
@@ -453,6 +459,12 @@
 		6292BEC81C0BAED300CC1B8E /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		6292BECB1C0BB27E00CC1B8E /* NetworkErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetworkErrorView.xib; sourceTree = "<group>"; };
 		6292BECF1C0BB78100CC1B8E /* NetworkErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkErrorView.swift; sourceTree = "<group>"; };
+		6292BEDE1C0C041B00CC1B8E /* LocationIndicatorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationIndicatorView.xib; sourceTree = "<group>"; };
+		6292BEE01C0C07B100CC1B8E /* LocationIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationIndicatorView.swift; sourceTree = "<group>"; };
+		6292BEE21C0C0FCA00CC1B8E /* LocationServiceState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationServiceState.swift; sourceTree = "<group>"; };
+		6292BEE41C0C102C00CC1B8E /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		6292BEE61C0C131E00CC1B8E /* LocationServiceActionCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationServiceActionCreator.swift; sourceTree = "<group>"; };
+		6292BEE91C0C162000CC1B8E /* LocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		629E0BE61C09322E0065D495 /* NavigationActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationActions.swift; sourceTree = "<group>"; };
 		629E0BEE1C0951760065D495 /* TypeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeHelper.swift; sourceTree = "<group>"; };
 		629E0BF01C0951900065D495 /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
@@ -605,6 +617,7 @@
 				626DA42C1BFE8CC700988FC0 /* Contact.swift */,
 				626DA4301BFE94BC00988FC0 /* Model.swift */,
 				62D4927D1C02C1B200607938 /* TwitterUser.swift */,
+				6292BEE41C0C102C00CC1B8E /* Location.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -745,6 +758,23 @@
 			path = NetworkError;
 			sourceTree = "<group>";
 		};
+		6292BEDD1C0C040900CC1B8E /* LocationIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				6292BEDE1C0C041B00CC1B8E /* LocationIndicatorView.xib */,
+				6292BEE01C0C07B100CC1B8E /* LocationIndicatorView.swift */,
+			);
+			path = LocationIndicator;
+			sourceTree = "<group>";
+		};
+		6292BEE81C0C160C00CC1B8E /* LocationService */ = {
+			isa = PBXGroup;
+			children = (
+				6292BEE91C0C162000CC1B8E /* LocationService.swift */,
+			);
+			path = LocationService;
+			sourceTree = "<group>";
+		};
 		62BBE79A1C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding */ = {
 			isa = PBXGroup;
 			children = (
@@ -788,6 +818,7 @@
 		62D3B6BA1BF2FAA80056D509 /* Meet */ = {
 			isa = PBXGroup;
 			children = (
+				6292BEE81C0C160C00CC1B8E /* LocationService */,
 				626DA4361BFEA4A700988FC0 /* Frameworks */,
 				626DA4481BFFE06100988FC0 /* Clients */,
 				62D492811C02D2A200607938 /* UI */,
@@ -830,6 +861,7 @@
 				62D3B6EA1BF3A9870056D509 /* AppState.swift */,
 				626DA4341BFE9E1C00988FC0 /* DataState.swift */,
 				626DA4521BFFEE6400988FC0 /* TwitterAPIState.swift */,
+				6292BEE21C0C0FCA00CC1B8E /* LocationServiceState.swift */,
 			);
 			path = State;
 			sourceTree = "<group>";
@@ -859,6 +891,7 @@
 			children = (
 				62D3B6FF1BF446310056D509 /* Actions.swift */,
 				626DA4501BFFEDBE00988FC0 /* TwitterAPIActionCreator.swift */,
+				6292BEE61C0C131E00CC1B8E /* LocationServiceActionCreator.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -866,6 +899,7 @@
 		62D492811C02D2A200607938 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				6292BEDD1C0C040900CC1B8E /* LocationIndicator */,
 				6292BECA1C0BB27200CC1B8E /* NetworkError */,
 				62D492821C02D2A200607938 /* TwitterSearch */,
 			);
@@ -1465,6 +1499,7 @@
 				62D492841C02D2C000607938 /* TwitterUserTableViewCell.xib in Resources */,
 				6292BEC41C0BAA4100CC1B8E /* TwitterSearchErrorTableViewCell.xib in Resources */,
 				6292BECC1C0BB27E00CC1B8E /* NetworkErrorView.xib in Resources */,
+				6292BEDF1C0C041B00CC1B8E /* LocationIndicatorView.xib in Resources */,
 				62D3B6C31BF2FAA80056D509 /* Assets.xcassets in Resources */,
 				626DA4571C000FAE00988FC0 /* TwitterKeys.plist in Resources */,
 				62D3B6C11BF2FAA80056D509 /* Main.storyboard in Resources */,
@@ -1561,17 +1596,22 @@
 				62D3B6EB1BF3A9870056D509 /* AppState.swift in Sources */,
 				626DA4531BFFEE6400988FC0 /* TwitterAPIState.swift in Sources */,
 				626DA44F1BFFE44400988FC0 /* Authentication.swift in Sources */,
+				6292BEE31C0C0FCA00CC1B8E /* LocationServiceState.swift in Sources */,
 				626DA4351BFE9E1C00988FC0 /* DataState.swift in Sources */,
 				626DA4331BFE9DA400988FC0 /* DataMutationReducer.swift in Sources */,
+				6292BEE71C0C131E00CC1B8E /* LocationServiceActionCreator.swift in Sources */,
 				626DA4311BFE94BC00988FC0 /* Model.swift in Sources */,
 				626DA42D1BFE8CC700988FC0 /* Contact.swift in Sources */,
+				6292BEEA1C0C162000CC1B8E /* LocationService.swift in Sources */,
 				626DA4511BFFEDBE00988FC0 /* TwitterAPIActionCreator.swift in Sources */,
 				62D4927E1C02C1B200607938 /* TwitterUser.swift in Sources */,
 				62D3B7061BF457C40056D509 /* SearchTwitterViewController.swift in Sources */,
+				6292BEE51C0C102D00CC1B8E /* Location.swift in Sources */,
 				626DA4551BFFEF5B00988FC0 /* TwitterAPIReducer.swift in Sources */,
 				62D3B7001BF446310056D509 /* Actions.swift in Sources */,
 				62D3B6FA1BF3B73A0056D509 /* AddContactViewController.swift in Sources */,
 				62D3B6F81BF3B72E0056D509 /* ContactListViewController.swift in Sources */,
+				6292BEE11C0C07B100CC1B8E /* LocationIndicatorView.swift in Sources */,
 				6292BED01C0BB78100CC1B8E /* NetworkErrorView.swift in Sources */,
 				626DA44A1BFFE06C00988FC0 /* TwitterClient.swift in Sources */,
 				62D3B6BC1BF2FAA80056D509 /* AppDelegate.swift in Sources */,

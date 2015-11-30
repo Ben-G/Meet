@@ -70,29 +70,47 @@
                                     <action selector="emailIntroButtonTapped:" destination="tmC-Au-bX5" eventType="touchUpInside" id="FjB-EO-SdU"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wc8-X4-kgB" customClass="LocationIndicatorView" customModule="Meet" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="600" height="80"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="n6v-8J-tQv"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="8WK-iA-QcY" firstAttribute="centerY" secondItem="fJN-3l-dqU" secondAttribute="centerY" constant="30" id="3gd-up-zay"/>
                             <constraint firstAttribute="trailingMargin" secondItem="AXs-Lp-Zjo" secondAttribute="trailing" constant="228" id="8gS-k4-sCY"/>
+                            <constraint firstAttribute="trailing" secondItem="Wc8-X4-kgB" secondAttribute="trailing" id="9gZ-su-3Hc"/>
+                            <constraint firstItem="Wc8-X4-kgB" firstAttribute="top" secondItem="fJN-3l-dqU" secondAttribute="topMargin" id="F4s-e0-k2X"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8WK-iA-QcY" secondAttribute="trailing" constant="234" id="JJq-Pn-lGZ"/>
                             <constraint firstItem="AXs-Lp-Zjo" firstAttribute="centerY" secondItem="fJN-3l-dqU" secondAttribute="centerY" constant="-30" id="Uj0-NI-Ysw"/>
                             <constraint firstItem="8WK-iA-QcY" firstAttribute="leading" secondItem="fJN-3l-dqU" secondAttribute="leadingMargin" constant="234" id="ebr-QR-6sJ"/>
+                            <constraint firstItem="Wc8-X4-kgB" firstAttribute="top" secondItem="Qz6-hr-wFe" secondAttribute="bottom" id="kLl-oh-pE1"/>
                             <constraint firstItem="AXs-Lp-Zjo" firstAttribute="centerX" secondItem="fJN-3l-dqU" secondAttribute="centerX" id="lI3-oo-mSn"/>
                             <constraint firstItem="AXs-Lp-Zjo" firstAttribute="leading" secondItem="fJN-3l-dqU" secondAttribute="leadingMargin" constant="229" id="oy2-rk-QLL"/>
+                            <constraint firstItem="Wc8-X4-kgB" firstAttribute="leading" secondItem="fJN-3l-dqU" secondAttribute="leading" id="tvu-1i-YHk"/>
                             <constraint firstItem="8WK-iA-QcY" firstAttribute="centerX" secondItem="fJN-3l-dqU" secondAttribute="centerX" id="upn-WQ-Zzg"/>
+                            <constraint firstItem="zqI-ma-bgK" firstAttribute="top" secondItem="Wc8-X4-kgB" secondAttribute="bottom" id="wEs-8g-NfF"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="F4s-e0-k2X"/>
                                 <exclude reference="8gS-k4-sCY"/>
                                 <exclude reference="oy2-rk-QLL"/>
                                 <exclude reference="JJq-Pn-lGZ"/>
                                 <exclude reference="ebr-QR-6sJ"/>
+                                <exclude reference="wEs-8g-NfF"/>
                             </mask>
                         </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Contacts" id="EAl-TI-jOg" userLabel="Meet"/>
+                    <connections>
+                        <outlet property="locationIndicatorView" destination="Wc8-X4-kgB" id="eBL-Io-p1u"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I88-xM-3Sw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

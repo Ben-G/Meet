@@ -22,3 +22,7 @@ enum DataMutationAction: ActionType {
     case DeleteContact(Int)
     case SetContacts([Contact])
 }
+
+enum LocationServiceAction: ActionType {
+    case RequestLocationServiceAccess
+}
