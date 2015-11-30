@@ -708,9 +708,9 @@
 			isa = PBXGroup;
 			children = (
 				628B30C71C0B9BDB00E2213D /* SSKeychain.framework */,
-				628B30C91C0B9BDB00E2213D /* SSKeychain iOS Tests.xctest */,
+				628B30C91C0B9BDB00E2213D /* SSKeychainTests-iOS.xctest */,
 				628B30CB1C0B9BDB00E2213D /* SSKeychain.framework */,
-				628B30CD1C0B9BDB00E2213D /* SSKeychain Mac Tests.xctest */,
+				628B30CD1C0B9BDB00E2213D /* SSKeychainTests-OSX.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1067,6 +1067,7 @@
 				62D3B6B51BF2FAA80056D509 /* Frameworks */,
 				62D3B6B61BF2FAA80056D509 /* Resources */,
 				626DA43B1BFEA4C200988FC0 /* Embed Frameworks */,
+				62750BE81C0D066E00B688CD /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1330,10 +1331,10 @@
 			remoteRef = 628B30C61C0B9BDB00E2213D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		628B30C91C0B9BDB00E2213D /* SSKeychain iOS Tests.xctest */ = {
+		628B30C91C0B9BDB00E2213D /* SSKeychainTests-iOS.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = "SSKeychain iOS Tests.xctest";
+			path = "SSKeychainTests-iOS.xctest";
 			remoteRef = 628B30C81C0B9BDB00E2213D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -1344,10 +1345,10 @@
 			remoteRef = 628B30CA1C0B9BDB00E2213D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		628B30CD1C0B9BDB00E2213D /* SSKeychain Mac Tests.xctest */ = {
+		628B30CD1C0B9BDB00E2213D /* SSKeychainTests-OSX.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = "SSKeychain Mac Tests.xctest";
+			path = "SSKeychainTests-OSX.xctest";
 			remoteRef = 628B30CC1C0B9BDB00E2213D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -1526,6 +1527,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		62750BE81C0D066E00B688CD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
 		627B05EC1C0971E000481356 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
