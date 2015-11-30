@@ -12,10 +12,15 @@ import ReactiveCocoa
 class LocationService: NSObject, CLLocationManagerDelegate {
 
     var locationManager: CLLocationManager
-    let location: MutableProperty<Location?> = MutableProperty(nil)
+    let location: Signal<Location, LocationServiceError>
+    private let observer: Observer<Location, LocationServiceError>
     
     override init() {
+        let (signal, observer) = Signal<Location, LocationServiceError>.pipe()
+        self.location = signal
+        self.observer = observer
         locationManager = CLLocationManager()
+        
         super.init()
         
         locationManager.delegate = self
@@ -30,11 +35,15 @@ class LocationService: NSObject, CLLocationManagerDelegate {
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if (CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse) {
             locationManager.startUpdatingLocation()
+        } else if (CLLocationManager.authorizationStatus() == .Restricted || CLLocationManager.authorizationStatus() == .Denied) {
+            observer.sendFailed(.LocationServiceUnauthorized)
         }
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print(locations)
+        if let location = locations.last {
+            observer.sendNext(Location(geocodedAddress: "Stuttgart", coordinate: location.coordinate))
+        }
     }
     
 }

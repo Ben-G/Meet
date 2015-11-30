@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 import Result
 
 enum LocationServiceError: ErrorType {
@@ -14,9 +15,9 @@ enum LocationServiceError: ErrorType {
 }
 
 struct LocationServiceState {
-    var locationServiceAuthorized: Bool
-    var busyLocating: Bool
-    var currentLocation: Result<Location, LocationServiceError>
+    var authorizationStatus = CLLocationManager.authorizationStatus()
+    var busyLocating: Bool = false
+    var currentLocation: Result<Location, LocationServiceError>?
 }
 
 protocol HasLocationServiceState {

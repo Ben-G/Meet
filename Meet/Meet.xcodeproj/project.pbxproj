@@ -49,6 +49,7 @@
 		6292BEE51C0C102D00CC1B8E /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6292BEE41C0C102C00CC1B8E /* Location.swift */; };
 		6292BEE71C0C131E00CC1B8E /* LocationServiceActionCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6292BEE61C0C131E00CC1B8E /* LocationServiceActionCreator.swift */; };
 		6292BEEA1C0C162000CC1B8E /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6292BEE91C0C162000CC1B8E /* LocationService.swift */; };
+		6292BEEC1C0C2D7100CC1B8E /* LocationServiceReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6292BEEB1C0C2D7100CC1B8E /* LocationServiceReducer.swift */; };
 		629E0BE71C09322E0065D495 /* NavigationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629E0BE61C09322E0065D495 /* NavigationActions.swift */; };
 		629E0BEF1C0951760065D495 /* TypeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629E0BEE1C0951760065D495 /* TypeHelper.swift */; };
 		629E0BF11C0951900065D495 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629E0BF01C0951900065D495 /* Types.swift */; };
@@ -465,6 +466,7 @@
 		6292BEE41C0C102C00CC1B8E /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		6292BEE61C0C131E00CC1B8E /* LocationServiceActionCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationServiceActionCreator.swift; sourceTree = "<group>"; };
 		6292BEE91C0C162000CC1B8E /* LocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		6292BEEB1C0C2D7100CC1B8E /* LocationServiceReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationServiceReducer.swift; sourceTree = "<group>"; };
 		629E0BE61C09322E0065D495 /* NavigationActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationActions.swift; sourceTree = "<group>"; };
 		629E0BEE1C0951760065D495 /* TypeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeHelper.swift; sourceTree = "<group>"; };
 		629E0BF01C0951900065D495 /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
@@ -871,6 +873,7 @@
 			children = (
 				626DA4321BFE9DA400988FC0 /* DataMutationReducer.swift */,
 				626DA4541BFFEF5B00988FC0 /* TwitterAPIReducer.swift */,
+				6292BEEB1C0C2D7100CC1B8E /* LocationServiceReducer.swift */,
 			);
 			path = Reducers;
 			sourceTree = "<group>";
@@ -1606,6 +1609,7 @@
 				626DA4511BFFEDBE00988FC0 /* TwitterAPIActionCreator.swift in Sources */,
 				62D4927E1C02C1B200607938 /* TwitterUser.swift in Sources */,
 				62D3B7061BF457C40056D509 /* SearchTwitterViewController.swift in Sources */,
+				6292BEEC1C0C2D7100CC1B8E /* LocationServiceReducer.swift in Sources */,
 				6292BEE51C0C102D00CC1B8E /* Location.swift in Sources */,
 				626DA4551BFFEF5B00988FC0 /* TwitterAPIReducer.swift in Sources */,
 				62D3B7001BF446310056D509 /* Actions.swift in Sources */,

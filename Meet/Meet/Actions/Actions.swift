@@ -24,5 +24,6 @@ enum DataMutationAction: ActionType {
 }
 
 enum LocationServiceAction: ActionType {
-    case RequestLocationServiceAccess
+    case SetLocationServiceBusy(Bool)
+    case SetLocation(Location)
 }

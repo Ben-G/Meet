@@ -12,10 +12,11 @@ import SwiftFlowRouter
 import SwiftFlowReactiveCocoaExtensions
 import SwiftFlowPersistenceNSCoding
 
-struct AppState: StateType, HasNavigationState, HasDataState, HasTwitterAPIState, Persistable {
+struct AppState: StateType, HasNavigationState, HasDataState, HasTwitterAPIState, Persistable, HasLocationServiceState {
     var navigationState = NavigationState()
     var dataState = persistenceAdapter.hydrateStore() ?? DataState()
     var twitterAPIState = TwitterAPIState()
+    var locationServiceState = LocationServiceState()
     
     init() { }
     

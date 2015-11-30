@@ -20,16 +20,30 @@ class AddContactViewController: UIViewController, StoreSubscriber {
     
     override func viewDidLoad() {
         locationIndicatorView.locationServiceRequestedCallback = { [unowned self] view in
-            self.store.dispatch( self.locationServiceActionCreator.retrieveLocation() )
+            self.store.dispatch( self.locationServiceActionCreator.retrieveLocation(true) )
         }
     }
     
     override func viewWillAppear(animated: Bool) {
         store.subscribe(self)
+        store.dispatch( locationServiceActionCreator.retrieveLocation(false) )
     }
     
     func newState(maybeState: StateType) {
         guard let state = maybeState as? AppState else { return }
+        
+        if let currentLocationResult = state.locationServiceState.currentLocation {
+            switch currentLocationResult {
+            case .Success(let location):
+                locationIndicatorView.displayState = .Located(location.geocodedAddress)
+            case .Failure(let error):
+                break
+            }
+        } else if (state.locationServiceState.busyLocating == true) {
+            locationIndicatorView.displayState = .BusyLocating
+        } else if (state.locationServiceState.authorizationStatus == .NotDetermined) {
+            locationIndicatorView.displayState = .LocationAuthorizationRequired
+        }
     }
     
     @IBAction func emailIntroButtonTapped(sender: AnyObject) {
