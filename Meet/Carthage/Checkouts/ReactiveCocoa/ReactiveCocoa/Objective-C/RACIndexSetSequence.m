@@ -30,9 +30,9 @@
 
 + (instancetype)sequenceWithIndexSet:(NSIndexSet *)indexSet {
 	NSUInteger count = indexSet.count;
-	
+
 	if (count == 0) return self.empty;
-	
+
 	NSUInteger sizeInBytes = sizeof(NSUInteger) * count;
 
 	NSMutableData *data = [[NSMutableData alloc] initWithCapacity:sizeInBytes];
@@ -76,20 +76,20 @@
 		// Enumeration has completed.
 		return 0;
 	}
-	
+
 	if (state->state == 0) {
 		// Enumeration begun, mark the mutation flag.
 		state->mutationsPtr = state->extra;
 	}
-	
+
 	state->itemsPtr = stackbuf;
-	
+
 	unsigned long index = 0;
 	while (index < MIN(self.count - state->state, len)) {
 		stackbuf[index] = @(self.indexes[index + state->state]);
 		++index;
 	}
-	
+
 	state->state += index;
 	return index;
 }

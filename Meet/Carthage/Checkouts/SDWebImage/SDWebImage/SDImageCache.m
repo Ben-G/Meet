@@ -253,11 +253,11 @@ FOUNDATION_STATIC_INLINE NSUInteger SDCacheCostForImage(UIImage *image) {
 
 - (BOOL)diskImageExistsWithKey:(NSString *)key {
     BOOL exists = NO;
-    
+
     // this is an exception to access the filemanager on another queue than ioQueue, but we are using the shared instance
     // from apple docs on NSFileManager: The methods of the shared NSFileManager object can be called from multiple threads safely.
     exists = [[NSFileManager defaultManager] fileExistsAtPath:[self defaultCachePathForKey:key]];
-    
+
     return exists;
 }
 
@@ -383,17 +383,17 @@ FOUNDATION_STATIC_INLINE NSUInteger SDCacheCostForImage(UIImage *image) {
 }
 
 - (void)removeImageForKey:(NSString *)key fromDisk:(BOOL)fromDisk withCompletion:(SDWebImageNoParamsBlock)completion {
-    
+
     if (key == nil) {
         return;
     }
-    
+
     [self.memCache removeObjectForKey:key];
-    
+
     if (fromDisk) {
         dispatch_async(self.ioQueue, ^{
             [_fileManager removeItemAtPath:[self defaultCachePathForKey:key] error:nil];
-            
+
             if (completion) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     completion();
@@ -403,7 +403,7 @@ FOUNDATION_STATIC_INLINE NSUInteger SDCacheCostForImage(UIImage *image) {
     } else if (completion){
         completion();
     }
-    
+
 }
 
 - (void)setMaxMemoryCost:(NSUInteger)maxMemoryCost {
@@ -491,7 +491,7 @@ FOUNDATION_STATIC_INLINE NSUInteger SDCacheCostForImage(UIImage *image) {
             currentCacheSize += [totalAllocatedSize unsignedIntegerValue];
             [cacheFiles setObject:resourceValues forKey:fileURL];
         }
-        
+
         for (NSURL *fileURL in urlsToDelete) {
             [_fileManager removeItemAtURL:fileURL error:nil];
         }

@@ -18,7 +18,7 @@
 	dispatch_once(&onceToken, ^{
 		tupleNil = [[self alloc] init];
 	});
-	
+
 	return tupleNil;
 }
 
@@ -51,9 +51,9 @@
 - (instancetype)init {
 	self = [super init];
 	if (self == nil) return nil;
-	
+
 	self.backingArray = [NSArray array];
-	
+
 	return self;
 }
 
@@ -64,7 +64,7 @@
 - (BOOL)isEqual:(RACTuple *)object {
 	if (object == self) return YES;
 	if (![object isKindOfClass:self.class]) return NO;
-	
+
 	return [self.backingArray isEqual:object.backingArray];
 }
 
@@ -93,7 +93,7 @@
 - (id)initWithCoder:(NSCoder *)coder {
 	self = [self init];
 	if (self == nil) return nil;
-	
+
 	self.backingArray = [coder decodeObjectForKey:@keypath(self.backingArray)];
 	return self;
 }
@@ -111,18 +111,18 @@
 
 + (instancetype)tupleWithObjectsFromArray:(NSArray *)array convertNullsToNils:(BOOL)convert {
 	RACTuple *tuple = [[self alloc] init];
-	
+
 	if (convert) {
 		NSMutableArray *newArray = [NSMutableArray arrayWithCapacity:array.count];
 		for (id object in array) {
 			[newArray addObject:(object == NSNull.null ? RACTupleNil.tupleNil : object)];
 		}
-		
+
 		tuple.backingArray = newArray;
 	} else {
 		tuple.backingArray = [array copy];
 	}
-	
+
 	return tuple;
 }
 
@@ -143,23 +143,23 @@
 		tuple.backingArray = @[];
 		return tuple;
 	}
-	
+
 	NSMutableArray *objects = [[NSMutableArray alloc] initWithCapacity:count];
-	
+
 	va_start(args, object);
 	for (id currentObject = object; currentObject != nil; currentObject = va_arg(args, id)) {
 		[objects addObject:currentObject];
 	}
 
 	va_end(args);
-	
+
 	tuple.backingArray = objects;
 	return tuple;
 }
 
 - (id)objectAtIndex:(NSUInteger)index {
 	if (index >= self.count) return nil;
-	
+
 	id object = self.backingArray[index];
 	return (object == RACTupleNil.tupleNil ? nil : object);
 }
@@ -169,7 +169,7 @@
 	for (id object in self.backingArray) {
 		[newArray addObject:(object == RACTupleNil.tupleNil ? NSNull.null : object)];
 	}
-	
+
 	return newArray;
 }
 
@@ -236,13 +236,13 @@
 	dispatch_once(&onceToken, ^{
 		trampoline = [[self alloc] init];
 	});
-	
+
 	return trampoline;
 }
 
 - (void)setObject:(RACTuple *)tuple forKeyedSubscript:(NSArray *)variables {
 	NSCParameterAssert(variables != nil);
-	
+
 	[variables enumerateObjectsUsingBlock:^(NSValue *value, NSUInteger index, BOOL *stop) {
 		__strong id *ptr = (__strong id *)value.pointerValue;
 		*ptr = tuple[index];

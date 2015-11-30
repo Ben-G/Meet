@@ -121,7 +121,7 @@
     self.completionBlock = completionBlock;
     self.progressBlock = progressBlock;
 
-    if(urls.count == 0){ 
+    if(urls.count == 0){
         if(completionBlock){
             completionBlock(0,0);
         }

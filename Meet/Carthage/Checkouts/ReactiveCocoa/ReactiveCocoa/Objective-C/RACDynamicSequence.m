@@ -123,7 +123,7 @@
 		// recursing.
 		__autoreleasing RACSequence *tail __attribute__((unused)) = _tail;
 	}
-	
+
 	_tail = nil;
 }
 

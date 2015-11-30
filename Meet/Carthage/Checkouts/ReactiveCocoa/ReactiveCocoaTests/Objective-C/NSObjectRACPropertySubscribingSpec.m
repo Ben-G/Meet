@@ -131,7 +131,7 @@ qck_describe(@"+rac_signalWithChangesFor:keyPath:options:observer:", ^{
 			[objectValueSignal(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) subscribeNext:^(NSDictionary *x) {
 				actual = x[NSKeyValueChangeNewKey];
 			}];
-			
+
 			expect(actual).to(equal(NSNull.null));
 		});
 	});

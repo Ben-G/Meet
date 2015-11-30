@@ -17,9 +17,9 @@ struct AppState: StateType, HasNavigationState, HasDataState, HasTwitterAPIState
     var dataState = persistenceAdapter.hydrateStore() ?? DataState()
     var twitterAPIState = TwitterAPIState()
     var locationServiceState = LocationServiceState()
-    
+
     init() { }
-    
+
     func persistableState() -> DataState {
         return dataState
     }

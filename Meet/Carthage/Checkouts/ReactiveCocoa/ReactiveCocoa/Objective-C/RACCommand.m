@@ -95,7 +95,7 @@ const NSInteger RACCommandErrorNotEnabled = 1;
 		}]
 		deliverOn:RACScheduler.mainThreadScheduler]
 		setNameWithFormat:@"%@ -executionSignals", self];
-	
+
 	// `errors` needs to be multicasted so that it picks up all
 	// `activeExecutionSignals` that are added.
 	//
@@ -111,7 +111,7 @@ const NSInteger RACCommandErrorNotEnabled = 1;
 		}]
 		deliverOn:RACScheduler.mainThreadScheduler]
 		publish];
-	
+
 	_errors = [errorsConnection.signal setNameWithFormat:@"%@ -errors", self];
 	[errorsConnection connect];
 
@@ -139,24 +139,24 @@ const NSInteger RACCommandErrorNotEnabled = 1;
 		distinctUntilChanged]
 		replayLast]
 		setNameWithFormat:@"%@ -executing", self];
-	
+
 	RACSignal *moreExecutionsAllowed = [RACSignal
 		if:[self.allowsConcurrentExecutionSubject startWith:@NO]
 		then:[RACSignal return:@YES]
 		else:[immediateExecuting not]];
-	
+
 	if (enabledSignal == nil) {
 		enabledSignal = [RACSignal return:@YES];
 	} else {
 		enabledSignal = [enabledSignal startWith:@YES];
 	}
-	
+
 	_immediateEnabled = [[[[RACSignal
 		combineLatest:@[ enabledSignal, moreExecutionsAllowed ]]
 		and]
 		takeUntil:self.rac_willDeallocSignal]
 		replayLast];
-	
+
 	_enabled = [[[[[self.immediateEnabled
 		take:1]
 		concat:[[self.immediateEnabled skip:1] deliverOn:RACScheduler.mainThreadScheduler]]
@@ -193,7 +193,7 @@ const NSInteger RACCommandErrorNotEnabled = 1;
 	RACMulticastConnection *connection = [[signal
 		subscribeOn:RACScheduler.mainThreadScheduler]
 		multicast:[RACReplaySubject subject]];
-	
+
 	[self.addedExecutionSignalsSubject sendNext:connection.signal];
 
 	[connection connect];

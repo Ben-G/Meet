@@ -52,7 +52,7 @@ NSString * const RACSchedulerCurrentSchedulerKey = @"RACSchedulerCurrentSchedule
 	dispatch_once(&onceToken, ^{
 		immediateScheduler = [[RACImmediateScheduler alloc] init];
 	});
-	
+
 	return immediateScheduler;
 }
 
@@ -62,7 +62,7 @@ NSString * const RACSchedulerCurrentSchedulerKey = @"RACSchedulerCurrentSchedule
 	dispatch_once(&onceToken, ^{
 		mainThreadScheduler = [[RACTargetQueueScheduler alloc] initWithName:@"com.ReactiveCocoa.RACScheduler.mainThreadScheduler" targetQueue:dispatch_get_main_queue()];
 	});
-	
+
 	return mainThreadScheduler;
 }
 

@@ -85,7 +85,7 @@ static NSString *const kSSKeychainLabel = @"SSToolkitLabel";
 
 	NSError *error;
 	XCTAssertFalse([query save:&error], @"Function should return NO as not all needed information is provided: %@", error);
-	
+
 	query = [[SSKeychainQuery alloc] init];
 	query.password = kSSKeychainPassword;
 	query.account = kSSKeychainAccountName;
@@ -107,12 +107,12 @@ static NSString *const kSSKeychainLabel = @"SSToolkitLabel";
 	query = [[SSKeychainQuery alloc] init];
 	query.service = kSSKeychainServiceName;
 	XCTAssertFalse([query deleteItem:&error], @"Function deleteItem should return NO if not all needed information is provided: %@", error);
-	
+
 	// check if fetch handels missing information correctly
 	query = [[SSKeychainQuery alloc] init];
 	query.account = kSSKeychainAccountName;
 	XCTAssertFalse([query fetch:&error], @"Function fetch should return NO if not all needed information is provided: %@", error);
-	
+
 	query = [[SSKeychainQuery alloc] init];
 	query.service = kSSKeychainServiceName;
 	XCTAssertFalse([query fetch:&error], @"Function fetch should return NO if not all needed information is provided: %@", error);
@@ -142,7 +142,7 @@ static NSString *const kSSKeychainLabel = @"SSToolkitLabel";
 	XCTAssertFalse([query fetch:NULL], @"Fetch should fail when trying to fetch an unsynced password that was saved as synced. error == NULL");
 
 	XCTAssertNotEqualObjects(query.password, kSSKeychainPassword, @"Passwords should not be equal when trying to fetch an unsynced password that was saved as synced.");
-  
+
 	query = [[SSKeychainQuery alloc] init];
 	query.service = kSSKeychainServiceName;
 	query.account = kSSKeychainAccountName;
@@ -156,25 +156,25 @@ static NSString *const kSSKeychainLabel = @"SSToolkitLabel";
 // Test Class Methods of SSKeychain
 - (void)testSSKeychain {
 	NSError *error = nil;
-	
+
 	// create a new keychain item
 	XCTAssertTrue([SSKeychain setPassword:kSSKeychainPassword forService:kSSKeychainServiceName account:kSSKeychainAccountName error:&error], @"Unable to save item: %@", error);
-	
+
 	// check password
 	XCTAssertEqualObjects([SSKeychain passwordForService:kSSKeychainServiceName account:kSSKeychainAccountName], kSSKeychainPassword, @"Passwords were not equal");
-	
+
 	// check all accounts
 	XCTAssertTrue([self _accounts:[SSKeychain allAccounts] containsAccountWithName:kSSKeychainAccountName], @"Matching account was not returned");
 	// check account
 	XCTAssertTrue([self _accounts:[SSKeychain accountsForService:kSSKeychainServiceName] containsAccountWithName:kSSKeychainAccountName], @"Matching account was not returned");
-	
+
 	// delete password
 	XCTAssertTrue([SSKeychain deletePasswordForService:kSSKeychainServiceName account:kSSKeychainAccountName error:&error], @"Unable to delete password: %@", error);
-	
+
 	// set password and delete it without error function
 	XCTAssertTrue([SSKeychain setPassword:kSSKeychainPassword forService:kSSKeychainServiceName account:kSSKeychainAccountName], @"Unable to save item");
 	XCTAssertTrue([SSKeychain deletePasswordForService:kSSKeychainServiceName account:kSSKeychainAccountName], @"Unable to delete password");
-	
+
 #if __IPHONE_4_0 && TARGET_OS_IPHONE
 	[SSKeychain setAccessibilityType:kSecAttrAccessibleWhenUnlockedThisDeviceOnly];
 	XCTAssertTrue([SSKeychain accessibilityType] == kSecAttrAccessibleWhenUnlockedThisDeviceOnly, @"Unable to verify accessibilityType");

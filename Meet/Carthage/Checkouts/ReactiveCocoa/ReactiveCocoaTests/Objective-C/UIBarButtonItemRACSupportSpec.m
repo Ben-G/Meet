@@ -19,7 +19,7 @@ QuickSpecBegin(UIBarButtonItemRACSupportSpec)
 
 qck_describe(@"UIBarButtonItem", ^{
 	__block UIBarButtonItem *button;
-	
+
 	qck_beforeEach(^{
 		button = [[UIBarButtonItem alloc] init];
 		expect(button).notTo(beNil());

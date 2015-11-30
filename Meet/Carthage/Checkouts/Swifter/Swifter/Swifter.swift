@@ -117,7 +117,7 @@ public class Swifter {
                 let jsonResult = try JSON.parseJSONData(data)
                 downloadProgress?(json: jsonResult, response: response)
             } catch _ as NSError {
-                
+
                 let jsonString = NSString(data: data, encoding: NSUTF8StringEncoding)
                 let jsonChunks = jsonString!.componentsSeparatedByString("\r\n") as [String]
 
@@ -131,7 +131,7 @@ public class Swifter {
                             let jsonResult = try JSON.parseJSONData(chunkData)
                             downloadProgress?(json: jsonResult, response: response)
                         } catch _ as NSError {
-                            
+
                         } catch {
                             fatalError()
                         }
@@ -182,5 +182,5 @@ public class Swifter {
     internal func postJSONWithPath(path: String, baseURL: NSURL, parameters: Dictionary<String, Any>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: JSONSuccessHandler?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) -> SwifterHTTPRequest {
         return self.jsonRequestWithPath(path, baseURL: baseURL, method: "POST", parameters: parameters, uploadProgress: uploadProgress, downloadProgress: downloadProgress, success: success, failure: failure)
     }
-    
+
 }

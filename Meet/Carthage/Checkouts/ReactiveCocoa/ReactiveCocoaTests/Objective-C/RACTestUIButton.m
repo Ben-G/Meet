@@ -16,7 +16,7 @@
 }
 
 // Required for unit testing – controls don't work normally
-// outside of normal apps. 
+// outside of normal apps.
 -(void)sendAction:(SEL)action to:(id)target forEvent:(UIEvent *)event {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"

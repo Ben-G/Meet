@@ -41,7 +41,7 @@
 
 	_disposable = [RACCompoundDisposable compoundDisposable];
 	_subscribers = [[NSMutableArray alloc] initWithCapacity:1];
-	
+
 	return self;
 }
 
@@ -61,7 +61,7 @@
 	@synchronized (subscribers) {
 		[subscribers addObject:subscriber];
 	}
-	
+
 	return [RACDisposable disposableWithBlock:^{
 		@synchronized (subscribers) {
 			// Since newer subscribers are generally shorter-lived, search
@@ -96,7 +96,7 @@
 
 - (void)sendError:(NSError *)error {
 	[self.disposable dispose];
-	
+
 	[self enumerateSubscribersUsingBlock:^(id<RACSubscriber> subscriber) {
 		[subscriber sendError:error];
 	}];
@@ -104,7 +104,7 @@
 
 - (void)sendCompleted {
 	[self.disposable dispose];
-	
+
 	[self enumerateSubscribersUsingBlock:^(id<RACSubscriber> subscriber) {
 		[subscriber sendCompleted];
 	}];

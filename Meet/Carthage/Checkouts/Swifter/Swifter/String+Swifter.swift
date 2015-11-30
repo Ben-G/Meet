@@ -47,7 +47,7 @@ extension String {
             return self[Range(start: startIndex, end: endIndex)]
         }
     }
-    
+
     func urlEncodedStringWithEncoding(encoding: NSStringEncoding) -> String {
         let charactersToBeEscaped = ":/?&=;+!@#$()',*" as CFStringRef
         let charactersToLeaveUnescaped = "[]." as CFStringRef
@@ -80,17 +80,17 @@ extension String {
                 parameters.updateValue(value! as String, forKey: key! as String)
             }
         }
-        
+
         return parameters
     }
 
     func SHA1DigestWithKey(key: String) -> NSData {
         let str = self.cStringUsingEncoding(NSUTF8StringEncoding)
         let strLen = self.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
-        
+
         let digestLen = Int(CC_SHA1_DIGEST_LENGTH)
         let result = UnsafeMutablePointer<Void>.alloc(digestLen)
-        
+
         let keyStr = key.cStringUsingEncoding(NSUTF8StringEncoding)!
         let keyLen = key.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
 
@@ -98,6 +98,6 @@ extension String {
 
         return NSData(bytes: result, length: digestLen)
     }
-    
+
 }
 

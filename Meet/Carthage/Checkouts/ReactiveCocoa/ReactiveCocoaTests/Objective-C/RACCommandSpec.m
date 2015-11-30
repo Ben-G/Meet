@@ -64,7 +64,7 @@ qck_describe(@"with a simple signal block", ^{
 		}];
 
 		expect(@(signalsReceived)).to(equal(@0));
-		
+
 		[command execute:value];
 		expect(@(signalsReceived)).toEventually(equal(@1));
 		expect(@(completed)).to(beTruthy());
@@ -104,7 +104,7 @@ qck_describe(@"with a simple signal block", ^{
 		[command.errors subscribeNext:^(id _) {
 			receivedError = YES;
 		}];
-		
+
 		expect(@([[command execute:nil] asynchronouslyWaitUntilCompleted:NULL])).to(beTruthy());
 		expect(@(receivedError)).to(beFalsy());
 	});
@@ -226,7 +226,7 @@ qck_it(@"should wait for all signals to complete or error before executing sends
 	}];
 
 	command.allowsConcurrentExecution = YES;
-	
+
 	RACSubject *firstSubject = [RACSubject subject];
 	expect([command execute:firstSubject]).notTo(beNil());
 
@@ -249,14 +249,14 @@ qck_it(@"should have allowsConcurrentExecution be observable", ^{
 	RACCommand *command = [[RACCommand alloc] initWithSignalBlock:^(RACSignal *signal) {
 		return signal;
 	}];
-	
+
 	RACSubject *completion = [RACSubject subject];
 	RACSignal *allowsConcurrentExecution = [[RACObserve(command, allowsConcurrentExecution)
 		takeUntil:completion]
 		replayLast];
-	
+
 	command.allowsConcurrentExecution = YES;
-	
+
 	expect([allowsConcurrentExecution first]).to(beTrue());
 	[completion sendCompleted];
 });
@@ -341,7 +341,7 @@ qck_it(@"should deliver errors onto 'errors'", ^{
 	}];
 
 	command.allowsConcurrentExecution = YES;
-	
+
 	RACSubject *firstSubject = [RACSubject subject];
 	expect([command execute:firstSubject]).notTo(beNil());
 
@@ -350,7 +350,7 @@ qck_it(@"should deliver errors onto 'errors'", ^{
 
 	NSError *firstError = [NSError errorWithDomain:@"" code:1 userInfo:nil];
 	NSError *secondError = [NSError errorWithDomain:@"" code:2 userInfo:nil];
-	
+
 	// We should receive errors from our previously-started executions.
 	NSMutableArray *receivedErrors = [NSMutableArray array];
 	[command.errors subscribeNext:^(NSError *error) {
@@ -441,7 +441,7 @@ qck_describe(@"enabled signal", ^{
 		[enabledSubject sendNext:@NO];
 		expect([command.enabled first]).toEventually(equal(@NO));
 	});
-	
+
 	qck_it(@"should sample enabledSignal synchronously at initialization time", ^{
 		RACCommand *command = [[RACCommand alloc] initWithEnabled:[RACSignal return:@NO] signalBlock:^(id _) {
 			return [RACSignal empty];
@@ -495,7 +495,7 @@ qck_describe(@"enabled signal", ^{
 
 		RACSignal *signal = [command execute:nil];
 		expect(signal).notTo(beNil());
-		
+
 		__block BOOL success = NO;
 		__block NSError *error = nil;
 		expect([signal firstOrDefault:nil success:&success error:&error]).to(beNil());

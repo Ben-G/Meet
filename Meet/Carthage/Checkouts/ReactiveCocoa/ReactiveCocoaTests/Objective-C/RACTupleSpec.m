@@ -71,12 +71,12 @@ qck_describe(@"RACTuplePack", ^{
 		RACTuple *tuple = [RACTuple tupleWithObjects:RACUnit.defaultUnit, nil];
 		expect(RACTuplePack(RACUnit.defaultUnit)).to(equal(tuple));
 	});
-	
+
 	qck_it(@"should translate nil", ^{
 		RACTuple *tuple = [RACTuple tupleWithObjects:RACTupleNil.tupleNil, nil];
 		expect(RACTuplePack(nil)).to(equal(tuple));
 	});
-	
+
 	qck_it(@"should pack multiple values", ^{
 		NSString *string = @"foobar";
 		NSNumber *number = @5;

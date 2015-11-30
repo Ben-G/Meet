@@ -18,10 +18,10 @@
 
 - (RACChannelTerminal *)rac_channelTerminalForKey:(NSString *)key {
 	RACChannel *channel = [RACChannel new];
-	
+
 	RACScheduler *scheduler = [RACScheduler scheduler];
 	__block BOOL ignoreNextValue = NO;
-	
+
 	@weakify(self);
 	[[[[[[[NSNotificationCenter.defaultCenter
 		rac_addObserverForName:NSUserDefaultsDidChangeNotification object:self]
@@ -41,7 +41,7 @@
 		distinctUntilChanged]
 		takeUntil:self.rac_willDeallocSignal]
 		subscribe:channel.leadingTerminal];
-	
+
 	[[channel.leadingTerminal
 		deliverOn:scheduler]
 		subscribeNext:^(id value) {
@@ -49,7 +49,7 @@
 			ignoreNextValue = YES;
 			[self setObject:value forKey:key];
 		}];
-	
+
 	return channel.followingTerminal;
 }
 

@@ -244,11 +244,11 @@ public extension Swifter {
 
             }, success: {
                 json, response in
-                
+
                 progress?(status: json.object)
                 return
-                
+
             }, failure: failure)
     }
-    
+
 }

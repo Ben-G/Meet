@@ -30,7 +30,7 @@ public enum Result<T, Error: ErrorType>: ResultType, CustomStringConvertible, Cu
 			self = .Failure(error as! Error)
 		}
 	}
-	
+
 
 	// MARK: Deconstruction
 
@@ -58,12 +58,12 @@ public enum Result<T, Error: ErrorType>: ResultType, CustomStringConvertible, Cu
 
 
 	// MARK: Higher-order functions
-	
+
 	/// Returns `self.value` if this result is a .Success, or the given value otherwise. Equivalent with `??`
 	public func recover(@autoclosure value: () -> T) -> T {
 		return self.value ?? value()
 	}
-	
+
 	/// Returns this result if it is a .Success, or the given result otherwise. Equivalent with `??`
 	public func recoverWith(@autoclosure result: () -> Result<T,Error>) -> Result<T,Error> {
 		return analysis(

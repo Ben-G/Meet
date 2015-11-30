@@ -10,7 +10,7 @@
 public final class Atomic<Value> {
 	private var spinLock = OS_SPINLOCK_INIT
 	private var _value: Value
-	
+
 	/// Atomically gets or sets the value of the variable.
 	public var value: Value {
 		get {
@@ -20,27 +20,27 @@ public final class Atomic<Value> {
 
 			return v
 		}
-	
+
 		set(newValue) {
 			lock()
 			_value = newValue
 			unlock()
 		}
 	}
-	
+
 	/// Initializes the variable with the given initial value.
 	public init(_ value: Value) {
 		_value = value
 	}
-	
+
 	private func lock() {
 		OSSpinLockLock(&spinLock)
 	}
-	
+
 	private func unlock() {
 		OSSpinLockUnlock(&spinLock)
 	}
-	
+
 	/// Atomically replaces the contents of the variable.
 	///
 	/// Returns the old value.
@@ -56,10 +56,10 @@ public final class Atomic<Value> {
 		let oldValue = _value
 		_value = action(_value)
 		unlock()
-		
+
 		return oldValue
 	}
-	
+
 	/// Atomically performs an arbitrary action using the current value of the
 	/// variable.
 	///
@@ -68,7 +68,7 @@ public final class Atomic<Value> {
 		lock()
 		let result = action(_value)
 		unlock()
-		
+
 		return result
 	}
 }

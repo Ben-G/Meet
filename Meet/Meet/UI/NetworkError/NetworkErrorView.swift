@@ -9,11 +9,11 @@
 import UIKit
 
 class NetworkErrorView: UIView {
-    
+
     var retryFunction: (() -> Void)?
-    
+
     @IBAction func retryButtonTapped(sender: AnyObject) {
         retryFunction?()
     }
-    
+
 }

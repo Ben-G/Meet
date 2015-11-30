@@ -44,12 +44,12 @@
 
 - (id)nextObject {
 	id object = nil;
-	
+
 	@synchronized (self) {
 		object = self.sequence.head;
 		self.sequence = self.sequence.tail;
 	}
-	
+
 	return object;
 }
 
@@ -205,11 +205,11 @@
 	NSCParameterAssert(reduce != NULL);
 
 	if (self.head == nil) return start;
-	
+
 	for (id value in self) {
 		start = reduce(start, value);
 	}
-	
+
 	return start;
 }
 
@@ -217,11 +217,11 @@
 	NSCParameterAssert(reduce != NULL);
 
 	if (self.head == nil) return start;
-	
+
 	RACSequence *rest = [RACSequence sequenceWithHeadBlock:^{
 		return [self.tail foldRightWithStart:start reduce:reduce];
 	} tailBlock:nil];
-	
+
 	return reduce(self.head, rest);
 }
 
@@ -233,11 +233,11 @@
 
 - (BOOL)all:(BOOL (^)(id))block {
 	NSCParameterAssert(block != NULL);
-	
+
 	NSNumber *result = [self foldLeftWithStart:@YES reduce:^(NSNumber *accumulator, id value) {
 		return @(accumulator.boolValue && block(value));
 	}];
-	
+
 	return result.boolValue;
 }
 

@@ -23,7 +23,7 @@
 		rac_signalForSelector:@selector(prepareForReuse)]
 		mapReplace:RACUnit.defaultUnit]
 		setNameWithFormat:@"%@ -rac_prepareForReuseSignal", RACDescription(self)];
-	
+
 	objc_setAssociatedObject(self, _cmd, signal, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 	return signal;
 }

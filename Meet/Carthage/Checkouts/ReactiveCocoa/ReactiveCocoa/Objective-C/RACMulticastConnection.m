@@ -45,7 +45,7 @@
 	_sourceSignal = source;
 	_serialDisposable = [[RACSerialDisposable alloc] init];
 	_signal = subject;
-	
+
 	return self;
 }
 

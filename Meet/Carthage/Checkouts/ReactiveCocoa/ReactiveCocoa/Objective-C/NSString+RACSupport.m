@@ -14,10 +14,10 @@
 
 + (RACSignal *)rac_readContentsOfURL:(NSURL *)URL usedEncoding:(NSStringEncoding *)encoding scheduler:(RACScheduler *)scheduler {
 	NSCParameterAssert(scheduler != nil);
-	
+
 	RACReplaySubject *subject = [RACReplaySubject subject];
 	[subject setNameWithFormat:@"+rac_readContentsOfURL: %@ usedEncoding:scheduler: %@", URL, scheduler];
-	
+
 	[scheduler schedule:^{
 		NSError *error = nil;
 		NSString *string = [NSString stringWithContentsOfURL:URL usedEncoding:encoding error:&error];
@@ -28,7 +28,7 @@
 			[subject sendCompleted];
 		}
 	}];
-	
+
 	return subject;
 }
 

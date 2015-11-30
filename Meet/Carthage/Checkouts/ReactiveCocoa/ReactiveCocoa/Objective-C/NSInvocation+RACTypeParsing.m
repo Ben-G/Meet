@@ -71,7 +71,7 @@
 		NSGetSizeAndAlignment(argType, &argSize, NULL);
 		NSCAssert(valueSize == argSize, @"Value size does not match argument size in -rac_setArgument: %@ atIndex: %lu", object, (unsigned long)index);
 #endif
-		
+
 		unsigned char valueBytes[valueSize];
 		[object getValue:valueBytes];
 
@@ -137,7 +137,7 @@
 
 		unsigned char valueBytes[valueSize];
 		[self getArgument:valueBytes atIndex:(NSInteger)index];
-		
+
 		return [NSValue valueWithBytes:valueBytes objCType:argType];
 	}
 

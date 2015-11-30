@@ -75,5 +75,5 @@ public extension Swifter {
 
             }, failure: failure)
     }
-    
+
 }

@@ -32,7 +32,7 @@ extern NSString * const RACUnderlyingCommandErrorKey;
 /// Errors will be automatically caught upon the inner signals, and sent upon
 /// `errors` instead. If you _want_ to receive inner errors, use -execute: or
 /// -[RACSignal materialize].
-/// 
+///
 /// Only executions that begin _after_ subscription will be sent upon this
 /// signal. All inner signals will arrive upon the main thread.
 @property (nonatomic, strong, readonly) RACSignal *executionSignals;

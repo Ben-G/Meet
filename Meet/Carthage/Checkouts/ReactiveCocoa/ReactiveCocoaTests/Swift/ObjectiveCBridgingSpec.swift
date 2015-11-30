@@ -127,20 +127,20 @@ class ObjectiveCBridgingSpec: QuickSpec {
 					observer.sendFailed(expectedError)
 					expect(error).to(equal(expectedError as NSError))
 				}
-				
+
 				it("should maintain userInfo on NSError") {
 					let (signal, observer) = Signal<AnyObject, NSError>.pipe()
 					let racSignal = toRACSignal(signal)
-					
+
 					var error: NSError?
-					
+
 					racSignal.subscribeError {
 						error = $0
 						return
 					}
-					
+
 					observer.sendFailed(testNSError)
-					
+
 					let userInfoValue = error?.userInfo[key] as? String
 					expect(userInfoValue).to(equal(userInfo[key]))
 				}
@@ -167,11 +167,11 @@ class ObjectiveCBridgingSpec: QuickSpec {
 					let event = racSignal.first() as? RACEvent
 					expect(event?.error).to(equal(TestError.Error1 as NSError))
 				}
-				
+
 				it("should maintain userInfo on NSError") {
 					let producer = SignalProducer<AnyObject, NSError>(error: testNSError)
 					let racSignal = toRACSignal(producer).materialize()
-					
+
 					let event = racSignal.first() as? RACEvent
 					let userInfoValue = event?.error.userInfo[key] as? String
 					expect(userInfoValue).to(equal(userInfo[key]))
@@ -245,7 +245,7 @@ class ObjectiveCBridgingSpec: QuickSpec {
 
 			var command: RACCommand!
 			var enabled = false
-			
+
 			beforeEach {
 				results = []
 				enabledProperty = MutableProperty(true)

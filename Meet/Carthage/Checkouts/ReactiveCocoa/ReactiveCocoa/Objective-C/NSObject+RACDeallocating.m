@@ -21,7 +21,7 @@ static NSMutableSet *swizzledClasses() {
 	dispatch_once(&onceToken, ^{
 		swizzledClasses = [[NSMutableSet alloc] init];
 	});
-	
+
 	return swizzledClasses;
 }
 
@@ -50,17 +50,17 @@ static void swizzleDeallocIfNeeded(Class classToSwizzle) {
 				originalDealloc(self, deallocSelector);
 			}
 		};
-		
+
 		IMP newDeallocIMP = imp_implementationWithBlock(newDealloc);
-		
+
 		if (!class_addMethod(classToSwizzle, deallocSelector, newDeallocIMP, "v@:")) {
 			// The class already contains a method implementation.
 			Method deallocMethod = class_getInstanceMethod(classToSwizzle, deallocSelector);
-			
+
 			// We need to store original implementation before setting new implementation
 			// in case method is called at the time of setting.
 			originalDealloc = (__typeof__(originalDealloc))method_getImplementation(deallocMethod);
-			
+
 			// We need to store original implementation again, in case it just changed.
 			originalDealloc = (__typeof__(originalDealloc))method_setImplementation(deallocMethod, newDeallocIMP);
 		}

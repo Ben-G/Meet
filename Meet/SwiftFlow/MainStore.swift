@@ -14,40 +14,40 @@ public class MainStore: Store {
             subscribers.forEach { $0._newState(appState) }
         }
     }
-    
+
     private var reducer: AnyReducer
     private var subscribers: [AnyStoreSubscriber] = []
-    
+
     public init(reducer: AnyReducer, appState: StateType) {
         self.reducer = reducer
         self.appState = appState
     }
-    
+
     public func subscribe(subscriber: AnyStoreSubscriber) {
         subscribers.append(subscriber)
         subscriber._newState(appState)
     }
-    
+
     public func unsubscribe(subscriber: AnyStoreSubscriber) {
         let index = subscribers.indexOf { return $0 === subscriber }
-        
+
         if let index = index {
             subscribers.removeAtIndex(index)
         }
     }
-    
+
     public func dispatch(action: ActionType) {
         dispatch(action, callback: nil)
     }
-    
+
     public func dispatch(actionCreatorProvider: ActionCreator) {
         dispatch(actionCreatorProvider, callback: nil)
     }
-    
+
     public func dispatch(asyncActionCreatorProvider: AsyncActionCreator) {
         dispatch(asyncActionCreatorProvider, callback: nil)
     }
-    
+
     public func dispatch(action: ActionType, callback: DispatchCallback?)  {
         // Dispatch Asynchronously so that each subscriber receives the latest state
         // Without Async a receiver could immediately be called and emit a new state
@@ -56,14 +56,14 @@ public class MainStore: Store {
             callback?(self.appState)
         }
     }
-    
+
     public func dispatch(actionCreatorProvider: ActionCreator, callback: DispatchCallback?) {
         let action = actionCreatorProvider(state: self.appState, store: self)
         if let action = action {
             dispatch(action, callback: callback)
         }
     }
-    
+
     public func dispatch(actionCreatorProvider: AsyncActionCreator, callback: DispatchCallback?) {
         actionCreatorProvider(state: self.appState, store: self) { actionProvider in
             let action = actionProvider(state: self.appState, store: self)

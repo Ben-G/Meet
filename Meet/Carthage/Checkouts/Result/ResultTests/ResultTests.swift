@@ -36,12 +36,12 @@ final class ResultTests: XCTestCase {
 	}
 
 	// MARK: Try - Catch
-	
+
 	func testTryCatchProducesSuccesses() {
 		let result: Result<String, NSError> = Result(try tryIsSuccess("success"))
 		XCTAssert(result == success)
 	}
-	
+
 	func testTryCatchProducesFailures() {
 		let result: Result<String, NSError> = Result(try tryIsSuccess(nil))
 		XCTAssert(result.error == error)
@@ -119,7 +119,7 @@ func tryIsSuccess(text: String?) throws -> String {
 	guard let text = text else {
 		throw error
 	}
-	
+
 	return text
 }
 
@@ -127,7 +127,7 @@ extension NSError {
 	var function: String? {
 		return userInfo[Result<(), NSError>.functionKey as NSString] as? String
 	}
-	
+
 	var file: String? {
 		return userInfo[Result<(), NSError>.fileKey as NSString] as? String
 	}

@@ -18,7 +18,7 @@
 	dispatch_once(&onceToken, ^{
 		defaultUnit = [[self alloc] init];
 	});
-	
+
 	return defaultUnit;
 }
 

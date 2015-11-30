@@ -100,7 +100,7 @@
 		_disposable = nil;
 	}
 	OSSpinLockUnlock(&_spinLock);
-	
+
 	[existingDisposable dispose];
 }
 

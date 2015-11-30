@@ -47,7 +47,7 @@
 	self = [super init];
 	if (self == nil) return nil;
 
-	_disposeBlock = (void *)CFBridgingRetain([block copy]); 
+	_disposeBlock = (void *)CFBridgingRetain([block copy]);
 	OSMemoryBarrier();
 
 	return self;

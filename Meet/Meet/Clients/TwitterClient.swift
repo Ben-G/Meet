@@ -23,31 +23,31 @@ enum TwitterAPIError: ErrorType {
 }
 
 struct TwitterClient {
-    
+
     static var cachedSwifter: Swifter?
-    
+
     static func login() -> SignalProducer<Swifter, TwitterAPIError> {
         let accountType = ACAccountStore().accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
         let accountStore = ACAccountStore()
-        
+
         return SignalProducer<Swifter, TwitterAPIError> { observer, _ in
-            
+
             if let cachedSwifter = self.cachedSwifter {
                 observer.sendNext(cachedSwifter)
                 observer.sendCompleted()
             }
-            
+
             accountStore.requestAccessToAccountsWithType(accountType, options: nil) { (t:Bool, e:NSError!) -> Void in
-                
+
                 let (consumerKey, consumerSecret) = Authentication.retrieveApplicationAuthPair()
                 let accounts = ACAccountStore().accountsWithAccountType(accountType)
-                
+
                 var nativeAccount: ACAccount? = nil
-                
+
                 if let accounts = accounts where accounts.count > 0 {
                     nativeAccount = accounts.last as? ACAccount
                 }
-                
+
                 if let nativeAccount = nativeAccount {
                     let swifter = Swifter(account: nativeAccount)
                     observer.sendNext(swifter)
@@ -70,7 +70,7 @@ struct TwitterClient {
             }
         }
     }
-    
+
     static func findUsers(searchString: String) -> SignalProducer<[TwitterUser], TwitterAPIError> {
         return SignalProducer { observer, disposables in
             login().startWithNext { swifter in
@@ -89,5 +89,5 @@ struct TwitterClient {
             }
         }
     }
-    
+
 }

@@ -11,11 +11,11 @@ import ListKit
 import WebImage
 
 class TwitterUserTableViewCell: UITableViewCell, ListKitCellProtocol {
-    
+
     @IBOutlet var profilePictureImageView: UIImageView!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var usernameLabel: UILabel!
-    
+
     var model: TwitterUser? {
         didSet {
             nameLabel.text = model?.name
@@ -23,5 +23,5 @@ class TwitterUserTableViewCell: UITableViewCell, ListKitCellProtocol {
             profilePictureImageView.sd_setImageWithURL(model?.profilePictureURL)
         }
     }
-    
+
 }

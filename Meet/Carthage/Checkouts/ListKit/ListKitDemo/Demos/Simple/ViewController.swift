@@ -20,12 +20,12 @@ class CustomTableViewCell: UITableViewCell, ListKitCellProtocol {
 class ViewController: UIViewController {
 
   @IBOutlet weak var tableView: UITableView!
-  
+
   var dataSource: ArrayDataSource<CustomTableViewCell, String>?
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
-      
+
     dataSource = ArrayDataSource(array: ["Test", "Another One", "OK"], cellType: CustomTableViewCell.self)
     tableView.dataSource = dataSource
   }

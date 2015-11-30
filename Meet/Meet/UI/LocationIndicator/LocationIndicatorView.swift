@@ -9,18 +9,18 @@
 import UIKit
 
 class LocationIndicatorView: UIView {
-    
+
     enum DisplayState {
         case LocationAuthorizationRequired
         case BusyLocating
         case Located(String)
     }
-    
+
     @IBOutlet var mainLabel: UILabel!
     var contentView: UIView!
-    
+
     var locationServiceRequestedCallback: (UIView -> Void)?
-    
+
     var displayState: DisplayState = .LocationAuthorizationRequired {
         didSet {
             switch displayState {
@@ -33,7 +33,7 @@ class LocationIndicatorView: UIView {
             }
         }
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 
@@ -41,11 +41,11 @@ class LocationIndicatorView: UIView {
         contentView.frame = self.bounds
         self.addSubview(contentView)
     }
-    
+
     //MARK: Touch Handling
-    
+
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         locationServiceRequestedCallback?(self)
     }
-    
+
 }

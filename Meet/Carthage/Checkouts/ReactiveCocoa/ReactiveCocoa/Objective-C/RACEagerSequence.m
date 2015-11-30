@@ -23,7 +23,7 @@
 	RACStreamBindBlock bindBlock = block();
 	NSArray *currentArray = self.array;
 	NSMutableArray *resultArray = [NSMutableArray arrayWithCapacity:currentArray.count];
-	
+
 	for (id value in currentArray) {
 		BOOL stop = NO;
 		RACSequence *boundValue = (id)bindBlock(value, &stop);
@@ -35,7 +35,7 @@
 
 		if (stop) break;
 	}
-	
+
 	return [[self.class sequenceWithArray:resultArray offset:0] setNameWithFormat:@"[%@] -bind:", self.name];
 }
 

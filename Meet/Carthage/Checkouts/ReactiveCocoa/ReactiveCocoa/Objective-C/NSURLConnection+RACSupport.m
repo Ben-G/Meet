@@ -38,7 +38,7 @@
 				}
 			}];
 #pragma clang diagnostic pop
-			
+
 			return [RACDisposable disposableWithBlock:^{
 				// It's not clear if this will actually cancel the connection,
 				// but we can at least prevent _some_ unnecessary work --

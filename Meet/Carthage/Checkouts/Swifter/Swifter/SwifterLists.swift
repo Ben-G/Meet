@@ -401,7 +401,7 @@ public extension Swifter {
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
-            
+
             success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
 
             }, failure: failure)
@@ -1582,19 +1582,19 @@ public extension Swifter {
         parameters["slug"] = slug
         parameters["screen_name"] = screenNames.joinWithSeparator(",")
         parameters["owner_screen_name"] = ownerScreenName
-        
+
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
-            
+
             success?(response: json)
             return
-            
+
             }, failure: failure)
     }
-    
+
     public func postListsMembersDestroyAllWithSlug(slug: String, userIDs: [String], ownerID: String, success: ((response: JSON?) -> Void)?, failure: FailureHandler?) {
         let path = "lists/members/destroy_all.json"
-        
+
         var parameters = Dictionary<String, Any>()
         parameters["slug"] = slug
 
@@ -1602,58 +1602,58 @@ public extension Swifter {
         parameters["user_id"] = userIDStrings.joinWithSeparator(",")
 
         parameters["owner_id"] = ownerID
-        
+
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
-            
+
             success?(response: json)
             return
-            
+
             }, failure: failure)
     }
-    
+
     public func postListsMembersDestroyAllWithSlug(slug: String, screenNames: [String], ownerID: String, success: ((response: JSON?) -> Void)?, failure: FailureHandler?) {
         let path = "lists/members/destroy_all.json"
-        
+
         var parameters = Dictionary<String, Any>()
         parameters["slug"] = slug
         parameters["screen_name"] = screenNames.joinWithSeparator(",")
         parameters["owner_id"] = ownerID
-        
+
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
-            
+
             success?(response: json)
             return
-            
+
             }, failure: failure)
     }
-    
+
     /*
     GET    lists/ownerships
-    
+
     Returns the lists owned by the specified Twitter user. Private lists will only be shown if the authenticated user is also the owner of the lists.
     */
     public func getListsOwnershipsWithUserID(userID: String, count: String?, cursor: String?, success: ((lists: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)?, failure: FailureHandler?) {
         let path = "lists/ownerships.json"
-        
+
         var parameters = Dictionary<String, Any>()
         parameters["user_id"] = userID
-        
+
         if count != nil {
             parameters["count"] = count!
         }
         if cursor != nil {
             parameters["cursor"] = cursor!
         }
-        
+
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
-            
+
             success?(lists: json["lists"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
 
             }, failure: failure)
-        
+
     }
-    
+
 }

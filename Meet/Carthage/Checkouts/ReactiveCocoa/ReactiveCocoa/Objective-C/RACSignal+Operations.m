@@ -1052,7 +1052,7 @@ static RACDisposable *subscribeForever (RACSignal *signal, void (^next)(id), voi
 - (RACSignal *)deliverOnMainThread {
 	return [[RACSignal createSignal:^(id<RACSubscriber> subscriber) {
 		__block volatile int32_t queueLength = 0;
-		
+
 		void (^performOnMainThread)(dispatch_block_t) = ^(dispatch_block_t block) {
 			int32_t queued = OSAtomicIncrement32(&queueLength);
 			if (NSThread.isMainThread && queued == 1) {

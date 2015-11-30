@@ -29,7 +29,7 @@ static void *RACSubclassAssociationKey = &RACSubclassAssociationKey;
 static NSMutableSet *swizzledClasses() {
 	static NSMutableSet *set;
 	static dispatch_once_t pred;
-	
+
 	dispatch_once(&pred, ^{
 		set = [[NSMutableSet alloc] init];
 	});

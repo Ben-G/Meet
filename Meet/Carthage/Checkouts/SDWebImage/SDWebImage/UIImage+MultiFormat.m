@@ -21,7 +21,7 @@
     if (!data) {
         return nil;
     }
-    
+
     UIImage *image;
     NSString *imageContentType = [NSData sd_contentTypeForImageData:data];
     if ([imageContentType isEqualToString:@"image/gif"]) {

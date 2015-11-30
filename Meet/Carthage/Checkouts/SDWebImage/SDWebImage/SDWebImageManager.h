@@ -65,11 +65,11 @@ typedef NS_OPTIONS(NSUInteger, SDWebImageOptions) {
 
     /**
      * By default, image are loaded in the order they were queued. This flag move them to
-     * the front of the queue and is loaded immediately instead of waiting for the current queue to be loaded (which 
+     * the front of the queue and is loaded immediately instead of waiting for the current queue to be loaded (which
      * could take a while).
      */
     SDWebImageHighPriority = 1 << 8,
-    
+
     /**
      * By default, placeholder images are loaded while the image is loading. This flag will delay the loading
      * of the placeholder image until after the image has finished loading.
@@ -82,7 +82,7 @@ typedef NS_OPTIONS(NSUInteger, SDWebImageOptions) {
      * Use this flag to transform them anyway.
      */
     SDWebImageTransformAnimatedImage = 1 << 10,
-    
+
     /**
      * By default, image is added to the imageView after download. But in some cases, we want to
      * have the hand before setting the image (apply a filter or add it with cross-fade animation for instance)
@@ -191,14 +191,14 @@ SDWebImageManager *manager = [SDWebImageManager sharedManager];
  * @param completedBlock A block called when operation has been completed.
  *
  *   This parameter is required.
- * 
+ *
  *   This block has no return value and takes the requested UIImage as first parameter.
  *   In case of error the image parameter is nil and the second parameter may contain an NSError.
  *
  *   The third parameter is an `SDImageCacheType` enum indicating if the image was retrived from the local cache
  *   or from the memory cache or from the network.
  *
- *   The last parameter is set to NO when the SDWebImageProgressiveDownload option is used and the image is 
+ *   The last parameter is set to NO when the SDWebImageProgressiveDownload option is used and the image is
  *   downloading. This block is thus called repetidly with a partial image. When image is fully downloaded, the
  *   block is called a last time with the full image and the last parameter set to YES.
  *
@@ -252,7 +252,7 @@ SDWebImageManager *manager = [SDWebImageManager sharedManager];
  *
  *  @param url              image url
  *  @param completionBlock  the block to be executed when the check is finished
- *  
+ *
  *  @note the completion block is always executed on the main queue
  */
 - (void)cachedImageExistsForURL:(NSURL *)url

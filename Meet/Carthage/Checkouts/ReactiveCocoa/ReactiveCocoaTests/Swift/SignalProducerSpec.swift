@@ -301,7 +301,7 @@ class SignalProducerSpec: QuickSpec {
 						break
 					}
 				}
-				
+
 				expect(values).to(equal([2]))
 				expect(error).to(beNil())
 
@@ -316,28 +316,28 @@ class SignalProducerSpec: QuickSpec {
 				expect(values).to(equal([2, 3, 4]))
 				expect(error).to(equal(TestError.Default))
 			}
-			
+
 			it("should always replay termination event") {
 				let (producer, observer) = SignalProducer<Int, TestError>.buffer(0)
 				var completed = false
-				
+
 				observer.sendCompleted()
-				
+
 				producer.startWithCompleted {
 					completed = true
 				}
-				
+
 				expect(completed).to(beTruthy())
 			}
-			
+
 			it("should replay values after being terminated") {
 				let (producer, observer) = SignalProducer<Int, TestError>.buffer(1)
 				var value: Int?
 				var completed = false
-				
+
 				observer.sendNext(123)
 				observer.sendCompleted()
-				
+
 				producer.start { event in
 					switch event {
 					case let .Next(val):
@@ -348,7 +348,7 @@ class SignalProducerSpec: QuickSpec {
 						break
 					}
 				}
-				
+
 				expect(value).to(equal(123))
 				expect(completed).to(beTruthy())
 			}
@@ -383,7 +383,7 @@ class SignalProducerSpec: QuickSpec {
 					values.append(newValue)
 
 					var bufferedValues: [Int] = []
-					
+
 					producer.startWithNext { bufferedValue in
 						bufferedValues.append(bufferedValue)
 					}
@@ -810,27 +810,27 @@ class SignalProducerSpec: QuickSpec {
 				}
 			}
 		}
-		
+
 		describe("sequence operators") {
 			var producerA: SignalProducer<Int, NoError>!
 			var producerB: SignalProducer<Int, NoError>!
-			
+
 			beforeEach {
 				producerA = SignalProducer<Int, NoError>(values: [ 1, 2 ])
 				producerB = SignalProducer<Int, NoError>(values: [ 3, 4 ])
 			}
-			
+
 			it("should combine the events to one array") {
 				let producer = combineLatest([producerA, producerB])
 				let result = producer.collect().single()
-				
+
 				expect(result?.value).to(equal([[1, 4], [2, 4]]))
 			}
-			
+
 			it("should zip the events to one array") {
 				let producer = zip([producerA, producerB])
 				let result = producer.collect().single()
-				
+
 				expect(result?.value).to(equal([[1, 3], [2, 4]]))
 			}
 		}
@@ -1685,9 +1685,9 @@ class SignalProducerSpec: QuickSpec {
 					.startWithSignal { signal, innerDisposable in
 						downstreamDisposable = innerDisposable
 					}
-				
+
 				expect(upstreamDisposable.disposed).to(beFalsy())
-				
+
 				downstreamDisposable.dispose()
 				expect(upstreamDisposable.disposed).to(beTruthy())
 			}

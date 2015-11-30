@@ -57,11 +57,11 @@
 }
 
 - (void)lifeIsGood:(id)sender {
-	
+
 }
 
 + (void)lifeIsGood:(id)sender {
-	
+
 }
 
 - (NSRange)returnRangeValueWithObjectValue:(id)objectValue andIntegerValue:(NSInteger)integerValue {

@@ -37,7 +37,7 @@
 			[subscriber sendNext:self.currentValue];
 		}
 	}];
-	
+
 	return [RACDisposable disposableWithBlock:^{
 		[subscriptionDisposable dispose];
 		[schedulingDisposable dispose];

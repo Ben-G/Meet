@@ -21,11 +21,11 @@ class ContactTableViewCell: UITableViewCell, ListKitCellProtocol {
 }
 
 class ContactListViewController: UIViewController, StoreSubscriber {
-  
+
     @IBOutlet var tableView: UITableView!
 
     var store = mainStore
-    
+
     var dataSource = ArrayDataSource(array: [], cellType: ContactTableViewCell.self)
 
     var contacts: [Contact]? {
@@ -35,17 +35,17 @@ class ContactListViewController: UIViewController, StoreSubscriber {
             }
         }
     }
-    
+
     override func viewWillAppear(animated: Bool) {
         tableView.dataSource = self
         store.subscribe(self)
         tableView.reloadData()
     }
-    
+
     override func viewWillDisappear(animated: Bool) {
         store.unsubscribe(self)
     }
-    
+
     func newState(state: HasDataState) {
         contacts = state.dataState.contacts
     }
@@ -54,23 +54,23 @@ class ContactListViewController: UIViewController, StoreSubscriber {
 
 extension ContactListViewController: UITableViewDataSource {
 
-   
+
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         return self.dataSource.tableView(tableView, cellForRowAtIndexPath: indexPath)
     }
-    
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.tableView(tableView, numberOfRowsInSection: section)
     }
-    
+
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         let contactID = dataSource.array[indexPath.row].identifier
-        
+
         // TODO: Consider implementing this as a pending action, or alternatively as an extension on UITableView using Dwift: https://github.com/jflinter/Dwifft or https://github.com/brutella/simplediff-swift
-        
+
         store.dispatch( DataMutationAction.DeleteContact(contactID) ) { appState in
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
         }
     }
-    
+
 }

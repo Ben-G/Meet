@@ -388,14 +388,14 @@ public extension Swifter {
         if map != nil {
             parameters["map"] = map!
         }
-        
+
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
-            
+
             success?(statuses: json.array)
             return
-            
+
             }, failure: failure)
     }
-    
+
 }

@@ -165,11 +165,11 @@ public extension Swifter {
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
-            
+
             success?(places: json.array)
             return
-            
+
             }, failure: failure)
     }
-    
+
 }

@@ -10,7 +10,7 @@ import Foundation
 import SwiftFlow
 
 struct LocationServiceReducer: Reducer {
-    
+
     func handleAction(state: HasLocationServiceState, action: LocationServiceAction) -> HasLocationServiceState {
         switch action {
         case .SetLocationServiceBusy(let busy):
@@ -19,17 +19,17 @@ struct LocationServiceReducer: Reducer {
             return setLocation(state, location: location)
         }
     }
-    
+
     func setLocationServiceBusy(var state: HasLocationServiceState, busy: Bool) -> HasLocationServiceState {
         state.locationServiceState.busyLocating = busy
-        
+
         return state
     }
-    
+
     func setLocation(var state: HasLocationServiceState, location: Location) -> HasLocationServiceState {
         state.locationServiceState.currentLocation = .Success(location)
-        
+
         return state
     }
-    
+
 }

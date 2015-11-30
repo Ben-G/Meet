@@ -30,7 +30,7 @@ import SwifterMac
 class ViewController: NSViewController {
 
     let useACAccount = true
-                            
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

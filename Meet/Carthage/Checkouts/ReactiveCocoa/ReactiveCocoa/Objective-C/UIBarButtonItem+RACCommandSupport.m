@@ -24,25 +24,25 @@ static void *UIControlEnabledDisposableKey = &UIControlEnabledDisposableKey;
 
 - (void)setRac_command:(RACCommand *)command {
 	objc_setAssociatedObject(self, UIControlRACCommandKey, command, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-	
+
 	// Check for stored signal in order to remove it and add a new one
 	RACDisposable *disposable = objc_getAssociatedObject(self, UIControlEnabledDisposableKey);
 	[disposable dispose];
-	
+
 	if (command == nil) return;
-	
+
 	disposable = [command.enabled setKeyPath:@keypath(self.enabled) onObject:self];
 	objc_setAssociatedObject(self, UIControlEnabledDisposableKey, disposable, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-	
+
 	[self rac_hijackActionAndTargetIfNeeded];
 }
 
 - (void)rac_hijackActionAndTargetIfNeeded {
 	SEL hijackSelector = @selector(rac_commandPerformAction:);
 	if (self.target == self && self.action == hijackSelector) return;
-	
+
 	if (self.target != nil) NSLog(@"WARNING: UIBarButtonItem.rac_command hijacks the control's existing target and action.");
-	
+
 	self.target = self;
 	self.action = hijackSelector;
 }

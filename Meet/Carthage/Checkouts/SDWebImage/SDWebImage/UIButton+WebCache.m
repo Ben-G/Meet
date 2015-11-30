@@ -52,20 +52,20 @@ static char imageURLStorageKey;
 
     [self setImage:placeholder forState:state];
     [self sd_cancelImageLoadForState:state];
-    
+
     if (!url) {
         [self.imageURLStorage removeObjectForKey:@(state)];
-        
+
         dispatch_main_async_safe(^{
             NSError *error = [NSError errorWithDomain:SDWebImageErrorDomain code:-1 userInfo:@{NSLocalizedDescriptionKey : @"Trying to load a nil url"}];
             if (completedBlock) {
                 completedBlock(nil, error, SDImageCacheTypeNone, url);
             }
         });
-        
+
         return;
     }
-    
+
     self.imageURLStorage[@(state)] = url;
 
     __weak __typeof(self)wself = self;

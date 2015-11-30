@@ -120,11 +120,11 @@ qck_describe(@"eager sequences", ^{
 	__block BOOL tailInvoked;
 
 	NSArray *values = @[ @0, @1 ];
-	
+
 	qck_beforeEach(^{
 		headInvoked = NO;
 		tailInvoked = NO;
-		
+
 		lazySequence = [RACSequence sequenceWithHeadBlock:^{
 			headInvoked = YES;
 			return @0;
@@ -132,17 +132,17 @@ qck_describe(@"eager sequences", ^{
 			tailInvoked = YES;
 			return [RACSequence return:@1];
 		}];
-		
+
 		expect(lazySequence).notTo(beNil());
 	});
-	
+
 	qck_itBehavesLike(RACSequenceExamples, ^{
 		return @{
 			RACSequenceExampleSequence: lazySequence.eagerSequence,
 			RACSequenceExampleExpectedValues: values
 		};
 	});
-	
+
 	qck_it(@"should evaluate all values immediately", ^{
 		RACSequence *eagerSequence = lazySequence.eagerSequence;
 		expect(@(headInvoked)).to(beTruthy());
@@ -198,7 +198,7 @@ qck_describe(@"-objectEnumerator", ^{
 		__block BOOL firstHeadInvoked = NO;
 		__block BOOL secondHeadInvoked = NO;
 		__block BOOL thirdHeadInvoked = NO;
-		
+
 		RACSequence *sequence = [RACSequence sequenceWithHeadBlock:^id{
 			firstHeadInvoked = YES;
 			return @1;
@@ -216,36 +216,36 @@ qck_describe(@"-objectEnumerator", ^{
 			}];
 		}];
 		NSEnumerator *enumerator = sequence.objectEnumerator;
-		
+
 		expect(@(firstHeadInvoked)).to(beFalsy());
 		expect(@(secondHeadInvoked)).to(beFalsy());
 		expect(@(thirdHeadInvoked)).to(beFalsy());
-		
+
 		expect([enumerator nextObject]).to(equal(@1));
-		
+
 		expect(@(firstHeadInvoked)).to(beTruthy());
 		expect(@(secondHeadInvoked)).to(beFalsy());
 		expect(@(thirdHeadInvoked)).to(beFalsy());
-		
+
 		expect([enumerator nextObject]).to(equal(@2));
-		
+
 		expect(@(secondHeadInvoked)).to(beTruthy());
 		expect(@(thirdHeadInvoked)).to(beFalsy());
-		
+
 		expect([enumerator nextObject]).to(equal(@3));
-		
+
 		expect(@(thirdHeadInvoked)).to(beTruthy());
-		
+
 		expect([enumerator nextObject]).to(beNil());
 	});
-	
+
 	qck_it(@"should let the sequence dealloc as it's enumerated", ^{
 		__block BOOL firstSequenceDeallocd = NO;
 		__block BOOL secondSequenceDeallocd = NO;
 		__block BOOL thirdSequenceDeallocd = NO;
-		
+
 		NSEnumerator *enumerator = nil;
-		
+
 		@autoreleasepool {
 			RACSequence *thirdSequence __attribute__((objc_precise_lifetime)) = [RACSequence sequenceWithHeadBlock:^id{
 				return @3;
@@ -255,7 +255,7 @@ qck_describe(@"-objectEnumerator", ^{
 			[thirdSequence.rac_deallocDisposable addDisposable:[RACDisposable disposableWithBlock:^{
 				thirdSequenceDeallocd = YES;
 			}]];
-			
+
 			RACSequence *secondSequence __attribute__((objc_precise_lifetime)) = [RACSequence sequenceWithHeadBlock:^id{
 				return @2;
 			} tailBlock:^RACSequence *{
@@ -264,7 +264,7 @@ qck_describe(@"-objectEnumerator", ^{
 			[secondSequence.rac_deallocDisposable addDisposable:[RACDisposable disposableWithBlock:^{
 				secondSequenceDeallocd = YES;
 			}]];
-			
+
 			RACSequence *firstSequence __attribute__((objc_precise_lifetime)) = [RACSequence sequenceWithHeadBlock:^id{
 				return @1;
 			} tailBlock:^RACSequence *{
@@ -273,10 +273,10 @@ qck_describe(@"-objectEnumerator", ^{
 			[firstSequence.rac_deallocDisposable addDisposable:[RACDisposable disposableWithBlock:^{
 				firstSequenceDeallocd = YES;
 			}]];
-			
+
 			enumerator = firstSequence.objectEnumerator;
 		}
-		
+
 		@autoreleasepool {
 			expect([enumerator nextObject]).to(equal(@1));
 		}
@@ -285,12 +285,12 @@ qck_describe(@"-objectEnumerator", ^{
 			expect([enumerator nextObject]).to(equal(@2));
 		}
 		expect(@(firstSequenceDeallocd)).toEventually(beTruthy());
-		
+
 		@autoreleasepool {
 			expect([enumerator nextObject]).to(equal(@3));
 		}
 		expect(@(secondSequenceDeallocd)).toEventually(beTruthy());
-		
+
 		@autoreleasepool {
 			expect([enumerator nextObject]).to(beNil());
 		}
@@ -349,16 +349,16 @@ qck_describe(@"-foldRightWithStart:reduce:", ^{
 			tailInvoked = YES;
 			return [RACSequence return:@1];
 		}];
-		
+
 		NSNumber *result = [sequence foldRightWithStart:@2 reduce:^(NSNumber *first, RACSequence *rest) {
 			return first;
 		}];
-		
+
 		expect(result).to(equal(@0));
 		expect(@(headInvoked)).to(beTruthy());
 		expect(@(tailInvoked)).to(beFalsy());
 	});
-	
+
 	qck_it(@"should reduce with start last", ^{
 		RACSequence *sequence = [[[RACSequence return:@0] concat:[RACSequence return:@1]] concat:[RACSequence return:@2]];
 		NSNumber *result = [sequence foldRightWithStart:@3 reduce:^(NSNumber *first, RACSequence *rest) {
@@ -366,7 +366,7 @@ qck_describe(@"-foldRightWithStart:reduce:", ^{
 		}];
 		expect(result).to(equal(@3));
 	});
-	
+
 	qck_it(@"should be right associative", ^{
 		RACSequence *sequence = [[[RACSequence return:@1] concat:[RACSequence return:@2]] concat:[RACSequence return:@3]];
 		NSNumber *result = [sequence foldRightWithStart:@0 reduce:^(NSNumber *first, RACSequence *rest) {
@@ -382,14 +382,14 @@ qck_describe(@"-any", ^{
 	qck_beforeEach(^{
 		sequence = [[[RACSequence return:@0] concat:[RACSequence return:@1]] concat:[RACSequence return:@2]];
 	});
-	
+
 	qck_it(@"should return true when at least one exists", ^{
 		BOOL result = [sequence any:^ BOOL (NSNumber *value) {
 			return value.integerValue > 0;
 		}];
 		expect(@(result)).to(beTruthy());
 	});
-	
+
 	qck_it(@"should return false when no such thing exists", ^{
 		BOOL result = [sequence any:^ BOOL (NSNumber *value) {
 			return value.integerValue == 3;
@@ -403,14 +403,14 @@ qck_describe(@"-all", ^{
 	qck_beforeEach(^{
 		sequence = [[[RACSequence return:@0] concat:[RACSequence return:@1]] concat:[RACSequence return:@2]];
 	});
-	
+
 	qck_it(@"should return true when all values pass", ^{
 		BOOL result = [sequence all:^ BOOL (NSNumber *value) {
 			return value.integerValue >= 0;
 		}];
 		expect(@(result)).to(beTruthy());
 	});
-	
+
 	qck_it(@"should return false when at least one value fails", ^{
 		BOOL result = [sequence all:^ BOOL (NSNumber *value) {
 			return value.integerValue < 2;
@@ -424,14 +424,14 @@ qck_describe(@"-objectPassingTest:", ^{
 	qck_beforeEach(^{
 		sequence = [[[RACSequence return:@0] concat:[RACSequence return:@1]] concat:[RACSequence return:@2]];
 	});
-	
+
 	qck_it(@"should return leftmost object that passes the test", ^{
 		NSNumber *result = [sequence objectPassingTest:^ BOOL (NSNumber *value) {
 			return value.intValue > 0;
 		}];
 		expect(result).to(equal(@1));
 	});
-	
+
 	qck_it(@"should return nil if no objects pass the test", ^{
 		NSNumber *result = [sequence objectPassingTest:^ BOOL (NSNumber *value) {
 			return value.intValue < 0;

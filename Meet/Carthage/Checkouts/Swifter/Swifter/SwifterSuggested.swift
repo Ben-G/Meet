@@ -86,8 +86,8 @@ public extension Swifter {
 
             success?(users: json.array)
             return
-            
+
             }, failure: failure)
     }
-    
+
 }

@@ -10,63 +10,63 @@ class UnboxTests: XCTestCase {
         XCTAssertNotNil(unboxed, "Failed to unbox valid dictionary")
         unboxed?.verifyAgainstDictionary(dictionary)
     }
-    
+
     func testWithMissingRequiredValues() {
         let validDictionary = UnboxTestDictionaryWithAllRequiredKeysWithValidValues(false)
-        
+
         for key in validDictionary.keys {
             var invalidDictionary = validDictionary
             invalidDictionary.removeValueForKey(key)
-            
+
             let unboxed: UnboxTestMock? = Unbox(invalidDictionary)
             XCTAssertNil(unboxed, "Unbox did not return nil for an invalid dictionary")
         }
     }
-    
+
     func testWithInvalidRequiredValues() {
         let validDictionary = UnboxTestDictionaryWithAllRequiredKeysWithValidValues(false)
-        
+
         for key in validDictionary.keys {
             var invalidDictionary = validDictionary
             invalidDictionary[key] = NSObject()
-            
+
             let unboxed: UnboxTestMock? = Unbox(invalidDictionary)
             XCTAssertNil(unboxed, "Unbox did not return nil for an invalid dictionary")
         }
     }
-    
+
     func testWithInvalidRequiredURL() {
         var invalidDictionary = UnboxTestDictionaryWithAllRequiredKeysWithValidValues(false)
         invalidDictionary[UnboxTestMock.requiredURLKey] = "Clearly not a URL!"
-        
+
         let unboxed: UnboxTestMock? = Unbox(invalidDictionary)
         XCTAssertNil(unboxed, "Unbox did not return nil for a dictionary with an invalid required URL value")
     }
-    
+
     func testWithInvalidRequiredUnboxable() {
         var invalidDictionary = UnboxTestDictionaryWithAllRequiredKeysWithValidValues(false)
         invalidDictionary[UnboxTestMock.requiredUnboxableKey] = "Totally not unboxable"
-        
+
         let unboxedFromString: UnboxTestMock? = Unbox(invalidDictionary)
         XCTAssertNil(unboxedFromString, "Unbox did not return nil for a string")
-        
+
         invalidDictionary[UnboxTestMock.requiredUnboxableKey] = ["cannotBe" : "unboxed"]
-        
+
         let unboxedFromInvalidDictionary: UnboxTestMock? = Unbox(invalidDictionary)
         XCTAssertNil(unboxedFromInvalidDictionary, "Unbox did not return nil for an invalid dictionary")
     }
-    
+
     func testWithInvalidOptionalValue() {
         var validDictionary = UnboxTestDictionaryWithAllRequiredKeysWithValidValues(false)
         validDictionary[UnboxTestMock.optionalBoolKey] = "Not a Bool"
-        
+
         let unboxed: UnboxTestMock? = Unbox(validDictionary)
         XCTAssertNotNil(unboxed, "Invalid optional values should be ignored")
     }
-    
+
     func testUnboxingFromValidData() {
         let dictionary = UnboxTestDictionaryWithAllRequiredKeysWithValidValues(false)
-        
+
         do {
             let data = try NSJSONSerialization.dataWithJSONObject(dictionary, options: [])
             let unboxed: UnboxTestMock? = Unbox(data)
@@ -75,32 +75,32 @@ class UnboxTests: XCTestCase {
             XCTFail("Could not decode data from dictionary: \(dictionary)")
         }
     }
-    
+
     func testUnboxingArrayOfDictionaries() {
         let dictionaries = [
             UnboxTestDictionaryWithAllRequiredKeysWithValidValues(false),
             UnboxTestDictionaryWithAllRequiredKeysWithValidValues(false),
             UnboxTestDictionaryWithAllRequiredKeysWithValidValues(false)
         ]
-        
+
         guard let unboxedArray: [UnboxTestMock] = Unbox(dictionaries) else {
             return XCTFail()
         }
-        
+
         XCTAssertEqual(unboxedArray.count, 3)
-        
+
         for unboxed in unboxedArray {
             unboxed.verifyAgainstDictionary(UnboxTestDictionaryWithAllRequiredKeysWithValidValues(false))
         }
     }
-    
+
     func testThrowingForMissingRequiredValues() {
         let validDictionary = UnboxTestDictionaryWithAllRequiredKeysWithValidValues(false)
-        
+
         for key in validDictionary.keys {
             var invalidDictionary = validDictionary
             invalidDictionary.removeValueForKey(key)
-            
+
             do {
                 try UnboxOrThrow(invalidDictionary) as UnboxTestMock
                 XCTFail("Unbox should have thrown for a missing value")
@@ -111,16 +111,16 @@ class UnboxTests: XCTestCase {
             }
         }
     }
-    
+
     func testThrowingForInvalidRequiredValues() {
         let validDictionary = UnboxTestDictionaryWithAllRequiredKeysWithValidValues(false)
-        
+
         for key in validDictionary.keys {
             var invalidDictionary = validDictionary
             let invalidValue = NSObject()
             let invalidValueDescription = "\(invalidValue)"
             invalidDictionary[key] = invalidValue
-            
+
             do {
                 try UnboxOrThrow(invalidDictionary) as UnboxTestMock
                 XCTFail("Unbox should have thrown for an invalid value")
@@ -129,12 +129,12 @@ class UnboxTests: XCTestCase {
             } catch {
                 XCTFail("Unbox did not return the correct error type")
             }
-            
+
             let unboxed: UnboxTestMock? = Unbox(invalidDictionary)
             XCTAssertNil(unboxed, "Unbox did not return nil for an invalid dictionary")
         }
     }
-    
+
     func testThrowingForInvalidData() {
         if let data = "Not a dictionary".dataUsingEncoding(NSUTF8StringEncoding) {
             do {
@@ -149,14 +149,14 @@ class UnboxTests: XCTestCase {
             XCTFail("Could not create data from a string")
         }
     }
-    
+
     func testThrowingForInvalidDataArray() {
         let notDictionaryArray = [12, 13, 9]
-        
+
         guard let data = try? NSJSONSerialization.dataWithJSONObject(notDictionaryArray, options: []) else {
             return XCTFail()
         }
-        
+
         do {
             try UnboxOrThrow(data) as UnboxTestMock
             XCTFail()
@@ -166,14 +166,14 @@ class UnboxTests: XCTestCase {
             XCTFail("Unbox did not return the correct error type")
         }
     }
-    
+
     func testThrowingForSingleInvalidDictionaryInArray() {
         let dictionaries = [
             UnboxTestDictionaryWithAllRequiredKeysWithValidValues(false),
             ["invalid" : "dictionary"],
             UnboxTestDictionaryWithAllRequiredKeysWithValidValues(false)
         ]
-        
+
         do {
             try UnboxOrThrow(dictionaries) as [UnboxTestMock]
             XCTFail()
@@ -181,42 +181,42 @@ class UnboxTests: XCTestCase {
             // Test passed
         }
     }
-    
+
     func testContext() {
         class Model: Unboxable {
             let nestedUnboxable: Model?
-            
+
             required init(unboxer: Unboxer) {
                 if let context = unboxer.context as? String {
                     XCTAssertTrue("context" == context, "")
                 } else {
                     XCTFail("Context was of an unexpected type: \(unboxer.context)")
                 }
-                
+
                 self.nestedUnboxable = unboxer.unbox("nested")
             }
         }
-        
+
         let unboxed: Model? = Unbox(["nested" : UnboxableDictionary()], context: "context")
-        
+
         XCTAssertFalse(unboxed == nil, "Could not unbox with a context")
     }
-    
+
     func testRequiredContext() {
         let dictionary = [
             "nested" : [:],
             "nestedArray": [[:]]
         ]
-        
+
         if let model: UnboxTestContextMock = Unbox(dictionary, context: "context") {
             XCTAssertEqual(model.context, "context")
-            
+
             if let nestedModel = model.nested {
                 XCTAssertEqual(nestedModel.context, "nestedContext")
             } else {
                 XCTFail("Failed to unbox nested model")
             }
-            
+
             if let nestedArrayModel = model.nestedArray?.first {
                 XCTAssertEqual(nestedArrayModel.context, "nestedArrayContext")
             } else {
@@ -253,14 +253,14 @@ class UnboxTests: XCTestCase {
             XCTFail()
         }
     }
-    
+
     func testAllKeys() {
         let dictionary = [
             "a" : "A",
             "b" : 12,
             "c" : ["C"]
         ]
-        
+
         struct Model: Unboxable {
             init(unboxer: Unboxer) {
                 XCTAssertEqual(unboxer.allKeys.count, 3)
@@ -269,7 +269,7 @@ class UnboxTests: XCTestCase {
                 XCTAssertTrue(unboxer.allKeys.contains("c"))
             }
         }
-        
+
         Unbox(dictionary) as Model?
     }
 }
@@ -285,13 +285,13 @@ private func UnboxTestDictionaryWithAllRequiredKeysWithValidValues(nested: Bool)
         UnboxTestMock.requiredURLKey : "http://www.google.com",
         UnboxTestMock.requiredArrayKey : ["unbox", "is", "pretty", "cool", "right?"]
     ]
-    
+
     if !nested {
         dictionary[UnboxTestMock.requiredUnboxableKey] = UnboxTestDictionaryWithAllRequiredKeysWithValidValues(true)
         dictionary[UnboxTestMock.requiredUnboxableArrayKey] = [UnboxTestDictionaryWithAllRequiredKeysWithValidValues(true)]
         dictionary[UnboxTestMock.requiredUnboxableDictionaryKey] = ["test" : UnboxTestDictionaryWithAllRequiredKeysWithValidValues(true)]
     }
-    
+
     return dictionary
 }
 
@@ -300,7 +300,7 @@ private func UnboxTestDictionaryWithAllRequiredKeysWithValidValues(nested: Bool)
 private enum UnboxTestEnum: Int, UnboxableEnum {
     case First
     case Second
-    
+
     private static func unboxFallbackValue() -> UnboxTestEnum {
         return .First
     }
@@ -323,7 +323,7 @@ private class UnboxTestBaseMock: Unboxable {
     static let optionalURLKey = "optionalURL"
     static let requiredArrayKey = "requiredArray"
     static let optionalArrayKey = "optionalArray"
-    
+
     let requiredBool: Bool
     let optionalBool: Bool?
     let requiredInt: Int
@@ -340,7 +340,7 @@ private class UnboxTestBaseMock: Unboxable {
     let optionalURL: NSURL?
     let requiredArray: [String]
     let optionalArray: [String]?
-    
+
     required init(unboxer: Unboxer) {
         self.requiredBool = unboxer.unbox(UnboxTestBaseMock.requiredBoolKey)
         self.optionalBool = unboxer.unbox(UnboxTestBaseMock.optionalBoolKey)
@@ -359,11 +359,11 @@ private class UnboxTestBaseMock: Unboxable {
         self.requiredArray = unboxer.unbox(UnboxTestBaseMock.requiredArrayKey)
         self.optionalArray = unboxer.unbox(UnboxTestBaseMock.optionalArrayKey)
     }
-    
+
     func verifyAgainstDictionary(dictionary: UnboxableDictionary) {
         for (key, value) in dictionary {
             let verificationOutcome: Bool
-            
+
             switch key {
             case UnboxTestBaseMock.requiredBoolKey:
                 verificationOutcome = self.verifyPropertyValue(self.requiredBool, againstDictionaryValue: value)
@@ -400,39 +400,39 @@ private class UnboxTestBaseMock: Unboxable {
             default:
                 verificationOutcome = true
             }
-            
+
             XCTAssertTrue(verificationOutcome, "Verification failed for key: " + key)
         }
     }
-    
+
     func verifyPropertyValue<T: Equatable>(propertyValue: T?, againstDictionaryValue dictionaryValue: AnyObject?) -> Bool {
         if let propertyValue = propertyValue {
             if let typedDictionaryValue = dictionaryValue as? T {
                 return propertyValue == typedDictionaryValue
             }
         }
-        
+
         return false
     }
-    
+
     func verifyEnumPropertyValue<T: UnboxableEnum where T: Equatable>(propertyValue: T?, againstDictionaryValue dictionaryValue: AnyObject?) -> Bool {
         if let rawValue = dictionaryValue as? T.RawValue {
             if let enumValue = T(rawValue: rawValue) {
                 return propertyValue == enumValue
             }
         }
-        
+
         return false
     }
-    
+
     func verifyURLPropertyValue(propertyValue: NSURL?, againstDictionaryValue dictionaryValue: AnyObject?) -> Bool {
         if let string = dictionaryValue as? String {
             return self.verifyPropertyValue(self.requiredURL, againstDictionaryValue: NSURL(string: string))
         }
-        
+
         return false
     }
-    
+
     func verifyArrayPropertyValue<T: Equatable>(propertyValue: [T]?, againstDictionaryValue dictionaryValue: AnyObject?) -> Bool {
         if let propertyValue = propertyValue {
             if let dictionaryArrayValue = dictionaryValue as? [T] {
@@ -441,11 +441,11 @@ private class UnboxTestBaseMock: Unboxable {
                         return false
                     }
                 }
-                
+
                 return true
             }
         }
-        
+
         return false
     }
 }
@@ -457,14 +457,14 @@ private class UnboxTestMock: UnboxTestBaseMock {
     static let optionalUnboxableArrayKey = "optionalUnboxableArray"
     static let requiredUnboxableDictionaryKey = "requiredUnboxableDictionary"
     static let optionalUnboxableDictionaryKey = "optionalUnboxableDictionary"
-    
+
     let requiredUnboxable: UnboxTestBaseMock
     let optionalUnboxable: UnboxTestBaseMock?
     let requiredUnboxableArray: [UnboxTestBaseMock]
     let optionalUnboxableArray: [UnboxTestBaseMock]?
     let requiredUnboxableDictionary: [String : UnboxTestBaseMock]
     let optionalUnboxableDictionary: [String : UnboxTestBaseMock]?
-    
+
     required init(unboxer: Unboxer) {
         self.requiredUnboxable = unboxer.unbox(UnboxTestMock.requiredUnboxableKey)
         self.optionalUnboxable = unboxer.unbox(UnboxTestMock.optionalUnboxableKey)
@@ -472,7 +472,7 @@ private class UnboxTestMock: UnboxTestBaseMock {
         self.optionalUnboxableArray = unboxer.unbox(UnboxTestMock.optionalUnboxableArrayKey)
         self.requiredUnboxableDictionary = unboxer.unbox(UnboxTestMock.requiredUnboxableDictionaryKey)
         self.optionalUnboxableDictionary = unboxer.unbox(UnboxTestMock.optionalUnboxableDictionaryKey)
-        
+
         super.init(unboxer: unboxer)
     }
 }
@@ -481,7 +481,7 @@ private final class UnboxTestContextMock: UnboxableWithContext {
     let context: String
     let nested: UnboxTestContextMock?
     let nestedArray: [UnboxTestContextMock]?
-    
+
     init(unboxer: Unboxer, context: String) {
         self.context = context
         self.nested = unboxer.unbox("nested", context: "nestedContext")

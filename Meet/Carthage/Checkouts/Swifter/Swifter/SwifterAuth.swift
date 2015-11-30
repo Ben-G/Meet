@@ -62,7 +62,7 @@ public extension Swifter {
 
             let authorizeURL = NSURL(string: "/oauth/authorize", relativeToURL: self.apiURL)
             let queryURL = NSURL(string: authorizeURL!.absoluteString + "?oauth_token=\(token!.key)")
-            
+
             if openQueryURL != nil {
                 openQueryURL?(url: queryURL!)
             } else {
@@ -72,7 +72,7 @@ public extension Swifter {
                     NSWorkspace.sharedWorkspace().openURL(queryURL!)
                 #endif
             }
-            
+
             }, failure: failure)
     }
 

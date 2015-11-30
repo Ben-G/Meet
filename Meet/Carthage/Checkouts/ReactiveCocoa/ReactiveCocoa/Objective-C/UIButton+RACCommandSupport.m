@@ -24,28 +24,28 @@ static void *UIButtonEnabledDisposableKey = &UIButtonEnabledDisposableKey;
 
 - (void)setRac_command:(RACCommand *)command {
 	objc_setAssociatedObject(self, UIButtonRACCommandKey, command, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-	
+
 	// Check for stored signal in order to remove it and add a new one
 	RACDisposable *disposable = objc_getAssociatedObject(self, UIButtonEnabledDisposableKey);
 	[disposable dispose];
-	
+
 	if (command == nil) return;
-	
+
 	disposable = [command.enabled setKeyPath:@keypath(self.enabled) onObject:self];
 	objc_setAssociatedObject(self, UIButtonEnabledDisposableKey, disposable, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-	
+
 	[self rac_hijackActionAndTargetIfNeeded];
 }
 
 - (void)rac_hijackActionAndTargetIfNeeded {
 	SEL hijackSelector = @selector(rac_commandPerformAction:);
-	
+
 	for (NSString *selector in [self actionsForTarget:self forControlEvent:UIControlEventTouchUpInside]) {
 		if (hijackSelector == NSSelectorFromString(selector)) {
 			return;
 		}
 	}
-	
+
 	[self addTarget:self action:hijackSelector forControlEvents:UIControlEventTouchUpInside];
 }
 

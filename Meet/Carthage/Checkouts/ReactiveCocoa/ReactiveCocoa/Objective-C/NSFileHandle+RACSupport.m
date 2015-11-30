@@ -21,7 +21,7 @@
 	RACSignal *dataNotification = [[[NSNotificationCenter defaultCenter] rac_addObserverForName:NSFileHandleReadCompletionNotification object:self] map:^(NSNotification *note) {
 		return note.userInfo[NSFileHandleNotificationDataItem];
 	}];
-	
+
 	__block RACDisposable *subscription = [dataNotification subscribeNext:^(NSData *data) {
 		if (data.length > 0) {
 			[subject sendNext:data];
@@ -31,9 +31,9 @@
 			[subscription dispose];
 		}
 	}];
-	
+
 	[self readInBackgroundAndNotify];
-	
+
 	return subject;
 }
 

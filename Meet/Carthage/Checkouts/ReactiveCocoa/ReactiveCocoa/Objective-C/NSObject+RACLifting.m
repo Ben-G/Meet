@@ -19,22 +19,22 @@
 - (RACSignal *)rac_liftSelector:(SEL)selector withSignalOfArguments:(RACSignal *)arguments {
 	NSCParameterAssert(selector != NULL);
 	NSCParameterAssert(arguments != nil);
-	
+
 	@unsafeify(self);
-	
+
 	NSMethodSignature *methodSignature = [self methodSignatureForSelector:selector];
 	NSCAssert(methodSignature != nil, @"%@ does not respond to %@", self, NSStringFromSelector(selector));
-	
+
 	return [[[[arguments
 		takeUntil:self.rac_willDeallocSignal]
 		map:^(RACTuple *arguments) {
 			@strongify(self);
-			
+
 			NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
 			invocation.selector = selector;
 			invocation.rac_argumentsTuple = arguments;
 			[invocation invokeWithTarget:self];
-			
+
 			return invocation.rac_returnValue;
 		}]
 		replayLast]

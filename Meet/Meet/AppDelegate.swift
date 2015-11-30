@@ -17,62 +17,62 @@ let mainStore = MainStoreReactiveCocoa(reducer: MainReducer([NavigationReducer()
 var persistenceAdapter = PersistenceAdapter<DataState, AppState>()
 
 public class SwifterWrapper {
-    
+
     public class func handleOpenURL(url: NSURL) {
         Swifter.handleOpenURL(url)
     }
-    
+
 }
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
+
   var window: UIWindow?
 
    var router: Router!
-    
+
   var swifter: SwifterWrapper.Type = SwifterWrapper.self
-    
+
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    
+
     let tabBarController = UITabBarController()
     let addContactViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("AddContactViewController")
     let contactsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ContactsViewController")
-    
+
     tabBarController.viewControllers = [addContactViewController, contactsViewController]
-    
+
     router = Router(store: mainStore, rootViewController: tabBarController, transitionProvider: transitionFrom)
     mainStore.dispatch ( NavigationAction.SetNavigationState(addContactViewController) )
 
     window = UIWindow(frame: UIScreen.mainScreen().bounds)
     window?.rootViewController = router.rootViewController
     window?.makeKeyAndVisible()
-    
+
     mainStore.subscribe(self)
     persistenceAdapter.store = mainStore
-    
+
     return true
   }
-    
+
     func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
         print(url)
         if (url.absoluteString.containsString("swifter://")) {
             swifter.handleOpenURL(url)
             return true
         }
-        
+
         return false
     }
 }
 
 extension AppDelegate: StoreSubscriber {
-    
+
     func newState(maybeState: StateType) {
         guard let state = maybeState as? AppState else { return }
 
         print(state)
     }
-    
+
 }
 
 func transitionFrom(vc1: UIViewController, to vc2: UIViewController) -> RouteTransition {
@@ -93,9 +93,9 @@ func transitionFrom(vc1: UIViewController, to vc2: UIViewController) -> RouteTra
     if (vc1 is AddContactViewController) && (vc2 is EmailIntroViewController) {
         return .Modal
     }
-    
+
     return .None
-    
+
     //      switch transition {
     //      case is (ContactListViewController, AddContactViewController):
     //          return .TabBarSelect

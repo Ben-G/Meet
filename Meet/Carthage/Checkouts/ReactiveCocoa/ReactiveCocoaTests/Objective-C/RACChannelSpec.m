@@ -27,7 +27,7 @@ qck_describe(@"RACChannel", ^{
 			} copy]
 		};
 	});
-	
+
 	qck_describe(@"memory management", ^{
 		qck_it(@"should dealloc when its subscribers are disposed", ^{
 			RACDisposable *leadingDisposable = nil;
@@ -49,7 +49,7 @@ qck_describe(@"RACChannel", ^{
 			[followingDisposable dispose];
 			expect(@(deallocated)).toEventually(beTruthy());
 		});
-		
+
 		qck_it(@"should dealloc when its subscriptions are disposed", ^{
 			RACDisposable *leadingDisposable = nil;
 			RACDisposable *followingDisposable = nil;

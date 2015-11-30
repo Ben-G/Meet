@@ -48,7 +48,7 @@ internal class SwifterAccountsClient: SwifterClientProtocol {
         request.downloadProgressHandler = downloadProgress
         request.successHandler = success
         request.failureHandler = failure
-        
+
         request.start()
         return request
     }
@@ -57,7 +57,7 @@ internal class SwifterAccountsClient: SwifterClientProtocol {
         let url = NSURL(string: path, relativeToURL: baseURL)
 
         var params = parameters
-        
+
         var postData: NSData?
         var postDataKey: String?
 
@@ -95,7 +95,7 @@ internal class SwifterAccountsClient: SwifterClientProtocol {
         request.downloadProgressHandler = downloadProgress
         request.successHandler = success
         request.failureHandler = failure
-        
+
         request.start()
         return request
     }

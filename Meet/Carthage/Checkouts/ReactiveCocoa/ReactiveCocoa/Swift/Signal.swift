@@ -187,7 +187,7 @@ extension SignalType {
 	public func observeCompleted(completed: () -> ()) -> Disposable? {
 		return observe(Observer(completed: completed))
 	}
-	
+
 	/// Observes the Signal by invoking the given callback when a `failed` event is
 	/// received.
 	///
@@ -197,7 +197,7 @@ extension SignalType {
 	public func observeFailed(error: Error -> ()) -> Disposable? {
 		return observe(Observer(failed: error))
 	}
-	
+
 	/// Observes the Signal by invoking the given callback when an `interrupted` event is
 	/// received. If the Signal has already terminated, the callback will be invoked
 	/// immediately.
@@ -593,7 +593,7 @@ extension SignalType where Value: SignalProducerType, Error == Value.Error {
 private struct LatestState<Value, Error: ErrorType> {
 	var outerSignalComplete: Bool = false
 	var innerSignalComplete: Bool = true
-	
+
 	var replacingInnerSignal: Bool = false
 }
 
@@ -724,11 +724,11 @@ extension SignalType {
 
 			let signalState = CombineLatestState<Value>()
 			let otherState = CombineLatestState<U>()
-			
+
 			let onBothNext = { () -> () in
 				observer.sendNext((signalState.latestValue!, otherState.latestValue!))
 			}
-			
+
 			let onFailed = observer.sendFailed
 			let onBothCompleted = observer.sendCompleted
 			let onInterrupted = observer.sendInterrupted
@@ -736,7 +736,7 @@ extension SignalType {
 			let disposable = CompositeDisposable()
 			disposable += self.observeWithStates(signalState, otherState, lock, onBothNext, onFailed, onBothCompleted, onInterrupted)
 			disposable += otherSignal.observeWithStates(otherState, signalState, lock, onBothNext, onFailed, onBothCompleted, onInterrupted)
-			
+
 			return disposable
 		}
 	}
@@ -880,7 +880,7 @@ extension SignalType {
 						st.signalCompleted = true
 						return st
 					}
-					
+
 					if oldState.samplerCompleted {
 						observer.sendCompleted()
 					}
@@ -888,7 +888,7 @@ extension SignalType {
 					observer.sendInterrupted()
 				}
 			}
-			
+
 			disposable += sampler.observe { event in
 				switch event {
 				case .Next:
@@ -900,7 +900,7 @@ extension SignalType {
 						st.samplerCompleted = true
 						return st
 					}
-					
+
 					if oldState.signalCompleted {
 						observer.sendCompleted()
 					}
@@ -1083,7 +1083,7 @@ extension SignalType {
 					while (buffer.count + 1) > count {
 						buffer.removeAtIndex(0)
 					}
-					
+
 					buffer.append(value)
 				case let .Failed(error):
 					observer.sendFailed(error)
@@ -1091,7 +1091,7 @@ extension SignalType {
 					for bufferedValue in buffer {
 						observer.sendNext(bufferedValue)
 					}
-					
+
 					observer.sendCompleted()
 				case .Interrupted:
 					observer.sendInterrupted()
@@ -1133,31 +1133,31 @@ extension SignalType {
 		return Signal { observer in
 			let states = Atomic(ZipState<Value>(), ZipState<U>())
 			let disposable = CompositeDisposable()
-			
+
 			let flush = { () -> () in
 				var originalStates: (ZipState<Value>, ZipState<U>)!
 				states.modify { states in
 					originalStates = states
-					
+
 					var updatedStates = states
 					let extractCount = min(states.0.values.count, states.1.values.count)
-					
+
 					updatedStates.0.values.removeRange(0 ..< extractCount)
 					updatedStates.1.values.removeRange(0 ..< extractCount)
 					return updatedStates
 				}
-				
+
 				while !originalStates.0.values.isEmpty && !originalStates.1.values.isEmpty {
 					let left = originalStates.0.values.removeAtIndex(0)
 					let right = originalStates.1.values.removeAtIndex(0)
 					observer.sendNext((left, right))
 				}
-				
+
 				if originalStates.0.isFinished || originalStates.1.isFinished {
 					observer.sendCompleted()
 				}
 			}
-			
+
 			let onFailed = { observer.sendFailed($0) }
 			let onInterrupted = { observer.sendInterrupted() }
 
@@ -1168,7 +1168,7 @@ extension SignalType {
 						states.0.values.append(value)
 						return states
 					}
-					
+
 					flush()
 				case let .Failed(error):
 					onFailed(error)
@@ -1177,7 +1177,7 @@ extension SignalType {
 						states.0.completed = true
 						return states
 					}
-					
+
 					flush()
 				case .Interrupted:
 					onInterrupted()
@@ -1191,7 +1191,7 @@ extension SignalType {
 						states.1.values.append(value)
 						return states
 					}
-					
+
 					flush()
 				case let .Failed(error):
 					onFailed(error)
@@ -1200,13 +1200,13 @@ extension SignalType {
 						states.1.completed = true
 						return states
 					}
-					
+
 					flush()
 				case .Interrupted:
 					onInterrupted()
 				}
 			}
-			
+
 			return disposable
 		}
 	}
@@ -1286,7 +1286,7 @@ extension SignalType {
 
 							return state
 						}
-						
+
 						if let pendingValue = previousState.pendingValue {
 							observer.sendNext(pendingValue)
 						}
@@ -1399,7 +1399,7 @@ public func combineLatest<S: SequenceType, Value, Error where S.Generator.Elemen
 			signal.combineLatestWith(next).map { $0.0 + [$0.1] }
 		}
 	}
-	
+
 	return .never
 }
 
@@ -1493,7 +1493,7 @@ public func zip<S: SequenceType, Value, Error where S.Generator.Element == Signa
 			signal.zipWith(next).map { $0.0 + [$0.1] }
 		}
 	}
-	
+
 	return .never
 }
 

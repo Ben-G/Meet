@@ -50,7 +50,7 @@ qck_describe(@"-connect", ^{
 		expect(@(subscriptionCount)).to(equal(@1));
 
 		[disposable1 dispose];
-		
+
 		RACDisposable *disposable2 = [connection connect];
 		expect(@(subscriptionCount)).to(equal(@1));
 		expect(disposable1).to(equal(disposable2));
@@ -81,14 +81,14 @@ qck_describe(@"-connect", ^{
 
 qck_describe(@"-autoconnect", ^{
 	__block RACSignal *autoconnectedSignal;
-	
+
 	qck_beforeEach(^{
 		autoconnectedSignal = [connection autoconnect];
 	});
 
 	qck_it(@"should subscribe to the multicasted signal on the first subscription", ^{
 		expect(@(subscriptionCount)).to(equal(@0));
-		
+
 		[autoconnectedSignal subscribeNext:^(id x) {}];
 		expect(@(subscriptionCount)).to(equal(@1));
 
@@ -135,7 +135,7 @@ qck_describe(@"-autoconnect", ^{
 
 		[subject sendNext:@1];
 		[subject sendNext:@2];
-		
+
 		expect(results1).to(equal((@[ @1, @2 ])));
 		[disposable dispose];
 

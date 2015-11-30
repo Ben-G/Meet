@@ -13,7 +13,7 @@ import UIKit
 /// with the `ArrayDataSource` class.
 public protocol ListKitCellProtocol {
   typealias CellType
-  
+
   /// Stores the content that is represented within the cell.
   /// Types adopting this protocol should update the UI when this
   /// property is set
@@ -26,32 +26,32 @@ public protocol ListKitCellProtocol {
 public class ArrayDataSource<U, T where U:ListKitCellProtocol, U:UITableViewCell, T == U.CellType> : NSObject, UITableViewDataSource {
 
   let cellIdentifier = "arrayDataSourceCell"
-  
+
   private let nib: UINib?
 
   /// The content represented in the table view
   public var array: Array<T>
-  
+
   /// Initialize with a custom cell type
   public init (array:Array<T> = [], cellType: U.Type) {
     self.array = array
     self.nib = nil
   }
-  
-  /// Initialize with a custom cell type and a NIB file from which 
+
+  /// Initialize with a custom cell type and a NIB file from which
   /// the cell should be loaded
   public init (array:Array<T> = [], cellType: U.Type, nib: UINib) {
     self.array = array
     self.nib = nib
   }
-  
+
   public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return array.count
   }
 
   public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     var cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as! U?
-    
+
     if var cell = cell {
       cell.model = array[indexPath.row]
     } else {
@@ -66,8 +66,8 @@ public class ArrayDataSource<U, T where U:ListKitCellProtocol, U:UITableViewCell
         cell!.model = array[indexPath.row]
       }
     }
-    
+
     return cell!
   }
-  
+
 }

@@ -91,7 +91,7 @@ extension Bag: CollectionType {
 	public var startIndex: Index {
 		return 0
 	}
-	
+
 	public var endIndex: Index {
 		return elements.count
 	}

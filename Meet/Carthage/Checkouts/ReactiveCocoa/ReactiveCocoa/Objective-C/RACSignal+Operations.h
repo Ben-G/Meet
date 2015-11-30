@@ -620,7 +620,7 @@ extern const NSInteger RACSignalErrorNoMatchingCase;
 /// predicateBlock - cannot be nil.
 - (RACSignal *)any:(BOOL (^)(id object))predicateBlock;
 
-/// Sends an [NSNumber numberWithBool:YES] if all the objects the receiving 
+/// Sends an [NSNumber numberWithBool:YES] if all the objects the receiving
 /// signal sends pass `predicateBlock`.
 ///
 /// predicateBlock - cannot be nil.
@@ -678,7 +678,7 @@ extern const NSInteger RACSignalErrorNoMatchingCase;
 /// Performs a boolean OR on all of the RACTuple of NSNumbers in sent by the receiver.
 ///
 /// Asserts if the receiver sends anything other than a RACTuple of one or more NSNumbers.
-/// 
+///
 /// Returns a signal that applies OR to each NSNumber in the tuple.
 - (RACSignal *)or;
 

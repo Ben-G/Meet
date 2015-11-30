@@ -33,7 +33,7 @@ public let JSONFalse = JSONValue(false)
 public let JSONNull = JSONValue.JSONNull
 
 public enum JSON : Equatable, CustomStringConvertible {
-    
+
     case JSONString(String)
     case JSONNumber(Double)
     case JSONObject(Dictionary<String, JSONValue>)
@@ -41,7 +41,7 @@ public enum JSON : Equatable, CustomStringConvertible {
     case JSONBool(Bool)
     case JSONNull
     case JSONInvalid
-    
+
     init(_ value: Bool?) {
         if let bool = value {
             self = .JSONBool(bool)
@@ -50,7 +50,7 @@ public enum JSON : Equatable, CustomStringConvertible {
             self = .JSONInvalid
         }
     }
-    
+
     init(_ value: Double?) {
         if let number = value {
             self = .JSONNumber(number)
@@ -59,7 +59,7 @@ public enum JSON : Equatable, CustomStringConvertible {
             self = .JSONInvalid
         }
     }
-    
+
     init(_ value: Int?) {
         if let number = value {
             self = .JSONNumber(Double(number))
@@ -68,7 +68,7 @@ public enum JSON : Equatable, CustomStringConvertible {
             self = .JSONInvalid
         }
     }
-    
+
     init(_ value: String?) {
         if let string = value {
             self = .JSONString(string)
@@ -77,7 +77,7 @@ public enum JSON : Equatable, CustomStringConvertible {
             self = .JSONInvalid
         }
     }
-    
+
     init(_ value: Array<JSONValue>?) {
         if let array = value {
             self = .JSONArray(array)
@@ -86,7 +86,7 @@ public enum JSON : Equatable, CustomStringConvertible {
             self = .JSONInvalid
         }
     }
-    
+
     init(_ value: Dictionary<String, JSONValue>?) {
         if let dict = value {
             self = .JSONObject(dict)
@@ -95,7 +95,7 @@ public enum JSON : Equatable, CustomStringConvertible {
             self = .JSONInvalid
         }
     }
-    
+
     init(_ rawValue: AnyObject?) {
         if let value : AnyObject = rawValue {
             switch value {
@@ -113,7 +113,7 @@ public enum JSON : Equatable, CustomStringConvertible {
                     newArray.append(JSON(item))
                 }
                 self = .JSONArray(newArray)
-                
+
             case let dict as NSDictionary:
                 var newDict : Dictionary<String, JSONValue> = [:]
                 for (k, v): (AnyObject, AnyObject) in dict {
@@ -127,10 +127,10 @@ public enum JSON : Equatable, CustomStringConvertible {
                     }
                 }
                 self = .JSONObject(newDict)
-                
+
             case let string as NSString:
                 self = .JSONString(string as String)
-                
+
             case let number as NSNumber:
                 if number.isBool {
                     self = .JSONBool(number.boolValue)
@@ -138,10 +138,10 @@ public enum JSON : Equatable, CustomStringConvertible {
                 else {
                     self = .JSONNumber(number.doubleValue)
                 }
-                
+
             case _ as NSNull:
                 self = .JSONNull
-                
+
             default:
                 assert(true, "This location should never be reached")
                 self = .JSONInvalid
@@ -165,7 +165,7 @@ public enum JSON : Equatable, CustomStringConvertible {
         switch self {
         case .JSONNumber(let value):
             return Int(value)
-            
+
         default:
             return nil
         }
@@ -185,7 +185,7 @@ public enum JSON : Equatable, CustomStringConvertible {
         switch self {
         case .JSONObject(let value):
             return value
-            
+
         default:
             return nil
         }
@@ -195,7 +195,7 @@ public enum JSON : Equatable, CustomStringConvertible {
         switch self {
         case .JSONArray(let value):
             return value
-            
+
         default:
             return nil
         }
@@ -252,7 +252,7 @@ public enum JSON : Equatable, CustomStringConvertible {
         if let data = jsonString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
             return try parseJSONData(data)
         }
-        
+
         throw error
     }
 
@@ -273,7 +273,7 @@ public func ==(lhs: JSON, rhs: JSON) -> Bool {
     switch (lhs, rhs) {
     case (.JSONNull, .JSONNull):
         return true
-        
+
     case (.JSONBool(let lhsValue), .JSONBool(let rhsValue)):
         return lhsValue == rhsValue
 
@@ -288,7 +288,7 @@ public func ==(lhs: JSON, rhs: JSON) -> Bool {
 
     case (.JSONObject(let lhsValue), .JSONObject(let rhsValue)):
         return lhsValue == rhsValue
-        
+
     default:
         return false
     }
@@ -308,26 +308,26 @@ extension JSON {
     private func _prettyPrint(indent: String, _ level: Int) -> String {
         let currentIndent = (0...level).map({ _ in "" }).joinWithSeparator(indent)
         let nextIndent = currentIndent + "  "
-        
+
         switch self {
         case .JSONBool(let bool):
             return bool ? "true" : "false"
-            
+
         case .JSONNumber(let number):
             return "\(number)"
-            
+
         case .JSONString(let string):
             return "\"\(string)\""
-            
+
         case .JSONArray(let array):
             return "[\n" + array.map({ "\(nextIndent)\($0._prettyPrint(indent, level + 1))" }).joinWithSeparator(",\n") + "\n\(currentIndent)]"
-            
+
         case .JSONObject(let dict):
             return "{\n" + dict.map({ "\(nextIndent)\"\($0)\" : \($1._prettyPrint(indent, level + 1))"}).joinWithSeparator(",\n") + "\n\(currentIndent)}"
-            
+
         case .JSONNull:
             return "null"
-            
+
         case .JSONInvalid:
             assert(true, "This should never be reached")
             return ""
@@ -352,15 +352,15 @@ extension JSONValue: BooleanType {
 }
 
 extension JSON: StringLiteralConvertible {
-    
+
     public init(stringLiteral value: StringLiteralType) {
         self.init(value)
     }
-    
+
     public init(extendedGraphemeClusterLiteral value: StringLiteralType) {
         self.init(value)
     }
-    
+
     public init(unicodeScalarLiteral value: StringLiteralType) {
         self.init(value)
     }
@@ -368,7 +368,7 @@ extension JSON: StringLiteralConvertible {
 }
 
 extension JSON: IntegerLiteralConvertible {
-    
+
     public init(integerLiteral value: IntegerLiteralType) {
         self.init(value)
     }
@@ -376,7 +376,7 @@ extension JSON: IntegerLiteralConvertible {
 }
 
 extension JSON: BooleanLiteralConvertible {
-    
+
     public init(booleanLiteral value: BooleanLiteralType) {
         self.init(value)
     }
@@ -384,7 +384,7 @@ extension JSON: BooleanLiteralConvertible {
 }
 
 extension JSON: FloatLiteralConvertible {
-    
+
     public init(floatLiteral value: FloatLiteralType) {
         self.init(value)
     }
@@ -392,28 +392,28 @@ extension JSON: FloatLiteralConvertible {
 }
 
 extension JSON: DictionaryLiteralConvertible {
-    
+
     public init(dictionaryLiteral elements: (String, AnyObject)...) {
         var dict = [String : AnyObject]()
-        
+
         for (key, value) in elements {
             dict[key] = value
         }
-       
+
         self.init(dict)
     }
 
 }
 
 extension JSON: ArrayLiteralConvertible {
-    
+
     public init(arrayLiteral elements: AnyObject...) {
         self.init(elements)
     }
 }
 
 extension JSON: NilLiteralConvertible {
-    
+
     public init(nilLiteral: ()) {
         self.init(NSNull())
     }

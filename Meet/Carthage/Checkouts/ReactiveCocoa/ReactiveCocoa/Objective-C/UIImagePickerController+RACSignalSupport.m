@@ -17,7 +17,7 @@
 
 static void RACUseDelegateProxy(UIImagePickerController *self) {
 	if (self.delegate == self.rac_delegateProxy) return;
-    
+
 	self.rac_delegateProxy.rac_proxiedDelegate = self.delegate;
 	self.delegate = (id)self.rac_delegateProxy;
 }
@@ -28,7 +28,7 @@ static void RACUseDelegateProxy(UIImagePickerController *self) {
 		proxy = [[RACDelegateProxy alloc] initWithProtocol:@protocol(UIImagePickerControllerDelegate)];
 		objc_setAssociatedObject(self, _cmd, proxy, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 	}
-    
+
 	return proxy;
 }
 
@@ -36,7 +36,7 @@ static void RACUseDelegateProxy(UIImagePickerController *self) {
 	RACSignal *pickerCancelledSignal = [[self.rac_delegateProxy
 		signalForSelector:@selector(imagePickerControllerDidCancel:)]
 		merge:self.rac_willDeallocSignal];
-		
+
 	RACSignal *imagePickerSignal = [[[[self.rac_delegateProxy
 		signalForSelector:@selector(imagePickerController:didFinishPickingMediaWithInfo:)]
 		reduceEach:^(UIImagePickerController *pickerController, NSDictionary *userInfo) {
@@ -44,9 +44,9 @@ static void RACUseDelegateProxy(UIImagePickerController *self) {
 		}]
 		takeUntil:pickerCancelledSignal]
 		setNameWithFormat:@"%@ -rac_imageSelectedSignal", RACDescription(self)];
-    
+
 	RACUseDelegateProxy(self);
-    
+
 	return imagePickerSignal;
 }
 

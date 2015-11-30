@@ -20,7 +20,7 @@ QuickSpecBegin(UIButtonRACSupportSpec)
 
 qck_describe(@"UIButton", ^{
 	__block UIButton *button;
-	
+
 	qck_beforeEach(^{
 		button = [RACTestUIButton button];
 		expect(button).notTo(beNil());

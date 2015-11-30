@@ -346,7 +346,7 @@ extension SignalProducerType {
 	public func startWithCompleted(completed: () -> ()) -> Disposable {
 		return start(Observer(completed: completed))
 	}
-	
+
 	/// Creates a Signal from the producer, then adds exactly one observer to
 	/// the Signal, which will invoke the given callback when a `failed` event is
 	/// received.
@@ -356,7 +356,7 @@ extension SignalProducerType {
 	public func startWithFailed(failed: Error -> ()) -> Disposable {
 		return start(Observer(failed: failed))
 	}
-	
+
 	/// Creates a Signal from the producer, then adds exactly one observer to
 	/// the Signal, which will invoke the given callback when an `interrupted` event is
 	/// received.
@@ -426,7 +426,7 @@ extension SignalProducerType {
 			}
 		}
 	}
-	
+
 	/// Maps each value in the producer to a new value.
 	@warn_unused_result(message="Did you forget to call `start` on the producer?")
 	public func map<U>(transform: Value -> U) -> SignalProducer<U, Error> {
@@ -642,7 +642,7 @@ extension SignalProducerType {
 		return lift(Signal.zipWith)(otherProducer)
 	}
 
-	/// Zips elements of this producer and a signal into pairs. The elements of 
+	/// Zips elements of this producer and a signal into pairs. The elements of
 	/// any Nth pair are the Nth elements of the two.
 	@warn_unused_result(message="Did you forget to call `start` on the producer?")
 	public func zipWith<U>(otherSignal: Signal<U, Error>) -> SignalProducer<(Value, U), Error> {
@@ -904,7 +904,7 @@ public func combineLatest<S: SequenceType, Value, Error where S.Generator.Elemen
 			producer.combineLatestWith(next).map { $0.0 + [$0.1] }
 		}
 	}
-	
+
 	return .empty
 }
 
@@ -1209,7 +1209,7 @@ extension SignalProducerType {
 				dispatch_semaphore_signal(semaphore)
 			}
 		}
-		
+
 		dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
 		return result
 	}

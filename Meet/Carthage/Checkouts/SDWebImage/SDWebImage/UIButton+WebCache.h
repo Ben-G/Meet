@@ -21,7 +21,7 @@
 
 /**
  * Get the image URL for a control state.
- * 
+ *
  * @param state Which state you want to know the URL for. The values are described in UIControlState.
  */
 - (NSURL *)sd_imageURLForState:(UIControlState)state;

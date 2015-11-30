@@ -51,7 +51,7 @@ class TweetsViewController: UITableViewController {
         let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: nil)
 
         cell.textLabel?.text = tweets[indexPath.row]["text"].string
-        
+
         return cell
     }
 

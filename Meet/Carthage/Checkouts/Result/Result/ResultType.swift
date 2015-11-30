@@ -4,13 +4,13 @@
 public protocol ResultType {
 	typealias Value
 	typealias Error: ErrorType
-	
+
 	/// Constructs a successful result wrapping a `value`.
 	init(value: Value)
 
 	/// Constructs a failed result wrapping an `error`.
 	init(error: Error)
-	
+
 	/// Case analysis for ResultType.
 	///
 	/// Returns the value produced by appliying `ifFailure` to the error if self represents a failure, or `ifSuccess` to the result value if self represents a success.
@@ -28,12 +28,12 @@ public protocol ResultType {
 }
 
 public extension ResultType {
-	
+
 	/// Returns the value if self represents a success, `nil` otherwise.
 	public var value: Value? {
 		return analysis(ifSuccess: { $0 }, ifFailure: { _ in nil })
 	}
-	
+
 	/// Returns the error if self represents a failure, `nil` otherwise.
 	public var error: Error? {
 		return analysis(ifSuccess: { _ in nil }, ifFailure: { $0 })
@@ -50,12 +50,12 @@ public extension ResultType {
 			ifSuccess: transform,
 			ifFailure: Result<U, Error>.Failure)
 	}
-	
+
 	/// Returns a new Result by mapping `Failure`'s values using `transform`, or re-wrapping `Success`es’ values.
 	public func mapError<Error2>(@noescape transform: Error -> Error2) -> Result<Value, Error2> {
 		return flatMapError { .Failure(transform($0)) }
 	}
-	
+
 	/// Returns the result of applying `transform` to `Failure`’s errors, or re-wrapping `Success`es’ values.
 	public func flatMapError<Error2>(@noescape transform: Error -> Result<Value, Error2>) -> Result<Value, Error2> {
 		return analysis(

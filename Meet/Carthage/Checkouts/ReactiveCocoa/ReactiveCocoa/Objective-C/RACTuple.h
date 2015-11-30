@@ -59,7 +59,7 @@
 
 @property (nonatomic, readonly) NSUInteger count;
 
-/// These properties all return the object at that index or nil if the number of 
+/// These properties all return the object at that index or nil if the number of
 /// objects is less than the index.
 @property (nonatomic, readonly) id first;
 @property (nonatomic, readonly) id second;
@@ -106,7 +106,7 @@
 @interface RACTuple (ObjectSubscripting)
 /// Returns the object at that index or nil if the number of objects is less
 /// than the index.
-- (id)objectAtIndexedSubscript:(NSUInteger)idx; 
+- (id)objectAtIndexedSubscript:(NSUInteger)idx;
 @end
 
 /// This and everything below is for internal use only.

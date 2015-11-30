@@ -16,7 +16,7 @@ inline UIImage *SDScaledImageForKey(NSString *key, UIImage *image) {
     if (!image) {
         return nil;
     }
-    
+
     if ([image.images count] > 0) {
         NSMutableArray *scaledImages = [NSMutableArray array];
 
@@ -34,7 +34,7 @@ inline UIImage *SDScaledImageForKey(NSString *key, UIImage *image) {
                 if (range.location != NSNotFound) {
                     scale = 2.0;
                 }
-                
+
                 range = [key rangeOfString:@"@3x."];
                 if (range.location != NSNotFound) {
                     scale = 3.0;

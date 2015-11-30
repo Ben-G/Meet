@@ -29,28 +29,28 @@ struct DataMutationReducer: Reducer {
         let newContactID = state.dataState.contacts.count + 1
         let newContact = Contact(identifier: newContactID, emailAddress: email)
         state.dataState.contacts.append(newContact)
-        
+
         return state
     }
-    
+
     func createContact(var state: HasDataState, twitterUser: TwitterUser) -> HasDataState {
         let newContactID = state.dataState.contacts.count + 1
         let newContact = Contact(identifier: newContactID, twitterHandle: twitterUser.username)
         state.dataState.contacts.append(newContact)
-        
+
         return state
     }
     func deleteContact(var state: HasDataState, identifier: Int) -> HasDataState {
         // TODO: remove dummy implementation
         state.dataState.contacts.removeLast()
-        
+
         return state
     }
-    
+
     func setContacts(var state: HasDataState, contacts: [Contact]) -> HasDataState {
         state.dataState.contacts = contacts
-        
+
         return state
     }
-    
+
 }

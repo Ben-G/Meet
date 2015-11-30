@@ -49,10 +49,10 @@ NSString *lowercaseStringPath = @keypath(NSString.new, lowercaseString);
  * receiver, collection object receiver and related keypaths:
  *
  * @code
- 
+
  NSString *employessFirstNamePath = @collectionKeypath(department.employees, Employee.new, firstName)
  // => @"employees.firstName"
- 
+
  NSString *employessFirstNamePath = @collectionKeypath(Department.new, employees, Employee.new, firstName)
  // => @"employees.firstName"
 

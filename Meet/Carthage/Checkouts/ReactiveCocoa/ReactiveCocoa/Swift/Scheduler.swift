@@ -89,11 +89,11 @@ public final class UIScheduler: SchedulerType {
 /// A scheduler backed by a serial GCD queue.
 public final class QueueScheduler: DateSchedulerType {
 	internal let queue: dispatch_queue_t
-	
+
 	internal init(internalQueue: dispatch_queue_t) {
 		queue = internalQueue
 	}
-	
+
 	/// Initializes a scheduler that will target the given queue with its work.
 	///
 	/// Even if the queue is concurrent, all work items enqueued with the
@@ -113,7 +113,7 @@ public final class QueueScheduler: DateSchedulerType {
 	/// date, and will always schedule asynchronously (even if already running
 	/// on the main thread).
 	public static let mainQueueScheduler = QueueScheduler(internalQueue: dispatch_get_main_queue())
-	
+
 	public var currentDate: NSDate {
 		return NSDate()
 	}

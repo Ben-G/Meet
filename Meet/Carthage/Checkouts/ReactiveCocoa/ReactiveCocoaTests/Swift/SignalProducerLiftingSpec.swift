@@ -34,7 +34,7 @@ class SignalProducerLiftingSpec: QuickSpec {
 				expect(lastValue).to(equal("2"))
 			}
 		}
-		
+
 		describe("mapError") {
 			it("should transform the errors of the signal") {
 				let (producer, observer) = SignalProducer<Int, TestError>.buffer()
@@ -328,11 +328,11 @@ class SignalProducerLiftingSpec: QuickSpec {
 				expect(lastValue).to(equal(2))
 				expect(completed).to(beTrue())
 			}
-			
+
 			it("should complete immediately after taking given number of values") {
 				let numbers = [ 1, 2, 4, 4, 5 ]
 				let testScheduler = TestScheduler()
-				
+
 				let producer: SignalProducer<Int, NoError> = SignalProducer { observer, _ in
 					// workaround `Class declaration cannot close over value 'observer' defined in outer scope`
 					let observer = observer
@@ -343,13 +343,13 @@ class SignalProducerLiftingSpec: QuickSpec {
 						}
 					}
 				}
-				
+
 				var completed = false
-				
+
 				producer
 					.take(numbers.count)
 					.startWithCompleted { completed = true }
-				
+
 				expect(completed).to(beFalsy())
 				testScheduler.run()
 				expect(completed).to(beTruthy())
@@ -625,11 +625,11 @@ class SignalProducerLiftingSpec: QuickSpec {
 				producer
 					.observeOn(testScheduler)
 					.startWithNext { result.append($0) }
-				
+
 				observer.sendNext(1)
 				observer.sendNext(2)
 				expect(result).to(beEmpty())
-				
+
 				testScheduler.run()
 				expect(result).to(equal([ 1, 2 ]))
 			}
@@ -647,10 +647,10 @@ class SignalProducerLiftingSpec: QuickSpec {
 						observer.sendCompleted()
 					})
 				}
-				
+
 				var result: [Int] = []
 				var completed = false
-				
+
 				producer
 					.delay(10, onScheduler: testScheduler)
 					.start { event in
@@ -663,14 +663,14 @@ class SignalProducerLiftingSpec: QuickSpec {
 							break
 						}
 					}
-				
+
 				testScheduler.advanceByInterval(4) // send initial value
 				expect(result).to(beEmpty())
-				
+
 				testScheduler.advanceByInterval(10) // send second value and receive first
 				expect(result).to(equal([ 1 ]))
 				expect(completed).to(beFalsy())
-				
+
 				testScheduler.advanceByInterval(10) // send second value and receive first
 				expect(result).to(equal([ 1, 2 ]))
 				expect(completed).to(beTruthy())
@@ -686,13 +686,13 @@ class SignalProducerLiftingSpec: QuickSpec {
 						observer.sendFailed(TestError.Default)
 					}
 				}
-				
+
 				var errored = false
-				
+
 				producer
 					.delay(10, onScheduler: testScheduler)
 					.startWithFailed { _ in errored = true }
-				
+
 				testScheduler.advance()
 				expect(errored).to(beTruthy())
 			}
@@ -784,7 +784,7 @@ class SignalProducerLiftingSpec: QuickSpec {
 			var sampledProducer: SignalProducer<Int, NoError>!
 			var observer: Signal<Int, NoError>.Observer!
 			var samplerObserver: Signal<(), NoError>.Observer!
-			
+
 			beforeEach {
 				let (producer, incomingObserver) = SignalProducer<Int, NoError>.buffer()
 				let (sampler, incomingSamplerObserver) = SignalProducer<(), NoError>.buffer()
@@ -792,29 +792,29 @@ class SignalProducerLiftingSpec: QuickSpec {
 				observer = incomingObserver
 				samplerObserver = incomingSamplerObserver
 			}
-			
+
 			it("should forward the latest value when the sampler fires") {
 				var result: [Int] = []
 				sampledProducer.startWithNext { result.append($0) }
-				
+
 				observer.sendNext(1)
 				observer.sendNext(2)
 				samplerObserver.sendNext(())
 				expect(result).to(equal([ 2 ]))
 			}
-			
+
 			it("should do nothing if sampler fires before signal receives value") {
 				var result: [Int] = []
 				sampledProducer.startWithNext { result.append($0) }
-				
+
 				samplerObserver.sendNext(())
 				expect(result).to(beEmpty())
 			}
-			
+
 			it("should send lates value multiple times when sampler fires multiple times") {
 				var result: [Int] = []
 				sampledProducer.startWithNext { result.append($0) }
-				
+
 				observer.sendNext(1)
 				samplerObserver.sendNext(())
 				samplerObserver.sendNext(())
@@ -824,10 +824,10 @@ class SignalProducerLiftingSpec: QuickSpec {
 			it("should complete when both inputs have completed") {
 				var completed = false
 				sampledProducer.startWithCompleted { completed = true }
-				
+
 				observer.sendCompleted()
 				expect(completed).to(beFalsy())
-				
+
 				samplerObserver.sendCompleted()
 				expect(completed).to(beTruthy())
 			}
@@ -837,7 +837,7 @@ class SignalProducerLiftingSpec: QuickSpec {
 			var combinedProducer: SignalProducer<(Int, Double), NoError>!
 			var observer: Signal<Int, NoError>.Observer!
 			var otherObserver: Signal<Double, NoError>.Observer!
-			
+
 			beforeEach {
 				let (producer, incomingObserver) = SignalProducer<Int, NoError>.buffer()
 				let (otherSignal, incomingOtherObserver) = SignalProducer<Double, NoError>.buffer()
@@ -845,19 +845,19 @@ class SignalProducerLiftingSpec: QuickSpec {
 				observer = incomingObserver
 				otherObserver = incomingOtherObserver
 			}
-			
+
 			it("should forward the latest values from both inputs") {
 				var latest: (Int, Double)?
 				combinedProducer.startWithNext { latest = $0 }
-				
+
 				observer.sendNext(1)
 				expect(latest).to(beNil())
-				
+
 				// is there a better way to test tuples?
 				otherObserver.sendNext(1.5)
 				expect(latest?.0).to(equal(1))
 				expect(latest?.1).to(equal(1.5))
-				
+
 				observer.sendNext(2)
 				expect(latest?.0).to(equal(2))
 				expect(latest?.1).to(equal(1.5))
@@ -866,10 +866,10 @@ class SignalProducerLiftingSpec: QuickSpec {
 			it("should complete when both inputs have completed") {
 				var completed = false
 				combinedProducer.startWithCompleted { completed = true }
-				
+
 				observer.sendCompleted()
 				expect(completed).to(beFalsy())
-				
+
 				otherObserver.sendCompleted()
 				expect(completed).to(beTruthy())
 			}
@@ -949,9 +949,9 @@ class SignalProducerLiftingSpec: QuickSpec {
 				producer
 					.materialize()
 					.startWithNext { latestEvent = $0 }
-				
+
 				observer.sendNext(2)
-				
+
 				expect(latestEvent).toNot(beNil())
 				if let latestEvent = latestEvent {
 					switch latestEvent {
@@ -961,7 +961,7 @@ class SignalProducerLiftingSpec: QuickSpec {
 						fail()
 					}
 				}
-				
+
 				observer.sendFailed(TestError.Default)
 				if let latestEvent = latestEvent {
 					switch latestEvent {
@@ -978,22 +978,22 @@ class SignalProducerLiftingSpec: QuickSpec {
 			typealias IntEvent = Event<Int, TestError>
 			var observer: Signal<IntEvent, NoError>.Observer!
 			var dematerialized: SignalProducer<Int, TestError>!
-			
+
 			beforeEach {
 				let (producer, incomingObserver) = SignalProducer<IntEvent, NoError>.buffer()
 				observer = incomingObserver
 				dematerialized = producer.dematerialize()
 			}
-			
+
 			it("should send values for Next events") {
 				var result: [Int] = []
 				dematerialized.startWithNext { result.append($0) }
-				
+
 				expect(result).to(beEmpty())
-				
+
 				observer.sendNext(.Next(2))
 				expect(result).to(equal([ 2 ]))
-				
+
 				observer.sendNext(.Next(4))
 				expect(result).to(equal([ 2, 4 ]))
 			}
@@ -1001,9 +1001,9 @@ class SignalProducerLiftingSpec: QuickSpec {
 			it("should error out for Error events") {
 				var errored = false
 				dematerialized.startWithFailed { _ in errored = true }
-				
+
 				expect(errored).to(beFalsy())
-				
+
 				observer.sendNext(.Failed(TestError.Default))
 				expect(errored).to(beTruthy())
 			}
@@ -1011,7 +1011,7 @@ class SignalProducerLiftingSpec: QuickSpec {
 			it("should complete early for Completed events") {
 				var completed = false
 				dematerialized.startWithCompleted { completed = true }
-				
+
 				expect(completed).to(beFalsy())
 				observer.sendNext(IntEvent.Completed)
 				expect(completed).to(beTruthy())
@@ -1021,23 +1021,23 @@ class SignalProducerLiftingSpec: QuickSpec {
 		describe("takeLast") {
 			var observer: Signal<Int, TestError>.Observer!
 			var lastThree: SignalProducer<Int, TestError>!
-				
+
 			beforeEach {
 				let (producer, incomingObserver) = SignalProducer<Int, TestError>.buffer()
 				observer = incomingObserver
 				lastThree = producer.takeLast(3)
 			}
-			
+
 			it("should send the last N values upon completion") {
 				var result: [Int] = []
 				lastThree.startWithNext { result.append($0) }
-				
+
 				observer.sendNext(1)
 				observer.sendNext(2)
 				observer.sendNext(3)
 				observer.sendNext(4)
 				expect(result).to(beEmpty())
-				
+
 				observer.sendCompleted()
 				expect(result).to(equal([ 2, 3, 4 ]))
 			}
@@ -1045,13 +1045,13 @@ class SignalProducerLiftingSpec: QuickSpec {
 			it("should send less than N values if not enough were received") {
 				var result: [Int] = []
 				lastThree.startWithNext { result.append($0) }
-				
+
 				observer.sendNext(1)
 				observer.sendNext(2)
 				observer.sendCompleted()
 				expect(result).to(equal([ 1, 2 ]))
 			}
-			
+
 			it("should send nothing when errors") {
 				var result: [Int] = []
 				var errored = false
@@ -1065,12 +1065,12 @@ class SignalProducerLiftingSpec: QuickSpec {
 						break
 					}
 				}
-				
+
 				observer.sendNext(1)
 				observer.sendNext(2)
 				observer.sendNext(3)
 				expect(errored).to(beFalsy())
-				
+
 				observer.sendFailed(TestError.Default)
 				expect(errored).to(beTruthy())
 				expect(result).to(beEmpty())
@@ -1148,89 +1148,89 @@ class SignalProducerLiftingSpec: QuickSpec {
 				let producer = baseProducer.attempt { _ in
 					return .Success()
 				}
-				
+
 				var current: Int?
 				producer.startWithNext { value in
 					current = value
 				}
-				
+
 				for value in 1...5 {
 					observer.sendNext(value)
 					expect(current).to(equal(value))
 				}
 			}
-			
+
 			it("should error if an attempt fails") {
 				let (baseProducer, observer) = SignalProducer<Int, TestError>.buffer()
 				let producer = baseProducer.attempt { _ in
 					return .Failure(.Default)
 				}
-				
+
 				var error: TestError?
 				producer.startWithFailed { err in
 					error = err
 				}
-				
+
 				observer.sendNext(42)
 				expect(error).to(equal(TestError.Default))
 			}
 		}
-		
+
 		describe("attemptMap") {
 			it("should forward mapped values upon success") {
 				let (baseProducer, observer) = SignalProducer<Int, TestError>.buffer()
 				let producer = baseProducer.attemptMap { num -> Result<Bool, TestError> in
 					return .Success(num % 2 == 0)
 				}
-				
+
 				var even: Bool?
 				producer.startWithNext { value in
 					even = value
 				}
-				
+
 				observer.sendNext(1)
 				expect(even).to(equal(false))
-				
+
 				observer.sendNext(2)
 				expect(even).to(equal(true))
 			}
-			
+
 			it("should error if a mapping fails") {
 				let (baseProducer, observer) = SignalProducer<Int, TestError>.buffer()
 				let producer = baseProducer.attemptMap { _ -> Result<Bool, TestError> in
 					return .Failure(.Default)
 				}
-				
+
 				var error: TestError?
 				producer.startWithFailed { err in
 					error = err
 				}
-				
+
 				observer.sendNext(42)
 				expect(error).to(equal(TestError.Default))
 			}
 		}
-		
+
 		describe("combinePrevious") {
 			var observer: Signal<Int, NoError>.Observer!
 			let initialValue: Int = 0
 			var latestValues: (Int, Int)?
-			
+
 			beforeEach {
 				latestValues = nil
-				
+
 				let (signal, baseObserver) = SignalProducer<Int, NoError>.buffer()
 				observer = baseObserver
 				signal.combinePrevious(initialValue).startWithNext { latestValues = $0 }
 			}
-			
+
 			it("should forward the latest value with previous value") {
 				expect(latestValues).to(beNil())
-				
+
 				observer.sendNext(1)
 				expect(latestValues?.0).to(equal(initialValue))
 				expect(latestValues?.1).to(equal(1))
-				
+
 				observer.sendNext(2)
 				expect(latestValues?.0).to(equal(1))
 				expect(latestValues?.1).to(equal(2))

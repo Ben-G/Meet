@@ -74,9 +74,9 @@
 - (void)cachedImageExistsForURL:(NSURL *)url
                      completion:(SDWebImageCheckCacheCompletionBlock)completionBlock {
     NSString *key = [self cacheKeyForURL:url];
-    
+
     BOOL isInMemoryCache = ([self.imageCache imageFromMemoryCacheForKey:key] != nil);
-    
+
     if (isInMemoryCache) {
         // making sure we call the completion block on the main queue
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -86,7 +86,7 @@
         });
         return;
     }
-    
+
     [self.imageCache diskImageExistsWithKey:key completion:^(BOOL isInDiskCache) {
         // the completion block of checkDiskCacheForImageWithKey:completion: is always called on the main queue, no need to further dispatch
         if (completionBlock) {
@@ -98,7 +98,7 @@
 - (void)diskImageExistsForURL:(NSURL *)url
                    completion:(SDWebImageCheckCacheCompletionBlock)completionBlock {
     NSString *key = [self cacheKeyForURL:url];
-    
+
     [self.imageCache diskImageExistsWithKey:key completion:^(BOOL isInDiskCache) {
         // the completion block of checkDiskCacheForImageWithKey:completion: is always called on the main queue, no need to further dispatch
         if (completionBlock) {
@@ -206,7 +206,7 @@
                             [self.failedURLs removeObject:url];
                         }
                     }
-                    
+
                     BOOL cacheOnDisk = !(options & SDWebImageCacheMemoryOnly);
 
                     if (options & SDWebImageRefreshCached && image && !downloadedImage) {
@@ -249,7 +249,7 @@
             }];
             operation.cancelBlock = ^{
                 [subOperation cancel];
-                
+
                 @synchronized (self.runningOperations) {
                     [self.runningOperations removeObject:weakOperation];
                 }
@@ -325,7 +325,7 @@
     }
     if (self.cancelBlock) {
         self.cancelBlock();
-        
+
         // TODO: this is a temporary fix to #809.
         // Until we can figure the exact cause of the crash, going with the ivar instead of the setter
 //        self.cancelBlock = nil;

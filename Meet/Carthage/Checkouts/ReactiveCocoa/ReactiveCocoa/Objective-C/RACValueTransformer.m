@@ -33,7 +33,7 @@
 
 + (instancetype)transformerWithBlock:(id (^)(id value))block {
 	NSCParameterAssert(block != NULL);
-	
+
 	RACValueTransformer *transformer = [[self alloc] init];
 	transformer.transformBlock = block;
 	return transformer;

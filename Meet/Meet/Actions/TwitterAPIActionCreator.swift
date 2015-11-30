@@ -13,12 +13,12 @@ import SwiftFlow
 import SwiftFlowReactiveCocoaExtensions
 
 struct TwitterAPIActionCreator {
-    
+
     var twitterClient = TwitterClient.self
-    
+
     func authenticateUser() -> AsyncActionCreator {
         return { maybeState, store, callback in
-            
+
             guard let state = maybeState as? AppState else { return }
             if let swifter = state.twitterAPIState.swifter {
                 callback(self.setTwitterClient(swifter))
@@ -34,16 +34,16 @@ struct TwitterAPIActionCreator {
             }
         }
     }
-    
+
     func searchUsers(searchTerm: String) -> ActionCreator {
         return { state, store in
-            
-            // Don't hit Twitter API with empty query string            
+
+            // Don't hit Twitter API with empty query string
             if (searchTerm == "") {
                 store.dispatch( TwitterAPIAction.SetUserSearchResults(.Success([])) )
                 return nil
             }
-            
+
             self.twitterClient.findUsers(searchTerm).start { event in
                 switch event {
                 case let .Next(users):
@@ -54,15 +54,15 @@ struct TwitterAPIActionCreator {
                     break
                 }
             }
-            
+
             return nil
         }
     }
-    
+
     func setTwitterClient(swifter: Swifter) -> ActionCreator {
         return { _ in
             return TwitterAPIAction.SetTwitterClient(swifter)
         }
     }
-    
+
 }

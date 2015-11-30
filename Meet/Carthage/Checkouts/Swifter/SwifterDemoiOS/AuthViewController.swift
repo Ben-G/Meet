@@ -30,7 +30,7 @@ import SwifteriOS
 import SafariServices
 
 class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
-    
+
     var swifter: Swifter
 
     // Default to using the iOS account framework for handling twitter auth
@@ -100,13 +100,13 @@ class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
             error in
             self.alertWithTitle("Error", message: error.localizedDescription)
         }
-        
+
         self.swifter.getStatusesHomeTimelineWithCount(20, success: {
             (statuses: [JSONValue]?) in
-                
+
             // Successfully fetched timeline, so lets create and push the table view
             let tweetsViewController = self.storyboard!.instantiateViewControllerWithIdentifier("TweetsViewController") as! TweetsViewController
-                
+
             if statuses != nil {
                 tweetsViewController.tweets = statuses!
                 self.navigationController?.pushViewController(tweetsViewController, animated: true)
@@ -114,7 +114,7 @@ class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
             }
 
             }, failure: failureHandler)
-        
+
     }
 
     func alertWithTitle(title: String, message: String) {
@@ -122,7 +122,7 @@ class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
         alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }
-    
+
     @available(iOS 9.0, *)
     func safariViewControllerDidFinish(controller: SFSafariViewController) {
         NSNotificationCenter.defaultCenter().removeObserver(swifter, name: "SwifterCallbackNotificationName", object: nil)

@@ -224,7 +224,7 @@ qck_describe(@"RACTestObject", ^{
 		[[RACObserve(object, objectValue) publish] connect];
 
 		expect(@([object respondsToSelector:selector])).to(beTruthy());
-		
+
 		SEL selector2 = NSSelectorFromString(@"anotherSelector:");
 
 		// Then implement -anotherSelector: on the object
@@ -232,7 +232,7 @@ qck_describe(@"RACTestObject", ^{
 
 		expect(@([object respondsToSelector:selector2])).to(beTruthy());
 	});
-	
+
 	qck_it(@"should call the right signal for two instances of the same class, adding signals for the same selector", ^{
 		RACTestObject *object1 = [[RACTestObject alloc] init];
 		RACTestObject *object2 = [[RACTestObject alloc] init];
@@ -300,7 +300,7 @@ qck_describe(@"RACTestObject", ^{
 		[[object rac_signalForSelector:@selector(setObjectValue:andSecondObjectValue:)] subscribeNext:^(RACTuple *x) {
 			invokedMethodBefore = object.hasInvokedSetObjectValueAndSecondObjectValue;
 		}];
-		
+
 		[object setObjectValue:@YES andSecondObjectValue:@"Winner"];
 		expect(@(invokedMethodBefore)).to(beTruthy());
 	});
@@ -419,7 +419,7 @@ qck_describe(@"two classes in the same hierarchy", ^{
 qck_describe(@"-rac_signalForSelector:fromProtocol", ^{
 	__block RACTestObject<TestProtocol> *object;
 	__block Protocol *protocol;
-	
+
 	qck_beforeEach(^{
 		object = (id)[[RACTestObject alloc] init];
 		expect(object).notTo(beNil());

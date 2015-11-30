@@ -64,7 +64,7 @@ extension Dictionary {
 
         return parts.joinWithSeparator("&")
     }
-    
+
 }
 
 infix operator +| {}

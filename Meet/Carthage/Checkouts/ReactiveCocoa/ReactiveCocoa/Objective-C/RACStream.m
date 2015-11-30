@@ -90,7 +90,7 @@
 	NSCParameterAssert(block != nil);
 
 	Class class = self.class;
-	
+
 	return [[self flattenMap:^(id value) {
 		return [class return:block(value)];
 	}] setNameWithFormat:@"[%@] -map:", self.name];
@@ -120,7 +120,7 @@
 	NSCParameterAssert(block != nil);
 
 	Class class = self.class;
-	
+
 	return [[self flattenMap:^ id (id value) {
 		if (block(value)) {
 			return [class return:value];
@@ -154,7 +154,7 @@
 
 - (instancetype)skip:(NSUInteger)skipCount {
 	Class class = self.class;
-	
+
 	return [[self bind:^{
 		__block NSUInteger skipped = 0;
 
@@ -169,7 +169,7 @@
 
 - (instancetype)take:(NSUInteger)count {
 	Class class = self.class;
-	
+
 	if (count == 0) return class.empty;
 
 	return [[self bind:^{
@@ -284,7 +284,7 @@
 	NSCParameterAssert(predicate != nil);
 
 	Class class = self.class;
-	
+
 	return [[self bind:^{
 		return ^ id (id value, BOOL *stop) {
 			if (predicate(value)) return nil;
@@ -306,7 +306,7 @@
 	NSCParameterAssert(predicate != nil);
 
 	Class class = self.class;
-	
+
 	return [[self bind:^{
 		__block BOOL skipping = YES;
 

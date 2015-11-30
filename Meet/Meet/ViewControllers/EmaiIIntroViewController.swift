@@ -15,24 +15,24 @@ var mailComposerViewController: MFMailComposeViewController?
 class EmailIntroViewController: UIViewController {
 
     var store = mainStore
-    
+
     @IBAction func emailIntroButtonTapped(sender: AnyObject) {
         mailComposerViewController = MFMailComposeViewController()
         mailComposerViewController?.mailComposeDelegate = self
-    
+
         store.dispatch( NavigationAction.PresentViewController(mailComposerViewController!) )
     }
-    
+
     @IBAction func cancelButtonTapped(sender: AnyObject) {
         store.dispatch( NavigationAction.DismissViewController(presentingViewController: self.presentingViewController!) )
     }
-    
+
 }
 
 extension EmailIntroViewController: MFMailComposeViewControllerDelegate, UINavigationControllerDelegate {
- 
+
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-        
+
         if (result == MFMailComposeResultCancelled) {
             store.dispatch(
                 NavigationAction.DismissViewController(presentingViewController: self)
@@ -44,5 +44,5 @@ extension EmailIntroViewController: MFMailComposeViewControllerDelegate, UINavig
             )
         }
     }
-    
+
 }

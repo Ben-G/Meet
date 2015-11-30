@@ -165,7 +165,7 @@ public extension Swifter {
         if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
-        
+
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
@@ -835,15 +835,15 @@ public extension Swifter {
 
             }, failure: failure)
     }
-    
+
     /*
     GET    mutes/users/list
-    
+
     Returns an array of user objects the authenticating user has muted.
     */
     public func getMutesUsersListWithCursor(cursor: String? = nil, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: ((users: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "mutes/users/list.json"
-        
+
         var parameters = Dictionary<String, Any>()
         if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
@@ -854,13 +854,13 @@ public extension Swifter {
         if cursor != nil {
             parameters["cursor"] = cursor!
         }
-        
+
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
-            
+
             success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
 
             }, failure: failure)
     }
-    
+
 }

@@ -23,19 +23,19 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *MyIdentifier = @"MyIdentifier";
- 
+
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
- 
+
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier]
                  autorelease];
     }
- 
+
     // Here we use the provided sd_setImageWithURL: method to load the web image
     // Ensure you use a placeholder image otherwise cells will be initialized with no image
     [cell.imageView sd_setImageWithURL:[NSURL URLWithString:@"http://example.com/image.jpg"]
                       placeholderImage:[UIImage imageNamed:@"placeholder"]];
- 
+
     cell.textLabel.text = @"My Text";
     return cell;
 }

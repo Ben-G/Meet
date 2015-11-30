@@ -329,11 +329,11 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         if status == 509 { description = "Unassigned" }
         if status == 510 { description = "Not Extended" }
         if status == 511 { description = "Network Authentication Required" }
-        
+
         if description != nil {
             s = s + ": " + description! + ", Response: " + responseString
         }
-        
+
         return s
     }
 

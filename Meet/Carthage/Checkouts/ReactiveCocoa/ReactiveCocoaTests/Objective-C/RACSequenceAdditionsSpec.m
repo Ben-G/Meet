@@ -36,7 +36,7 @@ qck_beforeEach(^{
 qck_describe(@"NSArray sequences", ^{
 	__block NSMutableArray *values;
 	__block RACSequence *sequence;
-	
+
 	qck_beforeEach(^{
 		values = [numbers mutableCopy];
 		sequence = values.rac_sequence;
@@ -52,7 +52,7 @@ qck_describe(@"NSArray sequences", ^{
 
 	qck_describe(@"should be immutable", ^{
 		__block NSArray *unchangedValues;
-		
+
 		qck_beforeEach(^{
 			unchangedValues = [values copy];
 			[values addObject:@6];
@@ -188,7 +188,7 @@ qck_describe(@"NSOrderedSet sequences", ^{
 
 	qck_describe(@"should be immutable", ^{
 		__block NSArray *unchangedValues;
-		
+
 		qck_beforeEach(^{
 			unchangedValues = [values.array copy];
 			[values addObject:@6];
@@ -222,7 +222,7 @@ qck_describe(@"NSSet sequences", ^{
 
 	qck_describe(@"should be immutable", ^{
 		__block NSArray *unchangedValues;
-		
+
 		qck_beforeEach(^{
 			unchangedValues = [values.allObjects copy];
 			[values addObject:@6];
@@ -279,7 +279,7 @@ qck_describe(@"NSString sequences", ^{
 qck_describe(@"RACTuple sequences", ^{
 	__block RACTuple *tuple;
 	__block RACSequence *sequence;
-	
+
 	qck_beforeEach(^{
 		tuple = RACTuplePack(@"foo", nil, @"bar", NSNull.null, RACTupleNil.tupleNil);
 
@@ -298,7 +298,7 @@ qck_describe(@"RACTuple sequences", ^{
 qck_describe(@"NSIndexSet sequences", ^{
 	__block NSMutableIndexSet *values;
 	__block RACSequence *sequence;
-	
+
 	NSArray * (^valuesFromIndexSet)(NSIndexSet *indexSet) =  ^NSArray *(NSIndexSet *indexSet) {
 		NSMutableArray *arr = [NSMutableArray array];
 		[indexSet enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
@@ -307,28 +307,28 @@ qck_describe(@"NSIndexSet sequences", ^{
 
 		return [arr copy];
 	};
-	
+
 	qck_beforeEach(^{
 		values = [NSMutableIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 10)];
 		sequence = values.rac_sequence;
 		expect(sequence).notTo(beNil());
 	});
-	
+
 	qck_itBehavesLike(RACSequenceExamples, ^{
 		return @{
 			RACSequenceExampleSequence: sequence,
 			RACSequenceExampleExpectedValues: valuesFromIndexSet(values)
 		};
 	});
-	
+
 	qck_describe(@"should be immutable", ^{
 		__block NSArray *unchangedValues;
-		
+
 		qck_beforeEach(^{
 			unchangedValues = valuesFromIndexSet(values);
 			[values addIndex:20];
 		});
-		
+
 		qck_itBehavesLike(RACSequenceExamples, ^{
 			return @{
 				RACSequenceExampleSequence: sequence,
@@ -336,7 +336,7 @@ qck_describe(@"NSIndexSet sequences", ^{
 			};
 		});
 	});
-	
+
 	qck_describe(@"should not fire if empty", ^{
 		__block NSIndexSet *emptyIndexSet;
 		__block RACSequence *emptySequence;

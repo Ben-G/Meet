@@ -94,8 +94,8 @@ public extension Swifter {
 
             success?(savedSearch: json.object)
             return
-            
+
             }, failure: failure)
     }
-    
+
 }

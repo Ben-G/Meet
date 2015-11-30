@@ -60,7 +60,7 @@
 			return nil;
 		}]
 		multicast:[RACReplaySubject subject]];
-	
+
 	return [[[RACSignal
 		createSignal:^ id (id<RACSubscriber> subscriber) {
 			[connection.signal subscribe:subscriber];
@@ -94,13 +94,13 @@
 
 	/*
 	 * -bind: should:
-	 * 
+	 *
 	 * 1. Subscribe to the original signal of values.
 	 * 2. Any time the original signal sends a value, transform it using the binding block.
 	 * 3. If the binding block returns a signal, subscribe to it, and pass all of its values through to the subscriber as they're received.
 	 * 4. If the binding block asks the bind to terminate, complete the _original_ signal.
 	 * 5. When _all_ signals complete, send completed to the subscriber.
-	 * 
+	 *
 	 * If any signal sends an error at any point, send that to the subscriber.
 	 */
 
@@ -280,7 +280,7 @@
 
 - (RACDisposable *)subscribeNext:(void (^)(id x))nextBlock {
 	NSCParameterAssert(nextBlock != NULL);
-	
+
 	RACSubscriber *o = [RACSubscriber subscriberWithNext:nextBlock error:NULL completed:NULL];
 	return [self subscribe:o];
 }
@@ -288,7 +288,7 @@
 - (RACDisposable *)subscribeNext:(void (^)(id x))nextBlock completed:(void (^)(void))completedBlock {
 	NSCParameterAssert(nextBlock != NULL);
 	NSCParameterAssert(completedBlock != NULL);
-	
+
 	RACSubscriber *o = [RACSubscriber subscriberWithNext:nextBlock error:NULL completed:completedBlock];
 	return [self subscribe:o];
 }
@@ -297,21 +297,21 @@
 	NSCParameterAssert(nextBlock != NULL);
 	NSCParameterAssert(errorBlock != NULL);
 	NSCParameterAssert(completedBlock != NULL);
-	
+
 	RACSubscriber *o = [RACSubscriber subscriberWithNext:nextBlock error:errorBlock completed:completedBlock];
 	return [self subscribe:o];
 }
 
 - (RACDisposable *)subscribeError:(void (^)(NSError *error))errorBlock {
 	NSCParameterAssert(errorBlock != NULL);
-	
+
 	RACSubscriber *o = [RACSubscriber subscriberWithNext:NULL error:errorBlock completed:NULL];
 	return [self subscribe:o];
 }
 
 - (RACDisposable *)subscribeCompleted:(void (^)(void))completedBlock {
 	NSCParameterAssert(completedBlock != NULL);
-	
+
 	RACSubscriber *o = [RACSubscriber subscriberWithNext:NULL error:NULL completed:completedBlock];
 	return [self subscribe:o];
 }
@@ -319,7 +319,7 @@
 - (RACDisposable *)subscribeNext:(void (^)(id x))nextBlock error:(void (^)(NSError *error))errorBlock {
 	NSCParameterAssert(nextBlock != NULL);
 	NSCParameterAssert(errorBlock != NULL);
-	
+
 	RACSubscriber *o = [RACSubscriber subscriberWithNext:nextBlock error:errorBlock completed:NULL];
 	return [self subscribe:o];
 }
@@ -327,7 +327,7 @@
 - (RACDisposable *)subscribeError:(void (^)(NSError *))errorBlock completed:(void (^)(void))completedBlock {
 	NSCParameterAssert(completedBlock != NULL);
 	NSCParameterAssert(errorBlock != NULL);
-	
+
 	RACSubscriber *o = [RACSubscriber subscriberWithNext:NULL error:errorBlock completed:completedBlock];
 	return [self subscribe:o];
 }
@@ -390,7 +390,7 @@ static const NSTimeInterval RACSignalAsynchronousWaitTimeout = 10;
 		} completed:^{
 			done = YES;
 		}];
-	
+
 	do {
 		[NSRunLoop.mainRunLoop runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
 	} while (!done);

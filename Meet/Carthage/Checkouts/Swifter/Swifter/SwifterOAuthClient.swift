@@ -175,5 +175,5 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
 
         return signatureBaseString.SHA1DigestWithKey(signingKey).base64EncodedStringWithOptions([])
     }
-    
+
 }

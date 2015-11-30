@@ -33,7 +33,7 @@ static void *NSControlEnabledDisposableKey = &NSControlEnabledDisposableKey;
 		self.enabled = YES;
 		return;
 	}
-	
+
 	[self rac_hijackActionAndTargetIfNeeded];
 
 	RACScopedDisposable *disposable = [[command.enabled setKeyPath:@"enabled" onObject:self] asScopedDisposable];
@@ -43,9 +43,9 @@ static void *NSControlEnabledDisposableKey = &NSControlEnabledDisposableKey;
 - (void)rac_hijackActionAndTargetIfNeeded {
 	SEL hijackSelector = @selector(rac_commandPerformAction:);
 	if (self.target == self && self.action == hijackSelector) return;
-	
+
 	if (self.target != nil) NSLog(@"WARNING: NSControl.rac_command hijacks the control's existing target and action.");
-	
+
 	self.target = self;
 	self.action = hijackSelector;
 }

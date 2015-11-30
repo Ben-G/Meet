@@ -34,7 +34,7 @@ typedef NS_OPTIONS(NSUInteger, SDWebImageDownloaderOptions) {
     SDWebImageDownloaderContinueInBackground = 1 << 4,
 
     /**
-     * Handles cookies stored in NSHTTPCookieStore by setting 
+     * Handles cookies stored in NSHTTPCookieStore by setting
      * NSMutableURLRequest.HTTPShouldHandleCookies = YES;
      */
     SDWebImageDownloaderHandleCookies = 1 << 5,
@@ -147,7 +147,7 @@ typedef NSDictionary *(^SDWebImageDownloaderHeadersFilterBlock)(NSURL *url, NSDi
  * `NSOperation` to be used each time SDWebImage constructs a request
  * operation to download an image.
  *
- * @param operationClass The subclass of `SDWebImageDownloaderOperation` to set 
+ * @param operationClass The subclass of `SDWebImageDownloaderOperation` to set
  *        as default. Passing `nil` will revert to `SDWebImageDownloaderOperation`.
  */
 - (void)setOperationClass:(Class)operationClass;

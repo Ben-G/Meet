@@ -69,7 +69,7 @@
 	// between this method call and -forwardInvocation:.
 	__autoreleasing id delegate = self.rac_proxiedDelegate;
 	if ([delegate respondsToSelector:selector]) return YES;
-    
+
 	return [super respondsToSelector:selector];
 }
 

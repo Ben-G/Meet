@@ -10,11 +10,11 @@ import UIKit
 import ListKit
 
 class CityCell: UITableViewCell, ListKitCellProtocol {
-  
+
     @IBOutlet var mainImageView: UIImageView!
     @IBOutlet var subLabel: UILabel!
     @IBOutlet var mainLabel: UILabel!
-  
+
     var model: City? {
       didSet {
         if mainLabel != nil {
@@ -22,13 +22,13 @@ class CityCell: UITableViewCell, ListKitCellProtocol {
         }
       }
     }
-  
+
   override func awakeFromNib() {
     super.awakeFromNib()
-    
+
     configureCell()
   }
-  
+
   func configureCell() {
     mainLabel.text = model?.name
     subLabel.text = model?.country

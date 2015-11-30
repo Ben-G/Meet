@@ -13,7 +13,7 @@ import SwiftFlowReactiveCocoaExtensions
 import Result
 
 struct TwitterAPIReducer: Reducer {
-    
+
     func handleAction(state: HasTwitterAPIState, action: TwitterAPIAction) -> HasTwitterAPIState {
         switch action {
         case .SetTwitterClient(let swifter):
@@ -22,17 +22,17 @@ struct TwitterAPIReducer: Reducer {
             return setUserSearchResults(state, userSearchResults: result)
         }
     }
-        
+
     func setTwitterClient(var state: HasTwitterAPIState, swifter: Swifter) -> HasTwitterAPIState {
         state.twitterAPIState.swifter = swifter
-        
+
         return state
     }
-    
+
     func setUserSearchResults(var state: HasTwitterAPIState, userSearchResults: Result<[TwitterUser], TwitterAPIError>) -> HasTwitterAPIState {
         state.twitterAPIState.userSearchResults = userSearchResults
-        
+
         return state
     }
-    
+
 }

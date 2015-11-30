@@ -47,7 +47,7 @@
 
 		[disposable addDisposable:schedulingDisposable];
 	}
-	
+
 	return disposable;
 }
 

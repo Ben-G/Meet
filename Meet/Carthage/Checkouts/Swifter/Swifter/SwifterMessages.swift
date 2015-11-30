@@ -153,11 +153,11 @@ public extension Swifter {
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
-            
+
             success?(statuses: json.object)
             return
-            
+
             }, failure: failure)
     }
-    
+
 }

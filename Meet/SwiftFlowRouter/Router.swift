@@ -14,37 +14,37 @@ public typealias TransitionProvider = (UIViewController, to: UIViewController) -
 public class Router: NSObject {
     var store: Store
     var transitionFrom: TransitionProvider
-    
+
     public let rootViewController: UITabBarController
-    
+
     public init(store: Store, rootViewController: UITabBarController, transitionProvider: TransitionProvider) {
         self.store = store
         self.rootViewController = rootViewController
         self.transitionFrom = transitionProvider
-        
+
         super.init()
-        
+
         rootViewController.delegate = self
         self.store.subscribe(self)
     }
 }
 
 extension Router: UITabBarControllerDelegate {
-    
+
     public func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
         store.dispatch( NavigationAction.NavigateTo(viewController) )
-        
+
         return false
     }
-    
+
 }
 
 extension Router: StoreSubscriber {
   public func newState(state: HasNavigationState) {
-                
+
         if let fromViewController = state.navigationState.currentViewController,
             toViewController = state.navigationState.transitionToViewController {
-                
+
                 let transition: RouteTransition
                 // TODO: Cleanup nil-coalescing workaround
                 if case .Custom(let customPresentation) = state.navigationState.presentationType ?? .Default {
@@ -52,7 +52,7 @@ extension Router: StoreSubscriber {
                 } else {
                     transition = transitionFrom(fromViewController, to: toViewController)
                 }
-                
+
                 switch transition {
                 case .TabBarSelect:
                     rootViewController.selectedViewController = toViewController
@@ -71,7 +71,7 @@ extension Router: StoreSubscriber {
                 }
         }
     }
-    
+
 }
 
 public enum RouteTransition {

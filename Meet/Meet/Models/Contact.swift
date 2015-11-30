@@ -13,7 +13,7 @@ struct Contact: Model {
     let identifier: Int
     var emailAddress: String? = nil
     var twitterHandle: String? = nil
-    
+
     var displayName: String? {
         get {
             if let twitterHandle = twitterHandle {
@@ -21,21 +21,21 @@ struct Contact: Model {
             } else if let emailAddress = emailAddress {
                 return emailAddress
             }
-            
+
             return nil
         }
     }
-    
+
     init(identifier: Int, emailAddress: String) {
         self.identifier = identifier
         self.emailAddress = emailAddress
     }
-    
+
     init(identifier: Int, twitterHandle: String) {
         self.identifier = identifier
         self.twitterHandle = twitterHandle
     }
-    
+
 }
 
 extension Contact: Coding {
@@ -45,16 +45,16 @@ extension Contact: Coding {
 
         let emailAddress = dictionary["email"] as? String
         let twitterHandle = dictionary["twitterHandle"] as? String
-        
+
         // Empty String equals nil in serialization for this type
         if (twitterHandle == "" && emailAddress == "") { return nil }
-        
+
         if (twitterHandle == "") {
             self.twitterHandle = nil
         } else {
             self.twitterHandle = twitterHandle
         }
-        
+
         if (emailAddress == "") {
             self.emailAddress = nil
         } else {

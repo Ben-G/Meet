@@ -23,13 +23,13 @@ public struct AnyProperty<Value>: PropertyType {
 	public var producer: SignalProducer<Value, NoError> {
 		return _producer()
 	}
-	
+
 	/// Initializes a property as a read-only view of the given property.
 	public init<P: PropertyType where P.Value == Value>(_ property: P) {
 		_value = { property.value }
 		_producer = { property.producer }
 	}
-	
+
 	/// Initializes a property that first takes on `initialValue`, then each value
 	/// sent on a signal created by `producer`.
 	public init(initialValue: Value, producer: SignalProducer<Value, NoError>) {
@@ -37,7 +37,7 @@ public struct AnyProperty<Value>: PropertyType {
 		mutableProperty <~ producer
 		self.init(mutableProperty)
 	}
-	
+
 	/// Initializes a property that first takes on `initialValue`, then each value
 	/// sent on `signal`.
 	public init(initialValue: Value, signal: Signal<Value, NoError>) {
@@ -169,7 +169,7 @@ public final class MutableProperty<Value>: MutablePropertyType {
 	public init(object: NSObject?, keyPath: String) {
 		self.object = object
 		self.keyPath = keyPath
-		
+
 		/// DynamicProperty stay alive as long as object is alive.
 		/// This is made possible by strong reference cycles.
 		super.init()
