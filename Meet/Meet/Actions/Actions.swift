@@ -18,6 +18,7 @@ enum TwitterAPIAction: ActionType {
 
 enum DataMutationAction: ActionType {
     case CreateContactFromEmail(String)
+    case CreateContactWithTwitterUser(TwitterUser)
     case DeleteContact(Int)
     case SetContacts([Contact])
 }

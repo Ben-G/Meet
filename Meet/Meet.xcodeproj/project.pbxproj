@@ -52,7 +52,6 @@
 		62BBE79C1C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 62BBE79B1C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		62BBE7A01C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BBE7991C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding.framework */; };
 		62BBE7A11C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 62BBE7991C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		62CCBA571C058A5200B4F000 /* Contact+Coding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62CCBA561C058A5200B4F000 /* Contact+Coding.swift */; };
 		62D3B6BC1BF2FAA80056D509 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B6BB1BF2FAA80056D509 /* AppDelegate.swift */; };
 		62D3B6C11BF2FAA80056D509 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D3B6BF1BF2FAA80056D509 /* Main.storyboard */; };
 		62D3B6C31BF2FAA80056D509 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62D3B6C21BF2FAA80056D509 /* Assets.xcassets */; };
@@ -461,7 +460,6 @@
 		62BBE7991C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftFlowPersistenceNSCoding.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62BBE79B1C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftFlowPersistenceNSCoding.h; sourceTree = "<group>"; };
 		62BBE79D1C0ACE59004D6822 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		62CCBA561C058A5200B4F000 /* Contact+Coding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Contact+Coding.swift"; sourceTree = "<group>"; };
 		62D3B6B81BF2FAA80056D509 /* Meet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62D3B6BB1BF2FAA80056D509 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		62D3B6C01BF2FAA80056D509 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -614,6 +612,8 @@
 		626DA4361BFEA4A700988FC0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6292BEC81C0BAED300CC1B8E /* ImageIO.framework */,
+				6292BEC61C0BAE9900CC1B8E /* CoreGraphics.framework */,
 				6292BEAC1C0B9E0D00CC1B8E /* ReactiveCocoa.xcodeproj */,
 				628B30DD1C0B9BEF00E2213D /* Unbox.xcodeproj */,
 				628B30CE1C0B9BE500E2213D /* Swifter.xcodeproj */,
@@ -755,19 +755,9 @@
 			path = SwiftFlowPersistenceNSCoding;
 			sourceTree = "<group>";
 		};
-		62CCBA551C058A2000B4F000 /* Persistence */ = {
-			isa = PBXGroup;
-			children = (
-				62CCBA561C058A5200B4F000 /* Contact+Coding.swift */,
-			);
-			path = Persistence;
-			sourceTree = "<group>";
-		};
 		62D3B6AF1BF2FAA80056D509 = {
 			isa = PBXGroup;
 			children = (
-				6292BEC81C0BAED300CC1B8E /* ImageIO.framework */,
-				6292BEC61C0BAE9900CC1B8E /* CoreGraphics.framework */,
 				62D3B6BA1BF2FAA80056D509 /* Meet */,
 				62D3B6CF1BF2FAA80056D509 /* MeetTests */,
 				62D3B6DA1BF2FAA80056D509 /* MeetUITests */,
@@ -799,7 +789,6 @@
 			isa = PBXGroup;
 			children = (
 				626DA4361BFEA4A700988FC0 /* Frameworks */,
-				62CCBA551C058A2000B4F000 /* Persistence */,
 				626DA4481BFFE06100988FC0 /* Clients */,
 				62D492811C02D2A200607938 /* UI */,
 				626DA42B1BFE71B700988FC0 /* Models */,
@@ -1574,7 +1563,6 @@
 				626DA44F1BFFE44400988FC0 /* Authentication.swift in Sources */,
 				626DA4351BFE9E1C00988FC0 /* DataState.swift in Sources */,
 				626DA4331BFE9DA400988FC0 /* DataMutationReducer.swift in Sources */,
-				62CCBA571C058A5200B4F000 /* Contact+Coding.swift in Sources */,
 				626DA4311BFE94BC00988FC0 /* Model.swift in Sources */,
 				626DA42D1BFE8CC700988FC0 /* Contact.swift in Sources */,
 				626DA4511BFFEDBE00988FC0 /* TwitterAPIActionCreator.swift in Sources */,

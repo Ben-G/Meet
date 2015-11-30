@@ -11,28 +11,10 @@ import SwiftFlowReactiveCocoaExtensions
 import SwiftFlow
 import SwiftFlowRouter
 
-struct PendingAction {
-    let action: (AppState) -> Bool
-    
-    func resolve(appState: AppState) -> Bool {
-        let resolved = action(appState)
-        
-        return resolved
-    }
-}
-
 class AddContactViewController: UIViewController, StoreSubscriber {
   
     var store = mainStore
     var twitterAPIActionCreator = TwitterAPIActionCreator()
-    
-    var pendingActions: [PendingAction] = [] { didSet {
-            // check to see if aciton can be resolved with current state
-            guard let state = store.appState as? AppState else { return }
-        
-            resolvePendingActions(state)
-        }
-    }
     
     override func viewWillAppear(animated: Bool) {
         store.subscribe(self)
@@ -40,21 +22,7 @@ class AddContactViewController: UIViewController, StoreSubscriber {
     
     func newState(maybeState: StateType) {
         guard let state = maybeState as? AppState else { return }
-        
-        resolvePendingActions(state)
     }
-    
-    func resolvePendingActions(state: AppState) {
-        for var i = 0; i < pendingActions.count; i++ {
-            let pendingAction = pendingActions[i]
-            let resolved = pendingAction.resolve(state)
-            
-            if resolved == true {
-                pendingActions.removeAtIndex(i)
-            }
-        }
-    }
-    
     
     @IBAction func emailIntroButtonTapped(sender: AnyObject) {
         let emailIntroViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("EmailIntroViewController")
@@ -65,22 +33,13 @@ class AddContactViewController: UIViewController, StoreSubscriber {
     
     @IBAction func addTwitterButtonTapped(sender: AnyObject) {
         // TODO: Should not be instantiated here
-        
-        let navigateToTwitterViewController = PendingAction { state in
-            if state.twitterAPIState.swifter != nil {
-                let searchTwitterViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("SearchTwitterViewController")
-                
-                self.store.dispatch (
-                    NavigationAction.NavigateTo(searchTwitterViewController)
-                )
-                return true
-            } else {
-                return false
+        store.dispatch ( self.twitterAPIActionCreator.authenticateUser() ) { state in
+            if let state = state as? HasTwitterAPIState {
+                if (state.twitterAPIState.swifter != nil) {
+                    let searchTwitterViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("SearchTwitterViewController")
+                    self.store.dispatch (NavigationAction.NavigateTo(searchTwitterViewController))
+                }
             }
         }
-        
-        pendingActions.append(navigateToTwitterViewController)
-        
-        store.dispatch ( self.twitterAPIActionCreator.authenticateUser() )
     }
 }

@@ -15,7 +15,7 @@ import SwiftFlowReactiveCocoaExtensions
 class ContactTableViewCell: UITableViewCell, ListKitCellProtocol {
     var model: Contact? {
         didSet {
-            self.textLabel!.text = model?.emailAddress
+            self.textLabel!.text = model?.displayName
         }
     }
 }

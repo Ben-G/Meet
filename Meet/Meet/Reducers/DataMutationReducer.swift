@@ -16,6 +16,8 @@ struct DataMutationReducer: Reducer {
         switch action {
         case .CreateContactFromEmail(let email):
             return createContact(state, email: email)
+        case .CreateContactWithTwitterUser(let twitterUser):
+            return createContact(state, twitterUser: twitterUser)
         case .DeleteContact(let identifier):
             return deleteContact(state, identifier: identifier)
         case .SetContacts(let contacts):
@@ -31,6 +33,13 @@ struct DataMutationReducer: Reducer {
         return state
     }
     
+    func createContact(var state: HasDataState, twitterUser: TwitterUser) -> HasDataState {
+        let newContactID = state.dataState.contacts.count + 1
+        let newContact = Contact(identifier: newContactID, twitterHandle: twitterUser.username)
+        state.dataState.contacts.append(newContact)
+        
+        return state
+    }
     func deleteContact(var state: HasDataState, identifier: Int) -> HasDataState {
         // TODO: remove dummy implementation
         state.dataState.contacts.removeLast()

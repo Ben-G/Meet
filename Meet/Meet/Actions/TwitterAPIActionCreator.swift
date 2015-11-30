@@ -20,16 +20,18 @@ struct TwitterAPIActionCreator {
         return { maybeState, store, callback in
             
             guard let state = maybeState as? AppState else { return }
-                if state.twitterAPIState.swifter == nil {
-                    self.twitterClient.login().start { event in
-                        switch event {
-                        case let .Next(swifter):
-                            callback(self.setTwitterClient(swifter))
-                        default:
-                            print("oh")
-                        }
+            if let swifter = state.twitterAPIState.swifter {
+                callback(self.setTwitterClient(swifter))
+            } else {
+                self.twitterClient.login().start { event in
+                    switch event {
+                    case let .Next(swifter):
+                        callback(self.setTwitterClient(swifter))
+                    default:
+                        print("oh")
                     }
                 }
+            }
         }
     }
     

@@ -82,6 +82,17 @@ class SearchTwitterViewController: UIViewController, StoreSubscriber {
     
 }
 
+extension SearchTwitterViewController: UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let twitterUser = dataSource.array[indexPath.row]
+        
+        store.dispatch( DataMutationAction.CreateContactWithTwitterUser(twitterUser) )
+        store.dispatch( NavigationAction.DismissViewController(presentingViewController: self.presentingViewController!) )
+    }
+    
+}
+
 extension SearchTwitterViewController: UISearchBarDelegate {
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
