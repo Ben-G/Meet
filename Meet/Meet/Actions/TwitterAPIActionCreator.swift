@@ -36,6 +36,12 @@ struct TwitterAPIActionCreator {
     func searchUsers(searchTerm: String) -> ActionCreator {
         return { state, store in
             
+            // Don't hit Twitter API with empty query string            
+            if (searchTerm == "") {
+                store.dispatch( TwitterAPIAction.SetUserSearchResults(.Success([])) )
+                return nil
+            }
+            
             self.twitterClient.findUsers(searchTerm).start { event in
                 switch event {
                 case let .Next(users):
@@ -47,7 +53,7 @@ struct TwitterAPIActionCreator {
                 }
             }
             
-            return (action: nil)
+            return nil
         }
     }
     
