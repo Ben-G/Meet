@@ -10,7 +10,8 @@ import UIKit
 import SwiftFlow
 import SwiftFlowRecorder
 
-var mainStore = RecordingMainStore<Action>(reducer: CounterReducer(), appState: AppState())
+var mainStore = RecordingMainStore<Action>(reducer: CounterReducer(), appState: AppState(),
+                    recording: "recording.json")
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

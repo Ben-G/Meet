@@ -39,6 +39,7 @@
 		62750C4A1C0E261E00B688CD /* SwiftFlowRecorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62750C431C0E261E00B688CD /* SwiftFlowRecorder.framework */; };
 		62750C4B1C0E261E00B688CD /* SwiftFlowRecorder.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 62750C431C0E261E00B688CD /* SwiftFlowRecorder.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		62750C501C0E263A00B688CD /* RecordingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62750C4F1C0E263A00B688CD /* RecordingStore.swift */; };
+		62750C511C0E480F00B688CD /* SwiftFlowRecorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62750C431C0E261E00B688CD /* SwiftFlowRecorder.framework */; };
 		627B05E51C09700D00481356 /* SwiftFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD561C07ADA10080BF30 /* SwiftFlow.framework */; };
 		628B30EF1C0B9C0300E2213D /* Unbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 628B30E61C0B9BEF00E2213D /* Unbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		628B30F01C0B9C0D00E2213D /* SwifteriOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 628B30D81C0B9BE500E2213D /* SwifteriOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -566,6 +567,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62750C511C0E480F00B688CD /* SwiftFlowRecorder.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
