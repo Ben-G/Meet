@@ -13,7 +13,10 @@ import SwiftFlowRouter
 import SwiftFlowReactiveCocoaExtensions
 import SwiftFlowPersistenceNSCoding
 
-let mainStore = MainStoreReactiveCocoa(reducer: MainReducer([NavigationReducer(), DataMutationReducer(), TwitterAPIReducer(), LocationServiceReducer()]), appState: AppState())
+let mainStore =
+MainStoreReactiveCocoa(reducer: MainReducer([NavigationReducer(), DataMutationReducer(),
+    TwitterAPIReducer(), LocationServiceReducer()]), appState: AppState())
+
 var persistenceAdapter = PersistenceAdapter<DataState, AppState>()
 
 public class SwifterWrapper {
@@ -27,36 +30,43 @@ public class SwifterWrapper {
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-  var window: UIWindow?
+    var window: UIWindow?
 
-   var router: Router!
+    var router: Router!
 
-  var swifter: SwifterWrapper.Type = SwifterWrapper.self
+    var swifter: SwifterWrapper.Type = SwifterWrapper.self
 
-  func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
-    let tabBarController = UITabBarController()
-    let addContactViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("AddContactViewController")
-    let contactsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ContactsViewController")
+        let tabBarController = UITabBarController()
+        let addContactViewController = UIStoryboard(name: "Main", bundle: nil)
+            .instantiateViewControllerWithIdentifier("AddContactViewController")
+        let contactsViewController = UIStoryboard(name: "Main", bundle: nil)
+            .instantiateViewControllerWithIdentifier("ContactsViewController")
 
-    tabBarController.viewControllers = [addContactViewController, contactsViewController]
+        tabBarController.viewControllers = [addContactViewController, contactsViewController]
 
-    router = Router(store: mainStore, rootViewController: tabBarController, transitionProvider: transitionFrom)
-    mainStore.dispatch ( NavigationAction.SetNavigationState(addContactViewController) )
+        router = Router(store: mainStore, rootViewController: tabBarController,
+            transitionProvider: transitionFrom)
 
-    window = UIWindow(frame: UIScreen.mainScreen().bounds)
-    window?.rootViewController = router.rootViewController
-    window?.makeKeyAndVisible()
+        mainStore.dispatch ( NavigationAction.SetNavigationState(addContactViewController) )
 
-    mainStore.subscribe(self)
-    persistenceAdapter.store = mainStore
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window?.rootViewController = router.rootViewController
+        window?.makeKeyAndVisible()
 
-    return true
-  }
+        mainStore.subscribe(self)
+        persistenceAdapter.store = mainStore
 
-    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+        return true
+    }
+
+    func application(app: UIApplication, openURL url: NSURL,
+        options: [String : AnyObject]) -> Bool {
+
         print(url)
-        if (url.absoluteString.containsString("swifter://")) {
+        if url.absoluteString.containsString("swifter://") {
             swifter.handleOpenURL(url)
             return true
         }
@@ -105,4 +115,3 @@ func transitionFrom(vc1: UIViewController, to vc2: UIViewController) -> RouteTra
     //          return .None
     //      }
 }
-

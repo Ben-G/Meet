@@ -98,4 +98,5 @@ public typealias DispatchCallback = (StateType) -> Void
 public typealias ActionCreator = (state: StateType, store: Store) -> ActionType?
 
 /// AsyncActionCreators allow the developer to wait for the completion of an async action
-public typealias AsyncActionCreator = (state: StateType, store: Store, actionCreatorCallback: ActionCreator -> Void) -> Void
+public typealias AsyncActionCreator = (state: StateType, store: Store,
+    actionCreatorCallback: ActionCreator -> Void) -> Void

@@ -24,20 +24,25 @@ class EmailIntroViewController: UIViewController {
     }
 
     @IBAction func cancelButtonTapped(sender: AnyObject) {
-        store.dispatch( NavigationAction.DismissViewController(presentingViewController: self.presentingViewController!) )
+        store.dispatch(
+            NavigationAction.DismissViewController(presentingViewController:
+                self.presentingViewController!)
+        )
     }
 
 }
 
-extension EmailIntroViewController: MFMailComposeViewControllerDelegate, UINavigationControllerDelegate {
+extension EmailIntroViewController: MFMailComposeViewControllerDelegate,
+    UINavigationControllerDelegate {
 
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+    func mailComposeController(controller: MFMailComposeViewController,
+        didFinishWithResult result: MFMailComposeResult, error: NSError?) {
 
-        if (result == MFMailComposeResultCancelled) {
+        if result == MFMailComposeResultCancelled {
             store.dispatch(
                 NavigationAction.DismissViewController(presentingViewController: self)
             )
-        } else if (result == MFMailComposeResultSent) {
+        } else if result == MFMailComposeResultSent {
             store.dispatch( DataMutationAction.CreateContactFromEmail("Benjamin.Encz@gmail.com") )
             store.dispatch(
                 NavigationAction.DismissViewController(presentingViewController: self)

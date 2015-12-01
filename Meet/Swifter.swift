@@ -1,3 +1,4 @@
+// swiftlint:disable force_try
 #!/usr/bin/swift
 
 import Foundation
@@ -64,8 +65,9 @@ func addNewLinesToEndOfEachFile(inDirectory: String) {
     }
 }
 
-if (Process.arguments.count < 2) {
+if Process.arguments.count < 2 {
     exit(0)
 } else {
     addNewLinesToEndOfEachFile(Process.arguments[1])
 }
+// swiftlint:enable force_try

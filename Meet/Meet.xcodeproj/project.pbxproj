@@ -63,8 +63,6 @@
 		62D3B6C11BF2FAA80056D509 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D3B6BF1BF2FAA80056D509 /* Main.storyboard */; };
 		62D3B6C31BF2FAA80056D509 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62D3B6C21BF2FAA80056D509 /* Assets.xcassets */; };
 		62D3B6C61BF2FAA80056D509 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D3B6C41BF2FAA80056D509 /* LaunchScreen.storyboard */; };
-		62D3B6D11BF2FAA80056D509 /* MeetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B6D01BF2FAA80056D509 /* MeetTests.swift */; };
-		62D3B6DC1BF2FAA80056D509 /* MeetUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B6DB1BF2FAA80056D509 /* MeetUITests.swift */; };
 		62D3B6EB1BF3A9870056D509 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B6EA1BF3A9870056D509 /* AppState.swift */; };
 		62D3B6F81BF3B72E0056D509 /* ContactListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B6F71BF3B72E0056D509 /* ContactListViewController.swift */; };
 		62D3B6FA1BF3B73A0056D509 /* AddContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B6F91BF3B73A0056D509 /* AddContactViewController.swift */; };
@@ -445,7 +443,6 @@
 		626DA4521BFFEE6400988FC0 /* TwitterAPIState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterAPIState.swift; sourceTree = "<group>"; };
 		626DA4541BFFEF5B00988FC0 /* TwitterAPIReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterAPIReducer.swift; sourceTree = "<group>"; };
 		626DA4561C000FAE00988FC0 /* TwitterKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TwitterKeys.plist; sourceTree = "<group>"; };
-		62750C1B1C0D154D00B688CD /* Swifter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swifter.swift; sourceTree = SOURCE_ROOT; };
 		627B05E01C09700D00481356 /* SwiftFlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftFlowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		627B05E21C09700D00481356 /* StoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTests.swift; sourceTree = "<group>"; };
 		627B05E41C09700D00481356 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -482,10 +479,8 @@
 		62D3B6C51BF2FAA80056D509 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		62D3B6C71BF2FAA80056D509 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62D3B6CC1BF2FAA80056D509 /* MeetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		62D3B6D01BF2FAA80056D509 /* MeetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetTests.swift; sourceTree = "<group>"; };
 		62D3B6D21BF2FAA80056D509 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62D3B6D71BF2FAA80056D509 /* MeetUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeetUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		62D3B6DB1BF2FAA80056D509 /* MeetUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetUITests.swift; sourceTree = "<group>"; };
 		62D3B6DD1BF2FAA80056D509 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62D3B6EA1BF3A9870056D509 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		62D3B6F71BF3B72E0056D509 /* ContactListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactListViewController.swift; sourceTree = "<group>"; };
@@ -821,7 +816,6 @@
 		62D3B6BA1BF2FAA80056D509 /* Meet */ = {
 			isa = PBXGroup;
 			children = (
-				62750C1B1C0D154D00B688CD /* Swifter.swift */,
 				626DA4361BFEA4A700988FC0 /* Frameworks */,
 				6292BEE81C0C160C00CC1B8E /* LocationService */,
 				626DA4481BFFE06100988FC0 /* Clients */,
@@ -844,7 +838,6 @@
 			isa = PBXGroup;
 			children = (
 				62F43A811C022F820067E132 /* AppDelegate */,
-				62D3B6D01BF2FAA80056D509 /* MeetTests.swift */,
 				62D3B6D21BF2FAA80056D509 /* Info.plist */,
 			);
 			path = MeetTests;
@@ -853,7 +846,6 @@
 		62D3B6DA1BF2FAA80056D509 /* MeetUITests */ = {
 			isa = PBXGroup;
 			children = (
-				62D3B6DB1BF2FAA80056D509 /* MeetUITests.swift */,
 				62D3B6DD1BF2FAA80056D509 /* Info.plist */,
 			);
 			path = MeetUITests;
@@ -1644,7 +1636,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				62F43A831C022FCD0067E132 /* AppDelegateTests.swift in Sources */,
-				62D3B6D11BF2FAA80056D509 /* MeetTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1652,7 +1643,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				62D3B6DC1BF2FAA80056D509 /* MeetUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

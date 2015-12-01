@@ -26,7 +26,8 @@ class AppDelegateTests: XCTestCase {
         let appDelegate = AppDelegate()
         appDelegate.swifter = FakeSwifter.self
 
-        appDelegate.application(UIApplication.sharedApplication(), openURL: NSURL(string: "swifter://")!, options: [:])
+        appDelegate.application(UIApplication.sharedApplication(),
+            openURL: NSURL(string: "swifter://")!, options: [:])
 
         XCTAssertTrue(FakeSwifter.handled)
     }

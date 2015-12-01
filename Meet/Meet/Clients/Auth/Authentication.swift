@@ -45,13 +45,18 @@ struct Authentication {
             withExtension: "plist")
 
         if twitterKeysDictionaryURL == nil {
-            print("You need to add a TwitterKey.plist with your consumer key and secret!")
+            fatalError("You need to add a TwitterKey.plist with your consumer key and secret!")
         }
 
         let keys = NSDictionary(contentsOfURL: twitterKeysDictionaryURL!)!
 
-        return ApplicationAuthPair(consumerKey: keys["consumer_key"] as! String,
-            consumerSecret: keys["consumer_secret"] as! String)
+        guard let consumerKey = keys["consumer_key"] as? String,
+            consumerSecret = keys["consumer_secret"] as? String else {
+                fatalError("You need to add a TwitterKey.plist with your consumer key and secret!")
+        }
+
+        return ApplicationAuthPair(consumerKey: consumerKey,
+            consumerSecret: consumerSecret)
     }
 
 }

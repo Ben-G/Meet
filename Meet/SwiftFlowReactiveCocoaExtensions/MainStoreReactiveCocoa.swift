@@ -12,12 +12,15 @@ import SwiftFlow
 
 public protocol ReactiveCocoaStore {
     func dispatchReactive(asyncActionCreator: AsyncActionCreator) -> Signal<StateType, NoError>
-    func dispatchReactive(SignalAsyncActionCreator: SignalAsyncActionCreator) -> Signal<StateType, NoError>?
+    func dispatchReactive(signalAsyncActionCreator: SignalAsyncActionCreator)
+        -> Signal<StateType, NoError>?
+
     func dispatchReactive(actionCreator: ActionCreator) -> Signal<StateType, NoError>
     func dispatchReactive(action: ActionType) -> Signal<StateType, NoError>
 }
 
-public typealias SignalAsyncActionCreator = (state: StateType, store: Store) -> Signal<ActionCreator,NoError>?
+public typealias SignalAsyncActionCreator = (state: StateType, store: Store)
+    -> Signal<ActionCreator, NoError>?
 
 public class MainStoreReactiveCocoa: MainStore, ReactiveCocoaStore {
 
@@ -43,7 +46,9 @@ public class MainStoreReactiveCocoa: MainStore, ReactiveCocoaStore {
         }
     }
 
-    public func dispatchReactive(asyncActionCreator: AsyncActionCreator) -> Signal<StateType, NoError> {
+    public func dispatchReactive(asyncActionCreator: AsyncActionCreator)
+        -> Signal<StateType, NoError> {
+
         return Signal { observer in
             super.dispatch(asyncActionCreator) { newState in
                 observer.sendNext(newState)
@@ -54,10 +59,13 @@ public class MainStoreReactiveCocoa: MainStore, ReactiveCocoaStore {
         }
     }
 
-    public func dispatchReactive(signalAsyncActionCreator: SignalAsyncActionCreator) -> Signal<StateType, NoError>? {
-        return signalAsyncActionCreator(state: appState, store: self)?.flatMap(FlattenStrategy.Concat, transform: { actionCreator in
-            return self.dispatchReactive(actionCreator)
-        })
+    public func dispatchReactive(signalAsyncActionCreator: SignalAsyncActionCreator)
+        -> Signal<StateType, NoError>? {
+
+        return signalAsyncActionCreator(state: appState, store: self)?
+            .flatMap(FlattenStrategy.Concat, transform: { actionCreator in
+                return self.dispatchReactive(actionCreator)
+            })
     }
 
 }

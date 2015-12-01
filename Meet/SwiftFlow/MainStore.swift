@@ -48,7 +48,7 @@ public class MainStore: Store {
         dispatch(asyncActionCreatorProvider, callback: nil)
     }
 
-    public func dispatch(action: ActionType, callback: DispatchCallback?)  {
+    public func dispatch(action: ActionType, callback: DispatchCallback?) {
         // Dispatch Asynchronously so that each subscriber receives the latest state
         // Without Async a receiver could immediately be called and emit a new state
         dispatch_async(dispatch_get_main_queue()) {

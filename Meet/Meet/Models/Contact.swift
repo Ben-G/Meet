@@ -47,15 +47,15 @@ extension Contact: Coding {
         let twitterHandle = dictionary["twitterHandle"] as? String
 
         // Empty String equals nil in serialization for this type
-        if (twitterHandle == "" && emailAddress == "") { return nil }
+        if twitterHandle == "" && emailAddress == "" { return nil }
 
-        if (twitterHandle == "") {
+        if twitterHandle == "" {
             self.twitterHandle = nil
         } else {
             self.twitterHandle = twitterHandle
         }
 
-        if (emailAddress == "") {
+        if emailAddress == "" {
             self.emailAddress = nil
         } else {
             self.emailAddress = emailAddress
@@ -65,8 +65,10 @@ extension Contact: Coding {
     }
 
     func dictionaryRepresentation() -> NSDictionary {
-        return ["email": self.emailAddress ?? "", "twitterHandle": self.twitterHandle ?? "", "identifier": identifier]
+        return [
+            "email": self.emailAddress ?? "",
+            "twitterHandle": self.twitterHandle ?? "",
+            "identifier": identifier]
     }
 
 }
-

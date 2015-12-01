@@ -39,17 +39,17 @@ class AddContactViewController: UIViewController, StoreSubscriber {
             case .Failure(let error):
                 break
             }
-        } else if (state.locationServiceState.busyLocating == true) {
+        } else if state.locationServiceState.busyLocating == true {
             locationIndicatorView.displayState = .BusyLocating
-        } else if (state.locationServiceState.authorizationStatus == .NotDetermined) {
+        } else if state.locationServiceState.authorizationStatus == .NotDetermined {
             locationIndicatorView.displayState = .LocationAuthorizationRequired
         }
     }
 
     @IBAction func emailIntroButtonTapped(sender: AnyObject) {
-        let emailIntroViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("EmailIntroViewController")
+        let emailIntroViewController = UIStoryboard(name: "Main",bundle: nil)
+            .instantiateViewControllerWithIdentifier("EmailIntroViewController")
 
-//        store.dispatch { self.navigationActionCreator.navigateToViewController(emailIntroViewController) }
         store.dispatch(DataMutationAction.CreateContactFromEmail("Benjamin.Encz@gmail.com"))
     }
 
@@ -57,8 +57,9 @@ class AddContactViewController: UIViewController, StoreSubscriber {
         // TODO: Should not be instantiated here
         store.dispatch ( self.twitterAPIActionCreator.authenticateUser() ) { state in
             if let state = state as? HasTwitterAPIState {
-                if (state.twitterAPIState.swifter != nil) {
-                    let searchTwitterViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("SearchTwitterViewController")
+                if state.twitterAPIState.swifter != nil {
+                    let searchTwitterViewController = UIStoryboard(name: "Main", bundle: nil)
+                        .instantiateViewControllerWithIdentifier("SearchTwitterViewController")
                     self.store.dispatch (NavigationAction.NavigateTo(searchTwitterViewController))
                 }
             }

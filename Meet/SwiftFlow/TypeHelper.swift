@@ -8,7 +8,10 @@
 
 import Foundation
 
-public func withSpecificTypes<SpecificStateType, SpecificActionType: ActionType>(state: StateType, action: ActionType, @noescape function: (state: SpecificStateType, action: SpecificActionType) -> SpecificStateType) -> StateType {
+public func withSpecificTypes<SpecificStateType, SpecificActionType: ActionType>(state: StateType,
+    action: ActionType, @noescape function: (state: SpecificStateType, action: SpecificActionType)
+    -> SpecificStateType) -> StateType {
+
     guard let a = action as? SpecificActionType else { return state }
     guard let s = state as? SpecificStateType else { return state }
 

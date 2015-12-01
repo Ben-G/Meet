@@ -55,7 +55,9 @@ class ContactListViewController: UIViewController, StoreSubscriber {
 extension ContactListViewController: UITableViewDataSource {
 
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath)
+        -> UITableViewCell {
+
         return self.dataSource.tableView(tableView, cellForRowAtIndexPath: indexPath)
     }
 
@@ -63,11 +65,15 @@ extension ContactListViewController: UITableViewDataSource {
         return dataSource.tableView(tableView, numberOfRowsInSection: section)
     }
 
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView,
+        commitEditingStyle editingStyle: UITableViewCellEditingStyle,
+        forRowAtIndexPath indexPath: NSIndexPath) {
+
         let contactID = dataSource.array[indexPath.row].identifier
 
-        // TODO: Consider implementing this as a pending action, or alternatively as an extension on UITableView using Dwift: https://github.com/jflinter/Dwifft or https://github.com/brutella/simplediff-swift
-
+        // TODO: Consider implementing this as a pending action, or alternatively as an extension
+        // on UITableView using Dwift: https://github.com/jflinter/Dwifft or 
+        //https://github.com/brutella/simplediff-swift
         store.dispatch( DataMutationAction.DeleteContact(contactID) ) { appState in
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
         }

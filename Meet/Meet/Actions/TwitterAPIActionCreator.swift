@@ -39,7 +39,7 @@ struct TwitterAPIActionCreator {
         return { state, store in
 
             // Don't hit Twitter API with empty query string
-            if (searchTerm == "") {
+            if searchTerm == "" {
                 store.dispatch( TwitterAPIAction.SetUserSearchResults(.Success([])) )
                 return nil
             }

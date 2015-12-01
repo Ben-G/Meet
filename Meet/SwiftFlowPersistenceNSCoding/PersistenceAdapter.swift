@@ -64,11 +64,11 @@ public class PersistenceAdapter<DataStateType: Coding,
 
     func filePath() -> NSURL? {
         let documentDirectoryURL =
-            try! NSFileManager.defaultManager().URLForDirectory(.DocumentDirectory, inDomain:
+            try? NSFileManager.defaultManager().URLForDirectory(.DocumentDirectory, inDomain:
                 .UserDomainMask, appropriateForURL: nil, create: true)
 
 
-        return documentDirectoryURL.URLByAppendingPathComponent("contacts")
+        return documentDirectoryURL?.URLByAppendingPathComponent("contacts")
     }
 
 }
