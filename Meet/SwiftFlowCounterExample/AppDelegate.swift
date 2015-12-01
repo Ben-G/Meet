@@ -8,8 +8,9 @@
 
 import UIKit
 import SwiftFlow
+import SwiftFlowRecorder
 
-var mainStore = MainStore(reducer: CounterReducer(), appState: AppState())
+var mainStore = RecordingMainStore<Action>(reducer: CounterReducer(), appState: AppState())
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
