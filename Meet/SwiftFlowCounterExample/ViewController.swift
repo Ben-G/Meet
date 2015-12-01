@@ -26,11 +26,15 @@ class ViewController: UIViewController, StoreSubscriber {
     }
 
     @IBAction func increaseButtonTapped(sender: UIButton) {
-        mainStore.dispatch( CounterAction.Increase )
+        mainStore.dispatch(
+            Action(CounterActionIncrease)
+        )
     }
 
     @IBAction func decreaseButtonTapped(sender: UIButton) {
-        mainStore.dispatch( CounterAction.Decrease )
+        mainStore.dispatch(
+            Action(CounterActionDecrease)
+        )
     }
 
 }
