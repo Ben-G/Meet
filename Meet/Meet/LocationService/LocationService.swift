@@ -11,8 +11,9 @@ import ReactiveCocoa
 
 class LocationService: NSObject, CLLocationManagerDelegate {
 
-    var locationManager: CLLocationManager
     let location: Signal<Location, LocationServiceError>
+
+    private var locationManager: CLLocationManager
     private let observer: Observer<Location, LocationServiceError>
 
     override init() {
