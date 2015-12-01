@@ -26,6 +26,14 @@
 		626DA4531BFFEE6400988FC0 /* TwitterAPIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626DA4521BFFEE6400988FC0 /* TwitterAPIState.swift */; };
 		626DA4551BFFEF5B00988FC0 /* TwitterAPIReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626DA4541BFFEF5B00988FC0 /* TwitterAPIReducer.swift */; };
 		626DA4571C000FAE00988FC0 /* TwitterKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 626DA4561C000FAE00988FC0 /* TwitterKeys.plist */; };
+		62750C241C0E13A200B688CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62750C231C0E13A200B688CD /* AppDelegate.swift */; };
+		62750C261C0E13A200B688CD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62750C251C0E13A200B688CD /* ViewController.swift */; };
+		62750C291C0E13A200B688CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62750C271C0E13A200B688CD /* Main.storyboard */; };
+		62750C2B1C0E13A200B688CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62750C2A1C0E13A200B688CD /* Assets.xcassets */; };
+		62750C2E1C0E13A200B688CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62750C2C1C0E13A200B688CD /* LaunchScreen.storyboard */; };
+		62750C361C0E141D00B688CD /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62750C351C0E141D00B688CD /* AppState.swift */; };
+		62750C391C0E147B00B688CD /* CounterReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62750C381C0E147B00B688CD /* CounterReducer.swift */; };
+		62750C3B1C0E14BA00B688CD /* CounterActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62750C3A1C0E14BA00B688CD /* CounterActions.swift */; };
 		627B05E51C09700D00481356 /* SwiftFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD561C07ADA10080BF30 /* SwiftFlow.framework */; };
 		628B30EF1C0B9C0300E2213D /* Unbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 628B30E61C0B9BEF00E2213D /* Unbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		628B30F01C0B9C0D00E2213D /* SwifteriOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 628B30D81C0B9BE500E2213D /* SwifteriOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -443,6 +451,16 @@
 		626DA4521BFFEE6400988FC0 /* TwitterAPIState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterAPIState.swift; sourceTree = "<group>"; };
 		626DA4541BFFEF5B00988FC0 /* TwitterAPIReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterAPIReducer.swift; sourceTree = "<group>"; };
 		626DA4561C000FAE00988FC0 /* TwitterKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TwitterKeys.plist; sourceTree = "<group>"; };
+		62750C211C0E13A100B688CD /* SwiftFlowCounterExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftFlowCounterExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		62750C231C0E13A200B688CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		62750C251C0E13A200B688CD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		62750C281C0E13A200B688CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		62750C2A1C0E13A200B688CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		62750C2D1C0E13A200B688CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		62750C2F1C0E13A200B688CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		62750C351C0E141D00B688CD /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		62750C381C0E147B00B688CD /* CounterReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterReducer.swift; sourceTree = "<group>"; };
+		62750C3A1C0E14BA00B688CD /* CounterActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterActions.swift; sourceTree = "<group>"; };
 		627B05E01C09700D00481356 /* SwiftFlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftFlowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		627B05E21C09700D00481356 /* StoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTests.swift; sourceTree = "<group>"; };
 		627B05E41C09700D00481356 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -523,6 +541,13 @@
 			files = (
 				6292BEDA1C0BC64300CC1B8E /* ReactiveCocoa.framework in Frameworks */,
 				6292BED11C0BC17600CC1B8E /* SwiftFlow.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		62750C1E1C0E13A100B688CD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -652,6 +677,46 @@
 				626DA44E1BFFE44400988FC0 /* Authentication.swift */,
 			);
 			path = Auth;
+			sourceTree = "<group>";
+		};
+		62750C221C0E13A200B688CD /* SwiftFlowCounterExample */ = {
+			isa = PBXGroup;
+			children = (
+				62750C371C0E146500B688CD /* Reducer */,
+				62750C341C0E141100B688CD /* Actions */,
+				62750C331C0E140C00B688CD /* State */,
+				62750C231C0E13A200B688CD /* AppDelegate.swift */,
+				62750C251C0E13A200B688CD /* ViewController.swift */,
+				62750C271C0E13A200B688CD /* Main.storyboard */,
+				62750C2A1C0E13A200B688CD /* Assets.xcassets */,
+				62750C2C1C0E13A200B688CD /* LaunchScreen.storyboard */,
+				62750C2F1C0E13A200B688CD /* Info.plist */,
+			);
+			path = SwiftFlowCounterExample;
+			sourceTree = "<group>";
+		};
+		62750C331C0E140C00B688CD /* State */ = {
+			isa = PBXGroup;
+			children = (
+				62750C351C0E141D00B688CD /* AppState.swift */,
+			);
+			path = State;
+			sourceTree = "<group>";
+		};
+		62750C341C0E141100B688CD /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				62750C3A1C0E14BA00B688CD /* CounterActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		62750C371C0E146500B688CD /* Reducer */ = {
+			isa = PBXGroup;
+			children = (
+				62750C381C0E147B00B688CD /* CounterReducer.swift */,
+			);
+			path = Reducer;
 			sourceTree = "<group>";
 		};
 		627B05E11C09700D00481356 /* SwiftFlowTests */ = {
@@ -786,6 +851,7 @@
 		62D3B6AF1BF2FAA80056D509 = {
 			isa = PBXGroup;
 			children = (
+				62750C221C0E13A200B688CD /* SwiftFlowCounterExample */,
 				62D3B6BA1BF2FAA80056D509 /* Meet */,
 				62D3B6CF1BF2FAA80056D509 /* MeetTests */,
 				62D3B6DA1BF2FAA80056D509 /* MeetUITests */,
@@ -809,6 +875,7 @@
 				6267DD901C07B2480080BF30 /* SwiftFlowReactiveCocoaExtensions.framework */,
 				627B05E01C09700D00481356 /* SwiftFlowTests.xctest */,
 				62BBE7991C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding.framework */,
+				62750C211C0E13A100B688CD /* SwiftFlowCounterExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1015,6 +1082,23 @@
 			productReference = 6267DD901C07B2480080BF30 /* SwiftFlowReactiveCocoaExtensions.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		62750C201C0E13A100B688CD /* SwiftFlowCounterExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 62750C301C0E13A200B688CD /* Build configuration list for PBXNativeTarget "SwiftFlowCounterExample" */;
+			buildPhases = (
+				62750C1D1C0E13A100B688CD /* Sources */,
+				62750C1E1C0E13A100B688CD /* Frameworks */,
+				62750C1F1C0E13A100B688CD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SwiftFlowCounterExample;
+			productName = SwiftFlowCounterExample;
+			productReference = 62750C211C0E13A100B688CD /* SwiftFlowCounterExample.app */;
+			productType = "com.apple.product-type.application";
+		};
 		627B05DF1C09700D00481356 /* SwiftFlowTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 627B05E81C09700D00481356 /* Build configuration list for PBXNativeTarget "SwiftFlowTests" */;
@@ -1131,6 +1215,9 @@
 					6267DD8F1C07B2480080BF30 = {
 						CreatedOnToolsVersion = 7.1.1;
 					};
+					62750C201C0E13A100B688CD = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
 					627B05DF1C09700D00481356 = {
 						CreatedOnToolsVersion = 7.1.1;
 					};
@@ -1201,6 +1288,7 @@
 				6267DD8F1C07B2480080BF30 /* SwiftFlowReactiveCocoaExtensions */,
 				627B05DF1C09700D00481356 /* SwiftFlowTests */,
 				62BBE7981C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding */,
+				62750C201C0E13A100B688CD /* SwiftFlowCounterExample */,
 			);
 		};
 /* End PBXProject section */
@@ -1475,6 +1563,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		62750C1F1C0E13A100B688CD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				62750C2E1C0E13A200B688CD /* LaunchScreen.storyboard in Resources */,
+				62750C2B1C0E13A200B688CD /* Assets.xcassets in Resources */,
+				62750C291C0E13A200B688CD /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		627B05DE1C09700D00481356 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1580,6 +1678,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				62FF6BD41C0B94CF003CF5A8 /* MainStoreReactiveCocoa.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		62750C1D1C0E13A100B688CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				62750C361C0E141D00B688CD /* AppState.swift in Sources */,
+				62750C391C0E147B00B688CD /* CounterReducer.swift in Sources */,
+				62750C261C0E13A200B688CD /* ViewController.swift in Sources */,
+				62750C241C0E13A200B688CD /* AppDelegate.swift in Sources */,
+				62750C3B1C0E14BA00B688CD /* CounterActions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1702,6 +1812,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		62750C271C0E13A200B688CD /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				62750C281C0E13A200B688CD /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		62750C2C1C0E13A200B688CD /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				62750C2D1C0E13A200B688CD /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		62D3B6BF1BF2FAA80056D509 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1859,6 +1985,28 @@
 				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		62750C311C0E13A200B688CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = SwiftFlowCounterExample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.benjamin-encz.SwiftFlowCounterExample";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		62750C321C0E13A200B688CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = SwiftFlowCounterExample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.benjamin-encz.SwiftFlowCounterExample";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -2141,6 +2289,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		62750C301C0E13A200B688CD /* Build configuration list for PBXNativeTarget "SwiftFlowCounterExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				62750C311C0E13A200B688CD /* Debug */,
+				62750C321C0E13A200B688CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		627B05E81C09700D00481356 /* Build configuration list for PBXNativeTarget "SwiftFlowTests" */ = {
 			isa = XCConfigurationList;
