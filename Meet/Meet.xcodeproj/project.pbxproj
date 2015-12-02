@@ -11,6 +11,7 @@
 		620CB9F21C0E630100892BCE /* SwiftFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD561C07ADA10080BF30 /* SwiftFlow.framework */; };
 		620CB9F91C0EB19E00892BCE /* StateHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620CB9F81C0EB19E00892BCE /* StateHistoryView.swift */; };
 		620CB9FB1C0EB4D500892BCE /* StateHistoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620CB9FA1C0EB4D500892BCE /* StateHistoryCollectionViewCell.swift */; };
+		624BFC2D1C0F80660047637E /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624BFC2C1C0F80660047637E /* InfoViewController.swift */; };
 		6267DD461C07A0A90080BF30 /* SwiftFlowRouter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6267DD451C07A0A90080BF30 /* SwiftFlowRouter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6267DD4A1C07A0A90080BF30 /* SwiftFlowRouter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD431C07A0A90080BF30 /* SwiftFlowRouter.framework */; };
 		6267DD4B1C07A0A90080BF30 /* SwiftFlowRouter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD431C07A0A90080BF30 /* SwiftFlowRouter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -453,6 +454,7 @@
 /* Begin PBXFileReference section */
 		620CB9F81C0EB19E00892BCE /* StateHistoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateHistoryView.swift; sourceTree = "<group>"; };
 		620CB9FA1C0EB4D500892BCE /* StateHistoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateHistoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		624BFC2C1C0F80660047637E /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		6267DD431C07A0A90080BF30 /* SwiftFlowRouter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftFlowRouter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6267DD451C07A0A90080BF30 /* SwiftFlowRouter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftFlowRouter.h; sourceTree = "<group>"; };
 		6267DD471C07A0A90080BF30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -739,6 +741,7 @@
 				62750C2A1C0E13A200B688CD /* Assets.xcassets */,
 				62750C2C1C0E13A200B688CD /* LaunchScreen.storyboard */,
 				62750C2F1C0E13A200B688CD /* Info.plist */,
+				624BFC2C1C0F80660047637E /* InfoViewController.swift */,
 			);
 			path = SwiftFlowCounterExample;
 			sourceTree = "<group>";
@@ -1791,6 +1794,7 @@
 				62750C241C0E13A200B688CD /* AppDelegate.swift in Sources */,
 				62750C531C0E5C2D00B688CD /* StatsViewController.swift in Sources */,
 				62750C3D1C0E218400B688CD /* ActionDecoder.swift in Sources */,
+				624BFC2D1C0F80660047637E /* InfoViewController.swift in Sources */,
 				62750C3B1C0E14BA00B688CD /* CounterActions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

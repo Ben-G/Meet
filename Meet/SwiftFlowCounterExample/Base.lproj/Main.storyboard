@@ -74,8 +74,22 @@
                     <view key="view" contentMode="scaleToFill" id="4KT-vS-zEO">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ugC-Up-JJx">
+                                <rect key="frame" x="282.5" y="285" width="35" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Push"/>
+                                <connections>
+                                    <action selector="pushButtonTapped:" destination="KFP-J2-0mC" eventType="touchUpInside" id="JSa-Ra-ZlH"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ugC-Up-JJx" firstAttribute="centerX" secondItem="4KT-vS-zEO" secondAttribute="centerX" id="LsH-oJ-Uoh"/>
+                            <constraint firstItem="ugC-Up-JJx" firstAttribute="centerY" secondItem="4KT-vS-zEO" secondAttribute="centerY" id="hXk-7y-M0w"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Stats" id="yVI-mR-hmo" userLabel="Stats"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -83,6 +97,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zNl-Ua-peA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2704" y="174"/>
+        </scene>
+        <!--Info View Controller-->
+        <scene sceneID="cD6-74-m0N">
+            <objects>
+                <viewController storyboardIdentifier="InfoViewController" id="cy1-Mb-tqC" customClass="InfoViewController" customModule="SwiftFlowCounterExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="VVd-4g-4zq"/>
+                        <viewControllerLayoutGuide type="bottom" id="kb5-4q-tLg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rTm-q7-U4l">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qC6-Tk-3Sd">
+                                <rect key="frame" x="276" y="285" width="48" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="cancelButtonTapped:" destination="cy1-Mb-tqC" eventType="touchUpInside" id="oeB-Gj-4BF"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" red="0.80784313730000001" green="0.99607843139999996" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="qC6-Tk-3Sd" firstAttribute="centerY" secondItem="rTm-q7-U4l" secondAttribute="centerY" id="1JH-i5-I8j"/>
+                            <constraint firstItem="qC6-Tk-3Sd" firstAttribute="centerX" secondItem="rTm-q7-U4l" secondAttribute="centerX" id="gIG-N7-Kvh"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dfY-kJ-QTt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3449" y="181"/>
         </scene>
     </scenes>
 </document>

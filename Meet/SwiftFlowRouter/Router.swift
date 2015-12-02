@@ -45,10 +45,9 @@ public class Router: StoreSubscriber {
         print("----NEW----")
         print(state.navigationState.route)
 
-
         if lastNavigationState.route.count > 0 && state.navigationState.route.count > 0 {
             while lastCommonSubroute + 1 < state.navigationState.route.count &&
-                lastCommonSubroute + 1 < state.navigationState.route.count &&
+                lastCommonSubroute + 1 < lastNavigationState.route.count &&
                 state.navigationState.route[lastCommonSubroute + 1] == lastNavigationState
                 .route[lastCommonSubroute + 1] {
                     lastCommonSubroute++
@@ -58,6 +57,8 @@ public class Router: StoreSubscriber {
         // remove all view controllers that are in old state, beyond common subroute but aren't
         // in new state
         var oldRouteIndex = lastNavigationState.route.count - 1
+
+        //TODO: Fix code that determines whether last Common Subroute needs to swap or pop
 
         while oldRouteIndex > lastCommonSubroute + 1 && oldRouteIndex >= 0 {
             let routeSegmentToPop = lastNavigationState.route[oldRouteIndex]
@@ -76,6 +77,12 @@ public class Router: StoreSubscriber {
                 viewControllerForSubroute[oldRouteIndex - 1]
                     .changeRouteSegment(lastNavigationState.route[oldRouteIndex],
                         toViewControllerIdentifier: routeSegmentToPush)
+        } else if (oldRouteIndex > newRouteIndex && oldRouteIndex > 0) {
+            let routeSegmentToPop = lastNavigationState.route[oldRouteIndex]
+            viewControllerForSubroute[oldRouteIndex - 1].popRouteSegment(routeSegmentToPop)
+            viewControllerForSubroute.removeAtIndex(oldRouteIndex)
+
+            oldRouteIndex--
         }
 
         if (oldRouteIndex == -1) {
@@ -85,12 +92,12 @@ public class Router: StoreSubscriber {
         }
 
         // push remainder of new route
-
         while oldRouteIndex < newRouteIndex {
             let routeSegmentToPush = state.navigationState.route[oldRouteIndex + 1]
 
-            viewControllerForSubroute[oldRouteIndex + 1] =
+            viewControllerForSubroute.append(
                 viewControllerForSubroute[oldRouteIndex].pushRouteSegment(routeSegmentToPush)
+            )
 
             oldRouteIndex++
         }
