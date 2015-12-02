@@ -18,6 +18,7 @@ public class RecordingMainStore: MainStore {
     var initialState: StateType
     var computedStates: [StateType] = []
     var actionsToReplay: Int?
+    let recordingPath: String?
 
     var loadedActions: [Action] = [] {
         didSet {
@@ -47,6 +48,7 @@ public class RecordingMainStore: MainStore {
 
     public init(reducer: AnyReducer, appState: StateType, recording: String? = nil) {
         initialState = appState
+        recordingPath = recording
 
         super.init(reducer: reducer, appState: appState)
 
@@ -71,6 +73,7 @@ public class RecordingMainStore: MainStore {
         super.dispatch(action, callback: callback)
 
         recordAction(action)
+        loadedActions.append(action)
     }
 
     func recordAction(action: Action) {

@@ -51,7 +51,7 @@ extension StateHistoryView: UICollectionViewDataSource, UICollectionViewDelegate
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(
             collectionViewCellReuseIdentifier, forIndexPath: indexPath) as! StateHistoryCollectionViewCell
 
-        cell.text = "\(indexPath.row)"
+        cell.text = "\(indexPath.row + 1)"
 
         return cell
     }
@@ -70,7 +70,7 @@ extension StateHistoryView: UICollectionViewDataSource, UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView,
         didSelectItemAtIndexPath indexPath: NSIndexPath) {
 
-        cellSelectionCallback?(indexPath.row)
+        cellSelectionCallback?(indexPath.row + 1)
     }
 
 }
