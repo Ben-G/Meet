@@ -141,6 +141,7 @@ public class RecordingMainStore: MainStore {
     private func replayToState(actions: [Action], state: Int) {
         print("Rewind to \(state)...")
         appState = initialState
+        recordedActions = []
         actionsToReplay = state
 
         for i in 0..<state {
