@@ -36,12 +36,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         router = Router(store: mainStore, rootViewController: tabBarController,
             transitionProvider: transitionFrom, viewControllerProvider: viewControllerProvider)
 
-//        mainStore.dispatch(
-//            Action (
-//                type: ActionSetNavigationState,
-//                payload: ["targetViewController": CounterViewController.identifier]
-//            )
-//        )
+        mainStore.dispatch { state, store in
+            if let state = state as? HasNavigationState where
+                state.navigationState.currentViewController == nil {
+                    return Action (
+                        type: ActionSetNavigationState,
+                        payload: ["targetViewController": CounterViewController.identifier]
+                    )
+            } else {
+                return nil
+            }
+        }
+
 
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.rootViewController = router.rootViewController
