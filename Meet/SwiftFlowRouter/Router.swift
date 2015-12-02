@@ -21,7 +21,7 @@ public protocol RoutableViewController {
 
 public class Router: StoreSubscriber {
 
-    public typealias RootViewControllerProvider = () -> RoutableViewController
+    public typealias RootViewControllerProvider = (viewControllerIdentifier: ViewControllerIdentifier) -> RoutableViewController
 
     var store: MainStore
     var lastNavigationState = NavigationState()
@@ -85,19 +85,19 @@ public class Router: StoreSubscriber {
             oldRouteIndex--
         }
 
-        if (oldRouteIndex == -1) {
-            // no common subroute, need to ask for root view controller
-            viewControllerForSubroute.append(rootViewControllerProvider())
-            oldRouteIndex++
-        }
-
         // push remainder of new route
         while oldRouteIndex < newRouteIndex {
             let routeSegmentToPush = state.navigationState.route[oldRouteIndex + 1]
 
-            viewControllerForSubroute.append(
-                viewControllerForSubroute[oldRouteIndex].pushRouteSegment(routeSegmentToPush)
-            )
+            if oldRouteIndex >= 0 {
+                viewControllerForSubroute.append(
+                    viewControllerForSubroute[oldRouteIndex].pushRouteSegment(routeSegmentToPush)
+                )
+            } else {
+                viewControllerForSubroute.append(
+                    rootViewControllerProvider(viewControllerIdentifier: routeSegmentToPush)
+                )
+            }
 
             oldRouteIndex++
         }
