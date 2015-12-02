@@ -17,8 +17,8 @@ enum NavigationPresentationType {
 public struct NavigationState {
     public init() {}
 
-    var currentViewController: UIViewController?
-    var transitionToViewController: UIViewController?
+    var currentViewController: String?
+    var transitionToViewController: String?
     var presentationType: NavigationPresentationType?
 }
 

@@ -8,8 +8,11 @@
 
 import UIKit
 import SwiftFlow
+import SwiftFlowRouter
 
-class ViewController: UIViewController, StoreSubscriber {
+class CounterViewController: UIViewController, StoreSubscriber, Routable {
+
+    static let identifier = "CounterViewController"
 
     @IBOutlet var counterLabel: UILabel!
 

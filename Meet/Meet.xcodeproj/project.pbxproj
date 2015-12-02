@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		620CB9F11C0E5D9600892BCE /* SwiftFlowRouter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD431C07A0A90080BF30 /* SwiftFlowRouter.framework */; };
+		620CB9F21C0E630100892BCE /* SwiftFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD561C07ADA10080BF30 /* SwiftFlow.framework */; };
 		6267DD461C07A0A90080BF30 /* SwiftFlowRouter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6267DD451C07A0A90080BF30 /* SwiftFlowRouter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6267DD4A1C07A0A90080BF30 /* SwiftFlowRouter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD431C07A0A90080BF30 /* SwiftFlowRouter.framework */; };
 		6267DD4B1C07A0A90080BF30 /* SwiftFlowRouter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD431C07A0A90080BF30 /* SwiftFlowRouter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -27,7 +29,7 @@
 		626DA4551BFFEF5B00988FC0 /* TwitterAPIReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626DA4541BFFEF5B00988FC0 /* TwitterAPIReducer.swift */; };
 		626DA4571C000FAE00988FC0 /* TwitterKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 626DA4561C000FAE00988FC0 /* TwitterKeys.plist */; };
 		62750C241C0E13A200B688CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62750C231C0E13A200B688CD /* AppDelegate.swift */; };
-		62750C261C0E13A200B688CD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62750C251C0E13A200B688CD /* ViewController.swift */; };
+		62750C261C0E13A200B688CD /* CounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62750C251C0E13A200B688CD /* CounterViewController.swift */; };
 		62750C291C0E13A200B688CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62750C271C0E13A200B688CD /* Main.storyboard */; };
 		62750C2B1C0E13A200B688CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62750C2A1C0E13A200B688CD /* Assets.xcassets */; };
 		62750C2E1C0E13A200B688CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62750C2C1C0E13A200B688CD /* LaunchScreen.storyboard */; };
@@ -40,6 +42,7 @@
 		62750C4B1C0E261E00B688CD /* SwiftFlowRecorder.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 62750C431C0E261E00B688CD /* SwiftFlowRecorder.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		62750C501C0E263A00B688CD /* RecordingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62750C4F1C0E263A00B688CD /* RecordingStore.swift */; };
 		62750C511C0E480F00B688CD /* SwiftFlowRecorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62750C431C0E261E00B688CD /* SwiftFlowRecorder.framework */; };
+		62750C531C0E5C2D00B688CD /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62750C521C0E5C2D00B688CD /* StatsViewController.swift */; };
 		627B05E51C09700D00481356 /* SwiftFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD561C07ADA10080BF30 /* SwiftFlow.framework */; };
 		628B30EF1C0B9C0300E2213D /* Unbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 628B30E61C0B9BEF00E2213D /* Unbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		628B30F01C0B9C0D00E2213D /* SwifteriOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 628B30D81C0B9BE500E2213D /* SwifteriOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -467,7 +470,7 @@
 		626DA4561C000FAE00988FC0 /* TwitterKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TwitterKeys.plist; sourceTree = "<group>"; };
 		62750C211C0E13A100B688CD /* SwiftFlowCounterExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftFlowCounterExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62750C231C0E13A200B688CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		62750C251C0E13A200B688CD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		62750C251C0E13A200B688CD /* CounterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterViewController.swift; sourceTree = "<group>"; };
 		62750C281C0E13A200B688CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		62750C2A1C0E13A200B688CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		62750C2D1C0E13A200B688CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -480,6 +483,7 @@
 		62750C451C0E261E00B688CD /* SwiftFlowRecorder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftFlowRecorder.h; sourceTree = "<group>"; };
 		62750C471C0E261E00B688CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62750C4F1C0E263A00B688CD /* RecordingStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingStore.swift; sourceTree = "<group>"; };
+		62750C521C0E5C2D00B688CD /* StatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		627B05E01C09700D00481356 /* SwiftFlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftFlowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		627B05E21C09700D00481356 /* StoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTests.swift; sourceTree = "<group>"; };
 		627B05E41C09700D00481356 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -567,6 +571,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				620CB9F11C0E5D9600892BCE /* SwiftFlowRouter.framework in Frameworks */,
 				62750C511C0E480F00B688CD /* SwiftFlowRecorder.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -575,6 +580,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				620CB9F21C0E630100892BCE /* SwiftFlow.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -714,7 +720,8 @@
 				62750C341C0E141100B688CD /* Actions */,
 				62750C331C0E140C00B688CD /* State */,
 				62750C231C0E13A200B688CD /* AppDelegate.swift */,
-				62750C251C0E13A200B688CD /* ViewController.swift */,
+				62750C251C0E13A200B688CD /* CounterViewController.swift */,
+				62750C521C0E5C2D00B688CD /* StatsViewController.swift */,
 				62750C271C0E13A200B688CD /* Main.storyboard */,
 				62750C2A1C0E13A200B688CD /* Assets.xcassets */,
 				62750C2C1C0E13A200B688CD /* LaunchScreen.storyboard */,
@@ -1766,8 +1773,9 @@
 			files = (
 				62750C361C0E141D00B688CD /* AppState.swift in Sources */,
 				62750C391C0E147B00B688CD /* CounterReducer.swift in Sources */,
-				62750C261C0E13A200B688CD /* ViewController.swift in Sources */,
+				62750C261C0E13A200B688CD /* CounterViewController.swift in Sources */,
 				62750C241C0E13A200B688CD /* AppDelegate.swift in Sources */,
+				62750C531C0E5C2D00B688CD /* StatsViewController.swift in Sources */,
 				62750C3D1C0E218400B688CD /* ActionDecoder.swift in Sources */,
 				62750C3B1C0E14BA00B688CD /* CounterActions.swift in Sources */,
 			);
@@ -2431,6 +2439,7 @@
 				62750C321C0E13A200B688CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		62750C4C1C0E261E00B688CD /* Build configuration list for PBXNativeTarget "SwiftFlowRecorder" */ = {
 			isa = XCConfigurationList;
@@ -2439,6 +2448,7 @@
 				62750C4E1C0E261E00B688CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		627B05E81C09700D00481356 /* Build configuration list for PBXNativeTarget "SwiftFlowTests" */ = {
 			isa = XCConfigurationList;

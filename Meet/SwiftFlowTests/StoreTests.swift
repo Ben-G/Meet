@@ -17,7 +17,7 @@ struct TestAppState: StateType {
     }
 }
 
-enum TestAction: ActionType {
+enum TestAction: Action {
     case SetValue(Int)
 }
 

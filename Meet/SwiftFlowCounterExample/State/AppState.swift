@@ -8,7 +8,9 @@
 
 import Foundation
 import SwiftFlow
+import SwiftFlowRouter
 
-struct AppState: StateType {
+struct AppState: StateType, HasNavigationState {
     var counter: Int = 0
+    var navigationState = NavigationState()
 }

@@ -9,6 +9,6 @@
 import Foundation
 import SwiftFlow
 
-//func decodeAction(dictionary: [String : AnyObject]) -> ActionType {
+//func decodeAction(dictionary: [String : AnyObject]) -> Action {
 //
 //}

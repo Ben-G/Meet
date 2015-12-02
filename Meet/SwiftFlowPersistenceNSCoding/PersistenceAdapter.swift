@@ -9,11 +9,6 @@
 import Foundation
 import SwiftFlow
 
-public protocol Coding {
-    init?(dictionary: NSDictionary)
-    func dictionaryRepresentation() -> NSDictionary
-}
-
 public protocol Persistable {
     typealias DataState
 

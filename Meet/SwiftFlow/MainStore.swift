@@ -8,16 +8,7 @@
 
 import Foundation
 
-public class MainStore<StoreActionType: ActionType>: Store {
-
-    public let actionType: StoreActionType.Type = StoreActionType.self
-
-    public typealias DispatchCallback = (StateType) -> Void
-    public typealias ActionCreator = (state: StateType, store: MainStore) -> StoreActionType?
-
-    /// AsyncActionCreators allow the developer to wait for the completion of an async actipublic on
-    public typealias AsyncActionCreator = (state: StateType, store: MainStore,
-        actionCreatorCallback: ActionCreator -> Void) -> Void
+public class MainStore: Store {
 
     private (set) public var appState: StateType {
         didSet {
@@ -46,7 +37,7 @@ public class MainStore<StoreActionType: ActionType>: Store {
         }
     }
 
-    public func dispatch(action: StoreActionType) {
+    public func dispatch(action: Action) {
         dispatch(action, callback: nil)
     }
 
@@ -58,7 +49,7 @@ public class MainStore<StoreActionType: ActionType>: Store {
         dispatch(asyncActionCreatorProvider, callback: nil)
     }
 
-    public func dispatch(action: StoreActionType, callback: DispatchCallback?) {
+    public func dispatch(action: Action, callback: DispatchCallback?) {
         // Dispatch Asynchronously so that each subscriber receives the latest state
         // Without Async a receiver could immediately be called and emit a new state
         dispatch_async(dispatch_get_main_queue()) {

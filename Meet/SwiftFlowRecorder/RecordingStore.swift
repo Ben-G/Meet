@@ -10,8 +10,7 @@ import Foundation
 import SwiftFlow
 import SwiftFlowPersistenceNSCoding
 
-public class RecordingMainStore<StoreActionType: ActionType where StoreActionType: Coding>
-    : MainStore<StoreActionType> {
+public class RecordingMainStore: MainStore {
 
     typealias RecordedActions = [[String : AnyObject]]
 
@@ -28,7 +27,7 @@ public class RecordingMainStore<StoreActionType: ActionType where StoreActionTyp
         }
     }
 
-    public override func dispatch(action: StoreActionType, callback: DispatchCallback?) {
+    public override func dispatch(action: Action, callback: DispatchCallback?) {
         super.dispatch(action, callback: callback)
 
         let recordedAction: [String : AnyObject] = [
@@ -76,7 +75,7 @@ public class RecordingMainStore<StoreActionType: ActionType where StoreActionTyp
         }
     }
 
-    private func loadActions(recording: String) -> [StoreActionType] {
+    private func loadActions(recording: String) -> [Action] {
         guard let recordingPath = documentsDirectory?.URLByAppendingPathComponent(recording) else {
             return []
         }
@@ -86,8 +85,8 @@ public class RecordingMainStore<StoreActionType: ActionType where StoreActionTyp
             options: NSJSONReadingOptions(rawValue: 0)) as! Array<AnyObject>
         print(jsonArray)
 
-        let actionsArray: [StoreActionType] = jsonArray.map {
-            return StoreActionType(dictionary: $0["action"] as! NSDictionary)!
+        let actionsArray: [Action] = jsonArray.map {
+            return Action(dictionary: $0["action"] as! NSDictionary)!
         }
 
         return actionsArray

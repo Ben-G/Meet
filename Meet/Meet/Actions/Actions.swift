@@ -11,19 +11,19 @@ import SwifteriOS
 import SwiftFlow
 import Result
 
-enum TwitterAPIAction: ActionType {
+enum TwitterAPIAction: Action {
     case SetTwitterClient(Swifter)
     case SetUserSearchResults(Result<[TwitterUser], TwitterAPIError>)
 }
 
-enum DataMutationAction: ActionType {
+enum DataMutationAction: Action {
     case CreateContactFromEmail(String)
     case CreateContactWithTwitterUser(TwitterUser)
     case DeleteContact(Int)
     case SetContacts([Contact])
 }
 
-enum LocationServiceAction: ActionType {
+enum LocationServiceAction: Action {
     case SetLocationServiceBusy(Bool)
     case SetLocation(Location)
 }

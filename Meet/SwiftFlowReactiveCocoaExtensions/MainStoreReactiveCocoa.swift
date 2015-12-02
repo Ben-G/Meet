@@ -16,7 +16,7 @@ public protocol ReactiveCocoaStore {
         -> Signal<StateType, NoError>?
 
     func dispatchReactive(actionCreator: ActionCreator) -> Signal<StateType, NoError>
-    func dispatchReactive(action: ActionType) -> Signal<StateType, NoError>
+    func dispatchReactive(action: Action) -> Signal<StateType, NoError>
 }
 
 public typealias SignalAsyncActionCreator = (state: StateType, store: Store)
@@ -24,7 +24,7 @@ public typealias SignalAsyncActionCreator = (state: StateType, store: Store)
 
 public class MainStoreReactiveCocoa: MainStore, ReactiveCocoaStore {
 
-    public func dispatchReactive(action: ActionType) -> Signal<StateType, NoError> {
+    public func dispatchReactive(action: Action) -> Signal<StateType, NoError> {
         return Signal { observer in
             super.dispatch(action) { newState in
                 observer.sendNext(newState)

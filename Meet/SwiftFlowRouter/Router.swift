@@ -9,34 +9,28 @@
 import UIKit
 import SwiftFlow
 
-public typealias TransitionProvider = (UIViewController, to: UIViewController) -> RouteTransition
+public typealias TransitionProvider = (String, to: String) -> RouteTransition
+public typealias ViewControllerProvider = String -> UIViewController
 
 public class Router: NSObject {
-    var store: Store
+    var store: MainStore
     var transitionFrom: TransitionProvider
+    var viewControllerProvider: ViewControllerProvider
 
     public let rootViewController: UITabBarController
 
-    public init(store: Store, rootViewController: UITabBarController, transitionProvider: TransitionProvider) {
+    public init(store: MainStore, rootViewController: UITabBarController,
+        transitionProvider: TransitionProvider, viewControllerProvider: ViewControllerProvider) {
+
         self.store = store
         self.rootViewController = rootViewController
         self.transitionFrom = transitionProvider
+        self.viewControllerProvider = viewControllerProvider
 
         super.init()
 
-        rootViewController.delegate = self
         self.store.subscribe(self)
     }
-}
-
-extension Router: UITabBarControllerDelegate {
-
-    public func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
-        store.dispatch( NavigationAction.NavigateTo(viewController) )
-
-        return false
-    }
-
 }
 
 extension Router: StoreSubscriber {
@@ -55,16 +49,33 @@ extension Router: StoreSubscriber {
 
                 switch transition {
                 case .TabBarSelect:
-                    rootViewController.selectedViewController = toViewController
-                    store.dispatch( NavigationAction.CompleteNavigationTo(toViewController) )
+                    rootViewController.selectedViewController = viewControllerProvider(toViewController)
+                    store.dispatch(
+                        Action(
+                            type: ActionCompleteNavigationTo,
+                            payload: ["targetViewController": toViewController]
+                        )
+                    )
                 case .Modal:
-                    fromViewController.presentViewController(toViewController, animated: true, completion: nil)
-                    store.dispatch( NavigationAction.CompleteNavigationTo(toViewController) )
+                    viewControllerProvider(fromViewController).presentViewController(viewControllerProvider(toViewController),
+                        animated: true, completion: nil)
+                    store.dispatch(
+                        Action(
+                            type: ActionCompleteNavigationTo,
+                            payload: ["targetViewController": toViewController]
+                        )
+                    )
                 case .Dismiss:
-                    toViewController.dismissViewControllerAnimated(true, completion: nil)
-                    store.dispatch( NavigationAction.CompleteNavigationTo(toViewController) )
+                    viewControllerProvider(toViewController).dismissViewControllerAnimated(true, completion: nil)
+                    store.dispatch(
+                        Action(
+                            type: ActionCompleteNavigationTo,
+                            payload: ["targetViewController": toViewController]
+                        )
+                    )
                 case .Push:
-                    rootViewController.navigationController?.pushViewController(toViewController, animated: true)
+                    rootViewController.navigationController?.pushViewController(viewControllerProvider(toViewController),
+                        animated: true)
 
                     // TODO: remove default
                 default: break

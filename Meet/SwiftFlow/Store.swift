@@ -9,8 +9,6 @@
 import Foundation
 
 public protocol Store {
-    typealias StoreActionType
-    var actionType: StoreActionType.Type { get }
 
     /// The current state stored in the store
     var appState: StateType { get }
@@ -41,7 +39,7 @@ public protocol Store {
      ```
      - parameter action: The action that is being dispatched to the store
     */
-    func dispatch(action: StoreActionType)
+    func dispatch(action: Action)
 
     /**
      Dispatches an action creator to the store. Action creators are functions that generate
@@ -92,14 +90,14 @@ public protocol Store {
      ```
      - parameter action: The action that is being dispatched to the store
      */
-    func dispatch(action: StoreActionType, callback: DispatchCallback?)
+    func dispatch(action: Action, callback: DispatchCallback?)
     func dispatch(actionCreatorProvider: ActionCreator, callback: DispatchCallback?)
     func dispatch(asyncActionCreatorProvider: AsyncActionCreator, callback: DispatchCallback?)
-
-    typealias DispatchCallback = (StateType) -> Void
-    typealias ActionCreator = (state: StateType, store: Store) -> StoreActionType?
-
-    /// AsyncActionCreators allow the developer to wait for the completion of an async action
-    typealias AsyncActionCreator = (state: StateType, store: Store,
-    actionCreatorCallback: ActionCreator -> Void) -> Void
 }
+
+public typealias DispatchCallback = (StateType) -> Void
+public typealias ActionCreator = (state: StateType, store: Store) -> Action?
+
+/// AsyncActionCreators allow the developer to wait for the completion of an async action
+public typealias AsyncActionCreator = (state: StateType, store: Store,
+    actionCreatorCallback: ActionCreator -> Void) -> Void

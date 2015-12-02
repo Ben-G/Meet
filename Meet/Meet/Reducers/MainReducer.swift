@@ -16,7 +16,7 @@ public struct MainReducer: AnyReducer {
         self.reducers = reducers
     }
 
-    public func _handleAction(var state: StateType, action: ActionType) -> StateType {
+    public func _handleAction(var state: StateType, action: Action) -> StateType {
         reducers.forEach { reducer in
             state = reducer._handleAction(state, action: action)
         }

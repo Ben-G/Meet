@@ -8,11 +8,11 @@
 
 import Foundation
 
-public func withSpecificTypes<SpecificStateType, SpecificActionType: ActionType>(state: StateType,
-    action: ActionType, @noescape function: (state: SpecificStateType, action: SpecificActionType)
+public func withSpecificTypes<SpecificStateType, Action>(state: StateType,
+    action: Action, @noescape function: (state: SpecificStateType, action: Action)
     -> SpecificStateType) -> StateType {
-
-    guard let a = action as? SpecificActionType else { return state }
+//TODO: Replace specific action type with specific action payload type
+    guard let a = action as? Action else { return state }
     guard let s = state as? SpecificStateType else { return state }
 
     return function(state: s, action: a) as! StateType
@@ -34,15 +34,14 @@ extension StoreSubscriber {
 }
 
 public protocol Reducer: AnyReducer {
-    typealias ReducerActionType: ActionType
     typealias ReducerStateType
 
-    func handleAction(state: ReducerStateType, action: ReducerActionType) -> ReducerStateType
+    func handleAction(state: ReducerStateType, action: Action) -> ReducerStateType
 }
 
 extension Reducer {
 
-    public func _handleAction(state: StateType, action: ActionType) -> StateType {
+    public func _handleAction(state: StateType, action: Action) -> StateType {
         return withSpecificTypes(state, action: action, function: handleAction)
     }
 
