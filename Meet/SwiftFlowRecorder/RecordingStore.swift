@@ -15,21 +15,62 @@ public class RecordingMainStore: MainStore {
     typealias RecordedActions = [[String : AnyObject]]
 
     var recordedActions: RecordedActions = []
+    var computedStates: [StateType] = []
+    var actionsToReplay: Int?
 
-    public init(reducer: AnyReducer, appState: StateType, recording: String? = nil) {
-        super.init(reducer: reducer, appState: appState)
+    public var window: UIWindow? {
+        didSet {
+            if let window = window {
+                let windowSize = window.bounds.size
+                let view = UIView(frame: CGRect(x: 0, y: 0,
+                    width: windowSize.width, height: 100))
+                view.backgroundColor = UIColor.redColor()
 
-        if let recording = recording {
-            let actions = loadActions(recording)
-            actions.forEach {
-                dispatch($0)
+                window.addSubview(view)
+                window.bringSubviewToFront(view)
             }
         }
     }
 
-    public override func dispatch(action: Action, callback: DispatchCallback?) {
+    public init(reducer: AnyReducer, appState: StateType, recording: String? = nil) {
+
+        super.init(reducer: reducer, appState: appState)
+
+        if let recording = recording {
+            let actions = loadActions(recording)
+            actionsToReplay = actions.count
+            // TODO: How Avoid that subsribers dispatch new actions during replay (in response
+            // to replayed actions?
+            // Only process recorded actions while replay is happening?
+
+            actions.forEach {
+                dispatchRecorded($0) { newState in
+                    self.actionsToReplay = self.actionsToReplay! - 1
+                    self.computedStates.append(newState)
+                    print("Computed \(self.computedStates.count) intermediated states")
+                }
+            }
+        }
+    }
+
+    func dispatchRecorded(action: Action, callback: DispatchCallback?) {
         super.dispatch(action, callback: callback)
 
+        recordAction(action)
+    }
+
+    public override func dispatch(action: Action, callback: DispatchCallback?) {
+        if let actionsToReplay = actionsToReplay where actionsToReplay > 0 {
+            // ignore actions that are dispatched during replay
+            return
+        }
+
+        super.dispatch(action, callback: callback)
+
+        recordAction(action)
+    }
+
+    func recordAction(action: Action) {
         let recordedAction: [String : AnyObject] = [
             "timestamp": NSDate.timeIntervalSinceReferenceDate(),
             "action": action.dictionaryRepresentation()
@@ -83,7 +124,6 @@ public class RecordingMainStore: MainStore {
 
         let jsonArray = try! NSJSONSerialization.JSONObjectWithData(data,
             options: NSJSONReadingOptions(rawValue: 0)) as! Array<AnyObject>
-        print(jsonArray)
 
         let actionsArray: [Action] = jsonArray.map {
             return Action(dictionary: $0["action"] as! NSDictionary)!

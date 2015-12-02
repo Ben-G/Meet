@@ -36,16 +36,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         router = Router(store: mainStore, rootViewController: tabBarController,
             transitionProvider: transitionFrom, viewControllerProvider: viewControllerProvider)
 
-        mainStore.dispatch(
-            Action (
-                type: ActionSetNavigationState,
-                payload: ["targetViewController": CounterViewController.identifier]
-            )
-        )
+//        mainStore.dispatch(
+//            Action (
+//                type: ActionSetNavigationState,
+//                payload: ["targetViewController": CounterViewController.identifier]
+//            )
+//        )
 
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.rootViewController = router.rootViewController
         window?.makeKeyAndVisible()
+
+        mainStore.window = window
 
         return true
     }
