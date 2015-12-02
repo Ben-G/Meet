@@ -1,4 +1,6 @@
 github "Ben-G/ListKit" "1.0.0"
+github "Quick/Nimble" "v3.0.0"
+github "Quick/Quick" "v0.8.0"
 github "antitypical/Result" "0.6.0-beta.5"
 github "rs/SDWebImage" "3.7.3"
 github "mattdonnelly/Swifter" "b785b1feb9edc83740d4d7dc46c1d27d0df33839"
