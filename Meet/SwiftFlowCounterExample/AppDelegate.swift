@@ -12,7 +12,7 @@ import SwiftFlowRecorder
 import SwiftFlowRouter
 
 var mainStore = RecordingMainStore(reducer: MainReducer([CounterReducer(), NavigationReducer()]),
-    appState: AppState(), recording: nil)
+    appState: AppState(), recording: "recording.json")
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -120,7 +120,7 @@ extension UITabBarController: RoutableViewController {
     }
 
     public func popRouteSegment(viewControllerIdentifier: ViewControllerIdentifier) {
-        abort()
+        // would need to unset root view controller here
     }
 
 }

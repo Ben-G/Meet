@@ -40,6 +40,12 @@ public class Router: StoreSubscriber {
         // find last common subroute
         var lastCommonSubroute = -1
 
+        print("----OLD----")
+        print(lastNavigationState.route)
+        print("----NEW----")
+        print(state.navigationState.route)
+
+
         if lastNavigationState.route.count > 0 && state.navigationState.route.count > 0 {
             while lastCommonSubroute + 1 < state.navigationState.route.count &&
                 lastCommonSubroute + 1 < state.navigationState.route.count &&
@@ -61,7 +67,9 @@ public class Router: StoreSubscriber {
             oldRouteIndex--
         }
 
-        if oldRouteIndex == lastCommonSubroute + 1 && oldRouteIndex >= 0 {
+        let newRouteIndex = state.navigationState.route.count - 1
+
+        if oldRouteIndex == lastCommonSubroute + 1 && oldRouteIndex >= 0 && oldRouteIndex <= newRouteIndex {
             let routeSegmentToPush = state.navigationState.route[oldRouteIndex]
 
             viewControllerForSubroute[oldRouteIndex] =
@@ -77,7 +85,6 @@ public class Router: StoreSubscriber {
         }
 
         // push remainder of new route
-        let newRouteIndex = state.navigationState.route.count - 1
 
         while oldRouteIndex < newRouteIndex {
             let routeSegmentToPush = state.navigationState.route[oldRouteIndex + 1]
