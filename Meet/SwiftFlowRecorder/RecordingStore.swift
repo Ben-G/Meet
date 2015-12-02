@@ -15,41 +15,44 @@ public class RecordingMainStore: MainStore {
     typealias RecordedActions = [[String : AnyObject]]
 
     var recordedActions: RecordedActions = []
+    var initialState: StateType
     var computedStates: [StateType] = []
     var actionsToReplay: Int?
+
+    var loadedActions: [Action] = [] {
+        didSet {
+            stateHistoryView?.statesCount = loadedActions.count
+        }
+    }
+
+    var stateHistoryView: StateHistoryView?
 
     public var window: UIWindow? {
         didSet {
             if let window = window {
                 let windowSize = window.bounds.size
-                let view = UIView(frame: CGRect(x: 0, y: 0,
+                stateHistoryView = StateHistoryView(frame: CGRect(x: 0, y: 0,
                     width: windowSize.width, height: 100))
-                view.backgroundColor = UIColor.redColor()
+                window.addSubview(stateHistoryView!)
+                window.bringSubviewToFront(stateHistoryView!)
 
-                window.addSubview(view)
-                window.bringSubviewToFront(view)
+                stateHistoryView?.cellSelectionCallback = { [unowned self] selection in
+                    self.replayToState(self.loadedActions, state: selection)
+                }
+
+                stateHistoryView?.statesCount = loadedActions.count
             }
         }
     }
 
     public init(reducer: AnyReducer, appState: StateType, recording: String? = nil) {
+        initialState = appState
 
         super.init(reducer: reducer, appState: appState)
 
         if let recording = recording {
-            let actions = loadActions(recording)
-            actionsToReplay = actions.count
-            // TODO: How Avoid that subsribers dispatch new actions during replay (in response
-            // to replayed actions?
-            // Only process recorded actions while replay is happening?
-
-            actions.forEach {
-                dispatchRecorded($0) { newState in
-                    self.actionsToReplay = self.actionsToReplay! - 1
-                    self.computedStates.append(newState)
-                    print("Computed \(self.computedStates.count) intermediated states")
-                }
-            }
+            loadedActions = loadActions(recording)
+            self.replayToState(loadedActions, state: loadedActions.count)
         }
     }
 
@@ -130,6 +133,19 @@ public class RecordingMainStore: MainStore {
         }
 
         return actionsArray
+    }
+
+    private func replayToState(actions: [Action], state: Int) {
+        print("Rewind to \(state)...")
+        appState = initialState
+        actionsToReplay = state
+
+        for i in 0..<state {
+            dispatchRecorded(actions[i]) { newState in
+                self.actionsToReplay = self.actionsToReplay! - 1
+                self.computedStates.append(newState)
+            }
+        }
     }
 
 }

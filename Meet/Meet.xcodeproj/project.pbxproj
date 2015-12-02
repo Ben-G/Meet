@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		620CB9F11C0E5D9600892BCE /* SwiftFlowRouter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD431C07A0A90080BF30 /* SwiftFlowRouter.framework */; };
 		620CB9F21C0E630100892BCE /* SwiftFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD561C07ADA10080BF30 /* SwiftFlow.framework */; };
+		620CB9F91C0EB19E00892BCE /* StateHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620CB9F81C0EB19E00892BCE /* StateHistoryView.swift */; };
+		620CB9FB1C0EB4D500892BCE /* StateHistoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620CB9FA1C0EB4D500892BCE /* StateHistoryCollectionViewCell.swift */; };
 		6267DD461C07A0A90080BF30 /* SwiftFlowRouter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6267DD451C07A0A90080BF30 /* SwiftFlowRouter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6267DD4A1C07A0A90080BF30 /* SwiftFlowRouter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD431C07A0A90080BF30 /* SwiftFlowRouter.framework */; };
 		6267DD4B1C07A0A90080BF30 /* SwiftFlowRouter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD431C07A0A90080BF30 /* SwiftFlowRouter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -449,6 +451,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		620CB9F81C0EB19E00892BCE /* StateHistoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateHistoryView.swift; sourceTree = "<group>"; };
+		620CB9FA1C0EB4D500892BCE /* StateHistoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateHistoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		6267DD431C07A0A90080BF30 /* SwiftFlowRouter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftFlowRouter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6267DD451C07A0A90080BF30 /* SwiftFlowRouter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftFlowRouter.h; sourceTree = "<group>"; };
 		6267DD471C07A0A90080BF30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -631,6 +635,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		620CB9F31C0EAFB900892BCE /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				620CB9F81C0EB19E00892BCE /* StateHistoryView.swift */,
+				620CB9FA1C0EB4D500892BCE /* StateHistoryCollectionViewCell.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		6267DD441C07A0A90080BF30 /* SwiftFlowRouter */ = {
 			isa = PBXGroup;
 			children = (
@@ -758,6 +771,7 @@
 		62750C441C0E261E00B688CD /* SwiftFlowRecorder */ = {
 			isa = PBXGroup;
 			children = (
+				620CB9F31C0EAFB900892BCE /* UI */,
 				62750C451C0E261E00B688CD /* SwiftFlowRecorder.h */,
 				62750C471C0E261E00B688CD /* Info.plist */,
 				62750C4F1C0E263A00B688CD /* RecordingStore.swift */,
@@ -1786,6 +1800,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				62750C501C0E263A00B688CD /* RecordingStore.swift in Sources */,
+				620CB9F91C0EB19E00892BCE /* StateHistoryView.swift in Sources */,
+				620CB9FB1C0EB4D500892BCE /* StateHistoryCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

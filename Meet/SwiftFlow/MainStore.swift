@@ -10,7 +10,7 @@ import Foundation
 
 public class MainStore: Store {
 
-    private (set) public var appState: StateType {
+    /*private (set)*/ public var appState: StateType {
         didSet {
             subscribers.forEach { $0._newState(appState) }
         }
