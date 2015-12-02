@@ -12,7 +12,7 @@ import SwiftFlowRecorder
 import SwiftFlowRouter
 
 var mainStore = RecordingMainStore(reducer: MainReducer([CounterReducer(), NavigationReducer()]),
-    appState: AppState(), recording: "recording.json")
+    appState: AppState(), recording: nil)
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var router: Router!
     var window: UIWindow?
 
+    var rootViewController: RoutableViewController!
     var counterViewController: UIViewController!
     var statsViewController: UIViewController!
 
@@ -32,16 +33,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         tabBarController.viewControllers = [counterViewController, statsViewController]
         tabBarController.delegate = self
+        rootViewController = tabBarController
 
-        router = Router(store: mainStore, rootViewController: tabBarController,
-            transitionProvider: transitionFrom, viewControllerProvider: viewControllerProvider)
+        router = Router(store: mainStore, rootViewControllerProvider: provideRootViewController)
 
         mainStore.dispatch { state, store in
+
             if let state = state as? HasNavigationState where
-                state.navigationState.currentViewController == nil {
+                state.navigationState.route == [] {
                     return Action (
-                        type: ActionSetNavigationState,
-                        payload: ["targetViewController": CounterViewController.identifier]
+                        type: ActionSetRoute,
+                        payload: ["route": ["TabBarViewController", CounterViewController.identifier]]
                     )
             } else {
                 return nil
@@ -50,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        window?.rootViewController = router.rootViewController
+        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
 
         mainStore.window = window
@@ -58,27 +60,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func transitionFrom(vc1: String, to vc2: String) -> RouteTransition {
-        if (vc1 == StatsViewController.identifier) && (vc2 == CounterViewController.identifier) {
-            return .TabBarSelect
-        }
-
-        if (vc1 == CounterViewController.identifier) && (vc2 == StatsViewController.identifier) {
-            return .TabBarSelect
-        }
-
-        return .None
-    }
-
-    func viewControllerProvider(identifier: String) -> UIViewController {
-        switch identifier {
-        case CounterViewController.identifier:
-            return counterViewController
-        case StatsViewController.identifier:
-            return statsViewController
-        default:
-            abort()
-        }
+    func provideRootViewController() -> RoutableViewController {
+        return rootViewController
     }
 
 }
@@ -86,14 +69,58 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate: UITabBarControllerDelegate {
 
     func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
-        mainStore.dispatch(
-            Action(
-                type: ActionNavigateTo,
-                payload: ["targetViewController": (viewController as! Routable)._identifier]
-            )
-        )
 
+        if viewController is CounterViewController {
+            mainStore.dispatch(
+                Action(
+                    type: ActionSetRoute,
+                    payload: ["route": ["TabBarViewController", CounterViewController.identifier]]
+                )
+            )
+        } else if viewController is StatsViewController {
+            mainStore.dispatch(
+                Action(
+                    type: ActionSetRoute,
+                    payload: ["route": ["TabBarViewController", StatsViewController.identifier]]
+                )
+            )
+        }
+        
         return false
+    }
+
+}
+
+extension UITabBarController: RoutableViewController {
+
+    public func changeRouteSegment(fromViewControllerIdentifier: ViewControllerIdentifier,
+        toViewControllerIdentifier: ViewControllerIdentifier) -> RoutableViewController {
+            if (toViewControllerIdentifier == CounterViewController.identifier) {
+                selectedIndex = 0
+                return viewControllers![0] as! RoutableViewController
+            } else if (toViewControllerIdentifier == StatsViewController.identifier) {
+                selectedIndex = 1
+                return viewControllers![1] as! RoutableViewController
+            }
+
+            abort()
+    }
+
+    public func pushRouteSegment(viewControllerIdentifier: ViewControllerIdentifier)
+        -> RoutableViewController {
+            if (viewControllerIdentifier == CounterViewController.identifier) {
+                selectedIndex = 0
+                return viewControllers![0] as! RoutableViewController
+            } else if (viewControllerIdentifier == StatsViewController.identifier) {
+                selectedIndex = 1
+                return viewControllers![1] as! RoutableViewController
+            }
+
+            abort()
+    }
+
+    public func popRouteSegment(viewControllerIdentifier: ViewControllerIdentifier) {
+        abort()
     }
 
 }

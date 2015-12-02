@@ -8,18 +8,13 @@
 
 import UIKit
 
-public enum NavigationPresentationType {
-    /// Uses the existing path between ViewControllers
-    case Default
-    case Custom(RouteTransition)
-}
+public typealias ViewControllerIdentifier = String
 
 public struct NavigationState {
     public init() {}
 
-    public var currentViewController: String?
-    public var transitionToViewController: String?
-    public var presentationType: NavigationPresentationType?
+    public var route: [ViewControllerIdentifier] = []
+    public var subRouteState: [NSDictionary] = []
 }
 
 public protocol HasNavigationState {
