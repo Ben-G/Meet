@@ -39,7 +39,7 @@ class FakeReducer: Reducer {
     }
 }
 
-class SwiftFlowRouterTests: QuickSpec {
+class SwiftFlowRouterIntegrationTests: QuickSpec {
 
     override func spec() {
 
@@ -85,6 +85,45 @@ class SwiftFlowRouterTests: QuickSpec {
                             return FakeRoutableViewController()
                         }
                     }
+                }
+
+                it("calls push on the root for a route with two elements") {
+                    store.dispatch(
+                        Action(
+                            type: ActionSetRoute,
+                            payload: ["route": ["TabBarViewController", "SecondViewController"]]
+                        )
+                    )
+
+                    class FakeRootRoutable: RoutableViewController {
+                        var calledWithIdentifier: ViewControllerIdentifier?
+
+                        func pushRouteSegment(viewControllerIdentifier: ViewControllerIdentifier)
+                            -> RoutableViewController {
+                            calledWithIdentifier = viewControllerIdentifier
+
+                            return FakeRoutableViewController()
+                        }
+
+                        func popRouteSegment(viewControllerIdentifier: ViewControllerIdentifier) { }
+
+                        func changeRouteSegment(fromViewControllerIdentifier: ViewControllerIdentifier,
+                            toViewControllerIdentifier: ViewControllerIdentifier) -> RoutableViewController {
+                                abort()
+                        }
+                    }
+
+                    let fakeRoutable = FakeRootRoutable()
+
+                    let _ = Router(store: store) { identifier in
+                        return fakeRoutable
+                    }
+
+                    // Let Run Loop Run so that dispatched actions can be performed
+                    NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode,
+                        beforeDate: NSDate.distantFuture())
+
+                    expect(fakeRoutable.calledWithIdentifier).to(equal("SecondViewController"))
                 }
 
             }

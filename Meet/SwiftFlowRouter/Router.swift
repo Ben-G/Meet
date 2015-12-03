@@ -37,81 +37,129 @@ public class Router: StoreSubscriber {
     }
 
     public func newState(state: HasNavigationState) {
-        // find last common subroute
-        var lastCommonSubroute = -1
+        let routingActions = Router.deriveRoutingActionsForTransitionFrom(
+            lastNavigationState.route, newRoutes: state.navigationState.route)
 
-        print("----OLD----")
-        print(lastNavigationState.route)
-        print("----NEW----")
-        print(state.navigationState.route)
+        routingActions.forEach { routingAction in
+            switch routingAction {
 
-        if lastNavigationState.route.count > 0 && state.navigationState.route.count > 0 {
-            while lastCommonSubroute + 1 < state.navigationState.route.count &&
-                lastCommonSubroute + 1 < lastNavigationState.route.count &&
-                state.navigationState.route[lastCommonSubroute + 1] == lastNavigationState
-                .route[lastCommonSubroute + 1] {
-                    lastCommonSubroute++
-            }
-        }
+            case let .Pop(responsibleControllerIndex, controllerToBePopped):
+                viewControllerForSubroute[responsibleControllerIndex].popRouteSegment(controllerToBePopped)
+                viewControllerForSubroute.removeAtIndex(responsibleControllerIndex + 1)
 
-        // remove all view controllers that are in old state, beyond common subroute but aren't
-        // in new state
-        var oldRouteIndex = lastNavigationState.route.count - 1
+            case let .Change(responsibleControllerIndex, controllerToBeReplaced, newController):
+                viewControllerForSubroute[responsibleControllerIndex + 1] =
+                    viewControllerForSubroute[responsibleControllerIndex]
+                        .changeRouteSegment(controllerToBeReplaced,
+                            toViewControllerIdentifier: newController)
 
-        //TODO: Fix code that determines whether last Common Subroute needs to swap or pop
-
-        while oldRouteIndex > lastCommonSubroute + 1 && oldRouteIndex >= 0 {
-            let routeSegmentToPop = lastNavigationState.route[oldRouteIndex]
-            viewControllerForSubroute[oldRouteIndex - 1].popRouteSegment(routeSegmentToPop)
-            viewControllerForSubroute.removeAtIndex(oldRouteIndex)
-
-            oldRouteIndex--
-        }
-
-        let newRouteIndex = state.navigationState.route.count - 1
-
-        if oldRouteIndex == lastCommonSubroute + 1 && oldRouteIndex >= 0 && oldRouteIndex <= newRouteIndex {
-            let routeSegmentToPush = state.navigationState.route[oldRouteIndex]
-
-            viewControllerForSubroute[oldRouteIndex] =
-                viewControllerForSubroute[oldRouteIndex - 1]
-                    .changeRouteSegment(lastNavigationState.route[oldRouteIndex],
-                        toViewControllerIdentifier: routeSegmentToPush)
-        } else if (oldRouteIndex > newRouteIndex && oldRouteIndex > 0) {
-            let routeSegmentToPop = lastNavigationState.route[oldRouteIndex]
-            viewControllerForSubroute[oldRouteIndex - 1].popRouteSegment(routeSegmentToPop)
-            viewControllerForSubroute.removeAtIndex(oldRouteIndex)
-
-            oldRouteIndex--
-        }
-
-        // push remainder of new route
-        while oldRouteIndex < newRouteIndex {
-            let routeSegmentToPush = state.navigationState.route[oldRouteIndex + 1]
-
-            if oldRouteIndex >= 0 {
-                viewControllerForSubroute.append(
-                    viewControllerForSubroute[oldRouteIndex].pushRouteSegment(routeSegmentToPush)
-                )
-            } else {
-                viewControllerForSubroute.append(
-                    rootViewControllerProvider(viewControllerIdentifier: routeSegmentToPush)
-                )
+            case let .Push(responsibleControllerIndex, controllerToBePushed):
+                if responsibleControllerIndex >= 0 {
+                    viewControllerForSubroute.append(
+                        viewControllerForSubroute[responsibleControllerIndex]
+                            .pushRouteSegment(controllerToBePushed)
+                    )
+                } else {
+                    viewControllerForSubroute.append(
+                        rootViewControllerProvider(viewControllerIdentifier: controllerToBePushed)
+                    )
+                }
             }
 
-            oldRouteIndex++
         }
 
         lastNavigationState = state.navigationState
     }
 
+    static func deriveRoutingActionsForTransitionFrom(oldRoutes: [ViewControllerIdentifier],
+        newRoutes: [ViewControllerIdentifier]) -> [RoutingActions] {
+
+            var routingActions: [RoutingActions] = []
+
+            // find last common subroute
+            var lastCommonSubroute = -1
+
+            print("----OLD----")
+            print(oldRoutes)
+            print("----NEW----")
+            print(newRoutes)
+
+            if oldRoutes.count > 0 && newRoutes.count > 0 {
+                while lastCommonSubroute + 1 < newRoutes.count &&
+                    lastCommonSubroute + 1 < oldRoutes.count &&
+                    newRoutes[lastCommonSubroute + 1] == oldRoutes[lastCommonSubroute + 1] {
+                            lastCommonSubroute++
+                }
+            }
+
+            // remove all view controllers that are in old state, beyond common subroute but aren't
+            // in new state
+            var oldRouteIndex = oldRoutes.count - 1
+
+            //TODO: Fix code that determines whether last Common Subroute needs to swap or pop
+
+            while oldRouteIndex > lastCommonSubroute + 1 && oldRouteIndex >= 0 {
+                let routeSegmentToPop = oldRoutes[oldRouteIndex]
+
+                let popAction = RoutingActions.Pop(
+                    responsibleControllerIndex: oldRouteIndex - 1,
+                    controllerToBePopped: routeSegmentToPop
+                )
+
+                routingActions.append(popAction)
+
+                oldRouteIndex--
+            }
+
+            let newRouteIndex = newRoutes.count - 1
+
+            if oldRouteIndex == lastCommonSubroute + 1 && oldRouteIndex >= 0
+                && oldRouteIndex <= newRouteIndex {
+
+                let routeSegmentToPush = newRoutes[oldRouteIndex]
+
+                let changeAction = RoutingActions.Change(
+                    responsibleControllerIndex: oldRouteIndex - 1,
+                    controllerToBeReplaced: oldRoutes[oldRouteIndex],
+                    newController: routeSegmentToPush)
+
+                routingActions.append(changeAction)
+
+            } else if (oldRouteIndex > newRouteIndex && oldRouteIndex > 0) {
+                let routeSegmentToPop = oldRoutes[oldRouteIndex]
+
+                let popAction = RoutingActions.Pop(
+                    responsibleControllerIndex: oldRouteIndex - 1,
+                    controllerToBePopped: routeSegmentToPop
+                )
+
+                routingActions.append(popAction)
+
+                oldRouteIndex--
+            }
+
+            // push remainder of new route
+            while oldRouteIndex < newRouteIndex {
+                let routeSegmentToPush = newRoutes[oldRouteIndex + 1]
+
+                let pushAction = RoutingActions.Push(
+                    responsibleControllerIndex: oldRouteIndex,
+                    controllerToBePushed: routeSegmentToPush
+                )
+
+                routingActions.append(pushAction)
+
+                oldRouteIndex++
+            }
+
+            return routingActions
+    }
+
 }
 
-public enum RouteTransition {
-  case Push
-  case Pop
-  case TabBarSelect
-  case Modal
-  case Dismiss
-  case None
+enum RoutingActions {
+    case Push(responsibleControllerIndex: Int, controllerToBePushed: ViewControllerIdentifier)
+    case Pop(responsibleControllerIndex: Int, controllerToBePopped: ViewControllerIdentifier)
+    case Change(responsibleControllerIndex: Int, controllerToBeReplaced: ViewControllerIdentifier,
+                    newController: ViewControllerIdentifier)
 }
