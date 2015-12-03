@@ -14,16 +14,22 @@ import SwiftFlow
 
 class FakeRoutableViewController: RoutableViewController {
 
-    func pushRouteSegment(viewControllerIdentifier: ViewControllerIdentifier) -> RoutableViewController {
-        return FakeRoutableViewController()
+
+    func pushRouteSegment(viewControllerIdentifier: ViewControllerIdentifier,
+        completionHandler: RoutingCompletionHandler) -> RoutableViewController {
+            completionHandler()
+            return FakeRoutableViewController()
     }
 
-    func popRouteSegment(viewControllerIdentifier: ViewControllerIdentifier) {
-
+    func popRouteSegment(viewControllerIdentifier: ViewControllerIdentifier,
+        completionHandler: RoutingCompletionHandler) {
+            completionHandler()
     }
 
     func changeRouteSegment(fromViewControllerIdentifier: ViewControllerIdentifier,
-        toViewControllerIdentifier: ViewControllerIdentifier) -> RoutableViewController {
+        toViewControllerIdentifier: ViewControllerIdentifier,
+        completionHandler: RoutingCompletionHandler) -> RoutableViewController {
+            completionHandler()
             return FakeRoutableViewController()
     }
 
@@ -96,34 +102,39 @@ class SwiftFlowRouterIntegrationTests: QuickSpec {
                     )
 
                     class FakeRootRoutable: RoutableViewController {
-                        var calledWithIdentifier: ViewControllerIdentifier?
+                        var calledWithIdentifier: (ViewControllerIdentifier?) -> Void
 
-                        func pushRouteSegment(viewControllerIdentifier: ViewControllerIdentifier)
-                            -> RoutableViewController {
-                            calledWithIdentifier = viewControllerIdentifier
-
-                            return FakeRoutableViewController()
+                        init(calledWithIdentifier: (ViewControllerIdentifier?) -> Void) {
+                            self.calledWithIdentifier = calledWithIdentifier
                         }
 
-                        func popRouteSegment(viewControllerIdentifier: ViewControllerIdentifier) { }
+                        func pushRouteSegment(viewControllerIdentifier: ViewControllerIdentifier,
+                            completionHandler: RoutingCompletionHandler) -> RoutableViewController {
+                                calledWithIdentifier(viewControllerIdentifier)
+
+                                completionHandler()
+                                return FakeRoutableViewController()
+                        }
+
+                        func popRouteSegment(viewControllerIdentifier: ViewControllerIdentifier,
+                            completionHandler: RoutingCompletionHandler) { abort() }
 
                         func changeRouteSegment(fromViewControllerIdentifier: ViewControllerIdentifier,
-                            toViewControllerIdentifier: ViewControllerIdentifier) -> RoutableViewController {
-                                abort()
+                            toViewControllerIdentifier: ViewControllerIdentifier,
+                            completionHandler: RoutingCompletionHandler) -> RoutableViewController { abort() }
+                    }
+
+                    waitUntil(timeout: 2.0) { completion in
+                        let fakeRoutable = FakeRootRoutable() { identifier in
+                            if identifier == "SecondViewController" {
+                                completion()
+                            }
+                        }
+
+                        let _ = Router(store: store) { identifier in
+                            return fakeRoutable
                         }
                     }
-
-                    let fakeRoutable = FakeRootRoutable()
-
-                    let _ = Router(store: store) { identifier in
-                        return fakeRoutable
-                    }
-
-                    // Let Run Loop Run so that dispatched actions can be performed
-                    NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode,
-                        beforeDate: NSDate.distantFuture())
-
-                    expect(fakeRoutable.calledWithIdentifier).to(equal("SecondViewController"))
                 }
 
             }

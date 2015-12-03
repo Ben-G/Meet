@@ -17,7 +17,9 @@ class SwiftFlowRouterUnitTests: QuickSpec {
     override func spec() {
         describe("routing calls") {
 
-            var router: Router!
+            let tabBarViewControllerIdentifier = "TabBarViewController"
+            let counterViewControllerIdentifier = "CounterViewController"
+            let statsViewControllerIdentifier = "StatsViewController"
 
             beforeEach() {
 
@@ -25,6 +27,31 @@ class SwiftFlowRouterUnitTests: QuickSpec {
 
             it("can derive steps from an empty route to a multi segment route") {
                 
+            }
+
+            it("generates a Change action on the last common subroute") {
+                let oldRoute = [tabBarViewControllerIdentifier, counterViewControllerIdentifier]
+                let newRoute = [tabBarViewControllerIdentifier, statsViewControllerIdentifier]
+
+                let routingActions = Router.deriveRoutingActionsForTransitionFrom(oldRoute,
+                    newRoutes: newRoute)
+
+                var controllerIndex: Int?
+                var toBeReplaced: ViewControllerIdentifier?
+                var new: ViewControllerIdentifier?
+
+                if case let RoutingActions.Change(responsibleControllerIndex,
+                    controllerToBeReplaced,
+                    newController) = routingActions.first! {
+                        controllerIndex = responsibleControllerIndex
+                        toBeReplaced = controllerToBeReplaced
+                        new = newController
+                }
+
+                expect(routingActions).to(haveCount(1))
+                expect(controllerIndex).to(equal(0))
+                expect(toBeReplaced).to(equal(counterViewControllerIdentifier))
+                expect(new).to(equal(statsViewControllerIdentifier))
             }
             
         }
