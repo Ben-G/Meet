@@ -8,12 +8,12 @@
 
 import UIKit
 
-public typealias ViewControllerIdentifier = String
+public typealias RouteElementIdentifier = String
 
 public struct NavigationState {
     public init() {}
 
-    public var route: [ViewControllerIdentifier] = []
+    public var route: [RouteElementIdentifier] = []
     public var subRouteState: [NSDictionary] = []
 }
 

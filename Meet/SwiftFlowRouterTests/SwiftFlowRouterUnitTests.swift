@@ -21,12 +21,27 @@ class SwiftFlowRouterUnitTests: QuickSpec {
             let counterViewControllerIdentifier = "CounterViewController"
             let statsViewControllerIdentifier = "StatsViewController"
 
-            beforeEach() {
-
-            }
-
             it("can derive steps from an empty route to a multi segment route") {
-                
+                let oldRoute: [RouteElementIdentifier] = []
+                let newRoute = [tabBarViewControllerIdentifier, statsViewControllerIdentifier]
+
+                let routingActions = Router.deriveRoutingActionsForTransitionFrom(oldRoute,
+                    newRoute: newRoute)
+
+                var action1IsPush: Bool?
+                var action2IsPush: Bool?
+
+                if case RoutingActions.Push = routingActions[0] {
+                    action1IsPush = true
+                }
+
+                if case RoutingActions.Push = routingActions[1] {
+                    action2IsPush = true
+                }
+
+                expect(routingActions).to(haveCount(2))
+                expect(action1IsPush).to(beTrue())
+                expect(action2IsPush).to(beTrue())
             }
 
             it("generates a Change action on the last common subroute") {
@@ -34,11 +49,11 @@ class SwiftFlowRouterUnitTests: QuickSpec {
                 let newRoute = [tabBarViewControllerIdentifier, statsViewControllerIdentifier]
 
                 let routingActions = Router.deriveRoutingActionsForTransitionFrom(oldRoute,
-                    newRoutes: newRoute)
+                    newRoute: newRoute)
 
                 var controllerIndex: Int?
-                var toBeReplaced: ViewControllerIdentifier?
-                var new: ViewControllerIdentifier?
+                var toBeReplaced: RouteElementIdentifier?
+                var new: RouteElementIdentifier?
 
                 if case let RoutingActions.Change(responsibleControllerIndex,
                     controllerToBeReplaced,
@@ -53,7 +68,7 @@ class SwiftFlowRouterUnitTests: QuickSpec {
                 expect(toBeReplaced).to(equal(counterViewControllerIdentifier))
                 expect(new).to(equal(statsViewControllerIdentifier))
             }
-            
+
         }
     }
 

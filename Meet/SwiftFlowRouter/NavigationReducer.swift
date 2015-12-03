@@ -16,7 +16,7 @@ public struct NavigationReducer: Reducer {
     public func handleAction(state: HasNavigationState, action: Action) -> HasNavigationState {
         switch action.type {
         case ActionSetRoute:
-            return setRoute(state, route: action.payload!["route"] as! [ViewControllerIdentifier])
+            return setRoute(state, route: action.payload!["route"] as! [RouteElementIdentifier])
         default:
             break
         }
@@ -24,7 +24,7 @@ public struct NavigationReducer: Reducer {
         return state
     }
 
-    func setRoute(var state: HasNavigationState, route: [ViewControllerIdentifier]) -> HasNavigationState {
+    func setRoute(var state: HasNavigationState, route: [RouteElementIdentifier]) -> HasNavigationState {
         state.navigationState.route = route
 
         return state

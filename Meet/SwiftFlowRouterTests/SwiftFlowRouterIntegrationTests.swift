@@ -12,23 +12,23 @@ import Nimble
 import SwiftFlow
 @testable import SwiftFlowRouter
 
-class FakeRoutableViewController: RoutableViewController {
+class FakeRoutableViewController: Routable {
 
 
-    func pushRouteSegment(viewControllerIdentifier: ViewControllerIdentifier,
-        completionHandler: RoutingCompletionHandler) -> RoutableViewController {
+    func pushRouteSegment(routeSegment: RouteElementIdentifier,
+        completionHandler: RoutingCompletionHandler) -> Routable {
             completionHandler()
             return FakeRoutableViewController()
     }
 
-    func popRouteSegment(viewControllerIdentifier: ViewControllerIdentifier,
+    func popRouteSegment(routeSegment: RouteElementIdentifier,
         completionHandler: RoutingCompletionHandler) {
             completionHandler()
     }
 
-    func changeRouteSegment(fromViewControllerIdentifier: ViewControllerIdentifier,
-        toViewControllerIdentifier: ViewControllerIdentifier,
-        completionHandler: RoutingCompletionHandler) -> RoutableViewController {
+    func changeRouteSegment(from: RouteElementIdentifier,
+        to: RouteElementIdentifier,
+        completionHandler: RoutingCompletionHandler) -> Routable {
             completionHandler()
             return FakeRoutableViewController()
     }
@@ -63,7 +63,7 @@ class SwiftFlowRouterIntegrationTests: QuickSpec {
                     var called = false
 
                     func provideRootViewController(viewControllerIdenifier:
-                        ViewControllerIdentifier) -> RoutableViewController {
+                        RouteElementIdentifier) -> Routable {
                             called = true
                             return FakeRoutableViewController()
                     }
@@ -101,27 +101,27 @@ class SwiftFlowRouterIntegrationTests: QuickSpec {
                         )
                     )
 
-                    class FakeRootRoutable: RoutableViewController {
-                        var calledWithIdentifier: (ViewControllerIdentifier?) -> Void
+                    class FakeRootRoutable: Routable {
+                        var calledWithIdentifier: (RouteElementIdentifier?) -> Void
 
-                        init(calledWithIdentifier: (ViewControllerIdentifier?) -> Void) {
+                        init(calledWithIdentifier: (RouteElementIdentifier?) -> Void) {
                             self.calledWithIdentifier = calledWithIdentifier
                         }
 
-                        func pushRouteSegment(viewControllerIdentifier: ViewControllerIdentifier,
-                            completionHandler: RoutingCompletionHandler) -> RoutableViewController {
-                                calledWithIdentifier(viewControllerIdentifier)
+                        func pushRouteSegment(routeSegment: RouteElementIdentifier,
+                            completionHandler: RoutingCompletionHandler) -> Routable {
+                                calledWithIdentifier(routeSegment)
 
                                 completionHandler()
                                 return FakeRoutableViewController()
                         }
 
-                        func popRouteSegment(viewControllerIdentifier: ViewControllerIdentifier,
+                        func popRouteSegment(viewControllerIdentifier: RouteElementIdentifier,
                             completionHandler: RoutingCompletionHandler) { abort() }
 
-                        func changeRouteSegment(fromViewControllerIdentifier: ViewControllerIdentifier,
-                            toViewControllerIdentifier: ViewControllerIdentifier,
-                            completionHandler: RoutingCompletionHandler) -> RoutableViewController { abort() }
+                        func changeRouteSegment(from: RouteElementIdentifier,
+                            to: RouteElementIdentifier,
+                            completionHandler: RoutingCompletionHandler) -> Routable { abort() }
                     }
 
                     waitUntil(timeout: 2.0) { completion in

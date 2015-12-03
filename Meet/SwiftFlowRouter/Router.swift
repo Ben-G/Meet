@@ -11,31 +11,31 @@ import SwiftFlow
 
 public typealias RoutingCompletionHandler = () -> Void
 
-// TODO: Ensure this protocol requires UIViewControlelrs
-public protocol RoutableViewController {
+public protocol Routable {
 
-    func pushRouteSegment(viewControllerIdentifier: ViewControllerIdentifier,
-        completionHandler: RoutingCompletionHandler) -> RoutableViewController
+    func pushRouteSegment(routeElementIdentifier: RouteElementIdentifier,
+        completionHandler: RoutingCompletionHandler) -> Routable
 
-    func popRouteSegment(viewControllerIdentifier: ViewControllerIdentifier,
+    func popRouteSegment(routeElementIdentifier: RouteElementIdentifier,
         completionHandler: RoutingCompletionHandler)
 
-    func changeRouteSegment(fromViewControllerIdentifier: ViewControllerIdentifier,
-        toViewControllerIdentifier: ViewControllerIdentifier,
-        completionHandler: RoutingCompletionHandler) -> RoutableViewController
+    func changeRouteSegment(from: RouteElementIdentifier,
+        to: RouteElementIdentifier,
+        completionHandler: RoutingCompletionHandler) -> Routable
 
 }
 
 public class Router: StoreSubscriber {
 
     public typealias RootViewControllerProvider =
-        (viewControllerIdentifier: ViewControllerIdentifier) -> RoutableViewController
+        (viewControllerIdentifier: RouteElementIdentifier) -> Routable
 
     var store: MainStore
     var lastNavigationState = NavigationState()
     var rootViewControllerProvider: RootViewControllerProvider
-    // maps route segements to UIViewController instances
-    var viewControllerForSubroute: [RoutableViewController] = []
+
+    // maps route segements to responsible Routable instances
+    var routableForSubroute: [Routable] = []
 
     let waitForRoutingCompletionQueue = dispatch_queue_create("WaitForRoutingCompletionQueue", nil)
 
@@ -48,7 +48,7 @@ public class Router: StoreSubscriber {
 
     public func newState(state: HasNavigationState) {
         let routingActions = Router.deriveRoutingActionsForTransitionFrom(
-            lastNavigationState.route, newRoutes: state.navigationState.route)
+            lastNavigationState.route, newRoute: state.navigationState.route)
 
         routingActions.forEach { routingAction in
 
@@ -60,25 +60,25 @@ public class Router: StoreSubscriber {
                 case let .Pop(responsibleControllerIndex, controllerToBePopped):
                     dispatch_async(dispatch_get_main_queue()) {
                         if responsibleControllerIndex >= 0 {
-                            self.viewControllerForSubroute[responsibleControllerIndex]
+                            self.routableForSubroute[responsibleControllerIndex]
                                 .popRouteSegment(controllerToBePopped) {
                                 dispatch_semaphore_signal(semaphore)
                             }
 
-                            self.viewControllerForSubroute.removeAtIndex(responsibleControllerIndex + 1)
+                            self.routableForSubroute.removeAtIndex(responsibleControllerIndex + 1)
                         } else {
                             // root case
-                            self.viewControllerForSubroute.removeAtIndex(responsibleControllerIndex + 1)
+                            self.routableForSubroute.removeAtIndex(responsibleControllerIndex + 1)
                             dispatch_semaphore_signal(semaphore)
                         }
                     }
 
                 case let .Change(responsibleControllerIndex, controllerToBeReplaced, newController):
                     dispatch_async(dispatch_get_main_queue()) {
-                        self.viewControllerForSubroute[responsibleControllerIndex + 1] =
-                            self.viewControllerForSubroute[responsibleControllerIndex]
+                        self.routableForSubroute[responsibleControllerIndex + 1] =
+                            self.routableForSubroute[responsibleControllerIndex]
                                 .changeRouteSegment(controllerToBeReplaced,
-                                    toViewControllerIdentifier: newController) {
+                                    to: newController) {
                                         dispatch_semaphore_signal(semaphore)
                         }
                     }
@@ -86,8 +86,8 @@ public class Router: StoreSubscriber {
                 case let .Push(responsibleControllerIndex, controllerToBePushed):
                     if responsibleControllerIndex >= 0 {
                         dispatch_async(dispatch_get_main_queue()) {
-                            self.viewControllerForSubroute.append(
-                                self.viewControllerForSubroute[responsibleControllerIndex]
+                            self.routableForSubroute.append(
+                                self.routableForSubroute[responsibleControllerIndex]
                                     .pushRouteSegment(controllerToBePushed) {
                                         dispatch_semaphore_signal(semaphore)
                                 }
@@ -95,7 +95,7 @@ public class Router: StoreSubscriber {
                         }
                     } else {
                         dispatch_async(dispatch_get_main_queue()) {
-                            self.viewControllerForSubroute.append(
+                            self.routableForSubroute.append(
                                 self.rootViewControllerProvider(viewControllerIdentifier: controllerToBePushed)
                             )
                             
@@ -119,8 +119,8 @@ public class Router: StoreSubscriber {
         lastNavigationState = state.navigationState
     }
 
-    static func deriveRoutingActionsForTransitionFrom(oldRoutes: [ViewControllerIdentifier],
-        newRoutes: [ViewControllerIdentifier]) -> [RoutingActions] {
+    static func deriveRoutingActionsForTransitionFrom(oldRoute: [RouteElementIdentifier],
+        newRoute: [RouteElementIdentifier]) -> [RoutingActions] {
 
             var routingActions: [RoutingActions] = []
 
@@ -128,30 +128,30 @@ public class Router: StoreSubscriber {
             var lastCommonSubroute = -1
 
             print("----OLD----")
-            print(oldRoutes)
+            print(oldRoute)
             print("----NEW----")
-            print(newRoutes)
+            print(newRoute)
 
-            if oldRoutes.count > 0 && newRoutes.count > 0 {
-                while lastCommonSubroute + 1 < newRoutes.count &&
-                    lastCommonSubroute + 1 < oldRoutes.count &&
-                    newRoutes[lastCommonSubroute + 1] == oldRoutes[lastCommonSubroute + 1] {
+            if oldRoute.count > 0 && newRoute.count > 0 {
+                while lastCommonSubroute + 1 < newRoute.count &&
+                    lastCommonSubroute + 1 < oldRoute.count &&
+                    newRoute[lastCommonSubroute + 1] == oldRoute[lastCommonSubroute + 1] {
                             lastCommonSubroute++
                 }
             }
 
             // remove all view controllers that are in old state, beyond common subroute but aren't
             // in new state
-            var oldRouteIndex = oldRoutes.count - 1
+            var oldRouteIndex = oldRoute.count - 1
 
             //TODO: Fix code that determines whether last Common Subroute needs to swap or pop
 
             while oldRouteIndex > lastCommonSubroute + 1 && oldRouteIndex >= 0 {
-                let routeSegmentToPop = oldRoutes[oldRouteIndex]
+                let routeSegmentToPop = oldRoute[oldRouteIndex]
 
                 let popAction = RoutingActions.Pop(
-                    responsibleControllerIndex: oldRouteIndex - 1,
-                    controllerToBePopped: routeSegmentToPop
+                    responsibleRoutableIndex: oldRouteIndex - 1,
+                    segmentToBePopped: routeSegmentToPop
                 )
 
                 routingActions.append(popAction)
@@ -159,26 +159,26 @@ public class Router: StoreSubscriber {
                 oldRouteIndex--
             }
 
-            let newRouteIndex = newRoutes.count - 1
+            let newRouteIndex = newRoute.count - 1
 
             if oldRouteIndex == lastCommonSubroute + 1 && oldRouteIndex >= 0
                 && oldRouteIndex <= newRouteIndex {
 
-                let routeSegmentToPush = newRoutes[oldRouteIndex]
+                let routeSegmentToPush = newRoute[oldRouteIndex]
 
                 let changeAction = RoutingActions.Change(
-                    responsibleControllerIndex: oldRouteIndex - 1,
-                    controllerToBeReplaced: oldRoutes[oldRouteIndex],
-                    newController: routeSegmentToPush)
+                    responsibleRoutableIndex: oldRouteIndex - 1,
+                    segmentToBeReplaced: oldRoute[oldRouteIndex],
+                    newSegment: routeSegmentToPush)
 
                 routingActions.append(changeAction)
 
             } else if (oldRouteIndex > newRouteIndex) {
-                let routeSegmentToPop = oldRoutes[oldRouteIndex]
+                let routeSegmentToPop = oldRoute[oldRouteIndex]
 
                 let popAction = RoutingActions.Pop(
-                    responsibleControllerIndex: oldRouteIndex - 1,
-                    controllerToBePopped: routeSegmentToPop
+                    responsibleRoutableIndex: oldRouteIndex - 1,
+                    segmentToBePopped: routeSegmentToPop
                 )
 
                 routingActions.append(popAction)
@@ -188,11 +188,11 @@ public class Router: StoreSubscriber {
 
             // push remainder of new route
             while oldRouteIndex < newRouteIndex {
-                let routeSegmentToPush = newRoutes[oldRouteIndex + 1]
+                let routeSegmentToPush = newRoute[oldRouteIndex + 1]
 
                 let pushAction = RoutingActions.Push(
-                    responsibleControllerIndex: oldRouteIndex,
-                    controllerToBePushed: routeSegmentToPush
+                    responsibleRoutableIndex: oldRouteIndex,
+                    segmentToBePushed: routeSegmentToPush
                 )
 
                 routingActions.append(pushAction)
@@ -206,8 +206,8 @@ public class Router: StoreSubscriber {
 }
 
 enum RoutingActions {
-    case Push(responsibleControllerIndex: Int, controllerToBePushed: ViewControllerIdentifier)
-    case Pop(responsibleControllerIndex: Int, controllerToBePopped: ViewControllerIdentifier)
-    case Change(responsibleControllerIndex: Int, controllerToBeReplaced: ViewControllerIdentifier,
-                    newController: ViewControllerIdentifier)
+    case Push(responsibleRoutableIndex: Int, segmentToBePushed: RouteElementIdentifier)
+    case Pop(responsibleRoutableIndex: Int, segmentToBePopped: RouteElementIdentifier)
+    case Change(responsibleRoutableIndex: Int, segmentToBeReplaced: RouteElementIdentifier,
+                    newSegment: RouteElementIdentifier)
 }
