@@ -54,7 +54,7 @@ public class Router: StoreSubscriber {
 
             let semaphore = dispatch_semaphore_create(0)
 
-            dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
+            dispatch_async(waitForRoutingCompletionQueue) {
                 switch routingAction {
 
                 case let .Pop(responsibleControllerIndex, controllerToBePopped):
@@ -104,7 +104,14 @@ public class Router: StoreSubscriber {
                     }
                 }
 
-                dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
+                let waitUntil = dispatch_time(DISPATCH_TIME_NOW, Int64(3 * Double(NSEC_PER_SEC)))
+
+                let result = dispatch_semaphore_wait(semaphore, waitUntil)
+
+                        if result != 0 {
+                            assertionFailure("[SwiftFlowRouter]: Router is stuck waiting for a completion handler to be called. " +
+                            "Ensure that you have called the completion handler in each Routable element.")
+                        }
             }
 
         }
