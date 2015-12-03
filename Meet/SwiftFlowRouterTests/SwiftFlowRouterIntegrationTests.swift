@@ -12,13 +12,13 @@ import Nimble
 import SwiftFlow
 @testable import SwiftFlowRouter
 
-class FakeRoutableViewController: Routable {
+class FakeRoutable: Routable {
 
 
     func pushRouteSegment(routeSegment: RouteElementIdentifier,
         completionHandler: RoutingCompletionHandler) -> Routable {
             completionHandler()
-            return FakeRoutableViewController()
+            return FakeRoutable()
     }
 
     func popRouteSegment(routeSegment: RouteElementIdentifier,
@@ -30,7 +30,7 @@ class FakeRoutableViewController: Routable {
         to: RouteElementIdentifier,
         completionHandler: RoutingCompletionHandler) -> Routable {
             completionHandler()
-            return FakeRoutableViewController()
+            return FakeRoutable()
     }
 
 }
@@ -60,18 +60,21 @@ class SwiftFlowRouterIntegrationTests: QuickSpec {
             describe("setup") {
 
                 it("does not request the root view controller when no route is provided") {
-                    var called = false
 
-                    func provideRootViewController(viewControllerIdenifier:
-                        RouteElementIdentifier) -> Routable {
-                            called = true
-                            return FakeRoutableViewController()
+                    class FakeRootRoutable: RoutablePushOnly {
+                        var called = false
+
+                        func pushRouteSegment(routeElementIdentifier: RouteElementIdentifier,
+                            completionHandler: RoutingCompletionHandler) -> Routable {
+                                called = true
+                                return FakeRoutable()
+                        }
                     }
 
-                    let _ = Router(store: store,
-                        rootViewControllerProvider: provideRootViewController)
+                    let routable = FakeRootRoutable()
+                    let _ = Router(store: store, rootRoutable: routable)
 
-                    expect(called).to(beFalse())
+                    expect(routable.called).to(beFalse())
                 }
 
                 it("requests the root with identifier when an initial route is provided") {
@@ -82,26 +85,7 @@ class SwiftFlowRouterIntegrationTests: QuickSpec {
                         )
                     )
 
-                    waitUntil(timeout: 2.0) { fullfill in
-                        let _ = Router(store: store) { identifier in
-                            if (identifier == "TabBarViewController") {
-                                fullfill()
-                            }
-
-                            return FakeRoutableViewController()
-                        }
-                    }
-                }
-
-                it("calls push on the root for a route with two elements") {
-                    store.dispatch(
-                        Action(
-                            type: ActionSetRoute,
-                            payload: ["route": ["TabBarViewController", "SecondViewController"]]
-                        )
-                    )
-
-                    class FakeRootRoutable: Routable {
+                    class FakeRootRoutable: RoutablePushOnly {
                         var calledWithIdentifier: (RouteElementIdentifier?) -> Void
 
                         init(calledWithIdentifier: (RouteElementIdentifier?) -> Void) {
@@ -113,27 +97,69 @@ class SwiftFlowRouterIntegrationTests: QuickSpec {
                                 calledWithIdentifier(routeSegment)
 
                                 completionHandler()
-                                return FakeRoutableViewController()
+                                return FakeRoutable()
                         }
 
-                        func popRouteSegment(viewControllerIdentifier: RouteElementIdentifier,
-                            completionHandler: RoutingCompletionHandler) { abort() }
-
-                        func changeRouteSegment(from: RouteElementIdentifier,
-                            to: RouteElementIdentifier,
-                            completionHandler: RoutingCompletionHandler) -> Routable { abort() }
                     }
 
-                    waitUntil(timeout: 2.0) { completion in
-                        let fakeRoutable = FakeRootRoutable() { identifier in
+                    waitUntil(timeout: 2.0) { fullfill in
+                        let rootRoutable = FakeRootRoutable { identifier in
+                            if identifier == "TabBarViewController" {
+                                fullfill()
+                            }
+                        }
+
+                        let _ = Router(store: store, rootRoutable: rootRoutable)
+                    }
+                }
+
+                fit("calls push on the root for a route with two elements") {
+                    store.dispatch(
+                        Action(
+                            type: ActionSetRoute,
+                            payload: ["route": ["TabBarViewController", "SecondViewController"]]
+                        )
+                    )
+
+                    class FakeChildRoutable: RoutablePushOnly {
+                        var calledWithIdentifier: (RouteElementIdentifier?) -> Void
+
+                        init(calledWithIdentifier: (RouteElementIdentifier?) -> Void) {
+                            self.calledWithIdentifier = calledWithIdentifier
+                        }
+
+                        func pushRouteSegment(routeSegment: RouteElementIdentifier,
+                            completionHandler: RoutingCompletionHandler) -> Routable {
+                                calledWithIdentifier(routeSegment)
+
+                                completionHandler()
+                                return FakeRoutable()
+                        }
+                    }
+
+                    waitUntil(timeout: 5.0) { completion in
+                        let fakeChildRoutable = FakeChildRoutable() { identifier in
                             if identifier == "SecondViewController" {
                                 completion()
                             }
                         }
 
-                        let _ = Router(store: store) { identifier in
-                            return fakeRoutable
+                        class FakeRootRoutable: RoutablePushOnly {
+                            let injectedRoutable: Routable
+
+                            init(injectedRoutable: Routable) {
+                                self.injectedRoutable = injectedRoutable
+                            }
+
+                            func pushRouteSegment(routeElementIdentifier: RouteElementIdentifier,
+                                completionHandler: RoutingCompletionHandler) -> Routable {
+                                    completionHandler()
+                                    return injectedRoutable
+                            }
                         }
+
+                        let _ = Router(store: store, rootRoutable:
+                            FakeRootRoutable(injectedRoutable: fakeChildRoutable))
                     }
                 }
 

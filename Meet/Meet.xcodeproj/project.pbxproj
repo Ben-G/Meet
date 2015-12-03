@@ -14,8 +14,6 @@
 		624BFC2D1C0F80660047637E /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624BFC2C1C0F80660047637E /* InfoViewController.swift */; };
 		624BFC591C0FA3B00047637E /* SwiftFlowRouterIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624BFC581C0FA3B00047637E /* SwiftFlowRouterIntegrationTests.swift */; };
 		624BFC5B1C0FA3B00047637E /* SwiftFlowRouter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD431C07A0A90080BF30 /* SwiftFlowRouter.framework */; };
-		624BFC941C0FA4A50047637E /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 624BFC891C0FA48E0047637E /* Nimble.framework */; };
-		624BFC951C0FA4AB0047637E /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 624BFC741C0FA4810047637E /* Quick.framework */; };
 		624BFC971C0FB5D80047637E /* SwiftFlowRouterUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624BFC961C0FB5D80047637E /* SwiftFlowRouterUnitTests.swift */; };
 		6267DD461C07A0A90080BF30 /* SwiftFlowRouter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6267DD451C07A0A90080BF30 /* SwiftFlowRouter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6267DD4A1C07A0A90080BF30 /* SwiftFlowRouter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD431C07A0A90080BF30 /* SwiftFlowRouter.framework */; };
@@ -52,6 +50,8 @@
 		62750C511C0E480F00B688CD /* SwiftFlowRecorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62750C431C0E261E00B688CD /* SwiftFlowRecorder.framework */; };
 		62750C531C0E5C2D00B688CD /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62750C521C0E5C2D00B688CD /* StatsViewController.swift */; };
 		627B05E51C09700D00481356 /* SwiftFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD561C07ADA10080BF30 /* SwiftFlow.framework */; };
+		6289C15B1C10ED3E0062037C /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 624BFC741C0FA4810047637E /* Quick.framework */; };
+		6289C1861C10ED440062037C /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 624BFC891C0FA48E0047637E /* Nimble.framework */; };
 		628B30EF1C0B9C0300E2213D /* Unbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 628B30E61C0B9BEF00E2213D /* Unbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		628B30F01C0B9C0D00E2213D /* SwifteriOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 628B30D81C0B9BE500E2213D /* SwifteriOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		628B30F11C0B9C1400E2213D /* SSKeychain.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 628B30C71C0B9BDB00E2213D /* SSKeychain.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -676,8 +676,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				624BFC951C0FA4AB0047637E /* Quick.framework in Frameworks */,
-				624BFC941C0FA4A50047637E /* Nimble.framework in Frameworks */,
+				6289C1861C10ED440062037C /* Nimble.framework in Frameworks */,
+				6289C15B1C10ED3E0062037C /* Quick.framework in Frameworks */,
 				624BFC5B1C0FA3B00047637E /* SwiftFlowRouter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2784,6 +2784,7 @@
 				624BFC601C0FA3B00047637E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6267DD4E1C07A0AA0080BF30 /* Build configuration list for PBXNativeTarget "SwiftFlowRouter" */ = {
 			isa = XCConfigurationList;

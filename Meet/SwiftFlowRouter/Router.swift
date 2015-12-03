@@ -11,37 +11,51 @@ import SwiftFlow
 
 public typealias RoutingCompletionHandler = () -> Void
 
-public protocol Routable {
+public protocol Routable: RoutablePush, RoutablePop, RoutableChange {}
 
-    func pushRouteSegment(routeElementIdentifier: RouteElementIdentifier,
-        completionHandler: RoutingCompletionHandler) -> Routable
-
-    func popRouteSegment(routeElementIdentifier: RouteElementIdentifier,
-        completionHandler: RoutingCompletionHandler)
-
+public protocol RoutableChange {
     func changeRouteSegment(from: RouteElementIdentifier,
         to: RouteElementIdentifier,
         completionHandler: RoutingCompletionHandler) -> Routable
+}
 
+public protocol RoutablePush {
+    func pushRouteSegment(routeElementIdentifier: RouteElementIdentifier,
+        completionHandler: RoutingCompletionHandler) -> Routable
+}
+
+public protocol RoutablePop {
+    func popRouteSegment(routeElementIdentifier: RouteElementIdentifier,
+        completionHandler: RoutingCompletionHandler)
+}
+
+public protocol RoutablePushOnly: Routable {}
+
+extension RoutablePushOnly {
+    public func changeRouteSegment(from: RouteElementIdentifier,
+        to: RouteElementIdentifier, completionHandler: RoutingCompletionHandler) -> Routable {
+            fatalError("This routable cannot change segments. You have not implemented it.")
+    }
+
+    public func popRouteSegment(routeElementIdentifier: RouteElementIdentifier,
+        completionHandler: RoutingCompletionHandler) {
+        fatalError("This routable cannot change segments. You have not implemented it.")
+    }
 }
 
 public class Router: StoreSubscriber {
 
-    public typealias RootViewControllerProvider =
-        (viewControllerIdentifier: RouteElementIdentifier) -> Routable
-
     var store: MainStore
     var lastNavigationState = NavigationState()
-    var rootViewControllerProvider: RootViewControllerProvider
 
     // maps route segements to responsible Routable instances
     var routableForSubroute: [Routable] = []
 
     let waitForRoutingCompletionQueue = dispatch_queue_create("WaitForRoutingCompletionQueue", nil)
 
-    public init(store: MainStore, rootViewControllerProvider: RootViewControllerProvider) {
+    public init(store: MainStore, rootRoutable: Routable) {
         self.store = store
-        self.rootViewControllerProvider = rootViewControllerProvider
+        self.routableForSubroute.append(rootRoutable)
 
         self.store.subscribe(self)
     }
@@ -57,50 +71,34 @@ public class Router: StoreSubscriber {
             dispatch_async(waitForRoutingCompletionQueue) {
                 switch routingAction {
 
-                case let .Pop(responsibleControllerIndex, controllerToBePopped):
+                case let .Pop(responsibleRoutableIndex, segmentToBePopped):
                     dispatch_async(dispatch_get_main_queue()) {
-                        if responsibleControllerIndex >= 0 {
-                            self.routableForSubroute[responsibleControllerIndex]
-                                .popRouteSegment(controllerToBePopped) {
-                                dispatch_semaphore_signal(semaphore)
+                        self.routableForSubroute[responsibleRoutableIndex]
+                            .popRouteSegment(segmentToBePopped) {
+                            dispatch_semaphore_signal(semaphore)
+                        }
+
+                        self.routableForSubroute.removeAtIndex(responsibleRoutableIndex + 1)
+                    }
+
+                case let .Change(responsibleRoutableIndex, segmentToBeReplaced, newSegment):
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.routableForSubroute[responsibleRoutableIndex + 1] =
+                            self.routableForSubroute[responsibleRoutableIndex]
+                                .changeRouteSegment(segmentToBeReplaced,
+                                    to: newSegment) {
+                                        dispatch_semaphore_signal(semaphore)
+                        }
+                    }
+
+                case let .Push(responsibleRoutableIndex, segmentToBePushed):
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.routableForSubroute.append(
+                            self.routableForSubroute[responsibleRoutableIndex]
+                                .pushRouteSegment(segmentToBePushed) {
+                                    dispatch_semaphore_signal(semaphore)
                             }
-
-                            self.routableForSubroute.removeAtIndex(responsibleControllerIndex + 1)
-                        } else {
-                            // root case
-                            self.routableForSubroute.removeAtIndex(responsibleControllerIndex + 1)
-                            dispatch_semaphore_signal(semaphore)
-                        }
-                    }
-
-                case let .Change(responsibleControllerIndex, controllerToBeReplaced, newController):
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.routableForSubroute[responsibleControllerIndex + 1] =
-                            self.routableForSubroute[responsibleControllerIndex]
-                                .changeRouteSegment(controllerToBeReplaced,
-                                    to: newController) {
-                                        dispatch_semaphore_signal(semaphore)
-                        }
-                    }
-
-                case let .Push(responsibleControllerIndex, controllerToBePushed):
-                    if responsibleControllerIndex >= 0 {
-                        dispatch_async(dispatch_get_main_queue()) {
-                            self.routableForSubroute.append(
-                                self.routableForSubroute[responsibleControllerIndex]
-                                    .pushRouteSegment(controllerToBePushed) {
-                                        dispatch_semaphore_signal(semaphore)
-                                }
-                            )
-                        }
-                    } else {
-                        dispatch_async(dispatch_get_main_queue()) {
-                            self.routableForSubroute.append(
-                                self.rootViewControllerProvider(viewControllerIdentifier: controllerToBePushed)
-                            )
-                            
-                            dispatch_semaphore_signal(semaphore)
-                        }
+                        )
                     }
                 }
 
@@ -150,7 +148,7 @@ public class Router: StoreSubscriber {
                 let routeSegmentToPop = oldRoute[oldRouteIndex]
 
                 let popAction = RoutingActions.Pop(
-                    responsibleRoutableIndex: oldRouteIndex - 1,
+                    responsibleRoutableIndex: oldRouteIndex,
                     segmentToBePopped: routeSegmentToPop
                 )
 
@@ -167,7 +165,7 @@ public class Router: StoreSubscriber {
                 let routeSegmentToPush = newRoute[oldRouteIndex]
 
                 let changeAction = RoutingActions.Change(
-                    responsibleRoutableIndex: oldRouteIndex - 1,
+                    responsibleRoutableIndex: oldRouteIndex,
                     segmentToBeReplaced: oldRoute[oldRouteIndex],
                     newSegment: routeSegmentToPush)
 
@@ -177,7 +175,7 @@ public class Router: StoreSubscriber {
                 let routeSegmentToPop = oldRoute[oldRouteIndex]
 
                 let popAction = RoutingActions.Pop(
-                    responsibleRoutableIndex: oldRouteIndex - 1,
+                    responsibleRoutableIndex: oldRouteIndex,
                     segmentToBePopped: routeSegmentToPop
                 )
 
@@ -191,7 +189,7 @@ public class Router: StoreSubscriber {
                 let routeSegmentToPush = newRoute[oldRouteIndex + 1]
 
                 let pushAction = RoutingActions.Push(
-                    responsibleRoutableIndex: oldRouteIndex,
+                    responsibleRoutableIndex: oldRouteIndex + 1,
                     segmentToBePushed: routeSegmentToPush
                 )
 
