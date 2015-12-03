@@ -54,15 +54,23 @@ public class Router: StoreSubscriber {
 
             let semaphore = dispatch_semaphore_create(0)
 
-            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0)) {
+            dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
                 switch routingAction {
 
                 case let .Pop(responsibleControllerIndex, controllerToBePopped):
                     dispatch_async(dispatch_get_main_queue()) {
-                        self.viewControllerForSubroute[responsibleControllerIndex]
-                            .popRouteSegment(controllerToBePopped) { dispatch_semaphore_signal(semaphore) }
+                        if responsibleControllerIndex >= 0 {
+                            self.viewControllerForSubroute[responsibleControllerIndex]
+                                .popRouteSegment(controllerToBePopped) {
+                                dispatch_semaphore_signal(semaphore)
+                            }
 
-                        self.viewControllerForSubroute.removeAtIndex(responsibleControllerIndex + 1)
+                            self.viewControllerForSubroute.removeAtIndex(responsibleControllerIndex + 1)
+                        } else {
+                            // root case
+                            self.viewControllerForSubroute.removeAtIndex(responsibleControllerIndex + 1)
+                            dispatch_semaphore_signal(semaphore)
+                        }
                     }
 
                 case let .Change(responsibleControllerIndex, controllerToBeReplaced, newController):
@@ -158,7 +166,7 @@ public class Router: StoreSubscriber {
 
                 routingActions.append(changeAction)
 
-            } else if (oldRouteIndex > newRouteIndex && oldRouteIndex > 0) {
+            } else if (oldRouteIndex > newRouteIndex) {
                 let routeSegmentToPop = oldRoutes[oldRouteIndex]
 
                 let popAction = RoutingActions.Pop(
