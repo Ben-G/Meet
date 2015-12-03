@@ -9,25 +9,35 @@
 import UIKit
 import SwiftFlow
 
+public typealias RoutingCompletionHandler = () -> Void
+
 // TODO: Ensure this protocol requires UIViewControlelrs
 public protocol RoutableViewController {
 
-    func pushRouteSegment(viewControllerIdentifier: ViewControllerIdentifier) -> RoutableViewController
-    func popRouteSegment(viewControllerIdentifier: ViewControllerIdentifier)
+    func pushRouteSegment(viewControllerIdentifier: ViewControllerIdentifier,
+        completionHandler: RoutingCompletionHandler) -> RoutableViewController
+
+    func popRouteSegment(viewControllerIdentifier: ViewControllerIdentifier,
+        completionHandler: RoutingCompletionHandler)
+
     func changeRouteSegment(fromViewControllerIdentifier: ViewControllerIdentifier,
-        toViewControllerIdentifier: ViewControllerIdentifier) -> RoutableViewController
+        toViewControllerIdentifier: ViewControllerIdentifier,
+        completionHandler: RoutingCompletionHandler) -> RoutableViewController
 
 }
 
 public class Router: StoreSubscriber {
 
-    public typealias RootViewControllerProvider = (viewControllerIdentifier: ViewControllerIdentifier) -> RoutableViewController
+    public typealias RootViewControllerProvider =
+        (viewControllerIdentifier: ViewControllerIdentifier) -> RoutableViewController
 
     var store: MainStore
     var lastNavigationState = NavigationState()
     var rootViewControllerProvider: RootViewControllerProvider
     // maps route segements to UIViewController instances
     var viewControllerForSubroute: [RoutableViewController] = []
+
+    let waitForRoutingCompletionQueue = dispatch_queue_create("WaitForRoutingCompletionQueue", nil)
 
     public init(store: MainStore, rootViewControllerProvider: RootViewControllerProvider) {
         self.store = store
@@ -41,29 +51,52 @@ public class Router: StoreSubscriber {
             lastNavigationState.route, newRoutes: state.navigationState.route)
 
         routingActions.forEach { routingAction in
-            switch routingAction {
 
-            case let .Pop(responsibleControllerIndex, controllerToBePopped):
-                viewControllerForSubroute[responsibleControllerIndex].popRouteSegment(controllerToBePopped)
-                viewControllerForSubroute.removeAtIndex(responsibleControllerIndex + 1)
+            let semaphore = dispatch_semaphore_create(0)
 
-            case let .Change(responsibleControllerIndex, controllerToBeReplaced, newController):
-                viewControllerForSubroute[responsibleControllerIndex + 1] =
-                    viewControllerForSubroute[responsibleControllerIndex]
-                        .changeRouteSegment(controllerToBeReplaced,
-                            toViewControllerIdentifier: newController)
+            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0)) {
+                switch routingAction {
 
-            case let .Push(responsibleControllerIndex, controllerToBePushed):
-                if responsibleControllerIndex >= 0 {
-                    viewControllerForSubroute.append(
-                        viewControllerForSubroute[responsibleControllerIndex]
-                            .pushRouteSegment(controllerToBePushed)
-                    )
-                } else {
-                    viewControllerForSubroute.append(
-                        rootViewControllerProvider(viewControllerIdentifier: controllerToBePushed)
-                    )
+                case let .Pop(responsibleControllerIndex, controllerToBePopped):
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.viewControllerForSubroute[responsibleControllerIndex]
+                            .popRouteSegment(controllerToBePopped) { dispatch_semaphore_signal(semaphore) }
+
+                        self.viewControllerForSubroute.removeAtIndex(responsibleControllerIndex + 1)
+                    }
+
+                case let .Change(responsibleControllerIndex, controllerToBeReplaced, newController):
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.viewControllerForSubroute[responsibleControllerIndex + 1] =
+                            self.viewControllerForSubroute[responsibleControllerIndex]
+                                .changeRouteSegment(controllerToBeReplaced,
+                                    toViewControllerIdentifier: newController) {
+                                        dispatch_semaphore_signal(semaphore)
+                        }
+                    }
+
+                case let .Push(responsibleControllerIndex, controllerToBePushed):
+                    if responsibleControllerIndex >= 0 {
+                        dispatch_async(dispatch_get_main_queue()) {
+                            self.viewControllerForSubroute.append(
+                                self.viewControllerForSubroute[responsibleControllerIndex]
+                                    .pushRouteSegment(controllerToBePushed) {
+                                        dispatch_semaphore_signal(semaphore)
+                                }
+                            )
+                        }
+                    } else {
+                        dispatch_async(dispatch_get_main_queue()) {
+                            self.viewControllerForSubroute.append(
+                                self.rootViewControllerProvider(viewControllerIdentifier: controllerToBePushed)
+                            )
+                            
+                            dispatch_semaphore_signal(semaphore)
+                        }
+                    }
                 }
+
+                dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
             }
 
         }

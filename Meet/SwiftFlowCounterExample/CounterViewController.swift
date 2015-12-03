@@ -40,14 +40,21 @@ class CounterViewController: UIViewController, StoreSubscriber, RoutableViewCont
         )
     }
 
-    func pushRouteSegment(viewControllerIdentifier: ViewControllerIdentifier) -> RoutableViewController {
-        abort()
+    func pushRouteSegment(viewControllerIdentifier: ViewControllerIdentifier,
+        completionHandler: RoutingCompletionHandler) -> RoutableViewController {
+
+            abort()
     }
-    func popRouteSegment(viewControllerIdentifier: ViewControllerIdentifier) {
-        abort()
+
+    func popRouteSegment(viewControllerIdentifier: ViewControllerIdentifier,
+        completionHandler: RoutingCompletionHandler) {
+            abort()
     }
+
     func changeRouteSegment(fromViewControllerIdentifier: ViewControllerIdentifier,
-        toViewControllerIdentifier: ViewControllerIdentifier) -> RoutableViewController {
+        toViewControllerIdentifier: ViewControllerIdentifier,
+        completionHandler: RoutingCompletionHandler) -> RoutableViewController {
+            
             abort()
     }
 

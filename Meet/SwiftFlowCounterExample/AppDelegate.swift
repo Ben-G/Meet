@@ -12,7 +12,7 @@ import SwiftFlowRecorder
 import SwiftFlowRouter
 
 var mainStore = RecordingMainStore(reducer: MainReducer([CounterReducer(), NavigationReducer()]),
-    appState: AppState(), recording: "recording.json")
+    appState: AppState(), recording: nil)
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -43,7 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 state.navigationState.route == [] {
                     return Action (
                         type: ActionSetRoute,
-                        payload: ["route": ["TabBarViewController", CounterViewController.identifier]]
+                        payload: ["route": ["TabBarViewController", StatsViewController.identifier,
+                            InfoViewController.identifier]]
                     )
             } else {
                 return nil
@@ -60,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func provideRootViewController() -> RoutableViewController {
+    func provideRootViewController(identifier: ViewControllerIdentifier) -> RoutableViewController {
         return rootViewController
     }
 
@@ -94,32 +95,39 @@ extension AppDelegate: UITabBarControllerDelegate {
 extension UITabBarController: RoutableViewController {
 
     public func changeRouteSegment(fromViewControllerIdentifier: ViewControllerIdentifier,
-        toViewControllerIdentifier: ViewControllerIdentifier) -> RoutableViewController {
+        toViewControllerIdentifier: ViewControllerIdentifier,
+        completionHandler: RoutingCompletionHandler) -> RoutableViewController {
             if (toViewControllerIdentifier == CounterViewController.identifier) {
                 selectedIndex = 0
+                completionHandler()
                 return viewControllers![0] as! RoutableViewController
             } else if (toViewControllerIdentifier == StatsViewController.identifier) {
                 selectedIndex = 1
+                completionHandler()
                 return viewControllers![1] as! RoutableViewController
             }
 
             abort()
     }
 
-    public func pushRouteSegment(viewControllerIdentifier: ViewControllerIdentifier)
+    public func pushRouteSegment(viewControllerIdentifier: ViewControllerIdentifier,
+        completionHandler: RoutingCompletionHandler)
         -> RoutableViewController {
             if (viewControllerIdentifier == CounterViewController.identifier) {
                 selectedIndex = 0
+                completionHandler()
                 return viewControllers![0] as! RoutableViewController
             } else if (viewControllerIdentifier == StatsViewController.identifier) {
                 selectedIndex = 1
+                completionHandler()
                 return viewControllers![1] as! RoutableViewController
             }
 
             abort()
     }
 
-    public func popRouteSegment(viewControllerIdentifier: ViewControllerIdentifier) {
+    public func popRouteSegment(viewControllerIdentifier: ViewControllerIdentifier,
+        completionHandler: RoutingCompletionHandler) {
         // would need to unset root view controller here
     }
 

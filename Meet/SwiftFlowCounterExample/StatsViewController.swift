@@ -16,21 +16,28 @@ class StatsViewController: UIViewController, RoutableViewController {
 
     var infoViewController: RoutableViewController!
 
-    func pushRouteSegment(viewControllerIdentifier: ViewControllerIdentifier) -> RoutableViewController {
-        infoViewController = UIStoryboard(name: "Main", bundle: nil)
-            .instantiateViewControllerWithIdentifier("InfoViewController") as! RoutableViewController
+    func pushRouteSegment(viewControllerIdentifier: ViewControllerIdentifier,
+        completionHandler: RoutingCompletionHandler) -> RoutableViewController {
 
-        presentViewController(infoViewController as! UIViewController, animated: false, completion: nil)
+            infoViewController = UIStoryboard(name: "Main", bundle: nil)
+                .instantiateViewControllerWithIdentifier("InfoViewController") as! RoutableViewController
 
-        return infoViewController
+            presentViewController(infoViewController as! UIViewController, animated: true,
+                completion: completionHandler)
+
+            return infoViewController
     }
 
-    func popRouteSegment(viewControllerIdentifier: ViewControllerIdentifier) {
-        dismissViewControllerAnimated(false, completion: nil)
+    func popRouteSegment(viewControllerIdentifier: ViewControllerIdentifier,
+        completionHandler: RoutingCompletionHandler) {
+
+        dismissViewControllerAnimated(true, completion: completionHandler)
     }
 
     func changeRouteSegment(fromViewControllerIdentifier: ViewControllerIdentifier,
-        toViewControllerIdentifier: ViewControllerIdentifier) -> RoutableViewController {
+        toViewControllerIdentifier: ViewControllerIdentifier,
+        completionHandler: RoutingCompletionHandler) -> RoutableViewController {
+
             abort()
     }
 
