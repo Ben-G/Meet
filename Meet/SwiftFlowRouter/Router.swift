@@ -61,7 +61,7 @@ public class Router: StoreSubscriber {
     }
 
     public func newState(state: HasNavigationState) {
-        let routingActions = Router.deriveRoutingActionsForTransitionFrom(
+        let routingActions = Router.routingActionsForTransitionFrom(
             lastNavigationState.route, newRoute: state.navigationState.route)
 
         routingActions.forEach { routingAction in
@@ -106,10 +106,11 @@ public class Router: StoreSubscriber {
 
                 let result = dispatch_semaphore_wait(semaphore, waitUntil)
 
-                        if result != 0 {
-                            assertionFailure("[SwiftFlowRouter]: Router is stuck waiting for a completion handler to be called. " +
-                            "Ensure that you have called the completion handler in each Routable element.")
-                        }
+                if result != 0 {
+                    assertionFailure("[SwiftFlowRouter]: Router is stuck waiting for a completion " +
+                        " handler to be called. Ensure that you have called the completion" +
+                        " handler in each Routable element.")
+                }
             }
 
         }
@@ -117,34 +118,46 @@ public class Router: StoreSubscriber {
         lastNavigationState = state.navigationState
     }
 
-    static func deriveRoutingActionsForTransitionFrom(oldRoute: [RouteElementIdentifier],
+    static func largestCommonSubroute(oldRoute: [RouteElementIdentifier],
+        newRoute: [RouteElementIdentifier]) -> Int {
+
+            var largestCommonSubroute = -1
+
+            while largestCommonSubroute + 1 < newRoute.count &&
+                  largestCommonSubroute + 1 < oldRoute.count &&
+                  newRoute[largestCommonSubroute + 1] == oldRoute[largestCommonSubroute + 1] {
+                    largestCommonSubroute++
+            }
+
+            return largestCommonSubroute
+    }
+
+    static func routingActionsForTransitionFrom(oldRoute: [RouteElementIdentifier],
         newRoute: [RouteElementIdentifier]) -> [RoutingActions] {
 
             var routingActions: [RoutingActions] = []
-
-            // find last common subroute
-            var lastCommonSubroute = -1
 
             print("----OLD----")
             print(oldRoute)
             print("----NEW----")
             print(newRoute)
 
-            if oldRoute.count > 0 && newRoute.count > 0 {
-                while lastCommonSubroute + 1 < newRoute.count &&
-                    lastCommonSubroute + 1 < oldRoute.count &&
-                    newRoute[lastCommonSubroute + 1] == oldRoute[lastCommonSubroute + 1] {
-                            lastCommonSubroute++
-                }
-            }
+            // Find the last common subroute between two routes
+            let commonSubroute = largestCommonSubroute(oldRoute, newRoute: newRoute)
 
             // remove all view controllers that are in old state, beyond common subroute but aren't
             // in new state
             var oldRouteIndex = oldRoute.count - 1
 
-            //TODO: Fix code that determines whether last Common Subroute needs to swap or pop
-
-            while oldRouteIndex > lastCommonSubroute + 1 && oldRouteIndex >= 0 {
+            // Pop all route segments of the old route that are no longer in the new route
+            // Stop one element ahead of the commonSubroute. When we are one element ahead of the
+            // commmon subroute we have two options:
+            //
+            // 1. The old route had an element after the commonSubroute and the new route does not
+            //    we need to pop the route segment after the commonSubroute
+            // 2. The new route has a different element after the commonSubroute, we need to replace
+            //    the old route element with the new one
+            while oldRouteIndex > commonSubroute + 1 {
                 let routeSegmentToPop = oldRoute[oldRouteIndex]
 
                 let popAction = RoutingActions.Pop(
@@ -157,32 +170,28 @@ public class Router: StoreSubscriber {
                 oldRouteIndex--
             }
 
-            let newRouteIndex = newRoute.count - 1
+            if (oldRoute.count > newRoute.count) {
+                let routeSegmentToPop = oldRoute[oldRouteIndex]
 
-            if oldRouteIndex == lastCommonSubroute + 1 && oldRouteIndex >= 0
-                && oldRouteIndex <= newRouteIndex {
+                let popAction = RoutingActions.Pop(
+                    responsibleRoutableIndex: oldRouteIndex,
+                    segmentToBePopped: routeSegmentToPop
+                )
 
-                let routeSegmentToPush = newRoute[oldRouteIndex]
+                oldRouteIndex--
+                routingActions.append(popAction)
+            } else if oldRoute.count > 0 && newRoute.count > 0 {
+                let routeSegmentToPush = newRoute[commonSubroute + 1]
 
                 let changeAction = RoutingActions.Change(
-                    responsibleRoutableIndex: oldRouteIndex,
-                    segmentToBeReplaced: oldRoute[oldRouteIndex],
+                    responsibleRoutableIndex: commonSubroute + 1,
+                    segmentToBeReplaced: oldRoute[commonSubroute + 1],
                     newSegment: routeSegmentToPush)
 
                 routingActions.append(changeAction)
-
-            } else if (oldRouteIndex > newRouteIndex) {
-                let routeSegmentToPop = oldRoute[oldRouteIndex]
-
-                let popAction = RoutingActions.Pop(
-                    responsibleRoutableIndex: oldRouteIndex,
-                    segmentToBePopped: routeSegmentToPop
-                )
-
-                routingActions.append(popAction)
-
-                oldRouteIndex--
             }
+
+            let newRouteIndex = newRoute.count - 1
 
             // push remainder of new route
             while oldRouteIndex < newRouteIndex {

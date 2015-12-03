@@ -113,7 +113,7 @@ class SwiftFlowRouterIntegrationTests: QuickSpec {
                     }
                 }
 
-                fit("calls push on the root for a route with two elements") {
+                it("calls push on the root for a route with two elements") {
                     store.dispatch(
                         Action(
                             type: ActionSetRoute,
