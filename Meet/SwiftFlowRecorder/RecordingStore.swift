@@ -71,7 +71,10 @@ public class RecordingMainStore: MainStore {
             return
         }
 
-        super.dispatch(action, callback: callback)
+        super.dispatch(action) { newState in
+            self.computedStates.append(newState)
+            callback?(newState)
+        }
 
         recordAction(action)
         loadedActions.append(action)
