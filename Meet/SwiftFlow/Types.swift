@@ -47,7 +47,7 @@ public struct Action: ActionType {
 
 extension Action: Coding {
 
-    public init?(dictionary: [String : AnyObject]) {
+    public init(dictionary: [String : AnyObject]) {
         self.type = dictionary["type"] as! String
         self.payload = dictionary["payload"] as? [String: AnyObject]
     }
@@ -62,7 +62,7 @@ extension Action: Coding {
     
 }
 
-public protocol StateType {
+public protocol StateType: Coding {
     init()
 }
 
@@ -77,6 +77,6 @@ public protocol AnyReducer {
 }
 
 public protocol Coding {
-    init?(dictionary: [String : AnyObject])
+    init(dictionary: [String : AnyObject])
     func dictionaryRepresentation() -> [String : AnyObject]
 }

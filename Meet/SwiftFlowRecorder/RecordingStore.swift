@@ -136,7 +136,7 @@ public class RecordingMainStore: MainStore {
             options: NSJSONReadingOptions(rawValue: 0)) as! Array<AnyObject>
 
         let actionsArray: [Action] = jsonArray.map {
-            return Action(dictionary: $0["action"] as! [String : AnyObject])!
+            return Action(dictionary: $0["action"] as! [String : AnyObject])
         }
 
         return actionsArray

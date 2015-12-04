@@ -14,3 +14,16 @@ struct AppState: StateType, HasNavigationState {
     var counter: Int = 0
     var navigationState = NavigationState()
 }
+
+extension AppState: Coding {
+
+    init(dictionary: [String : AnyObject]) {
+        counter = dictionary["counter"] as! Int
+        navigationState = NavigationState(dictionary: dictionary["navigationState"] as! [String : AnyObject])
+    }
+
+    func dictionaryRepresentation() -> [String : AnyObject] {
+        return ["counter": counter, "navigationState": navigationState.dictionaryRepresentation()]
+    }
+
+}
