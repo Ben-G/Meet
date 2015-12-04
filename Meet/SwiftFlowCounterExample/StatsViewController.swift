@@ -22,7 +22,7 @@ class StatsViewController: UIViewController, Routable {
             infoViewController = UIStoryboard(name: "Main", bundle: nil)
                 .instantiateViewControllerWithIdentifier("InfoViewController") as! Routable
 
-            presentViewController(infoViewController as! UIViewController, animated: true,
+            presentViewController(infoViewController as! UIViewController, animated: false,
                 completion: completionHandler)
 
             return infoViewController
@@ -31,7 +31,7 @@ class StatsViewController: UIViewController, Routable {
     func popRouteSegment(identifier: RouteElementIdentifier,
         completionHandler: RoutingCompletionHandler) {
 
-        dismissViewControllerAnimated(true, completion: completionHandler)
+        dismissViewControllerAnimated(false, completion: completionHandler)
     }
 
     @IBAction func pushButtonTapped(sender: UIButton) {

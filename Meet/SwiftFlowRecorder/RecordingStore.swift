@@ -26,18 +26,18 @@ public class RecordingMainStore: MainStore {
         }
     }
 
-    var stateHistoryView: StateHistoryView?
+    var stateHistoryView: StateHistorySliderView?
 
     public var window: UIWindow? {
         didSet {
             if let window = window {
                 let windowSize = window.bounds.size
-                stateHistoryView = StateHistoryView(frame: CGRect(x: 0, y: 0,
+                stateHistoryView = StateHistorySliderView(frame: CGRect(x: 0, y: 0,
                     width: windowSize.width, height: 100))
                 window.addSubview(stateHistoryView!)
                 window.bringSubviewToFront(stateHistoryView!)
 
-                stateHistoryView?.cellSelectionCallback = { [unowned self] selection in
+                stateHistoryView?.stateSelectionCallback = { [unowned self] selection in
                     self.replayToState(self.loadedActions, state: selection)
                 }
 

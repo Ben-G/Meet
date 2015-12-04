@@ -54,6 +54,7 @@
 		6289C1861C10ED440062037C /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 624BFC891C0FA48E0047637E /* Nimble.framework */; };
 		6289C1881C1107000062037C /* Routable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6289C1871C1107000062037C /* Routable.swift */; };
 		6289C1891C110CF70062037C /* SwiftFlowPersistenceNSCoding.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BBE7991C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding.framework */; };
+		6289C18B1C1120220062037C /* StateHistorySliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6289C18A1C1120220062037C /* StateHistorySliderView.swift */; };
 		628B30EF1C0B9C0300E2213D /* Unbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 628B30E61C0B9BEF00E2213D /* Unbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		628B30F01C0B9C0D00E2213D /* SwifteriOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 628B30D81C0B9BE500E2213D /* SwifteriOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		628B30F11C0B9C1400E2213D /* SSKeychain.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 628B30C71C0B9BDB00E2213D /* SSKeychain.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -619,6 +620,7 @@
 		627B05E21C09700D00481356 /* StoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTests.swift; sourceTree = "<group>"; };
 		627B05E41C09700D00481356 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6289C1871C1107000062037C /* Routable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Routable.swift; sourceTree = "<group>"; };
+		6289C18A1C1120220062037C /* StateHistorySliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateHistorySliderView.swift; sourceTree = "<group>"; };
 		628B30851C0B9BB300E2213D /* ListKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ListKit.xcodeproj; path = Carthage/Checkouts/ListKit/ListKit.xcodeproj; sourceTree = SOURCE_ROOT; };
 		628B30941C0B9BBE00E2213D /* Result.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Result.xcodeproj; path = Carthage/Checkouts/Result/Result.xcodeproj; sourceTree = SOURCE_ROOT; };
 		628B30AF1C0B9BCB00E2213D /* SDWebImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SDWebImage.xcodeproj; path = Carthage/Checkouts/SDWebImage/SDWebImage.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -779,6 +781,7 @@
 			children = (
 				620CB9F81C0EB19E00892BCE /* StateHistoryView.swift */,
 				620CB9FA1C0EB4D500892BCE /* StateHistoryCollectionViewCell.swift */,
+				6289C18A1C1120220062037C /* StateHistorySliderView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1511,6 +1514,7 @@
 					};
 					62750C201C0E13A100B688CD = {
 						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = Z4999T6UJA;
 					};
 					62750C421C0E261E00B688CD = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -2136,6 +2140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6289C18B1C1120220062037C /* StateHistorySliderView.swift in Sources */,
 				62750C501C0E263A00B688CD /* RecordingStore.swift in Sources */,
 				620CB9F91C0EB19E00892BCE /* StateHistoryView.swift in Sources */,
 				620CB9FB1C0EB4D500892BCE /* StateHistoryCollectionViewCell.swift in Sources */,
@@ -2471,6 +2476,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = SwiftFlowCounterExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.benjamin-encz.SwiftFlowCounterExample";
@@ -2482,6 +2488,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = SwiftFlowCounterExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.benjamin-encz.SwiftFlowCounterExample";
