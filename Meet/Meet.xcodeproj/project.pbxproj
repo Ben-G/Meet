@@ -52,6 +52,8 @@
 		627B05E51C09700D00481356 /* SwiftFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD561C07ADA10080BF30 /* SwiftFlow.framework */; };
 		6289C15B1C10ED3E0062037C /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 624BFC741C0FA4810047637E /* Quick.framework */; };
 		6289C1861C10ED440062037C /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 624BFC891C0FA48E0047637E /* Nimble.framework */; };
+		6289C1881C1107000062037C /* Routable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6289C1871C1107000062037C /* Routable.swift */; };
+		6289C1891C110CF70062037C /* SwiftFlowPersistenceNSCoding.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BBE7991C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding.framework */; };
 		628B30EF1C0B9C0300E2213D /* Unbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 628B30E61C0B9BEF00E2213D /* Unbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		628B30F01C0B9C0D00E2213D /* SwifteriOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 628B30D81C0B9BE500E2213D /* SwifteriOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		628B30F11C0B9C1400E2213D /* SSKeychain.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 628B30C71C0B9BDB00E2213D /* SSKeychain.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -616,6 +618,7 @@
 		627B05E01C09700D00481356 /* SwiftFlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftFlowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		627B05E21C09700D00481356 /* StoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTests.swift; sourceTree = "<group>"; };
 		627B05E41C09700D00481356 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6289C1871C1107000062037C /* Routable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Routable.swift; sourceTree = "<group>"; };
 		628B30851C0B9BB300E2213D /* ListKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ListKit.xcodeproj; path = Carthage/Checkouts/ListKit/ListKit.xcodeproj; sourceTree = SOURCE_ROOT; };
 		628B30941C0B9BBE00E2213D /* Result.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Result.xcodeproj; path = Carthage/Checkouts/Result/Result.xcodeproj; sourceTree = SOURCE_ROOT; };
 		628B30AF1C0B9BCB00E2213D /* SDWebImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SDWebImage.xcodeproj; path = Carthage/Checkouts/SDWebImage/SDWebImage.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -719,6 +722,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6289C1891C110CF70062037C /* SwiftFlowPersistenceNSCoding.framework in Frameworks */,
 				620CB9F21C0E630100892BCE /* SwiftFlow.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -827,6 +831,7 @@
 				6267DD451C07A0A90080BF30 /* SwiftFlowRouter.h */,
 				6267DD471C07A0A90080BF30 /* Info.plist */,
 				629E0BE61C09322E0065D495 /* NavigationActions.swift */,
+				6289C1871C1107000062037C /* Routable.swift */,
 			);
 			path = SwiftFlowRouter;
 			sourceTree = "<group>";
@@ -2088,6 +2093,7 @@
 				629E0BE71C09322E0065D495 /* NavigationActions.swift in Sources */,
 				62E58D231C0AF44900FE505E /* Router.swift in Sources */,
 				62E58D221C0AF44900FE505E /* NavigationState.swift in Sources */,
+				6289C1881C1107000062037C /* Routable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

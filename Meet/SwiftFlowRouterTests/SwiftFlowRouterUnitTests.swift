@@ -21,7 +21,7 @@ class SwiftFlowRouterUnitTests: QuickSpec {
             let counterViewControllerIdentifier = "CounterViewController"
             let statsViewControllerIdentifier = "StatsViewController"
 
-            it("can derive steps from an empty route to a multi segment route") {
+            it("calculates transitions from an empty route to a multi segment route") {
                 let oldRoute: [RouteElementIdentifier] = []
                 let newRoute = [tabBarViewControllerIdentifier, statsViewControllerIdentifier]
 
@@ -104,7 +104,7 @@ class SwiftFlowRouterUnitTests: QuickSpec {
                 expect(new).to(equal(statsViewControllerIdentifier))
             }
 
-            it("transitions frome empty route to empty route") {
+            it("calculates no actions for transition from empty route to empty route") {
                 let oldRoute: [RouteElementIdentifier] = []
                 let newRoute: [RouteElementIdentifier] = []
 
@@ -114,7 +114,17 @@ class SwiftFlowRouterUnitTests: QuickSpec {
                 expect(routingActions).to(haveCount(0))
             }
 
-            it("performs transition with multiple pops") {
+            it("calculates no actions for transitions between identical, non-empty routes") {
+                let oldRoute = [tabBarViewControllerIdentifier, statsViewControllerIdentifier]
+                let newRoute = [tabBarViewControllerIdentifier, statsViewControllerIdentifier]
+
+                let routingActions = Router.routingActionsForTransitionFrom(oldRoute,
+                    newRoute: newRoute)
+
+                expect(routingActions).to(haveCount(0))
+            }
+
+            it("calculates transitions with multiple pops") {
                 let oldRoute = [tabBarViewControllerIdentifier, statsViewControllerIdentifier,
                     counterViewControllerIdentifier]
                 let newRoute = [tabBarViewControllerIdentifier]
@@ -139,6 +149,40 @@ class SwiftFlowRouterUnitTests: QuickSpec {
 
                         if responsibleRoutableIndex == 1
                             && segmentToBePopped == statsViewControllerIdentifier {
+                                action2Correct = true
+                        }
+                }
+
+                expect(action1Correct).to(beTrue())
+                expect(action2Correct).to(beTrue())
+                expect(routingActions).to(haveCount(2))
+            }
+
+            it("calculates transitions with multiple pushes") {
+                let oldRoute = [tabBarViewControllerIdentifier]
+                let newRoute = [tabBarViewControllerIdentifier, statsViewControllerIdentifier,
+                    counterViewControllerIdentifier]
+
+                let routingActions = Router.routingActionsForTransitionFrom(oldRoute,
+                    newRoute: newRoute)
+
+                var action1Correct: Bool?
+                var action2Correct: Bool?
+
+                if case let RoutingActions.Push(responsibleRoutableIndex, segmentToBePushed)
+                    = routingActions[0] {
+
+                        if responsibleRoutableIndex == 1
+                            && segmentToBePushed == statsViewControllerIdentifier {
+                                action1Correct = true
+                        }
+                }
+
+                if case let RoutingActions.Push(responsibleRoutableIndex, segmentToBePushed)
+                    = routingActions[1] {
+
+                        if responsibleRoutableIndex == 2
+                            && segmentToBePushed == counterViewControllerIdentifier {
                                 action2Correct = true
                         }
                 }

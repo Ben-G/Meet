@@ -10,7 +10,7 @@ import UIKit
 import SwiftFlow
 import SwiftFlowRouter
 
-class CounterViewController: UIViewController, StoreSubscriber, RoutableViewController {
+class CounterViewController: UIViewController, StoreSubscriber, Routable {
 
     static let identifier = "CounterViewController"
 
@@ -40,20 +40,20 @@ class CounterViewController: UIViewController, StoreSubscriber, RoutableViewCont
         )
     }
 
-    func pushRouteSegment(viewControllerIdentifier: ViewControllerIdentifier,
-        completionHandler: RoutingCompletionHandler) -> RoutableViewController {
+    func pushRouteSegment(routeElementIdentifier: RouteElementIdentifier,
+        completionHandler: RoutingCompletionHandler) -> Routable {
 
             abort()
     }
 
-    func popRouteSegment(viewControllerIdentifier: ViewControllerIdentifier,
+    func popRouteSegment(routeElementIdentifier: RouteElementIdentifier,
         completionHandler: RoutingCompletionHandler) {
             abort()
     }
 
-    func changeRouteSegment(fromViewControllerIdentifier: ViewControllerIdentifier,
-        toViewControllerIdentifier: ViewControllerIdentifier,
-        completionHandler: RoutingCompletionHandler) -> RoutableViewController {
+    func changeRouteSegment(fromSegment: RouteElementIdentifier,
+        to: RouteElementIdentifier,
+        completionHandler: RoutingCompletionHandler) -> Routable {
             
             abort()
     }

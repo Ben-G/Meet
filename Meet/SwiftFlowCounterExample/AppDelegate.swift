@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var router: Router!
     var window: UIWindow?
 
-    var rootViewController: RoutableViewController!
+    var rootViewController: Routable!
     var counterViewController: UIViewController!
     var statsViewController: UIViewController!
 
@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabBarController.delegate = self
         rootViewController = tabBarController
 
-        router = Router(store: mainStore, rootViewControllerProvider: provideRootViewController)
+        router = Router(store: mainStore, rootRoutable: RootRoutable(routable: rootViewController))
 
         mainStore.dispatch { state, store in
 
@@ -61,8 +61,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func provideRootViewController(identifier: ViewControllerIdentifier) -> RoutableViewController {
-        return rootViewController
+}
+
+class RootRoutable: Routable {
+
+    var routable: Routable
+
+    init(routable: Routable) {
+        self.routable = routable
+    }
+
+    func pushRouteSegment(routeElementIdentifier: RouteElementIdentifier,
+        completionHandler: RoutingCompletionHandler) -> Routable {
+            completionHandler()
+            return routable
+    }
+
+    func popRouteSegment(routeElementIdentifier: RouteElementIdentifier,
+        completionHandler: RoutingCompletionHandler) {
+            completionHandler()
+    }
+
+    func changeRouteSegment(from: RouteElementIdentifier, to: RouteElementIdentifier,
+        completionHandler: RoutingCompletionHandler) -> Routable {
+            abort()
     }
 
 }
@@ -92,41 +114,41 @@ extension AppDelegate: UITabBarControllerDelegate {
 
 }
 
-extension UITabBarController: RoutableViewController {
+extension UITabBarController: Routable {
 
-    public func changeRouteSegment(fromViewControllerIdentifier: ViewControllerIdentifier,
-        toViewControllerIdentifier: ViewControllerIdentifier,
-        completionHandler: RoutingCompletionHandler) -> RoutableViewController {
-            if (toViewControllerIdentifier == CounterViewController.identifier) {
+    public func changeRouteSegment(fromSegment: RouteElementIdentifier,
+        to: RouteElementIdentifier,
+        completionHandler: RoutingCompletionHandler) -> Routable {
+            if (to == CounterViewController.identifier) {
                 selectedIndex = 0
                 completionHandler()
-                return viewControllers![0] as! RoutableViewController
-            } else if (toViewControllerIdentifier == StatsViewController.identifier) {
+                return viewControllers![0] as! Routable
+            } else if (to == StatsViewController.identifier) {
                 selectedIndex = 1
                 completionHandler()
-                return viewControllers![1] as! RoutableViewController
+                return viewControllers![1] as! Routable
             }
 
             abort()
     }
 
-    public func pushRouteSegment(viewControllerIdentifier: ViewControllerIdentifier,
+    public func pushRouteSegment(identifier: RouteElementIdentifier,
         completionHandler: RoutingCompletionHandler)
-        -> RoutableViewController {
-            if (viewControllerIdentifier == CounterViewController.identifier) {
+        -> Routable {
+            if (identifier == CounterViewController.identifier) {
                 selectedIndex = 0
                 completionHandler()
-                return viewControllers![0] as! RoutableViewController
-            } else if (viewControllerIdentifier == StatsViewController.identifier) {
+                return viewControllers![0] as! Routable
+            } else if (identifier == StatsViewController.identifier) {
                 selectedIndex = 1
                 completionHandler()
-                return viewControllers![1] as! RoutableViewController
+                return viewControllers![1] as! Routable
             }
 
             abort()
     }
 
-    public func popRouteSegment(viewControllerIdentifier: ViewControllerIdentifier,
+    public func popRouteSegment(viewControllerIdentifier: RouteElementIdentifier,
         completionHandler: RoutingCompletionHandler) {
         // would need to unset root view controller here
             completionHandler()

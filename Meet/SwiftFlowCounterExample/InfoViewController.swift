@@ -10,24 +10,24 @@ import UIKit
 import SwiftFlow
 import SwiftFlowRouter
 
-class InfoViewController: UIViewController, RoutableViewController {
+class InfoViewController: UIViewController, Routable {
 
     static let identifier = "InfoViewController"
 
-    func pushRouteSegment(viewControllerIdentifier: ViewControllerIdentifier,
-        completionHandler: RoutingCompletionHandler) -> RoutableViewController {
+    func pushRouteSegment(viewControllerIdentifier: RouteElementIdentifier,
+        completionHandler: RoutingCompletionHandler) -> Routable {
 
             abort()
     }
 
-    func popRouteSegment(viewControllerIdentifier: ViewControllerIdentifier,
+    func popRouteSegment(viewControllerIdentifier: RouteElementIdentifier,
         completionHandler: RoutingCompletionHandler) {
             abort()
     }
 
-    func changeRouteSegment(fromViewControllerIdentifier: ViewControllerIdentifier,
-        toViewControllerIdentifier: ViewControllerIdentifier,
-        completionHandler: RoutingCompletionHandler) -> RoutableViewController {
+    func changeRouteSegment(from: RouteElementIdentifier,
+        to: RouteElementIdentifier,
+        completionHandler: RoutingCompletionHandler) -> Routable {
 
             abort()
     }

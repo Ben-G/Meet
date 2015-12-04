@@ -9,58 +9,26 @@
 import UIKit
 import SwiftFlow
 
-public typealias RoutingCompletionHandler = () -> Void
-
-public protocol Routable: RoutablePush, RoutablePop, RoutableChange {}
-
-public protocol RoutableChange {
-    func changeRouteSegment(from: RouteElementIdentifier,
-        to: RouteElementIdentifier,
-        completionHandler: RoutingCompletionHandler) -> Routable
-}
-
-public protocol RoutablePush {
-    func pushRouteSegment(routeElementIdentifier: RouteElementIdentifier,
-        completionHandler: RoutingCompletionHandler) -> Routable
-}
-
-public protocol RoutablePop {
-    func popRouteSegment(routeElementIdentifier: RouteElementIdentifier,
-        completionHandler: RoutingCompletionHandler)
-}
-
-public protocol RoutablePushOnly: Routable {}
-
-extension RoutablePushOnly {
-    public func changeRouteSegment(from: RouteElementIdentifier,
-        to: RouteElementIdentifier, completionHandler: RoutingCompletionHandler) -> Routable {
-            fatalError("This routable cannot change segments. You have not implemented it.")
-    }
-
-    public func popRouteSegment(routeElementIdentifier: RouteElementIdentifier,
-        completionHandler: RoutingCompletionHandler) {
-        fatalError("This routable cannot change segments. You have not implemented it.")
-    }
-}
-
 public class Router: StoreSubscriber {
 
     var store: MainStore
     var lastNavigationState = NavigationState()
-
-    // maps route segements to responsible Routable instances
-    var routableForSubroute: [Routable] = []
-
+    var routables: [Routable] = []
     let waitForRoutingCompletionQueue = dispatch_queue_create("WaitForRoutingCompletionQueue", nil)
 
     public init(store: MainStore, rootRoutable: Routable) {
         self.store = store
-        self.routableForSubroute.append(rootRoutable)
+        self.routables.append(rootRoutable)
 
         self.store.subscribe(self)
     }
 
     public func newState(state: HasNavigationState) {
+        print("---OLD---")
+        print(lastNavigationState.route)
+        print("---NEW---")
+        print(state.navigationState.route)
+
         let routingActions = Router.routingActionsForTransitionFrom(
             lastNavigationState.route, newRoute: state.navigationState.route)
 
@@ -68,23 +36,28 @@ public class Router: StoreSubscriber {
 
             let semaphore = dispatch_semaphore_create(0)
 
+            // Dispatch all routing actions onto this dedicated queue. This will ensure that
+            // only one routing action can run at any given time. This is important for using this
+            // Router with UI frameworks. Whenever a navigation action is triggered, this queue will
+            // block (using semaphore_wait) until it receives a callback from the Routable 
+            // indicating that the navigation action has completed
             dispatch_async(waitForRoutingCompletionQueue) {
                 switch routingAction {
 
                 case let .Pop(responsibleRoutableIndex, segmentToBePopped):
                     dispatch_async(dispatch_get_main_queue()) {
-                        self.routableForSubroute[responsibleRoutableIndex]
+                        self.routables[responsibleRoutableIndex]
                             .popRouteSegment(segmentToBePopped) {
                             dispatch_semaphore_signal(semaphore)
                         }
 
-                        self.routableForSubroute.removeAtIndex(responsibleRoutableIndex + 1)
+                        self.routables.removeAtIndex(responsibleRoutableIndex + 1)
                     }
 
                 case let .Change(responsibleRoutableIndex, segmentToBeReplaced, newSegment):
                     dispatch_async(dispatch_get_main_queue()) {
-                        self.routableForSubroute[responsibleRoutableIndex + 1] =
-                            self.routableForSubroute[responsibleRoutableIndex]
+                        self.routables[responsibleRoutableIndex + 1] =
+                            self.routables[responsibleRoutableIndex]
                                 .changeRouteSegment(segmentToBeReplaced,
                                     to: newSegment) {
                                         dispatch_semaphore_signal(semaphore)
@@ -93,8 +66,8 @@ public class Router: StoreSubscriber {
 
                 case let .Push(responsibleRoutableIndex, segmentToBePushed):
                     dispatch_async(dispatch_get_main_queue()) {
-                        self.routableForSubroute.append(
-                            self.routableForSubroute[responsibleRoutableIndex]
+                        self.routables.append(
+                            self.routables[responsibleRoutableIndex]
                                 .pushRouteSegment(segmentToBePushed) {
                                     dispatch_semaphore_signal(semaphore)
                             }
@@ -107,9 +80,9 @@ public class Router: StoreSubscriber {
                 let result = dispatch_semaphore_wait(semaphore, waitUntil)
 
                 if result != 0 {
-                    assertionFailure("[SwiftFlowRouter]: Router is stuck waiting for a completion " +
-                        " handler to be called. Ensure that you have called the completion" +
-                        " handler in each Routable element.")
+                    assertionFailure("[SwiftFlowRouter]: Router is stuck waiting for a" +
+                        " completion handler to be called. Ensure that you have called the " +
+                        " completion handler in each Routable element.")
                 }
             }
 
@@ -117,6 +90,8 @@ public class Router: StoreSubscriber {
 
         lastNavigationState = state.navigationState
     }
+
+    // MARK: Route Transformation Logic
 
     static func largestCommonSubroute(oldRoute: [RouteElementIdentifier],
         newRoute: [RouteElementIdentifier]) -> Int {
@@ -132,79 +107,91 @@ public class Router: StoreSubscriber {
             return largestCommonSubroute
     }
 
+    // Maps Route index to Routable index. Routable index is offset by 1 because the root Routable
+    // is not represented in the route, e.g.
+    // route = ["tabBar"]
+    // routables = [RootRoutable, TabBarRoutable]
+    static func routableIndexForRouteSegment(segment: Int) -> Int {
+        return segment + 1
+    }
+
     static func routingActionsForTransitionFrom(oldRoute: [RouteElementIdentifier],
         newRoute: [RouteElementIdentifier]) -> [RoutingActions] {
 
             var routingActions: [RoutingActions] = []
 
-            print("----OLD----")
-            print(oldRoute)
-            print("----NEW----")
-            print(newRoute)
-
             // Find the last common subroute between two routes
             let commonSubroute = largestCommonSubroute(oldRoute, newRoute: newRoute)
 
-            // remove all view controllers that are in old state, beyond common subroute but aren't
-            // in new state
-            var oldRouteIndex = oldRoute.count - 1
+            if commonSubroute == oldRoute.count - 1 && commonSubroute == newRoute.count - 1 {
+                return []
+            }
+            // Keeps track which element of the routes we are working on
+            // We start at the end of the old route
+            var routeBuildingIndex = oldRoute.count - 1
 
             // Pop all route segments of the old route that are no longer in the new route
             // Stop one element ahead of the commonSubroute. When we are one element ahead of the
-            // commmon subroute we have two options:
+            // commmon subroute we have three options:
             //
             // 1. The old route had an element after the commonSubroute and the new route does not
             //    we need to pop the route segment after the commonSubroute
-            // 2. The new route has a different element after the commonSubroute, we need to replace
+            // 2. The old route had no element after the commonSubroute and the new route does, we
+            //    we need to push the route segment(s) after the commonSubroute
+            // 3. The new route has a different element after the commonSubroute, we need to replace
             //    the old route element with the new one
-            while oldRouteIndex > commonSubroute + 1 {
-                let routeSegmentToPop = oldRoute[oldRouteIndex]
+            while routeBuildingIndex > commonSubroute + 1 {
+                let routeSegmentToPop = oldRoute[routeBuildingIndex]
 
                 let popAction = RoutingActions.Pop(
-                    responsibleRoutableIndex: oldRouteIndex,
+                    responsibleRoutableIndex: routableIndexForRouteSegment(routeBuildingIndex - 1),
                     segmentToBePopped: routeSegmentToPop
                 )
 
                 routingActions.append(popAction)
-
-                oldRouteIndex--
+                routeBuildingIndex--
             }
 
-            if (oldRoute.count > newRoute.count) {
-                let routeSegmentToPop = oldRoute[oldRouteIndex]
-
+            // This is the 1. case:
+            // "The old route had an element after the commonSubroute and the new route does not
+            //  we need to pop the route segment after the commonSubroute"
+            if oldRoute.count > newRoute.count {
                 let popAction = RoutingActions.Pop(
-                    responsibleRoutableIndex: oldRouteIndex,
-                    segmentToBePopped: routeSegmentToPop
+                    responsibleRoutableIndex: routableIndexForRouteSegment(routeBuildingIndex - 1),
+                    segmentToBePopped: oldRoute[routeBuildingIndex]
                 )
 
-                oldRouteIndex--
                 routingActions.append(popAction)
-            } else if oldRoute.count > 0 && newRoute.count > 0 {
-                let routeSegmentToPush = newRoute[commonSubroute + 1]
-
+                routeBuildingIndex--
+            }
+            // This is the 3. case:
+            // "The new route has a different element after the commonSubroute, we need to replace
+            //  the old route element with the new one"
+            else if !(newRoute.count > oldRoute.count) && oldRoute.count > 0 && newRoute.count > 0 {
                 let changeAction = RoutingActions.Change(
-                    responsibleRoutableIndex: commonSubroute + 1,
+                    responsibleRoutableIndex: routableIndexForRouteSegment(commonSubroute),
                     segmentToBeReplaced: oldRoute[commonSubroute + 1],
-                    newSegment: routeSegmentToPush)
+                    newSegment: newRoute[commonSubroute + 1])
 
                 routingActions.append(changeAction)
             }
 
+            // Push remainder of elements in new Route that weren't in old Route, this covers
+            // the 2. case:
+            // "The old route had no element after the commonSubroute and the new route does,
+            //  we need to push the route segment(s) after the commonSubroute"
             let newRouteIndex = newRoute.count - 1
 
-            // push remainder of new route
-            while oldRouteIndex < newRouteIndex {
-                let routeSegmentToPush = newRoute[oldRouteIndex + 1]
+            while routeBuildingIndex < newRouteIndex {
+                let routeSegmentToPush = newRoute[routeBuildingIndex + 1]
 
                 let pushAction = RoutingActions.Push(
-                    responsibleRoutableIndex: oldRouteIndex + 1,
+                    responsibleRoutableIndex: routableIndexForRouteSegment(routeBuildingIndex),
                     segmentToBePushed: routeSegmentToPush
                 )
 
                 routingActions.append(pushAction)
-
-                oldRouteIndex++
+                routeBuildingIndex++
             }
 
             return routingActions

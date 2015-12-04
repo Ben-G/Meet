@@ -10,17 +10,17 @@ import UIKit
 import SwiftFlow
 import SwiftFlowRouter
 
-class StatsViewController: UIViewController, RoutableViewController {
+class StatsViewController: UIViewController, Routable {
 
     static let identifier = "StatsViewController"
 
-    var infoViewController: RoutableViewController!
+    var infoViewController: Routable!
 
-    func pushRouteSegment(viewControllerIdentifier: ViewControllerIdentifier,
-        completionHandler: RoutingCompletionHandler) -> RoutableViewController {
+    func pushRouteSegment(viewControllerIdentifier: RouteElementIdentifier,
+        completionHandler: RoutingCompletionHandler) -> Routable {
 
             infoViewController = UIStoryboard(name: "Main", bundle: nil)
-                .instantiateViewControllerWithIdentifier("InfoViewController") as! RoutableViewController
+                .instantiateViewControllerWithIdentifier("InfoViewController") as! Routable
 
             presentViewController(infoViewController as! UIViewController, animated: true,
                 completion: completionHandler)
@@ -28,15 +28,15 @@ class StatsViewController: UIViewController, RoutableViewController {
             return infoViewController
     }
 
-    func popRouteSegment(viewControllerIdentifier: ViewControllerIdentifier,
+    func popRouteSegment(identifier: RouteElementIdentifier,
         completionHandler: RoutingCompletionHandler) {
 
         dismissViewControllerAnimated(true, completion: completionHandler)
     }
 
-    func changeRouteSegment(fromViewControllerIdentifier: ViewControllerIdentifier,
-        toViewControllerIdentifier: ViewControllerIdentifier,
-        completionHandler: RoutingCompletionHandler) -> RoutableViewController {
+    func changeRouteSegment(from: RouteElementIdentifier,
+        to: RouteElementIdentifier,
+        completionHandler: RoutingCompletionHandler) -> Routable {
 
             abort()
     }
