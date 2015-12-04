@@ -16,13 +16,6 @@ enum TwitterAPIAction: Action {
     case SetUserSearchResults(Result<[TwitterUser], TwitterAPIError>)
 }
 
-enum DataMutationAction: Action {
-    case CreateContactFromEmail(String)
-    case CreateContactWithTwitterUser(TwitterUser)
-    case DeleteContact(Int)
-    case SetContacts([Contact])
-}
-
 enum LocationServiceAction: Action {
     case SetLocationServiceBusy(Bool)
     case SetLocation(Location)

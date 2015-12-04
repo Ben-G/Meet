@@ -22,6 +22,8 @@
 		625E65651C1124A30027C288 /* SwiftFlowPersistenceNSCoding.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 62BBE7991C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		625E65681C1124A30027C288 /* SwiftFlowRecorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62750C431C0E261E00B688CD /* SwiftFlowRecorder.framework */; };
 		625E65691C1124A30027C288 /* SwiftFlowRecorder.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 62750C431C0E261E00B688CD /* SwiftFlowRecorder.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		625E65A11C1247CB0027C288 /* DataMutationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E65A01C1247CB0027C288 /* DataMutationActions.swift */; };
+		625E65A31C124DE60027C288 /* TwitterAPIActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E65A21C124DE60027C288 /* TwitterAPIActions.swift */; };
 		6267DD461C07A0A90080BF30 /* SwiftFlowRouter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6267DD451C07A0A90080BF30 /* SwiftFlowRouter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6267DD4A1C07A0A90080BF30 /* SwiftFlowRouter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD431C07A0A90080BF30 /* SwiftFlowRouter.framework */; };
 		6267DD4B1C07A0A90080BF30 /* SwiftFlowRouter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD431C07A0A90080BF30 /* SwiftFlowRouter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -628,6 +630,8 @@
 		624BFC611C0FA4810047637E /* Quick.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quick.xcodeproj; path = Carthage/Checkouts/Quick/Quick.xcodeproj; sourceTree = SOURCE_ROOT; };
 		624BFC7F1C0FA48E0047637E /* Nimble.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nimble.xcodeproj; path = Carthage/Checkouts/Nimble/Nimble.xcodeproj; sourceTree = SOURCE_ROOT; };
 		624BFC961C0FB5D80047637E /* SwiftFlowRouterUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftFlowRouterUnitTests.swift; sourceTree = "<group>"; };
+		625E65A01C1247CB0027C288 /* DataMutationActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataMutationActions.swift; sourceTree = "<group>"; };
+		625E65A21C124DE60027C288 /* TwitterAPIActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterAPIActions.swift; sourceTree = "<group>"; };
 		6267DD431C07A0A90080BF30 /* SwiftFlowRouter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftFlowRouter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6267DD451C07A0A90080BF30 /* SwiftFlowRouter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftFlowRouter.h; sourceTree = "<group>"; };
 		6267DD471C07A0A90080BF30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1252,6 +1256,8 @@
 				62D3B6FF1BF446310056D509 /* Actions.swift */,
 				626DA4501BFFEDBE00988FC0 /* TwitterAPIActionCreator.swift */,
 				6292BEE61C0C131E00CC1B8E /* LocationServiceActionCreator.swift */,
+				625E65A01C1247CB0027C288 /* DataMutationActions.swift */,
+				625E65A21C124DE60027C288 /* TwitterAPIActions.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -2218,8 +2224,10 @@
 				626DA42D1BFE8CC700988FC0 /* Contact.swift in Sources */,
 				6292BEEA1C0C162000CC1B8E /* LocationService.swift in Sources */,
 				626DA4511BFFEDBE00988FC0 /* TwitterAPIActionCreator.swift in Sources */,
+				625E65A31C124DE60027C288 /* TwitterAPIActions.swift in Sources */,
 				62D4927E1C02C1B200607938 /* TwitterUser.swift in Sources */,
 				62D3B7061BF457C40056D509 /* SearchTwitterViewController.swift in Sources */,
+				625E65A11C1247CB0027C288 /* DataMutationActions.swift in Sources */,
 				6292BEEC1C0C2D7100CC1B8E /* LocationServiceReducer.swift in Sources */,
 				6292BEE51C0C102D00CC1B8E /* Location.swift in Sources */,
 				626DA4551BFFEF5B00988FC0 /* TwitterAPIReducer.swift in Sources */,

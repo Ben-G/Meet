@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftFlow
 import SwifteriOS
 
 struct TwitterUser {
@@ -26,4 +27,25 @@ struct TwitterUser {
             profilePictureURL = nil
         }
     }
+}
+
+extension TwitterUser: Coding {
+
+    init(dictionary: [String : AnyObject]) {
+        self.username = dictionary["username"] as! String
+        self.name = dictionary["name"] as! String
+
+        let profilePictureURL = dictionary["profilePictureURL"] as! String
+
+        if profilePictureURL != "null" {
+            self.profilePictureURL = NSURL(string: profilePictureURL)!
+        }
+
+    }
+
+    func dictionaryRepresentation() -> [String : AnyObject] {
+        return ["username": self.username, "name": self.name,
+            "profilePictureURL": profilePictureURL ?? "null"]
+    }
+
 }

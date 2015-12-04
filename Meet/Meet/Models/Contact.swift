@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftFlow
 import SwiftFlowPersistenceNSCoding
 
 struct Contact: Model {
@@ -40,14 +41,14 @@ struct Contact: Model {
 
 extension Contact: Coding {
 
-    init?(dictionary: NSDictionary) {
-        guard let identifier = dictionary["identifier"] as? Int else { return nil }
+    init(dictionary: [String : AnyObject]) {
+        let identifier = dictionary["identifier"] as! Int
 
-        let emailAddress = dictionary["email"] as? String
-        let twitterHandle = dictionary["twitterHandle"] as? String
+        let emailAddress = dictionary["email"] as! String
+        let twitterHandle = dictionary["twitterHandle"] as! String
 
         // Empty String equals nil in serialization for this type
-        if twitterHandle == "" && emailAddress == "" { return nil }
+        if twitterHandle == "" && emailAddress == "" { abort() }
 
         if twitterHandle == "" {
             self.twitterHandle = nil
@@ -64,7 +65,7 @@ extension Contact: Coding {
         self.identifier = identifier
     }
 
-    func dictionaryRepresentation() -> NSDictionary {
+    func dictionaryRepresentation() -> [String : AnyObject] {
         return [
             "email": self.emailAddress ?? "",
             "twitterHandle": self.twitterHandle ?? "",

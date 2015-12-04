@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftFlow
 import SwiftFlowPersistenceNSCoding
 
 struct DataState: Coding {
@@ -14,12 +15,12 @@ struct DataState: Coding {
 
     init() {}
 
-    init?(dictionary: NSDictionary) {
+    init(dictionary: [String : AnyObject]) {
         let array = dictionary["contacts"] as? NSArray
         contacts = array?.map { Contact(dictionary: $0 as! NSDictionary)! } ?? []
     }
 
-    func dictionaryRepresentation() -> NSDictionary {
+    func dictionaryRepresentation() -> [String : AnyObject] {
         let contactsArray = contacts.map { $0.dictionaryRepresentation() }
         return ["contacts": contactsArray]
     }
