@@ -83,7 +83,8 @@ class RootRoutable: Routable {
 
 extension AppDelegate: UITabBarControllerDelegate {
 
-    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
+    func tabBarController(tabBarController: UITabBarController,
+        shouldSelectViewController viewController: UIViewController) -> Bool {
 
         if viewController is CounterViewController {
             mainStore.dispatch(

@@ -14,7 +14,7 @@ public struct NavigationState {
     public init() {}
 
     public var route: [RouteElementIdentifier] = []
-    public var subRouteState: [NSDictionary] = []
+    public var subRouteState: [[String : Any]] = []
 }
 
 public protocol HasNavigationState {

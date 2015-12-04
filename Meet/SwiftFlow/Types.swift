@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol PayloadConvertible {
-    func toPayload() -> NSDictionary
+    func toPayload() -> [String: AnyObject]
 }
 
 public protocol ActionConvertible: ActionType {
@@ -22,14 +22,14 @@ public protocol ActionType {
 
 public struct Action: ActionType {
     public let type: String
-    public let payload: NSDictionary?
+    public let payload: [String: AnyObject]?
 
     public init(_ type: String) {
         self.type = type
         self.payload = nil
     }
 
-    public init(type: String, payload: NSDictionary) {
+    public init(type: String, payload: [String: AnyObject]) {
         self.type = type
         self.payload = payload
     }
@@ -47,12 +47,12 @@ public struct Action: ActionType {
 
 extension Action: Coding {
 
-    public init?(dictionary: NSDictionary) {
+    public init?(dictionary: [String : AnyObject]) {
         self.type = dictionary["type"] as! String
-        self.payload = dictionary["payload"] as? NSDictionary
+        self.payload = dictionary["payload"] as? [String: AnyObject]
     }
 
-    public func dictionaryRepresentation() -> NSDictionary {
+    public func dictionaryRepresentation() -> [String : AnyObject] {
         if let payload = payload {
             return ["type": type, "payload": payload]
         } else {
@@ -77,6 +77,6 @@ public protocol AnyReducer {
 }
 
 public protocol Coding {
-    init?(dictionary: NSDictionary)
-    func dictionaryRepresentation() -> NSDictionary
+    init?(dictionary: [String : AnyObject])
+    func dictionaryRepresentation() -> [String : AnyObject]
 }

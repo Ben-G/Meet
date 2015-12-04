@@ -31,7 +31,8 @@ public class PersistenceAdapter<DataStateType: Coding,
             do {
                 let data = NSData(contentsOfURL: path)
                 if let data = data {
-                    let state = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? NSDictionary
+                    let state =
+                        NSKeyedUnarchiver.unarchiveObjectWithData(data) as? [String : AnyObject]
                     if let state = state {
                         return DataStateType(dictionary: state)
                     } else {
