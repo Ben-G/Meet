@@ -36,11 +36,8 @@ class StatsViewController: UIViewController, Routable {
 
     @IBAction func pushButtonTapped(sender: UIButton) {
         mainStore.dispatch(
-            Action (
-                type: ActionSetRoute,
-                payload: ["route": ["TabBarViewController", StatsViewController.identifier,
-                    InfoViewController.identifier]]
-            )
+            SetRouteAction(["TabBarViewController", StatsViewController.identifier,
+                    InfoViewController.identifier])
         )
     }
 

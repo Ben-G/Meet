@@ -65,7 +65,7 @@ public class RecordingMainStore: MainStore {
         recordAction(action)
     }
 
-    public override func dispatch(action: Action, callback: DispatchCallback?) {
+    public override func dispatch(action: ActionType, callback: DispatchCallback?) {
         if let actionsToReplay = actionsToReplay where actionsToReplay > 0 {
             // ignore actions that are dispatched during replay
             return
@@ -76,8 +76,8 @@ public class RecordingMainStore: MainStore {
             callback?(newState)
         }
 
-        recordAction(action)
-        loadedActions.append(action)
+        recordAction(action.toAction())
+        loadedActions.append(action.toAction())
     }
 
     func recordAction(action: Action) {

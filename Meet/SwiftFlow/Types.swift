@@ -8,7 +8,19 @@
 
 import Foundation
 
-public struct Action {
+public protocol PayloadConvertible {
+    func toPayload() -> NSDictionary
+}
+
+public protocol ActionConvertible: ActionType {
+    init (_ action: Action)
+}
+
+public protocol ActionType {
+    func toAction() -> Action
+}
+
+public struct Action: ActionType {
     public let type: String
     public let payload: NSDictionary?
 
@@ -21,6 +33,16 @@ public struct Action {
         self.type = type
         self.payload = payload
     }
+
+    public init(type: String, payload payloadConvertible: PayloadConvertible) {
+        self.type = type
+        self.payload = payloadConvertible.toPayload()
+    }
+
+    public func toAction() -> Action {
+        return self
+    }
+
 }
 
 extension Action: Coding {

@@ -39,7 +39,7 @@ public protocol Store {
      ```
      - parameter action: The action that is being dispatched to the store
     */
-    func dispatch(action: Action)
+    func dispatch(action: ActionType)
 
     /**
      Dispatches an action creator to the store. Action creators are functions that generate
@@ -90,13 +90,13 @@ public protocol Store {
      ```
      - parameter action: The action that is being dispatched to the store
      */
-    func dispatch(action: Action, callback: DispatchCallback?)
+    func dispatch(action: ActionType, callback: DispatchCallback?)
     func dispatch(actionCreatorProvider: ActionCreator, callback: DispatchCallback?)
     func dispatch(asyncActionCreatorProvider: AsyncActionCreator, callback: DispatchCallback?)
 }
 
 public typealias DispatchCallback = (StateType) -> Void
-public typealias ActionCreator = (state: StateType, store: Store) -> Action?
+public typealias ActionCreator = (state: StateType, store: Store) -> ActionType?
 
 /// AsyncActionCreators allow the developer to wait for the completion of an async action
 public typealias AsyncActionCreator = (state: StateType, store: Store,

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		620CB9F11C0E5D9600892BCE /* SwiftFlowRouter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD431C07A0A90080BF30 /* SwiftFlowRouter.framework */; };
 		620CB9F21C0E630100892BCE /* SwiftFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD561C07ADA10080BF30 /* SwiftFlow.framework */; };
 		620CB9F91C0EB19E00892BCE /* StateHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620CB9F81C0EB19E00892BCE /* StateHistoryView.swift */; };
 		620CB9FB1C0EB4D500892BCE /* StateHistoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620CB9FA1C0EB4D500892BCE /* StateHistoryCollectionViewCell.swift */; };
@@ -15,6 +14,14 @@
 		624BFC591C0FA3B00047637E /* SwiftFlowRouterIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624BFC581C0FA3B00047637E /* SwiftFlowRouterIntegrationTests.swift */; };
 		624BFC5B1C0FA3B00047637E /* SwiftFlowRouter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD431C07A0A90080BF30 /* SwiftFlowRouter.framework */; };
 		624BFC971C0FB5D80047637E /* SwiftFlowRouterUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624BFC961C0FB5D80047637E /* SwiftFlowRouterUnitTests.swift */; };
+		625E655C1C1124A20027C288 /* SwiftFlowRouter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD431C07A0A90080BF30 /* SwiftFlowRouter.framework */; };
+		625E655D1C1124A20027C288 /* SwiftFlowRouter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD431C07A0A90080BF30 /* SwiftFlowRouter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		625E65601C1124A20027C288 /* SwiftFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD561C07ADA10080BF30 /* SwiftFlow.framework */; };
+		625E65611C1124A20027C288 /* SwiftFlow.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD561C07ADA10080BF30 /* SwiftFlow.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		625E65641C1124A30027C288 /* SwiftFlowPersistenceNSCoding.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BBE7991C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding.framework */; };
+		625E65651C1124A30027C288 /* SwiftFlowPersistenceNSCoding.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 62BBE7991C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		625E65681C1124A30027C288 /* SwiftFlowRecorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62750C431C0E261E00B688CD /* SwiftFlowRecorder.framework */; };
+		625E65691C1124A30027C288 /* SwiftFlowRecorder.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 62750C431C0E261E00B688CD /* SwiftFlowRecorder.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6267DD461C07A0A90080BF30 /* SwiftFlowRouter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6267DD451C07A0A90080BF30 /* SwiftFlowRouter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6267DD4A1C07A0A90080BF30 /* SwiftFlowRouter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD431C07A0A90080BF30 /* SwiftFlowRouter.framework */; };
 		6267DD4B1C07A0A90080BF30 /* SwiftFlowRouter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD431C07A0A90080BF30 /* SwiftFlowRouter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -47,7 +54,6 @@
 		62750C4A1C0E261E00B688CD /* SwiftFlowRecorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62750C431C0E261E00B688CD /* SwiftFlowRecorder.framework */; };
 		62750C4B1C0E261E00B688CD /* SwiftFlowRecorder.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 62750C431C0E261E00B688CD /* SwiftFlowRecorder.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		62750C501C0E263A00B688CD /* RecordingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62750C4F1C0E263A00B688CD /* RecordingStore.swift */; };
-		62750C511C0E480F00B688CD /* SwiftFlowRecorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62750C431C0E261E00B688CD /* SwiftFlowRecorder.framework */; };
 		62750C531C0E5C2D00B688CD /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62750C521C0E5C2D00B688CD /* StatsViewController.swift */; };
 		627B05E51C09700D00481356 /* SwiftFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD561C07ADA10080BF30 /* SwiftFlow.framework */; };
 		6289C15B1C10ED3E0062037C /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 624BFC741C0FA4810047637E /* Quick.framework */; };
@@ -221,6 +227,34 @@
 			proxyType = 2;
 			remoteGlobalIDString = 1F5DF15E1BDCA0CE00C3A531;
 			remoteInfo = "Nimble-tvOSTests";
+		};
+		625E655E1C1124A20027C288 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 62D3B6B01BF2FAA80056D509 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6267DD421C07A0A90080BF30;
+			remoteInfo = SwiftFlowRouter;
+		};
+		625E65621C1124A20027C288 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 62D3B6B01BF2FAA80056D509 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6267DD551C07ADA10080BF30;
+			remoteInfo = SwiftFlow;
+		};
+		625E65661C1124A30027C288 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 62D3B6B01BF2FAA80056D509 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 62BBE7981C0ACE59004D6822;
+			remoteInfo = SwiftFlowPersistenceNSCoding;
+		};
+		625E656A1C1124A30027C288 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 62D3B6B01BF2FAA80056D509 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 62750C421C0E261E00B688CD;
+			remoteInfo = SwiftFlowRecorder;
 		};
 		6267DD481C07A0A90080BF30 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -547,6 +581,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		625E659F1C1124A40027C288 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				625E65611C1124A20027C288 /* SwiftFlow.framework in Embed Frameworks */,
+				625E65651C1124A30027C288 /* SwiftFlowPersistenceNSCoding.framework in Embed Frameworks */,
+				625E65691C1124A30027C288 /* SwiftFlowRecorder.framework in Embed Frameworks */,
+				625E655D1C1124A20027C288 /* SwiftFlowRouter.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		626DA43B1BFEA4C200988FC0 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -715,8 +763,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				620CB9F11C0E5D9600892BCE /* SwiftFlowRouter.framework in Frameworks */,
-				62750C511C0E480F00B688CD /* SwiftFlowRecorder.framework in Frameworks */,
+				625E65601C1124A20027C288 /* SwiftFlow.framework in Frameworks */,
+				625E65681C1124A30027C288 /* SwiftFlowRecorder.framework in Frameworks */,
+				625E655C1C1124A20027C288 /* SwiftFlowRouter.framework in Frameworks */,
+				625E65641C1124A30027C288 /* SwiftFlowPersistenceNSCoding.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1364,10 +1414,15 @@
 				62750C1D1C0E13A100B688CD /* Sources */,
 				62750C1E1C0E13A100B688CD /* Frameworks */,
 				62750C1F1C0E13A100B688CD /* Resources */,
+				625E659F1C1124A40027C288 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				625E655F1C1124A20027C288 /* PBXTargetDependency */,
+				625E65631C1124A20027C288 /* PBXTargetDependency */,
+				625E65671C1124A30027C288 /* PBXTargetDependency */,
+				625E656B1C1124A30027C288 /* PBXTargetDependency */,
 			);
 			name = SwiftFlowCounterExample;
 			productName = SwiftFlowCounterExample;
@@ -1399,7 +1454,6 @@
 				627B05DC1C09700D00481356 /* Sources */,
 				627B05DD1C09700D00481356 /* Frameworks */,
 				627B05DE1C09700D00481356 /* Resources */,
-				627B05EC1C0971E000481356 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1505,9 +1559,11 @@
 					};
 					6267DD421C07A0A90080BF30 = {
 						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = Z4999T6UJA;
 					};
 					6267DD551C07ADA10080BF30 = {
 						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = Z4999T6UJA;
 					};
 					6267DD8F1C07B2480080BF30 = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -1518,12 +1574,14 @@
 					};
 					62750C421C0E261E00B688CD = {
 						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = Z4999T6UJA;
 					};
 					627B05DF1C09700D00481356 = {
 						CreatedOnToolsVersion = 7.1.1;
 					};
 					62BBE7981C0ACE59004D6822 = {
 						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = Z4999T6UJA;
 					};
 					62D3B6B71BF2FAA80056D509 = {
 						CreatedOnToolsVersion = 7.1;
@@ -2062,21 +2120,6 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
-		627B05EC1C0971E000481356 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/ReactiveCocoa.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -2218,6 +2261,26 @@
 			target = 6267DD421C07A0A90080BF30 /* SwiftFlowRouter */;
 			targetProxy = 624BFC5C1C0FA3B00047637E /* PBXContainerItemProxy */;
 		};
+		625E655F1C1124A20027C288 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6267DD421C07A0A90080BF30 /* SwiftFlowRouter */;
+			targetProxy = 625E655E1C1124A20027C288 /* PBXContainerItemProxy */;
+		};
+		625E65631C1124A20027C288 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6267DD551C07ADA10080BF30 /* SwiftFlow */;
+			targetProxy = 625E65621C1124A20027C288 /* PBXContainerItemProxy */;
+		};
+		625E65671C1124A30027C288 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 62BBE7981C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding */;
+			targetProxy = 625E65661C1124A30027C288 /* PBXContainerItemProxy */;
+		};
+		625E656B1C1124A30027C288 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 62750C421C0E261E00B688CD /* SwiftFlowRecorder */;
+			targetProxy = 625E656A1C1124A30027C288 /* PBXContainerItemProxy */;
+		};
 		6267DD491C07A0A90080BF30 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6267DD421C07A0A90080BF30 /* SwiftFlowRouter */;
@@ -2334,6 +2397,7 @@
 		6267DD4C1C07A0AA0080BF30 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Benjamin Encz (745876PLAT)";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2357,6 +2421,7 @@
 		6267DD4D1C07A0AA0080BF30 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Benjamin Encz (745876PLAT)";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2380,6 +2445,7 @@
 		6267DD601C07ADA10080BF30 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Benjamin Encz (745876PLAT)";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2403,6 +2469,7 @@
 		6267DD611C07ADA10080BF30 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Benjamin Encz (745876PLAT)";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2476,11 +2543,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Benjamin Encz (745876PLAT)";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = SwiftFlowCounterExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.benjamin-encz.SwiftFlowCounterExample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "8157b432-a1a7-47d3-90fe-2a424ef19d67";
 			};
 			name = Debug;
 		};
@@ -2488,11 +2558,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Benjamin Encz (745876PLAT)";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = SwiftFlowCounterExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.benjamin-encz.SwiftFlowCounterExample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "8157b432-a1a7-47d3-90fe-2a424ef19d67";
 			};
 			name = Release;
 		};
@@ -2500,6 +2573,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Benjamin Encz (745876PLAT)";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2521,6 +2595,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Benjamin Encz (745876PLAT)";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2569,6 +2644,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Benjamin Encz (745876PLAT)";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2590,6 +2666,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Benjamin Encz (745876PLAT)";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;

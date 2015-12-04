@@ -79,9 +79,8 @@ class SwiftFlowRouterIntegrationTests: QuickSpec {
 
                 it("requests the root with identifier when an initial route is provided") {
                     store.dispatch(
-                        Action(
-                            type: ActionSetRoute,
-                            payload: ["route": ["TabBarViewController"]]
+                        SetRouteAction(
+                            route: ["TabBarViewController"]
                         )
                     )
 
@@ -115,9 +114,9 @@ class SwiftFlowRouterIntegrationTests: QuickSpec {
 
                 it("calls push on the root for a route with two elements") {
                     store.dispatch(
-                        Action(
-                            type: ActionSetRoute,
-                            payload: ["route": ["TabBarViewController", "SecondViewController"]]
+
+                        SetRouteAction(
+                            route: ["TabBarViewController", "SecondViewController"]
                         )
                     )
 

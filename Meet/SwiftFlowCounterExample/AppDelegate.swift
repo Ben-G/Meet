@@ -41,11 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             if let state = state as? HasNavigationState where
                 state.navigationState.route == [] {
-                    return Action (
-                        type: ActionSetRoute,
-                        payload: ["route": ["TabBarViewController", StatsViewController.identifier,
-                            InfoViewController.identifier]]
-                    )
+                    return SetRouteAction(["TabBarViewController", StatsViewController.identifier,
+                            InfoViewController.identifier])
             } else {
                 return nil
             }
@@ -90,17 +87,11 @@ extension AppDelegate: UITabBarControllerDelegate {
 
         if viewController is CounterViewController {
             mainStore.dispatch(
-                Action(
-                    type: ActionSetRoute,
-                    payload: ["route": ["TabBarViewController", CounterViewController.identifier]]
-                )
+                SetRouteAction(["TabBarViewController", CounterViewController.identifier])
             )
         } else if viewController is StatsViewController {
             mainStore.dispatch(
-                Action(
-                    type: ActionSetRoute,
-                    payload: ["route": ["TabBarViewController", StatsViewController.identifier]]
-                )
+                SetRouteAction(["TabBarViewController", StatsViewController.identifier])
             )
         }
         

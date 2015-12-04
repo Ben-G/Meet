@@ -37,8 +37,12 @@ public class MainStore: Store {
         }
     }
 
-    public func dispatch(action: Action) {
-        dispatch(action, callback: nil)
+    public func dispatch(action: ActionConvertible) {
+        dispatch(action.toAction())
+    }
+
+    public func dispatch(action: ActionType) {
+        dispatch(action.toAction(), callback: nil)
     }
 
     public func dispatch(actionCreatorProvider: ActionCreator) {
@@ -49,11 +53,11 @@ public class MainStore: Store {
         dispatch(asyncActionCreatorProvider, callback: nil)
     }
 
-    public func dispatch(action: Action, callback: DispatchCallback?) {
+    public func dispatch(action: ActionType, callback: DispatchCallback?) {
         // Dispatch Asynchronously so that each subscriber receives the latest state
         // Without Async a receiver could immediately be called and emit a new state
         dispatch_async(dispatch_get_main_queue()) {
-            self.appState = self.reducer._handleAction(self.appState, action: action)
+            self.appState = self.reducer._handleAction(self.appState, action: action.toAction())
             callback?(self.appState)
         }
     }
