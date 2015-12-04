@@ -20,6 +20,7 @@ class SwiftFlowRouterUnitTests: QuickSpec {
             let tabBarViewControllerIdentifier = "TabBarViewController"
             let counterViewControllerIdentifier = "CounterViewController"
             let statsViewControllerIdentifier = "StatsViewController"
+            let infoViewControllerIdentifier = "InfoViewController"
 
             it("calculates transitions from an empty route to a multi segment route") {
                 let oldRoute: [RouteElementIdentifier] = []
@@ -77,6 +78,43 @@ class SwiftFlowRouterUnitTests: QuickSpec {
                 expect(controllerIndex).to(equal(1))
                 expect(toBeReplaced).to(equal(counterViewControllerIdentifier))
                 expect(new).to(equal(statsViewControllerIdentifier))
+            }
+
+            it("generates a Change action on the last common subroute, also for routes of different length") {
+                let oldRoute = [tabBarViewControllerIdentifier, counterViewControllerIdentifier]
+                let newRoute = [tabBarViewControllerIdentifier, statsViewControllerIdentifier,
+                    infoViewControllerIdentifier]
+
+                let routingActions = Router.routingActionsForTransitionFrom(oldRoute,
+                    newRoute: newRoute)
+
+                var action1Correct: Bool?
+                var action2Correct: Bool?
+
+                if case let RoutingActions.Change(responsibleRoutableIndex, segmentToBeReplaced,
+                    newSegment)
+                    = routingActions[0] {
+
+                        if responsibleRoutableIndex == 1
+                            && segmentToBeReplaced == counterViewControllerIdentifier
+                            && newSegment == statsViewControllerIdentifier{
+                                action1Correct = true
+                        }
+                }
+
+                if case let RoutingActions.Push(responsibleRoutableIndex, segmentToBePushed)
+                    = routingActions[1] {
+
+                        if responsibleRoutableIndex == 2
+                            && segmentToBePushed == infoViewControllerIdentifier {
+
+                                action2Correct = true
+                        }
+                }
+
+                expect(routingActions).to(haveCount(2))
+                expect(action1Correct).to(beTrue())
+                expect(action2Correct).to(beTrue())
             }
 
             it("generates a Change action on root when root element changes") {

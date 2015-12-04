@@ -48,6 +48,7 @@ public class RecordingMainStore: MainStore {
 
     public init(reducer: AnyReducer, appState: StateType, recording: String? = nil) {
         initialState = appState
+        computedStates.append(initialState)
         recordingPath = recording
 
         super.init(reducer: reducer, appState: appState)
@@ -139,17 +140,22 @@ public class RecordingMainStore: MainStore {
     }
 
     private func replayToState(actions: [Action], state: Int) {
-        print("Rewind to \(state)...")
-        appState = initialState
-        recordedActions = []
-        actionsToReplay = state
+        if (state > computedStates.count - 1) {
+            print("Rewind to \(state)...")
+            appState = initialState
+            recordedActions = []
+            actionsToReplay = state
 
-        for i in 0..<state {
-            dispatchRecorded(actions[i]) { newState in
-                self.actionsToReplay = self.actionsToReplay! - 1
-                self.computedStates.append(newState)
+            for i in 0..<state {
+                dispatchRecorded(actions[i]) { newState in
+                    self.actionsToReplay = self.actionsToReplay! - 1
+                    self.computedStates.append(newState)
+                }
             }
+        } else {
+            self.appState = computedStates[state]
         }
+
     }
 
 }

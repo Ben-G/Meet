@@ -167,7 +167,7 @@ public class Router: StoreSubscriber {
             // This is the 3. case:
             // "The new route has a different element after the commonSubroute, we need to replace
             //  the old route element with the new one"
-            else if !(newRoute.count > oldRoute.count) && oldRoute.count > 0 && newRoute.count > 0 {
+            else if oldRoute.count > (commonSubroute + 1) && newRoute.count > (commonSubroute + 1) {
                 let changeAction = RoutingActions.Change(
                     responsibleRoutableIndex: routableIndexForRouteSegment(commonSubroute),
                     segmentToBeReplaced: oldRoute[commonSubroute + 1],
