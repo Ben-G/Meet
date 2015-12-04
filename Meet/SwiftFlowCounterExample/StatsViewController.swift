@@ -34,13 +34,6 @@ class StatsViewController: UIViewController, Routable {
         dismissViewControllerAnimated(true, completion: completionHandler)
     }
 
-    func changeRouteSegment(from: RouteElementIdentifier,
-        to: RouteElementIdentifier,
-        completionHandler: RoutingCompletionHandler) -> Routable {
-
-            abort()
-    }
-
     @IBAction func pushButtonTapped(sender: UIButton) {
         mainStore.dispatch(
             Action (

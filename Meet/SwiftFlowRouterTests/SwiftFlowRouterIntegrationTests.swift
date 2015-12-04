@@ -61,7 +61,7 @@ class SwiftFlowRouterIntegrationTests: QuickSpec {
 
                 it("does not request the root view controller when no route is provided") {
 
-                    class FakeRootRoutable: RoutablePushOnly {
+                    class FakeRootRoutable: Routable {
                         var called = false
 
                         func pushRouteSegment(routeElementIdentifier: RouteElementIdentifier,
@@ -85,7 +85,7 @@ class SwiftFlowRouterIntegrationTests: QuickSpec {
                         )
                     )
 
-                    class FakeRootRoutable: RoutablePushOnly {
+                    class FakeRootRoutable: Routable {
                         var calledWithIdentifier: (RouteElementIdentifier?) -> Void
 
                         init(calledWithIdentifier: (RouteElementIdentifier?) -> Void) {
@@ -121,7 +121,7 @@ class SwiftFlowRouterIntegrationTests: QuickSpec {
                         )
                     )
 
-                    class FakeChildRoutable: RoutablePushOnly {
+                    class FakeChildRoutable: Routable {
                         var calledWithIdentifier: (RouteElementIdentifier?) -> Void
 
                         init(calledWithIdentifier: (RouteElementIdentifier?) -> Void) {
@@ -144,7 +144,7 @@ class SwiftFlowRouterIntegrationTests: QuickSpec {
                             }
                         }
 
-                        class FakeRootRoutable: RoutablePushOnly {
+                        class FakeRootRoutable: Routable {
                             let injectedRoutable: Routable
 
                             init(injectedRoutable: Routable) {

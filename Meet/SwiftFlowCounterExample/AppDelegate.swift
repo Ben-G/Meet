@@ -82,11 +82,6 @@ class RootRoutable: Routable {
             completionHandler()
     }
 
-    func changeRouteSegment(from: RouteElementIdentifier, to: RouteElementIdentifier,
-        completionHandler: RoutingCompletionHandler) -> Routable {
-            abort()
-    }
-
 }
 
 extension AppDelegate: UITabBarControllerDelegate {
@@ -150,7 +145,7 @@ extension UITabBarController: Routable {
 
     public func popRouteSegment(viewControllerIdentifier: RouteElementIdentifier,
         completionHandler: RoutingCompletionHandler) {
-        // would need to unset root view controller here
+            // would need to unset root view controller here
             completionHandler()
     }
 

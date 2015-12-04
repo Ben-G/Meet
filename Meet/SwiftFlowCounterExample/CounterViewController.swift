@@ -39,23 +39,5 @@ class CounterViewController: UIViewController, StoreSubscriber, Routable {
             Action(CounterActionDecrease)
         )
     }
-
-    func pushRouteSegment(routeElementIdentifier: RouteElementIdentifier,
-        completionHandler: RoutingCompletionHandler) -> Routable {
-
-            abort()
-    }
-
-    func popRouteSegment(routeElementIdentifier: RouteElementIdentifier,
-        completionHandler: RoutingCompletionHandler) {
-            abort()
-    }
-
-    func changeRouteSegment(fromSegment: RouteElementIdentifier,
-        to: RouteElementIdentifier,
-        completionHandler: RoutingCompletionHandler) -> Routable {
-            
-            abort()
-    }
-
+    
 }
