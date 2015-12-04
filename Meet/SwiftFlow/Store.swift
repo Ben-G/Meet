@@ -76,7 +76,7 @@ public protocol Store {
      action creator asynchronously. Use this method if you want to wait for the state change
      triggered by the asynchronously generated action creator.
      */
-    func dispatch(actionCreatorProvider: AsyncActionCreator)
+    func dispatch(asyncActionCreatorProvider: AsyncActionCreator)
 
     /**
      Dispatches an action and calls the callback as soon as the action has been processed.

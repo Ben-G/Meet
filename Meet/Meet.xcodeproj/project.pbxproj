@@ -49,7 +49,6 @@
 		62750C361C0E141D00B688CD /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62750C351C0E141D00B688CD /* AppState.swift */; };
 		62750C391C0E147B00B688CD /* CounterReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62750C381C0E147B00B688CD /* CounterReducer.swift */; };
 		62750C3B1C0E14BA00B688CD /* CounterActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62750C3A1C0E14BA00B688CD /* CounterActions.swift */; };
-		62750C3D1C0E218400B688CD /* ActionDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62750C3C1C0E218400B688CD /* ActionDecoder.swift */; };
 		62750C461C0E261E00B688CD /* SwiftFlowRecorder.h in Headers */ = {isa = PBXBuildFile; fileRef = 62750C451C0E261E00B688CD /* SwiftFlowRecorder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		62750C4A1C0E261E00B688CD /* SwiftFlowRecorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62750C431C0E261E00B688CD /* SwiftFlowRecorder.framework */; };
 		62750C4B1C0E261E00B688CD /* SwiftFlowRecorder.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 62750C431C0E261E00B688CD /* SwiftFlowRecorder.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -658,7 +657,6 @@
 		62750C351C0E141D00B688CD /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		62750C381C0E147B00B688CD /* CounterReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterReducer.swift; sourceTree = "<group>"; };
 		62750C3A1C0E14BA00B688CD /* CounterActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterActions.swift; sourceTree = "<group>"; };
-		62750C3C1C0E218400B688CD /* ActionDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionDecoder.swift; sourceTree = "<group>"; };
 		62750C431C0E261E00B688CD /* SwiftFlowRecorder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftFlowRecorder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62750C451C0E261E00B688CD /* SwiftFlowRecorder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftFlowRecorder.h; sourceTree = "<group>"; };
 		62750C471C0E261E00B688CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -990,7 +988,6 @@
 			isa = PBXGroup;
 			children = (
 				62750C3A1C0E14BA00B688CD /* CounterActions.swift */,
-				62750C3C1C0E218400B688CD /* ActionDecoder.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -2173,7 +2170,6 @@
 				62750C261C0E13A200B688CD /* CounterViewController.swift in Sources */,
 				62750C241C0E13A200B688CD /* AppDelegate.swift in Sources */,
 				62750C531C0E5C2D00B688CD /* StatsViewController.swift in Sources */,
-				62750C3D1C0E218400B688CD /* ActionDecoder.swift in Sources */,
 				624BFC2D1C0F80660047637E /* InfoViewController.swift in Sources */,
 				62750C3B1C0E14BA00B688CD /* CounterActions.swift in Sources */,
 			);

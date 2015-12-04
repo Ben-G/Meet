@@ -24,11 +24,6 @@ public class Router: StoreSubscriber {
     }
 
     public func newState(state: HasNavigationState) {
-        print("---OLD---")
-        print(lastNavigationState.route)
-        print("---NEW---")
-        print(state.navigationState.route)
-
         let routingActions = Router.routingActionsForTransitionFrom(
             lastNavigationState.route, newRoute: state.navigationState.route)
 
