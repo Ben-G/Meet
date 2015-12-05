@@ -19,6 +19,8 @@ struct LocationServiceReducer: Reducer {
             return setLocationServiceBusy(state, busy: SetLocationServiceBusy(action).busy)
         case SetLocation.type:
             return setLocation(state, location: SetLocation(action).location)
+        default:
+            abort()
         }
     }
 

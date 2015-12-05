@@ -58,6 +58,8 @@ func decodeSwifter(dictionary: [String : AnyObject]) -> Swifter {
         let secret = oAuthCredentials["secret"] as! String
 
         return Swifter(consumerKey: key, consumerSecret: secret)
+    } else {
+        abort()
     }
 }
 
@@ -120,6 +122,8 @@ extension Result where T: Coding, Error: Coding {
             self = .Success(T(dictionary: success))
         } else if let failure = dictionary["failure"] as? [String : AnyObject] {
             self = .Failure(Error(dictionary: failure))
+        } else {
+            abort()
         }
     }
 
