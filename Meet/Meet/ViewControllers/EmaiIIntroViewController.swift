@@ -14,6 +14,8 @@ var mailComposerViewController: MFMailComposeViewController?
 
 class EmailIntroViewController: UIViewController {
 
+    static let identifier = "EmailIntroViewController"
+
     var store = mainStore
 
     @IBAction func emailIntroButtonTapped(sender: AnyObject) {

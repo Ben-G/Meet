@@ -30,8 +30,8 @@ extension SetTwitterClient: ActionConvertible {
     }
 
     func toAction() -> Action {
-        return Action(type: CreateContactFromEmail.type,
-            payload: ["email": encodeSwifter(twitterClient)])
+        return Action(type: SetTwitterClient.type,
+            payload: ["swifter": encodeSwifter(twitterClient)])
     }
 }
 
@@ -53,7 +53,7 @@ func decodeSwifter(dictionary: [String : AnyObject]) -> Swifter {
 
         return Swifter(account: nativeAccount)
 
-    } else if let oAuthCredentials = dictionary["oAtuh"] {
+    } else if let oAuthCredentials = dictionary["oAuth"] {
         let key = oAuthCredentials["key"] as! String
         let secret = oAuthCredentials["secret"] as! String
 

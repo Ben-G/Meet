@@ -13,6 +13,8 @@ import SwiftFlowRouter
 
 class AddContactViewController: UIViewController, StoreSubscriber {
 
+    static let identifier = "AddContactViewController"
+
     @IBOutlet var locationIndicatorView: LocationIndicatorView!
     var store = mainStore
     var twitterAPIActionCreator = TwitterAPIActionCreator()
@@ -47,8 +49,8 @@ class AddContactViewController: UIViewController, StoreSubscriber {
     }
 
     @IBAction func emailIntroButtonTapped(sender: AnyObject) {
-        let emailIntroViewController = UIStoryboard(name: "Main",bundle: nil)
-            .instantiateViewControllerWithIdentifier("EmailIntroViewController")
+//        let emailIntroViewController = UIStoryboard(name: "Main",bundle: nil)
+//            .instantiateViewControllerWithIdentifier("EmailIntroViewController")
 
         store.dispatch(CreateContactFromEmail("Benjamin.Encz@gmail.com"))
     }
@@ -58,11 +60,36 @@ class AddContactViewController: UIViewController, StoreSubscriber {
         store.dispatch ( self.twitterAPIActionCreator.authenticateUser() ) { state in
             if let state = state as? HasTwitterAPIState {
                 if state.twitterAPIState.swifter != nil {
-                    let searchTwitterViewController = UIStoryboard(name: "Main", bundle: nil)
-                        .instantiateViewControllerWithIdentifier("SearchTwitterViewController")
-//                    self.store.dispatch (NavigationAction.NavigateTo(searchTwitterViewController))
+                    self.store.dispatch (
+                        SetRouteAction(["TabBarViewController", AddContactViewController.identifier,
+                            SearchTwitterViewController.identifier])
+                    )
                 }
             }
         }
     }
+}
+
+extension AddContactViewController: Routable {
+
+    func pushRouteSegment(routeElementIdentifier: RouteElementIdentifier,
+        completionHandler: RoutingCompletionHandler) -> Routable {
+
+            if (routeElementIdentifier == SearchTwitterViewController.identifier) {
+                let searchTwitterViewController = UIStoryboard(name: "Main", bundle: nil)
+                    .instantiateViewControllerWithIdentifier("SearchTwitterViewController") as! SearchTwitterViewController
+                presentViewController(searchTwitterViewController, animated: true,
+                    completion: completionHandler)
+                return searchTwitterViewController
+            }
+
+        abort()
+    }
+
+    func popRouteSegment(routeElementIdentifier: RouteElementIdentifier,
+        completionHandler: RoutingCompletionHandler) {
+
+            dismissViewControllerAnimated(true, completion: completionHandler)
+    }
+
 }

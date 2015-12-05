@@ -10,6 +10,7 @@ import UIKit
 import ListKit
 import ReactiveCocoa
 import SwiftFlow
+import SwiftFlowRouter
 import SwiftFlowReactiveCocoaExtensions
 
 class ContactTableViewCell: UITableViewCell, ListKitCellProtocol {
@@ -21,6 +22,8 @@ class ContactTableViewCell: UITableViewCell, ListKitCellProtocol {
 }
 
 class ContactListViewController: UIViewController, StoreSubscriber {
+
+    static let identifier = "ContactListViewController"
 
     @IBOutlet var tableView: UITableView!
 
@@ -78,5 +81,9 @@ extension ContactListViewController: UITableViewDataSource {
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
         }
     }
+
+}
+
+extension ContactListViewController: Routable {
 
 }

@@ -49,7 +49,7 @@ extension CreateContactWithTwitterUser: ActionConvertible, ActionType {
     }
 
     func toAction() -> Action {
-        return Action(type: CreateContactFromEmail.type,
+        return Action(type: CreateContactWithTwitterUser.type,
             payload: ["twitterUser": twitterUser.dictionaryRepresentation()])
     }
 }

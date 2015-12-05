@@ -22,7 +22,7 @@ struct TwitterAPIReducer: Reducer {
             return setUserSearchResults(state,
                 userSearchResults: SetUserSearchResult(action).userSearchResult)
         default:
-            abort()
+            return state
         }
     }
 

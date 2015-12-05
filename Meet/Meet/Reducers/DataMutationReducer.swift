@@ -23,7 +23,7 @@ struct DataMutationReducer: Reducer {
         case SetContacts.type:
             return setContacts(state, contacts: SetContacts(action).contacts)
         default:
-            abort()
+            return state
         }
     }
 

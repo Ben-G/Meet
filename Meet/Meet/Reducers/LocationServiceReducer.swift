@@ -20,7 +20,7 @@ struct LocationServiceReducer: Reducer {
         case SetLocation.type:
             return setLocation(state, location: SetLocation(action).location)
         default:
-            abort()
+            return state
         }
     }
 

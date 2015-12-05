@@ -12,7 +12,9 @@ import SwiftFlowReactiveCocoaExtensions
 import SwiftFlowRouter
 import SwiftFlow
 
-class SearchTwitterViewController: UIViewController, StoreSubscriber {
+class SearchTwitterViewController: UIViewController, StoreSubscriber, Routable {
+
+    static let identifier = "SearchTwitterViewController"
 
     @IBOutlet var tableView: UITableView!
 

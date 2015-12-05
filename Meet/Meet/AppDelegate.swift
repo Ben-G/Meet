@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     var router: Router!
-    var rootRoutable: Routable!
+    var rootViewController: Routable!
     var swifter: SwifterWrapper.Type = SwifterWrapper.self
 
     func application(application: UIApplication,
@@ -46,10 +46,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .instantiateViewControllerWithIdentifier("ContactsViewController")
 
         tabBarController.viewControllers = [addContactViewController, contactsViewController]
-        rootRoutable = RootRoutable()
-        router = Router(store: mainStore, rootRoutable: rootRoutable)
+        rootViewController = tabBarController
+        router = Router(store: mainStore, rootRoutable: RootRoutable(routable: rootViewController))
 
-//        mainStore.dispatch ( NavigationAction.SetNavigationState(addContactViewController) )
+        mainStore.dispatch { state, store in
+
+            if let state = state as? HasNavigationState where
+                state.navigationState.route == [] {
+                    return SetRouteAction(["TabBarViewController", AddContactViewController.identifier])
+            } else {
+                return nil
+            }
+        }
+
 
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.rootViewController = tabBarController
@@ -86,4 +95,83 @@ extension AppDelegate: StoreSubscriber {
 
 class RootRoutable: Routable {
 
+    var routable: Routable
+
+    init(routable: Routable) {
+        self.routable = routable
+    }
+
+    func pushRouteSegment(routeElementIdentifier: RouteElementIdentifier,
+        completionHandler: RoutingCompletionHandler) -> Routable {
+            completionHandler()
+            return routable
+    }
+
+    func popRouteSegment(routeElementIdentifier: RouteElementIdentifier,
+        completionHandler: RoutingCompletionHandler) {
+            completionHandler()
+    }
+    
+}
+
+extension UITabBarController: Routable {
+
+    public func changeRouteSegment(fromSegment: RouteElementIdentifier,
+        to: RouteElementIdentifier,
+        completionHandler: RoutingCompletionHandler) -> Routable {
+            if (to == AddContactViewController.identifier) {
+                selectedIndex = 0
+                completionHandler()
+                return viewControllers![0] as! Routable
+            } else if (to == ContactListViewController.identifier) {
+                selectedIndex = 1
+                completionHandler()
+                return viewControllers![1] as! Routable
+            }
+
+            abort()
+    }
+
+    public func pushRouteSegment(identifier: RouteElementIdentifier,
+        completionHandler: RoutingCompletionHandler)
+        -> Routable {
+            if (identifier == AddContactViewController.identifier) {
+                selectedIndex = 0
+                completionHandler()
+                return viewControllers![0] as! Routable
+            } else if (identifier == ContactListViewController.identifier) {
+                selectedIndex = 1
+                completionHandler()
+                return viewControllers![1] as! Routable
+            }
+
+            abort()
+    }
+
+    public func popRouteSegment(viewControllerIdentifier: RouteElementIdentifier,
+        completionHandler: RoutingCompletionHandler) {
+            // would need to unset root view controller here
+            completionHandler()
+    }
+    
+}
+
+extension AppDelegate: UITabBarControllerDelegate {
+
+    func tabBarController(tabBarController: UITabBarController,
+        shouldSelectViewController viewController: UIViewController) -> Bool {
+
+            if viewController is AddContactViewController {
+                mainStore.dispatch(
+                    SetRouteAction(["TabBarViewController", AddContactViewController.identifier])
+                )
+            } else if viewController is ContactListViewController {
+                mainStore.dispatch(
+                    SetRouteAction(["TabBarViewController", ContactListViewController.identifier])
+                )
+            }
+            
+            return false
+    }
+    
 }
