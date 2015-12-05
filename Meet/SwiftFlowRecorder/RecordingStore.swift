@@ -32,7 +32,7 @@ public class RecordingMainStore: MainStore {
         didSet {
             if let window = window {
                 let windowSize = window.bounds.size
-                stateHistoryView = StateHistorySliderView(frame: CGRect(x: 0, y: 0,
+                stateHistoryView = StateHistorySliderView(frame: CGRect(x: 0, y: windowSize.height - 300,
                     width: windowSize.width, height: 100))
                 window.addSubview(stateHistoryView!)
                 window.bringSubviewToFront(stateHistoryView!)

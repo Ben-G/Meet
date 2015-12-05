@@ -46,7 +46,7 @@ extension TwitterUser: Coding {
 
     func dictionaryRepresentation() -> [String : AnyObject] {
         return ["username": self.username, "name": self.name,
-            "profilePictureURL": profilePictureURL ?? "null"]
+            "profilePictureURL": profilePictureURL?.absoluteString ?? "null"]
     }
 
 }

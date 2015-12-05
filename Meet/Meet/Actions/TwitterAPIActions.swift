@@ -79,61 +79,50 @@ struct SetUserSearchResult {
 extension SetUserSearchResult: ActionConvertible {
 
     init(_ action: Action) {
-        self.userSearchResult = Result<[TwitterUser], TwitterAPIError>(dictionary:
-            action.payload!["userSearchResult"] as! [String : AnyObject])
+        self.userSearchResult = decode(action.payload!["userSearchResult"] as! [String : AnyObject])
     }
 
     func toAction() -> Action {
         return Action(type: SetUserSearchResult.type,
-            payload: ["userSearchResult": userSearchResult.dictionaryRepresentation()])
+            payload: ["userSearchResult": encode(userSearchResult)])
     }
 
 }
 
-extension Array: Coding {
-
-    public init(dictionary: [String : AnyObject]) {
-        fatalError("Only implemented for <Element: Coding>")
+func encode<A: Coding, B: Coding>(x: Result<A, B>) -> [String : AnyObject] {
+    switch x {
+    case .Success(let t):
+        return ["success": t.dictionaryRepresentation()]
+    case .Failure(let e):
+        return ["error": e.dictionaryRepresentation()]
     }
-
-    public func dictionaryRepresentation() -> [String : AnyObject] {
-        fatalError("Only implemented for <Element: Coding>")
-    }
-
 }
 
-extension Array where Element: Coding {
-
-    public init(dictionary: [String : AnyObject]) {
-        let values = dictionary["arrayValues"] as! [[String : AnyObject]]
-        self = values.map { Element(dictionary: $0) }
+func encode<A: Coding, B: Coding>(x: Result<[A], B>) -> [String : AnyObject] {
+    switch x {
+    case .Success(let t):
+        return ["success": t.map { $0.dictionaryRepresentation() }]
+    case .Failure(let e):
+        return ["error": e.dictionaryRepresentation()]
     }
-
-    public func dictionaryRepresentation() -> [String : AnyObject] {
-        return ["arrayValues": self.map { $0.dictionaryRepresentation() } ]
-    }
-
 }
 
-extension Result where T: Coding, Error: Coding {
-
-    init(dictionary: [String : AnyObject]) {
-        if let success = dictionary["success"] as? [String : AnyObject] {
-            self = .Success(T(dictionary: success))
-        } else if let failure = dictionary["failure"] as? [String : AnyObject] {
-            self = .Failure(Error(dictionary: failure))
-        } else {
-            abort()
-        }
+func decode<A: Coding, B: Coding>(dictionary: [String : AnyObject]) -> Result<[A], B> {
+    if let success = dictionary["success"] as? [AnyObject] {
+        return .Success( success.map { A(dictionary: $0 as! [String : AnyObject]) } )
+    } else if let failure = dictionary["failure"] as? [String : AnyObject] {
+        return .Failure(B(dictionary: failure))
+    } else {
+        abort()
     }
+}
 
-    func dictionaryRepresentation() -> [String : AnyObject] {
-        switch self {
-        case .Success(let t):
-            return ["success": t.dictionaryRepresentation()]
-        case .Failure(let e):
-            return ["error": e.dictionaryRepresentation()]
-        }
+func decode<A: Coding, B: Coding>(dictionary: [String : AnyObject]) -> Result<A, B> {
+    if let success = dictionary["success"] as? [String : AnyObject] {
+        return .Success(A(dictionary: success))
+    } else if let failure = dictionary["failure"] as? [String : AnyObject] {
+        return .Failure(B(dictionary: failure))
+    } else {
+        abort()
     }
-
 }

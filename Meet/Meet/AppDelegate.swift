@@ -12,10 +12,11 @@ import SwiftFlow
 import SwiftFlowRouter
 import SwiftFlowReactiveCocoaExtensions
 import SwiftFlowPersistenceNSCoding
+import SwiftFlowRecorder
 
 let mainStore =
-MainStoreReactiveCocoa(reducer: MainReducer([NavigationReducer(), DataMutationReducer(),
-    TwitterAPIReducer(), LocationServiceReducer()]), appState: AppState())
+RecordingMainStore(reducer: MainReducer([NavigationReducer(), DataMutationReducer(),
+    TwitterAPIReducer(), LocationServiceReducer()]), appState: AppState(), recording: "recording.json")
 
 var persistenceAdapter = PersistenceAdapter<DataState, AppState>()
 
@@ -47,25 +48,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         tabBarController.viewControllers = [addContactViewController, contactsViewController]
         rootViewController = tabBarController
+
         router = Router(store: mainStore, rootRoutable: RootRoutable(routable: rootViewController))
-
-        mainStore.dispatch { state, store in
-
-            if let state = state as? HasNavigationState where
-                state.navigationState.route == [] {
-                    return SetRouteAction(["TabBarViewController", AddContactViewController.identifier])
-            } else {
-                return nil
-            }
-        }
-
 
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
 
+        mainStore.window = window
+
         mainStore.subscribe(self)
         persistenceAdapter.store = mainStore
+
+            mainStore.dispatch { state, store in
+
+                if let state = state as? HasNavigationState where
+                    state.navigationState.route == [] {
+                        return SetRouteAction(["TabBarViewController", AddContactViewController.identifier])
+                } else {
+                    return nil
+                }
+            }
+
 
         return true
     }
