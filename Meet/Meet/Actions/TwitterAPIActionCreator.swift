@@ -12,6 +12,7 @@ import ReactiveCocoa
 import SwiftFlow
 import SwiftFlowReactiveCocoaExtensions
 
+
 struct TwitterAPIActionCreator {
 
     var twitterClient = TwitterClient.self
@@ -40,7 +41,8 @@ struct TwitterAPIActionCreator {
 
             // Don't hit Twitter API with empty query string
             if searchTerm == "" {
-                store.dispatch( SetUserSearchResult(.Success([])) )
+                let emptyList: [TwitterUser] = []
+                store.dispatch( SetUserSearchResult(.Success(emptyList)) )
                 return nil
             }
 

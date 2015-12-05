@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     var router: Router!
-
+    var rootRoutable: Routable!
     var swifter: SwifterWrapper.Type = SwifterWrapper.self
 
     func application(application: UIApplication,
@@ -46,14 +46,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .instantiateViewControllerWithIdentifier("ContactsViewController")
 
         tabBarController.viewControllers = [addContactViewController, contactsViewController]
+        rootRoutable = RootRoutable()
+        router = Router(store: mainStore, rootRoutable: rootRoutable)
 
-        router = Router(store: mainStore, rootViewController: tabBarController,
-            transitionProvider: transitionFrom)
-
-        mainStore.dispatch ( NavigationAction.SetNavigationState(addContactViewController) )
+//        mainStore.dispatch ( NavigationAction.SetNavigationState(addContactViewController) )
 
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        window?.rootViewController = router.rootViewController
+        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
 
         mainStore.subscribe(self)
@@ -85,33 +84,6 @@ extension AppDelegate: StoreSubscriber {
 
 }
 
-func transitionFrom(vc1: UIViewController, to vc2: UIViewController) -> RouteTransition {
-    let transition = (vc1, vc2)
+class RootRoutable: Routable {
 
-    if (vc1 is ContactListViewController) && (vc2 is AddContactViewController) {
-        return .TabBarSelect
-    }
-
-    if (vc1 is AddContactViewController) && (vc2 is ContactListViewController) {
-        return .TabBarSelect
-    }
-
-    if (vc1 is AddContactViewController) && (vc2 is SearchTwitterViewController) {
-        return .Modal
-    }
-
-    if (vc1 is AddContactViewController) && (vc2 is EmailIntroViewController) {
-        return .Modal
-    }
-
-    return .None
-
-    //      switch transition {
-    //      case is (ContactListViewController, AddContactViewController):
-    //          return .TabBarSelect
-    //      case is (AddContactViewController, ContactListViewController):
-    //          return .TabBarSelect
-    //      default:
-    //          return .None
-    //      }
 }

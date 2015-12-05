@@ -74,7 +74,7 @@ extension ContactListViewController: UITableViewDataSource {
         // TODO: Consider implementing this as a pending action, or alternatively as an extension
         // on UITableView using Dwift: https://github.com/jflinter/Dwifft or 
         //https://github.com/brutella/simplediff-swift
-        store.dispatch( DataMutationAction.DeleteContact(contactID) ) { appState in
+        store.dispatch( DeleteContact(contactID) ) { appState in
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
         }
     }

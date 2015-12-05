@@ -50,7 +50,7 @@ class AddContactViewController: UIViewController, StoreSubscriber {
         let emailIntroViewController = UIStoryboard(name: "Main",bundle: nil)
             .instantiateViewControllerWithIdentifier("EmailIntroViewController")
 
-        store.dispatch(DataMutationAction.CreateContactFromEmail("Benjamin.Encz@gmail.com"))
+        store.dispatch(CreateContactFromEmail("Benjamin.Encz@gmail.com"))
     }
 
     @IBAction func addTwitterButtonTapped(sender: AnyObject) {
@@ -60,7 +60,7 @@ class AddContactViewController: UIViewController, StoreSubscriber {
                 if state.twitterAPIState.swifter != nil {
                     let searchTwitterViewController = UIStoryboard(name: "Main", bundle: nil)
                         .instantiateViewControllerWithIdentifier("SearchTwitterViewController")
-                    self.store.dispatch (NavigationAction.NavigateTo(searchTwitterViewController))
+//                    self.store.dispatch (NavigationAction.NavigateTo(searchTwitterViewController))
                 }
             }
         }

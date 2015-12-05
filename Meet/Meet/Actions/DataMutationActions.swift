@@ -15,7 +15,7 @@ struct CreateContactFromEmail {
     static let type = "CreateContactFromEmail"
     let email: String
 
-    init(email: String) {
+    init(_ email: String) {
         self.email = email
     }
 }
@@ -60,7 +60,7 @@ struct DeleteContact {
     static let type = "DeleteContact"
     let contactID: Int
 
-    init(contactID: Int) {
+    init(_ contactID: Int) {
         self.contactID = contactID
     }
 }

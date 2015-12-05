@@ -88,24 +88,27 @@ extension SetUserSearchResult: ActionConvertible {
 
 }
 
-extension Result where T: Array<Coding>, Error: Coding {
+extension Array: Coding {
 
-    init(dictionary: [String : AnyObject]) {
-        if let success = dictionary["success"] as? [AnyObject] {
-            let successContent = success.map { T(dictionary:$0) }
-            self = .Success(successContent)
-        } else if let failure = dictionary["failure"] as? [AnyObject] {
-            self = .Failure(Error(dictionary: failure))
-        }
+    public init(dictionary: [String : AnyObject]) {
+        fatalError("Only implemented for <Element: Coding>")
     }
 
-    func dictionaryRepresentation() -> [String : AnyObject] {
-        switch self {
-        case .Success(let t):
-            return ["success": t.map { $0.dictionaryRepresentation() }]
-        case .Failure(let e):
-            return ["error": e.dictionaryRepresentation()]
-        }
+    public func dictionaryRepresentation() -> [String : AnyObject] {
+        fatalError("Only implemented for <Element: Coding>")
+    }
+
+}
+
+extension Array where Element: Coding {
+
+    public init(dictionary: [String : AnyObject]) {
+        let values = dictionary["arrayValues"] as! [[String : AnyObject]]
+        self = values.map { Element(dictionary: $0) }
+    }
+
+    public func dictionaryRepresentation() -> [String : AnyObject] {
+        return ["arrayValues": self.map { $0.dictionaryRepresentation() } ]
     }
 
 }
