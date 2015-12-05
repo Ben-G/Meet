@@ -33,16 +33,16 @@ extension CreateContactFromEmail: ActionConvertible, ActionType {
 
 // MARK: Create From Twitter User
 
-struct CreateContactFromTwitterUser {
-    static let type = "CreateContactFromEmail"
+struct CreateContactWithTwitterUser {
+    static let type = "CreateContactWithTwitterUser"
     let twitterUser: TwitterUser
 
-    init(twitterUser: TwitterUser) {
+    init(_ twitterUser: TwitterUser) {
         self.twitterUser = twitterUser
     }
 }
 
-extension CreateContactFromTwitterUser: ActionConvertible, ActionType {
+extension CreateContactWithTwitterUser: ActionConvertible, ActionType {
 
     init(_ action: Action) {
         self.twitterUser = TwitterUser(dictionary: action.payload!["twitterUser"] as! [String : AnyObject])

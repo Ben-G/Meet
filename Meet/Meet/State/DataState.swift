@@ -17,7 +17,7 @@ struct DataState: Coding {
 
     init(dictionary: [String : AnyObject]) {
         let array = dictionary["contacts"] as? NSArray
-        contacts = array?.map { Contact(dictionary: $0 as! NSDictionary)! } ?? []
+        contacts = array?.map { Contact(dictionary: $0 as! [String : AnyObject]) } ?? []
     }
 
     func dictionaryRepresentation() -> [String : AnyObject] {

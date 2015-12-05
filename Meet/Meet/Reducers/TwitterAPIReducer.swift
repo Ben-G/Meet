@@ -14,12 +14,15 @@ import Result
 
 struct TwitterAPIReducer: Reducer {
 
-    func handleAction(state: HasTwitterAPIState, action: TwitterAPIAction) -> HasTwitterAPIState {
-        switch action {
-        case .SetTwitterClient(let swifter):
-            return setTwitterClient(state, swifter: swifter)
-        case .SetUserSearchResults(let result):
-            return setUserSearchResults(state, userSearchResults: result)
+    func handleAction(state: HasTwitterAPIState, action: Action) -> HasTwitterAPIState {
+        switch action.type {
+        case SetTwitterClient.type:
+            return setTwitterClient(state, swifter: SetTwitterClient(action).twitterClient)
+        case SetUserSearchResult.type:
+            return setUserSearchResults(state,
+                userSearchResults: SetUserSearchResult(action).userSearchResult)
+        default:
+            abort()
         }
     }
 

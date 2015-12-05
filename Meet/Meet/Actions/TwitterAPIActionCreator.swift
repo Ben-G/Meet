@@ -40,16 +40,16 @@ struct TwitterAPIActionCreator {
 
             // Don't hit Twitter API with empty query string
             if searchTerm == "" {
-                store.dispatch( TwitterAPIAction.SetUserSearchResults(.Success([])) )
+                store.dispatch( SetUserSearchResult(.Success([])) )
                 return nil
             }
 
             self.twitterClient.findUsers(searchTerm).start { event in
                 switch event {
                 case let .Next(users):
-                    store.dispatch( TwitterAPIAction.SetUserSearchResults(.Success(users)) )
+                    store.dispatch( SetUserSearchResult(.Success(users)) )
                 case let .Failed(error):
-                    store.dispatch( TwitterAPIAction.SetUserSearchResults(.Failure(error)) )
+                    store.dispatch( SetUserSearchResult(.Failure(error)) )
                 default:
                     break
                 }
@@ -61,7 +61,7 @@ struct TwitterAPIActionCreator {
 
     func setTwitterClient(swifter: Swifter) -> ActionCreator {
         return { _ in
-            return TwitterAPIAction.SetTwitterClient(swifter)
+            return SetTwitterClient(swifter)
         }
     }
 

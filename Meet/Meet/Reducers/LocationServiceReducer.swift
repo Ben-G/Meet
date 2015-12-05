@@ -11,14 +11,14 @@ import SwiftFlow
 
 struct LocationServiceReducer: Reducer {
 
-    func handleAction(state: HasLocationServiceState, action: LocationServiceAction)
+    func handleAction(state: HasLocationServiceState, action: Action)
         -> HasLocationServiceState {
-
-        switch action {
-        case .SetLocationServiceBusy(let busy):
-            return setLocationServiceBusy(state, busy: busy)
-        case .SetLocation(let location):
-            return setLocation(state, location: location)
+            
+        switch action.type {
+        case SetLocationServiceBusy.type:
+            return setLocationServiceBusy(state, busy: SetLocationServiceBusy(action).busy)
+        case SetLocation.type:
+            return setLocation(state, location: SetLocation(action).location)
         }
     }
 

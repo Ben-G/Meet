@@ -13,13 +13,27 @@ import UIKit
 import SSKeychain
 import ReactiveCocoa
 import Unbox
+import SwiftFlow
 
 // TODO: Overhaul this
 
-enum TwitterAPIError: ErrorType {
+enum TwitterAPIError: String, ErrorType {
     case NotAuthenticated
     case NoInternetConnection
     case UnknownError
+}
+
+extension TwitterAPIError: Coding {
+
+    init(dictionary: [String : AnyObject]) {
+        let type = dictionary["type"] as! String
+        self = TwitterAPIError(rawValue: type)!
+    }
+
+    func dictionaryRepresentation() -> [String : AnyObject] {
+        return ["type": self.rawValue]
+    }
+
 }
 
 struct TwitterClient {

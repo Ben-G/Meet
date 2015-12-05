@@ -24,6 +24,7 @@
 		625E65691C1124A30027C288 /* SwiftFlowRecorder.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 62750C431C0E261E00B688CD /* SwiftFlowRecorder.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		625E65A11C1247CB0027C288 /* DataMutationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E65A01C1247CB0027C288 /* DataMutationActions.swift */; };
 		625E65A31C124DE60027C288 /* TwitterAPIActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E65A21C124DE60027C288 /* TwitterAPIActions.swift */; };
+		625E65A51C1267BF0027C288 /* LocationServiceActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E65A41C1267BF0027C288 /* LocationServiceActions.swift */; };
 		6267DD461C07A0A90080BF30 /* SwiftFlowRouter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6267DD451C07A0A90080BF30 /* SwiftFlowRouter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6267DD4A1C07A0A90080BF30 /* SwiftFlowRouter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD431C07A0A90080BF30 /* SwiftFlowRouter.framework */; };
 		6267DD4B1C07A0A90080BF30 /* SwiftFlowRouter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD431C07A0A90080BF30 /* SwiftFlowRouter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -101,7 +102,6 @@
 		62D3B6EB1BF3A9870056D509 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B6EA1BF3A9870056D509 /* AppState.swift */; };
 		62D3B6F81BF3B72E0056D509 /* ContactListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B6F71BF3B72E0056D509 /* ContactListViewController.swift */; };
 		62D3B6FA1BF3B73A0056D509 /* AddContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B6F91BF3B73A0056D509 /* AddContactViewController.swift */; };
-		62D3B7001BF446310056D509 /* Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B6FF1BF446310056D509 /* Actions.swift */; };
 		62D3B7061BF457C40056D509 /* SearchTwitterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B7051BF457C40056D509 /* SearchTwitterViewController.swift */; };
 		62D3B7301BFC58430056D509 /* EmaiIIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3B72F1BFC58430056D509 /* EmaiIIntroViewController.swift */; };
 		62D4927E1C02C1B200607938 /* TwitterUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D4927D1C02C1B200607938 /* TwitterUser.swift */; };
@@ -632,6 +632,7 @@
 		624BFC961C0FB5D80047637E /* SwiftFlowRouterUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftFlowRouterUnitTests.swift; sourceTree = "<group>"; };
 		625E65A01C1247CB0027C288 /* DataMutationActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataMutationActions.swift; sourceTree = "<group>"; };
 		625E65A21C124DE60027C288 /* TwitterAPIActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterAPIActions.swift; sourceTree = "<group>"; };
+		625E65A41C1267BF0027C288 /* LocationServiceActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationServiceActions.swift; sourceTree = "<group>"; };
 		6267DD431C07A0A90080BF30 /* SwiftFlowRouter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftFlowRouter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6267DD451C07A0A90080BF30 /* SwiftFlowRouter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftFlowRouter.h; sourceTree = "<group>"; };
 		6267DD471C07A0A90080BF30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -710,7 +711,6 @@
 		62D3B6EA1BF3A9870056D509 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		62D3B6F71BF3B72E0056D509 /* ContactListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactListViewController.swift; sourceTree = "<group>"; };
 		62D3B6F91BF3B73A0056D509 /* AddContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddContactViewController.swift; sourceTree = "<group>"; };
-		62D3B6FF1BF446310056D509 /* Actions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Actions.swift; sourceTree = "<group>"; };
 		62D3B7011BF4485C0056D509 /* MainReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainReducer.swift; path = ../Meet/Reducers/MainReducer.swift; sourceTree = "<group>"; };
 		62D3B7051BF457C40056D509 /* SearchTwitterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTwitterViewController.swift; sourceTree = "<group>"; };
 		62D3B72F1BFC58430056D509 /* EmaiIIntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmaiIIntroViewController.swift; sourceTree = "<group>"; };
@@ -1253,11 +1253,11 @@
 		62D3B6FE1BF446270056D509 /* Actions */ = {
 			isa = PBXGroup;
 			children = (
-				62D3B6FF1BF446310056D509 /* Actions.swift */,
 				626DA4501BFFEDBE00988FC0 /* TwitterAPIActionCreator.swift */,
 				6292BEE61C0C131E00CC1B8E /* LocationServiceActionCreator.swift */,
 				625E65A01C1247CB0027C288 /* DataMutationActions.swift */,
 				625E65A21C124DE60027C288 /* TwitterAPIActions.swift */,
+				625E65A41C1267BF0027C288 /* LocationServiceActions.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -2218,6 +2218,7 @@
 				626DA44F1BFFE44400988FC0 /* Authentication.swift in Sources */,
 				6292BEE31C0C0FCA00CC1B8E /* LocationServiceState.swift in Sources */,
 				626DA4351BFE9E1C00988FC0 /* DataState.swift in Sources */,
+				625E65A51C1267BF0027C288 /* LocationServiceActions.swift in Sources */,
 				626DA4331BFE9DA400988FC0 /* DataMutationReducer.swift in Sources */,
 				6292BEE71C0C131E00CC1B8E /* LocationServiceActionCreator.swift in Sources */,
 				626DA4311BFE94BC00988FC0 /* Model.swift in Sources */,
@@ -2231,7 +2232,6 @@
 				6292BEEC1C0C2D7100CC1B8E /* LocationServiceReducer.swift in Sources */,
 				6292BEE51C0C102D00CC1B8E /* Location.swift in Sources */,
 				626DA4551BFFEF5B00988FC0 /* TwitterAPIReducer.swift in Sources */,
-				62D3B7001BF446310056D509 /* Actions.swift in Sources */,
 				62D3B6FA1BF3B73A0056D509 /* AddContactViewController.swift in Sources */,
 				62D3B6F81BF3B72E0056D509 /* ContactListViewController.swift in Sources */,
 				6292BEE11C0C07B100CC1B8E /* LocationIndicatorView.swift in Sources */,

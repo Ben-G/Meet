@@ -27,3 +27,15 @@ struct AppState: StateType, HasNavigationState, HasDataState, HasTwitterAPIState
 
     }
 }
+
+extension AppState: Coding {
+
+    init(dictionary: [String : AnyObject]) {
+        abort()
+    }
+
+    func dictionaryRepresentation() -> [String : AnyObject] {
+        abort()
+    }
+
+}

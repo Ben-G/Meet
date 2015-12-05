@@ -13,15 +13,17 @@ import SwiftFlowReactiveCocoaExtensions
 struct DataMutationReducer: Reducer {
 
     func handleAction(state: HasDataState, action: Action) -> HasDataState {
-        switch action {
-        case .CreateContactFromEmail(let email):
-            return createContact(state, email: email)
-        case .CreateContactWithTwitterUser(let twitterUser):
-            return createContact(state, twitterUser: twitterUser)
-        case .DeleteContact(let identifier):
-            return deleteContact(state, identifier: identifier)
-        case .SetContacts(let contacts):
-            return setContacts(state, contacts: contacts)
+        switch action.type {
+        case CreateContactFromEmail.type:
+            return createContact(state, email: CreateContactFromEmail(action).email)
+        case CreateContactWithTwitterUser.type:
+            return createContact(state, twitterUser: CreateContactWithTwitterUser(action).twitterUser)
+        case DeleteContact.type:
+            return deleteContact(state, identifier: DeleteContact(action).contactID)
+        case SetContacts.type:
+            return setContacts(state, contacts: SetContacts(action).contacts)
+        default:
+            abort()
         }
     }
 

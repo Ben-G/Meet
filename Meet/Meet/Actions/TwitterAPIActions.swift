@@ -12,22 +12,18 @@ import SwiftFlow
 import Accounts
 import Result
 
-enum TwitterAPIAction: Action {
-//    case SetUserSearchResults(Result<[TwitterUser], TwitterAPIError>)
-}
-
 // MARK: Set Twitter Client
 
 struct SetTwitterClient {
     static let type = "SetTwitterClient"
     let twitterClient: Swifter
 
-    init(twitterClient: Swifter) {
+    init(_ twitterClient: Swifter) {
         self.twitterClient = twitterClient
     }
 }
 
-extension SetTwitterClient: ActionConvertible, ActionType {
+extension SetTwitterClient: ActionConvertible {
 
     init(_ action: Action) {
         self.twitterClient = decodeSwifter(action.payload!["swifter"] as! [String : AnyObject])
@@ -67,7 +63,52 @@ func decodeSwifter(dictionary: [String : AnyObject]) -> Swifter {
 
 // MARK: Set User Search Result
 
+//    case SetUserSearchResults(Result<[TwitterUser], TwitterAPIError>)
 
+struct SetUserSearchResult {
+    static let type = "SetUserSearchResult"
+    let userSearchResult: Result<[TwitterUser], TwitterAPIError>
+
+    init(_ userSearchResult: Result<[TwitterUser], TwitterAPIError>) {
+        self.userSearchResult = userSearchResult
+    }
+}
+
+extension SetUserSearchResult: ActionConvertible {
+
+    init(_ action: Action) {
+        self.userSearchResult = Result<[TwitterUser], TwitterAPIError>(dictionary:
+            action.payload!["userSearchResult"] as! [String : AnyObject])
+    }
+
+    func toAction() -> Action {
+        return Action(type: SetUserSearchResult.type,
+            payload: ["userSearchResult": userSearchResult.dictionaryRepresentation()])
+    }
+
+}
+
+extension Result where T: Array<Coding>, Error: Coding {
+
+    init(dictionary: [String : AnyObject]) {
+        if let success = dictionary["success"] as? [AnyObject] {
+            let successContent = success.map { T(dictionary:$0) }
+            self = .Success(successContent)
+        } else if let failure = dictionary["failure"] as? [AnyObject] {
+            self = .Failure(Error(dictionary: failure))
+        }
+    }
+
+    func dictionaryRepresentation() -> [String : AnyObject] {
+        switch self {
+        case .Success(let t):
+            return ["success": t.map { $0.dictionaryRepresentation() }]
+        case .Failure(let e):
+            return ["error": e.dictionaryRepresentation()]
+        }
+    }
+
+}
 
 extension Result where T: Coding, Error: Coding {
 

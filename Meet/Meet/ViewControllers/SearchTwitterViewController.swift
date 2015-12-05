@@ -73,7 +73,7 @@ class SearchTwitterViewController: UIViewController, StoreSubscriber {
     }
 
     @IBAction func cancelButtonTapped(sender: AnyObject) {
-        store.dispatch( TwitterAPIAction.SetUserSearchResults(.Success([])) )
+        store.dispatch( SetUserSearchResult(.Success([])) )
         store.dispatch(
             NavigationAction.DismissViewController(presentingViewController:
                 self.presentingViewController!)
@@ -91,7 +91,7 @@ extension SearchTwitterViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let twitterUser = dataSource.array[indexPath.row]
 
-        store.dispatch( DataMutationAction.CreateContactWithTwitterUser(twitterUser) )
+        store.dispatch( CreateContactWithTwitterUser(twitterUser) )
         store.dispatch(
             NavigationAction.DismissViewController(presentingViewController:
                 self.presentingViewController!)

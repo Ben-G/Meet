@@ -39,8 +39,9 @@ extension TwitterUser: Coding {
 
         if profilePictureURL != "null" {
             self.profilePictureURL = NSURL(string: profilePictureURL)!
+        } else {
+            self.profilePictureURL = nil
         }
-
     }
 
     func dictionaryRepresentation() -> [String : AnyObject] {

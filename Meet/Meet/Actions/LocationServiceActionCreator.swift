@@ -22,7 +22,7 @@ struct LocationServiceActionCreator {
                 state.locationServiceState.authorizationStatus == .AuthorizedWhenInUse {
 
                 if locationService == nil {
-                    store.dispatch ( LocationServiceAction.SetLocationServiceBusy(true) )
+                    store.dispatch ( SetLocationServiceBusy(true) )
                     locationService = LocationService()
                     locationService!.location.observe({ event in
                         switch event {
@@ -44,8 +44,8 @@ struct LocationServiceActionCreator {
 
     func setCurrentLocation(location: Location) -> ActionCreator {
         return { state, store in
-            store.dispatch( LocationServiceAction.SetLocationServiceBusy(false) )
-            return LocationServiceAction.SetLocation(location)
+            store.dispatch( SetLocationServiceBusy(false) )
+            return SetLocation(location)
         }
     }
 
