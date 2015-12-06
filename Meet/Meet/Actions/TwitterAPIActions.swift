@@ -12,6 +12,29 @@ import SwiftFlow
 import Accounts
 import Result
 
+// MARK: Set User Search Text
+
+struct SetUserSearchText {
+    static let type = "SetUserSearchText"
+    let userSearchText: String
+
+    init(_ userSearchText: String) {
+        self.userSearchText = userSearchText
+    }
+}
+
+extension SetUserSearchText: ActionConvertible {
+
+    init(_ action: Action) {
+        self.userSearchText = action.payload!["userSearchText"] as! String
+    }
+
+    func toAction() -> Action {
+        return Action(type: SetUserSearchText.type, payload: ["userSearchText": self.userSearchText])
+    }
+
+}
+
 // MARK: Set Twitter Client
 
 struct SetTwitterClient {

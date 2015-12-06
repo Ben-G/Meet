@@ -21,6 +21,8 @@ struct TwitterAPIReducer: Reducer {
         case SetUserSearchResult.type:
             return setUserSearchResults(state,
                 userSearchResults: SetUserSearchResult(action).userSearchResult)
+        case SetUserSearchText.type:
+            return setUserSearchText(state, userSearchText: SetUserSearchText(action).userSearchText)
         default:
             return state
         }
@@ -36,6 +38,14 @@ struct TwitterAPIReducer: Reducer {
         userSearchResults: Result<[TwitterUser], TwitterAPIError>) -> HasTwitterAPIState {
 
         state.twitterAPIState.userSearchResults = userSearchResults
+
+        return state
+    }
+
+    func setUserSearchText(var state: HasTwitterAPIState, userSearchText: String)
+        -> HasTwitterAPIState {
+
+        state.twitterAPIState.userSearchText = userSearchText
 
         return state
     }

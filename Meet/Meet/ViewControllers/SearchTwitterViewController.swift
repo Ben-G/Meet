@@ -17,6 +17,7 @@ class SearchTwitterViewController: UIViewController, StoreSubscriber, Routable {
     static let identifier = "SearchTwitterViewController"
 
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var searchBar: UISearchBar!
 
     var errorView: NetworkErrorView?
     var store = mainStore
@@ -24,7 +25,11 @@ class SearchTwitterViewController: UIViewController, StoreSubscriber, Routable {
         nib: UINib(nibName: "TwitterUserTableViewCell", bundle: nil))
 
     var twitterAPIActionCreator = TwitterAPIActionCreator()
-    var searchText: String?
+    var searchText: String? {
+        didSet {
+            searchBar.text = searchText
+        }
+    }
 
     var users: [TwitterUser]? {
         didSet {
@@ -72,6 +77,8 @@ class SearchTwitterViewController: UIViewController, StoreSubscriber, Routable {
                 self.users = nil
             }
         }
+
+        searchText = state.twitterAPIState.userSearchText
     }
 
     @IBAction func cancelButtonTapped(sender: AnyObject) {
@@ -105,7 +112,7 @@ extension SearchTwitterViewController: UITableViewDelegate {
 extension SearchTwitterViewController: UISearchBarDelegate {
 
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        self.searchText = searchText
+        store.dispatch( SetUserSearchText(searchText) )
         store.dispatch( self.twitterAPIActionCreator.searchUsers(searchText) )
     }
 
