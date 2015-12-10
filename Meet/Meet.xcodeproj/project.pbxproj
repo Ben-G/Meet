@@ -25,6 +25,16 @@
 		625E65A11C1247CB0027C288 /* DataMutationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E65A01C1247CB0027C288 /* DataMutationActions.swift */; };
 		625E65A31C124DE60027C288 /* TwitterAPIActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E65A21C124DE60027C288 /* TwitterAPIActions.swift */; };
 		625E65A51C1267BF0027C288 /* LocationServiceActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E65A41C1267BF0027C288 /* LocationServiceActions.swift */; };
+		625E65D71C193F9D0027C288 /* SwiftFlowCodableGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 625E65D61C193F9D0027C288 /* SwiftFlowCodableGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		625E66101C1940370027C288 /* SwiftCodableGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E660F1C1940370027C288 /* SwiftCodableGenerator.swift */; };
+		625E661D1C19406C0027C288 /* SourceKittenFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625E661A1C1940650027C288 /* SourceKittenFramework.framework */; };
+		625E66361C1940D50027C288 /* SWXMLHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625E662D1C1940C70027C288 /* SWXMLHash.framework */; };
+		625E66401C1940F40027C288 /* SwiftXPC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625E663D1C1940EC0027C288 /* SwiftXPC.framework */; };
+		625E66651C1941B90027C288 /* Commandant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625E66471C1941910027C288 /* Commandant.framework */; };
+		625E66661C1941C70027C288 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625E66561C1941AE0027C288 /* Result.framework */; };
+		625E666E1C1943290027C288 /* SwiftFlowCodableGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E666D1C1943290027C288 /* SwiftFlowCodableGeneratorTests.swift */; };
+		625E66701C1943290027C288 /* SwiftFlowCodableGenerator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625E65D41C193F9D0027C288 /* SwiftFlowCodableGenerator.framework */; };
+		625E66781C19479A0027C288 /* SetUserSearchText.swiftsourcefile in Resources */ = {isa = PBXBuildFile; fileRef = 625E66771C1946F60027C288 /* SetUserSearchText.swiftsourcefile */; };
 		6267DD461C07A0A90080BF30 /* SwiftFlowRouter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6267DD451C07A0A90080BF30 /* SwiftFlowRouter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6267DD4A1C07A0A90080BF30 /* SwiftFlowRouter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD431C07A0A90080BF30 /* SwiftFlowRouter.framework */; };
 		6267DD4B1C07A0A90080BF30 /* SwiftFlowRouter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6267DD431C07A0A90080BF30 /* SwiftFlowRouter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -256,6 +266,167 @@
 			proxyType = 1;
 			remoteGlobalIDString = 62750C421C0E261E00B688CD;
 			remoteInfo = SwiftFlowRecorder;
+		};
+		625E66171C1940650027C288 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 625E66111C1940650027C288 /* sourcekitten.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D0E7B63219E9C64500EDBA4D;
+			remoteInfo = sourcekitten;
+		};
+		625E66191C1940650027C288 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 625E66111C1940650027C288 /* sourcekitten.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D0D1216D19E87B05005E4BAA;
+			remoteInfo = SourceKittenFramework;
+		};
+		625E661B1C1940650027C288 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 625E66111C1940650027C288 /* sourcekitten.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D0D1217719E87B05005E4BAA;
+			remoteInfo = SourceKittenFrameworkTests;
+		};
+		625E66281C1940C70027C288 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 625E661E1C1940C60027C288 /* SWXMLHash.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD6083EF196CA106000B4F8D;
+			remoteInfo = "SWXMLHash iOS";
+		};
+		625E662A1C1940C70027C288 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 625E661E1C1940C60027C288 /* SWXMLHash.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD6083FA196CA106000B4F8D;
+			remoteInfo = "SWXMLHash iOS Tests";
+		};
+		625E662C1C1940C70027C288 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 625E661E1C1940C60027C288 /* SWXMLHash.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD9D052C1A757D8B003CCB21;
+			remoteInfo = "SWXMLHash OSX";
+		};
+		625E662E1C1940C70027C288 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 625E661E1C1940C60027C288 /* SWXMLHash.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD9D05361A757D8B003CCB21;
+			remoteInfo = "SWXMLHash OSX Tests";
+		};
+		625E66301C1940C70027C288 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 625E661E1C1940C60027C288 /* SWXMLHash.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDDEC74C1BF6311A00AB138B;
+			remoteInfo = "SWXMLHash tvOS";
+		};
+		625E66321C1940C70027C288 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 625E661E1C1940C60027C288 /* SWXMLHash.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDDEC7551BF6311B00AB138B;
+			remoteInfo = "SWXMLHash tvOS Tests";
+		};
+		625E66341C1940C70027C288 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 625E661E1C1940C60027C288 /* SWXMLHash.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDDEC7681BF6316C00AB138B;
+			remoteInfo = "SWXMLHash watchOS";
+		};
+		625E663C1C1940EC0027C288 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 625E66371C1940EC0027C288 /* SwiftXPC.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E8FE43F71A01A8AF002672BD;
+			remoteInfo = SwiftXPC;
+		};
+		625E663E1C1940EC0027C288 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 625E66371C1940EC0027C288 /* SwiftXPC.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E8FE44021A01A8AF002672BD;
+			remoteInfo = SwiftXPCTests;
+		};
+		625E66461C1941910027C288 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 625E66411C1941900027C288 /* Commandant.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D00CCDD91A20717400109F8C;
+			remoteInfo = Commandant;
+		};
+		625E66481C1941910027C288 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 625E66411C1941900027C288 /* Commandant.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D00CCDE41A20717400109F8C;
+			remoteInfo = CommandantTests;
+		};
+		625E66551C1941AE0027C288 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 625E664A1C1941AD0027C288 /* Result.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D45480571A9572F5009D7229;
+			remoteInfo = "Result-Mac";
+		};
+		625E66571C1941AE0027C288 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 625E664A1C1941AD0027C288 /* Result.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D45480671A9572F5009D7229;
+			remoteInfo = "Result-MacTests";
+		};
+		625E66591C1941AE0027C288 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 625E664A1C1941AD0027C288 /* Result.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D454807D1A957361009D7229;
+			remoteInfo = "Result-iOS";
+		};
+		625E665B1C1941AE0027C288 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 625E664A1C1941AD0027C288 /* Result.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D45480871A957362009D7229;
+			remoteInfo = "Result-iOSTests";
+		};
+		625E665D1C1941AE0027C288 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 625E664A1C1941AD0027C288 /* Result.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 57FCDE471BA280DC00130C48;
+			remoteInfo = "Result-tvOS";
+		};
+		625E665F1C1941AE0027C288 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 625E664A1C1941AD0027C288 /* Result.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 57FCDE541BA280E000130C48;
+			remoteInfo = "Result-tvOSTests";
+		};
+		625E66611C1941AE0027C288 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 625E664A1C1941AD0027C288 /* Result.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D03579A31B2B788F005D26AE;
+			remoteInfo = "Result-watchOS";
+		};
+		625E66631C1941AE0027C288 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 625E664A1C1941AD0027C288 /* Result.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D03579B01B2B78A1005D26AE;
+			remoteInfo = "Result-watchOSTests";
+		};
+		625E66711C1943290027C288 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 62D3B6B01BF2FAA80056D509 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 625E65D31C193F9C0027C288;
+			remoteInfo = SwiftFlowCodableGenerator;
 		};
 		6267DD481C07A0A90080BF30 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -633,6 +804,19 @@
 		625E65A01C1247CB0027C288 /* DataMutationActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataMutationActions.swift; sourceTree = "<group>"; };
 		625E65A21C124DE60027C288 /* TwitterAPIActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterAPIActions.swift; sourceTree = "<group>"; };
 		625E65A41C1267BF0027C288 /* LocationServiceActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationServiceActions.swift; sourceTree = "<group>"; };
+		625E65D41C193F9D0027C288 /* SwiftFlowCodableGenerator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftFlowCodableGenerator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		625E65D61C193F9D0027C288 /* SwiftFlowCodableGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftFlowCodableGenerator.h; sourceTree = "<group>"; };
+		625E65D81C193F9D0027C288 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		625E660F1C1940370027C288 /* SwiftCodableGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftCodableGenerator.swift; sourceTree = "<group>"; };
+		625E66111C1940650027C288 /* sourcekitten.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = sourcekitten.xcodeproj; path = Carthage/Checkouts/SourceKitten/sourcekitten.xcodeproj; sourceTree = SOURCE_ROOT; };
+		625E661E1C1940C60027C288 /* SWXMLHash.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SWXMLHash.xcodeproj; path = Carthage/Checkouts/SWXMLHash/SWXMLHash.xcodeproj; sourceTree = SOURCE_ROOT; };
+		625E66371C1940EC0027C288 /* SwiftXPC.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftXPC.xcodeproj; path = Carthage/Checkouts/SwiftXPC/SwiftXPC.xcodeproj; sourceTree = SOURCE_ROOT; };
+		625E66411C1941900027C288 /* Commandant.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Commandant.xcodeproj; path = Carthage/Checkouts/SourceKitten/Carthage/Checkouts/Commandant/Commandant.xcodeproj; sourceTree = SOURCE_ROOT; };
+		625E664A1C1941AD0027C288 /* Result.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Result.xcodeproj; path = Carthage/Checkouts/SourceKitten/Carthage/Checkouts/Result/Result.xcodeproj; sourceTree = SOURCE_ROOT; };
+		625E666B1C1943290027C288 /* SwiftFlowCodableGeneratorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftFlowCodableGeneratorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		625E666D1C1943290027C288 /* SwiftFlowCodableGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftFlowCodableGeneratorTests.swift; sourceTree = "<group>"; };
+		625E666F1C1943290027C288 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		625E66771C1946F60027C288 /* SetUserSearchText.swiftsourcefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = SetUserSearchText.swiftsourcefile; sourceTree = "<group>"; };
 		6267DD431C07A0A90080BF30 /* SwiftFlowRouter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftFlowRouter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6267DD451C07A0A90080BF30 /* SwiftFlowRouter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftFlowRouter.h; sourceTree = "<group>"; };
 		6267DD471C07A0A90080BF30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -734,6 +918,26 @@
 				6289C1861C10ED440062037C /* Nimble.framework in Frameworks */,
 				6289C15B1C10ED3E0062037C /* Quick.framework in Frameworks */,
 				624BFC5B1C0FA3B00047637E /* SwiftFlowRouter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		625E65D01C193F9C0027C288 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				625E66661C1941C70027C288 /* Result.framework in Frameworks */,
+				625E66651C1941B90027C288 /* Commandant.framework in Frameworks */,
+				625E66401C1940F40027C288 /* SwiftXPC.framework in Frameworks */,
+				625E66361C1940D50027C288 /* SWXMLHash.framework in Frameworks */,
+				625E661D1C19406C0027C288 /* SourceKittenFramework.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		625E66681C1943290027C288 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				625E66701C1943290027C288 /* SwiftFlowCodableGenerator.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -875,6 +1079,96 @@
 				624BFC931C0FA48E0047637E /* NimbleTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		625E65D51C193F9D0027C288 /* SwiftFlowCodableGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				625E664A1C1941AD0027C288 /* Result.xcodeproj */,
+				625E66411C1941900027C288 /* Commandant.xcodeproj */,
+				625E66371C1940EC0027C288 /* SwiftXPC.xcodeproj */,
+				625E661E1C1940C60027C288 /* SWXMLHash.xcodeproj */,
+				625E66111C1940650027C288 /* sourcekitten.xcodeproj */,
+				625E65D61C193F9D0027C288 /* SwiftFlowCodableGenerator.h */,
+				625E65D81C193F9D0027C288 /* Info.plist */,
+				625E660F1C1940370027C288 /* SwiftCodableGenerator.swift */,
+			);
+			path = SwiftFlowCodableGenerator;
+			sourceTree = "<group>";
+		};
+		625E66121C1940650027C288 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				625E66181C1940650027C288 /* sourcekitten.app */,
+				625E661A1C1940650027C288 /* SourceKittenFramework.framework */,
+				625E661C1C1940650027C288 /* SourceKittenFrameworkTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		625E661F1C1940C60027C288 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				625E66291C1940C70027C288 /* SWXMLHash.framework */,
+				625E662B1C1940C70027C288 /* SWXMLHash iOS Tests.xctest */,
+				625E662D1C1940C70027C288 /* SWXMLHash.framework */,
+				625E662F1C1940C70027C288 /* SWXMLHash OSX Tests.xctest */,
+				625E66311C1940C70027C288 /* SWXMLHash.framework */,
+				625E66331C1940C70027C288 /* SWXMLHash tvOS Tests.xctest */,
+				625E66351C1940C70027C288 /* SWXMLHash.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		625E66381C1940EC0027C288 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				625E663D1C1940EC0027C288 /* SwiftXPC.framework */,
+				625E663F1C1940EC0027C288 /* SwiftXPCTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		625E66421C1941900027C288 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				625E66471C1941910027C288 /* Commandant.framework */,
+				625E66491C1941910027C288 /* CommandantTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		625E664B1C1941AD0027C288 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				625E66561C1941AE0027C288 /* Result.framework */,
+				625E66581C1941AE0027C288 /* Result-MacTests.xctest */,
+				625E665A1C1941AE0027C288 /* Result.framework */,
+				625E665C1C1941AE0027C288 /* Result-iOSTests.xctest */,
+				625E665E1C1941AE0027C288 /* Result.framework */,
+				625E66601C1941AE0027C288 /* Result-tvOSTests.xctest */,
+				625E66621C1941AE0027C288 /* Result.framework */,
+				625E66641C1941AE0027C288 /* Result-watchOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		625E666C1C1943290027C288 /* SwiftFlowCodableGeneratorTests */ = {
+			isa = PBXGroup;
+			children = (
+				625E66761C1946E00027C288 /* TestData */,
+				625E666D1C1943290027C288 /* SwiftFlowCodableGeneratorTests.swift */,
+				625E666F1C1943290027C288 /* Info.plist */,
+			);
+			path = SwiftFlowCodableGeneratorTests;
+			sourceTree = "<group>";
+		};
+		625E66761C1946E00027C288 /* TestData */ = {
+			isa = PBXGroup;
+			children = (
+				625E66771C1946F60027C288 /* SetUserSearchText.swiftsourcefile */,
+			);
+			path = TestData;
 			sourceTree = "<group>";
 		};
 		6267DD441C07A0A90080BF30 /* SwiftFlowRouter */ = {
@@ -1157,6 +1451,8 @@
 				627B05E11C09700D00481356 /* SwiftFlowTests */,
 				62BBE79A1C0ACE59004D6822 /* SwiftFlowPersistenceNSCoding */,
 				62750C441C0E261E00B688CD /* SwiftFlowRecorder */,
+				625E65D51C193F9D0027C288 /* SwiftFlowCodableGenerator */,
+				625E666C1C1943290027C288 /* SwiftFlowCodableGeneratorTests */,
 				62D3B6B91BF2FAA80056D509 /* Products */,
 				624BFC571C0FA3B00047637E /* SwiftFlowRouterTests */,
 			);
@@ -1176,6 +1472,8 @@
 				62750C211C0E13A100B688CD /* SwiftFlowCounterExample.app */,
 				62750C431C0E261E00B688CD /* SwiftFlowRecorder.framework */,
 				624BFC561C0FA3B00047637E /* SwiftFlowRouterTests.xctest */,
+				625E65D41C193F9D0027C288 /* SwiftFlowCodableGenerator.framework */,
+				625E666B1C1943290027C288 /* SwiftFlowCodableGeneratorTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1293,6 +1591,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		625E65D11C193F9C0027C288 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				625E65D71C193F9D0027C288 /* SwiftFlowCodableGenerator.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6267DD401C07A0A90080BF30 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -1352,6 +1658,42 @@
 			name = SwiftFlowRouterTests;
 			productName = SwiftFlowRouterTests;
 			productReference = 624BFC561C0FA3B00047637E /* SwiftFlowRouterTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		625E65D31C193F9C0027C288 /* SwiftFlowCodableGenerator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 625E660E1C193F9D0027C288 /* Build configuration list for PBXNativeTarget "SwiftFlowCodableGenerator" */;
+			buildPhases = (
+				625E65CF1C193F9C0027C288 /* Sources */,
+				625E65D01C193F9C0027C288 /* Frameworks */,
+				625E65D11C193F9C0027C288 /* Headers */,
+				625E65D21C193F9C0027C288 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SwiftFlowCodableGenerator;
+			productName = SwiftFlowCodableGenerator;
+			productReference = 625E65D41C193F9D0027C288 /* SwiftFlowCodableGenerator.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		625E666A1C1943290027C288 /* SwiftFlowCodableGeneratorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 625E66731C1943290027C288 /* Build configuration list for PBXNativeTarget "SwiftFlowCodableGeneratorTests" */;
+			buildPhases = (
+				625E66671C1943290027C288 /* Sources */,
+				625E66681C1943290027C288 /* Frameworks */,
+				625E66691C1943290027C288 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				625E66721C1943290027C288 /* PBXTargetDependency */,
+			);
+			name = SwiftFlowCodableGeneratorTests;
+			productName = SwiftFlowCodableGeneratorTests;
+			productReference = 625E666B1C1943290027C288 /* SwiftFlowCodableGeneratorTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		6267DD421C07A0A90080BF30 /* SwiftFlowRouter */ = {
@@ -1560,6 +1902,12 @@
 					624BFC551C0FA3B00047637E = {
 						CreatedOnToolsVersion = 7.1.1;
 					};
+					625E65D31C193F9C0027C288 = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
+					625E666A1C1943290027C288 = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
 					6267DD421C07A0A90080BF30 = {
 						CreatedOnToolsVersion = 7.1.1;
 						DevelopmentTeam = Z4999T6UJA;
@@ -1612,6 +1960,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 625E66421C1941900027C288 /* Products */;
+					ProjectRef = 625E66411C1941900027C288 /* Commandant.xcodeproj */;
+				},
+				{
 					ProductGroup = 628B30861C0B9BB300E2213D /* Products */;
 					ProjectRef = 628B30851C0B9BB300E2213D /* ListKit.xcodeproj */;
 				},
@@ -1628,6 +1980,10 @@
 					ProjectRef = 6292BEAC1C0B9E0D00CC1B8E /* ReactiveCocoa.xcodeproj */;
 				},
 				{
+					ProductGroup = 625E664B1C1941AD0027C288 /* Products */;
+					ProjectRef = 625E664A1C1941AD0027C288 /* Result.xcodeproj */;
+				},
+				{
 					ProductGroup = 628B30951C0B9BBE00E2213D /* Products */;
 					ProjectRef = 628B30941C0B9BBE00E2213D /* Result.xcodeproj */;
 				},
@@ -1636,12 +1992,24 @@
 					ProjectRef = 628B30AF1C0B9BCB00E2213D /* SDWebImage.xcodeproj */;
 				},
 				{
+					ProductGroup = 625E66121C1940650027C288 /* Products */;
+					ProjectRef = 625E66111C1940650027C288 /* sourcekitten.xcodeproj */;
+				},
+				{
 					ProductGroup = 628B30C01C0B9BDB00E2213D /* Products */;
 					ProjectRef = 628B30BF1C0B9BDB00E2213D /* SSKeychain.xcodeproj */;
 				},
 				{
 					ProductGroup = 628B30CF1C0B9BE500E2213D /* Products */;
 					ProjectRef = 628B30CE1C0B9BE500E2213D /* Swifter.xcodeproj */;
+				},
+				{
+					ProductGroup = 625E66381C1940EC0027C288 /* Products */;
+					ProjectRef = 625E66371C1940EC0027C288 /* SwiftXPC.xcodeproj */;
+				},
+				{
+					ProductGroup = 625E661F1C1940C60027C288 /* Products */;
+					ProjectRef = 625E661E1C1940C60027C288 /* SWXMLHash.xcodeproj */;
 				},
 				{
 					ProductGroup = 628B30DE1C0B9BEF00E2213D /* Products */;
@@ -1661,6 +2029,8 @@
 				62750C201C0E13A100B688CD /* SwiftFlowCounterExample */,
 				62750C421C0E261E00B688CD /* SwiftFlowRecorder */,
 				624BFC551C0FA3B00047637E /* SwiftFlowRouterTests */,
+				625E65D31C193F9C0027C288 /* SwiftFlowCodableGenerator */,
+				625E666A1C1943290027C288 /* SwiftFlowCodableGeneratorTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1769,6 +2139,160 @@
 			fileType = wrapper.cfbundle;
 			path = NimbleTests.xctest;
 			remoteRef = 624BFC921C0FA48E0047637E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		625E66181C1940650027C288 /* sourcekitten.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = sourcekitten.app;
+			remoteRef = 625E66171C1940650027C288 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		625E661A1C1940650027C288 /* SourceKittenFramework.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SourceKittenFramework.framework;
+			remoteRef = 625E66191C1940650027C288 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		625E661C1C1940650027C288 /* SourceKittenFrameworkTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SourceKittenFrameworkTests.xctest;
+			remoteRef = 625E661B1C1940650027C288 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		625E66291C1940C70027C288 /* SWXMLHash.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SWXMLHash.framework;
+			remoteRef = 625E66281C1940C70027C288 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		625E662B1C1940C70027C288 /* SWXMLHash iOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SWXMLHash iOS Tests.xctest";
+			remoteRef = 625E662A1C1940C70027C288 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		625E662D1C1940C70027C288 /* SWXMLHash.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SWXMLHash.framework;
+			remoteRef = 625E662C1C1940C70027C288 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		625E662F1C1940C70027C288 /* SWXMLHash OSX Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SWXMLHash OSX Tests.xctest";
+			remoteRef = 625E662E1C1940C70027C288 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		625E66311C1940C70027C288 /* SWXMLHash.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SWXMLHash.framework;
+			remoteRef = 625E66301C1940C70027C288 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		625E66331C1940C70027C288 /* SWXMLHash tvOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SWXMLHash tvOS Tests.xctest";
+			remoteRef = 625E66321C1940C70027C288 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		625E66351C1940C70027C288 /* SWXMLHash.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SWXMLHash.framework;
+			remoteRef = 625E66341C1940C70027C288 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		625E663D1C1940EC0027C288 /* SwiftXPC.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftXPC.framework;
+			remoteRef = 625E663C1C1940EC0027C288 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		625E663F1C1940EC0027C288 /* SwiftXPCTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SwiftXPCTests.xctest;
+			remoteRef = 625E663E1C1940EC0027C288 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		625E66471C1941910027C288 /* Commandant.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Commandant.framework;
+			remoteRef = 625E66461C1941910027C288 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		625E66491C1941910027C288 /* CommandantTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = CommandantTests.xctest;
+			remoteRef = 625E66481C1941910027C288 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		625E66561C1941AE0027C288 /* Result.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Result.framework;
+			remoteRef = 625E66551C1941AE0027C288 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		625E66581C1941AE0027C288 /* Result-MacTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Result-MacTests.xctest";
+			remoteRef = 625E66571C1941AE0027C288 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		625E665A1C1941AE0027C288 /* Result.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Result.framework;
+			remoteRef = 625E66591C1941AE0027C288 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		625E665C1C1941AE0027C288 /* Result-iOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Result-iOSTests.xctest";
+			remoteRef = 625E665B1C1941AE0027C288 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		625E665E1C1941AE0027C288 /* Result.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Result.framework;
+			remoteRef = 625E665D1C1941AE0027C288 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		625E66601C1941AE0027C288 /* Result-tvOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Result-tvOSTests.xctest";
+			remoteRef = 625E665F1C1941AE0027C288 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		625E66621C1941AE0027C288 /* Result.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Result.framework;
+			remoteRef = 625E66611C1941AE0027C288 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		625E66641C1941AE0027C288 /* Result-watchOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Result-watchOSTests.xctest";
+			remoteRef = 625E66631C1941AE0027C288 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		628B308D1C0B9BB300E2213D /* ListKitDemo.app */ = {
@@ -2026,6 +2550,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		625E65D21C193F9C0027C288 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		625E66691C1943290027C288 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				625E66781C19479A0027C288 /* SetUserSearchText.swiftsourcefile in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6267DD411C07A0A90080BF30 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2132,6 +2671,22 @@
 			files = (
 				624BFC971C0FB5D80047637E /* SwiftFlowRouterUnitTests.swift in Sources */,
 				624BFC591C0FA3B00047637E /* SwiftFlowRouterIntegrationTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		625E65CF1C193F9C0027C288 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				625E66101C1940370027C288 /* SwiftCodableGenerator.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		625E66671C1943290027C288 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				625E666E1C1943290027C288 /* SwiftFlowCodableGeneratorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2285,6 +2840,11 @@
 			target = 62750C421C0E261E00B688CD /* SwiftFlowRecorder */;
 			targetProxy = 625E656A1C1124A30027C288 /* PBXContainerItemProxy */;
 		};
+		625E66721C1943290027C288 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 625E65D31C193F9C0027C288 /* SwiftFlowCodableGenerator */;
+			targetProxy = 625E66711C1943290027C288 /* PBXContainerItemProxy */;
+		};
 		6267DD491C07A0A90080BF30 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6267DD421C07A0A90080BF30 /* SwiftFlowRouter */;
@@ -2395,6 +2955,85 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.benjamin-encz.SwiftFlowRouterTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		625E65D91C193F9D0027C288 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = SwiftFlowCodableGenerator/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "de.benjamin-encz.SwiftFlowCodableGenerator";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		625E65DA1C193F9D0027C288 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = SwiftFlowCodableGenerator/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "de.benjamin-encz.SwiftFlowCodableGenerator";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		625E66741C1943290027C288 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = SwiftFlowCodableGeneratorTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "de.benjamin-encz.SwiftFlowCodableGeneratorTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		625E66751C1943290027C288 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = SwiftFlowCodableGeneratorTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "de.benjamin-encz.SwiftFlowCodableGeneratorTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -2879,6 +3518,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		625E660E1C193F9D0027C288 /* Build configuration list for PBXNativeTarget "SwiftFlowCodableGenerator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				625E65D91C193F9D0027C288 /* Debug */,
+				625E65DA1C193F9D0027C288 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		625E66731C1943290027C288 /* Build configuration list for PBXNativeTarget "SwiftFlowCodableGeneratorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				625E66741C1943290027C288 /* Debug */,
+				625E66751C1943290027C288 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		6267DD4E1C07A0AA0080BF30 /* Build configuration list for PBXNativeTarget "SwiftFlowRouter" */ = {
 			isa = XCConfigurationList;
