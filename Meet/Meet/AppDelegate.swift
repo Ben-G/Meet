@@ -10,13 +10,18 @@ import UIKit
 import SwifteriOS
 import SwiftFlow
 import SwiftFlowRouter
-import SwiftFlowReactiveCocoaExtensions
-import SwiftFlowPersistenceNSCoding
 import SwiftFlowRecorder
 
+let typeMaps: [TypeMap] = [
+    LocationServiceActionsTypeMap,
+    TwitterAPIActionsTypeMap,
+    DataMutationActionsTypeMap,
+    SwiftFlowRouter.typeMap
+]
+
 let mainStore =
-RecordingMainStore(reducer: MainReducer([NavigationReducer(), DataMutationReducer(),
-    TwitterAPIReducer(), LocationServiceReducer()]), appState: AppState(), recording: "recording.json")
+RecordingMainStore(reducer: CombinedReducer([NavigationReducer(), DataMutationReducer(),
+    TwitterAPIReducer(), LocationServiceReducer()]), appState: AppState(), typeMaps: typeMaps, recording: "recording.json")
 
 var persistenceAdapter = PersistenceAdapter<DataState, AppState>()
 

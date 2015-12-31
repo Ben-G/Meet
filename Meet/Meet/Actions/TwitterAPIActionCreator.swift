@@ -10,8 +10,6 @@ import Foundation
 import SwifteriOS
 import ReactiveCocoa
 import SwiftFlow
-import SwiftFlowReactiveCocoaExtensions
-
 
 struct TwitterAPIActionCreator {
 

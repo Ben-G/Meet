@@ -8,20 +8,19 @@
 
 import Foundation
 import SwiftFlow
-import SwiftFlowReactiveCocoaExtensions
 
 struct DataMutationReducer: Reducer {
 
     func handleAction(state: HasDataState, action: Action) -> HasDataState {
-        switch action.type {
-        case CreateContactFromEmail.type:
-            return createContact(state, email: CreateContactFromEmail(action).email)
-        case CreateContactWithTwitterUser.type:
-            return createContact(state, twitterUser: CreateContactWithTwitterUser(action).twitterUser)
-        case DeleteContact.type:
-            return deleteContact(state, identifier: DeleteContact(action).contactID)
-        case SetContacts.type:
-            return setContacts(state, contacts: SetContacts(action).contacts)
+        switch action {
+        case let action as CreateContactFromEmail:
+            return createContact(state, email: action.email)
+        case let action as CreateContactWithTwitterUser:
+            return createContact(state, twitterUser: action.twitterUser)
+        case let action as DeleteContact:
+            return deleteContact(state, identifier: action.contactID)
+        case let action as SetContacts:
+            return setContacts(state, contacts: action.contacts)
         default:
             return state
         }

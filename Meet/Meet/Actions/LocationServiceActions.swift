@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftFlow
+import SwiftFlowRecorder
 
 //enum LocationServiceAction: Action {
 //    case SetLocationServiceBusy(Bool)
@@ -25,22 +26,10 @@ struct SetLocationServiceBusy {
     }
 }
 
-extension SetLocationServiceBusy: ActionConvertible {
-
-    init(_ action: Action) {
-        self.busy = action.payload!["busy"] as! Bool
-    }
-
-    func toAction() -> Action {
-        return Action(type: SetLocationServiceBusy.type, payload: ["busy": busy])
-    }
-
-}
-
 // MARK: SetLocation
 
 struct SetLocation {
-    static let type = "SetLocationServiceBusy"
+    static let type = "SetLocation"
     let location: Location
 
     init(_ location: Location) {
@@ -48,15 +37,35 @@ struct SetLocation {
     }
 }
 
-extension SetLocation: ActionConvertible {
+// MARK: Serialization Code
 
-    init(_ action: Action) {
-        self.location = Location(dictionary: action.payload!["location"] as! [String : AnyObject])
+let LocationServiceActionsTypeMap: TypeMap = [
+    SetLocationServiceBusy.type: SetLocationServiceBusy.self,
+    SetLocation.type: SetLocation.self
+]
+
+extension SetLocationServiceBusy: StandardActionConvertible {
+
+    init(_ standardAction: StandardAction) {
+        self.busy = standardAction.payload!["busy"] as! Bool
     }
 
-    func toAction() -> Action {
-        return Action(type: SetLocation.type,
-            payload: ["location": location.dictionaryRepresentation()])
+    func toStandardAction() -> StandardAction {
+        return StandardAction(type: SetLocationServiceBusy.type, payload: ["busy": busy], isTypedAction: true)
+    }
+    
+}
+
+extension SetLocation: StandardActionConvertible {
+
+    init(_ standardAction: StandardAction) {
+        self.location = Location(dictionary:
+            standardAction.payload!["location"] as! [String : AnyObject])
+    }
+
+    func toStandardAction() -> StandardAction {
+        return StandardAction(type: SetLocation.type,
+            payload: ["location": location.dictionaryRepresentation()], isTypedAction: true)
     }
 
 }

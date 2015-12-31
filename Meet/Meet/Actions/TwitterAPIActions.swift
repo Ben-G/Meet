@@ -9,30 +9,19 @@
 import Foundation
 import SwifteriOS
 import SwiftFlow
+import SwiftFlowRecorder
 import Accounts
 import Result
 
 // MARK: Set User Search Text
 
-struct SetUserSearchText {
+struct SetUserSearchText: Action {
     static let type = "SetUserSearchText"
     let userSearchText: String
 
     init(_ userSearchText: String) {
         self.userSearchText = userSearchText
     }
-}
-
-extension SetUserSearchText: ActionConvertible {
-
-    init(_ action: Action) {
-        self.userSearchText = action.payload!["userSearchText"] as! String
-    }
-
-    func toAction() -> Action {
-        return Action(type: SetUserSearchText.type, payload: ["userSearchText": self.userSearchText])
-    }
-
 }
 
 // MARK: Set Twitter Client
@@ -46,49 +35,7 @@ struct SetTwitterClient {
     }
 }
 
-extension SetTwitterClient: ActionConvertible {
-
-    init(_ action: Action) {
-        self.twitterClient = decodeSwifter(action.payload!["swifter"] as! [String : AnyObject])
-    }
-
-    func toAction() -> Action {
-        return Action(type: SetTwitterClient.type,
-            payload: ["swifter": encodeSwifter(twitterClient)])
-    }
-}
-
-func encodeSwifter(swifter: Swifter) -> [String : AnyObject] {
-    if let nativeAccountIdentifier = swifter.client.credential?.account?.identifier {
-        return ["nativeAccount": nativeAccountIdentifier]
-    } else if let key = swifter.client.credential?.accessToken?.key,
-        secret = swifter.client.credential?.accessToken?.secret {
-        return ["oAuth": ["key": key, "secret": secret]]
-    } else {
-        abort()
-    }
-}
-
-// Fallback: Try to decode Swifter using info from toolchain
-func decodeSwifter(dictionary: [String : AnyObject]) -> Swifter {
-    if let nativeAccountIdentifier = dictionary["nativeAccount"] as? String {
-        let nativeAccount = ACAccountStore().accountWithIdentifier(nativeAccountIdentifier)
-
-        return Swifter(account: nativeAccount)
-
-    } else if let oAuthCredentials = dictionary["oAuth"] {
-        let key = oAuthCredentials["key"] as! String
-        let secret = oAuthCredentials["secret"] as! String
-
-        return Swifter(consumerKey: key, consumerSecret: secret)
-    } else {
-        abort()
-    }
-}
-
 // MARK: Set User Search Result
-
-//    case SetUserSearchResults(Result<[TwitterUser], TwitterAPIError>)
 
 struct SetUserSearchResult {
     static let type = "SetUserSearchResult"
@@ -99,53 +46,47 @@ struct SetUserSearchResult {
     }
 }
 
-extension SetUserSearchResult: ActionConvertible {
+// MARK: Serialization Code
 
-    init(_ action: Action) {
+let TwitterAPIActionsTypeMap: TypeMap = [
+    SetUserSearchText.type: SetUserSearchText.self,
+    SetTwitterClient.type: SetTwitterClient.self,
+    SetUserSearchResult.type: SetUserSearchResult.self
+]
+
+extension SetUserSearchText: StandardActionConvertible {
+
+    init(_ action: StandardAction) {
+        self.userSearchText = action.payload!["userSearchText"] as! String
+    }
+
+    func toStandardAction() -> StandardAction {
+        return StandardAction(type: SetUserSearchText.type, payload: ["userSearchText": self.userSearchText], isTypedAction: true)
+    }
+    
+}
+
+extension SetTwitterClient: StandardActionConvertible {
+
+    init(_ action: StandardAction) {
+        self.twitterClient = decodeSwifter(action.payload!["swifter"] as! [String : AnyObject])
+    }
+
+    func toStandardAction() -> StandardAction {
+        return StandardAction(type: SetTwitterClient.type,
+            payload: ["swifter": encodeSwifter(twitterClient)])
+    }
+}
+
+extension SetUserSearchResult: StandardActionConvertible {
+
+    init(_ action: StandardAction) {
         self.userSearchResult = decode(action.payload!["userSearchResult"] as! [String : AnyObject])
     }
 
-    func toAction() -> Action {
-        return Action(type: SetUserSearchResult.type,
-            payload: ["userSearchResult": encode(userSearchResult)])
+    func toStandardAction() -> StandardAction {
+        return StandardAction(type: SetUserSearchResult.type,
+            payload: ["userSearchResult": encode(userSearchResult)], isTypedAction: true)
     }
-
-}
-
-func encode<A: Coding, B: Coding>(x: Result<A, B>) -> [String : AnyObject] {
-    switch x {
-    case .Success(let t):
-        return ["success": t.dictionaryRepresentation()]
-    case .Failure(let e):
-        return ["error": e.dictionaryRepresentation()]
-    }
-}
-
-func encode<A: Coding, B: Coding>(x: Result<[A], B>) -> [String : AnyObject] {
-    switch x {
-    case .Success(let t):
-        return ["success": t.map { $0.dictionaryRepresentation() }]
-    case .Failure(let e):
-        return ["error": e.dictionaryRepresentation()]
-    }
-}
-
-func decode<A: Coding, B: Coding>(dictionary: [String : AnyObject]) -> Result<[A], B> {
-    if let success = dictionary["success"] as? [AnyObject] {
-        return .Success( success.map { A(dictionary: $0 as! [String : AnyObject]) } )
-    } else if let failure = dictionary["failure"] as? [String : AnyObject] {
-        return .Failure(B(dictionary: failure))
-    } else {
-        abort()
-    }
-}
-
-func decode<A: Coding, B: Coding>(dictionary: [String : AnyObject]) -> Result<A, B> {
-    if let success = dictionary["success"] as? [String : AnyObject] {
-        return .Success(A(dictionary: success))
-    } else if let failure = dictionary["failure"] as? [String : AnyObject] {
-        return .Failure(B(dictionary: failure))
-    } else {
-        abort()
-    }
+    
 }

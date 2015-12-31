@@ -8,10 +8,11 @@
 
 import Foundation
 import SwiftFlow
+import SwiftFlowRecorder
 
 // MARK: Create Contact From Email
 
-struct CreateContactFromEmail {
+struct CreateContactFromEmail: Action {
     static let type = "CreateContactFromEmail"
     let email: String
 
@@ -20,20 +21,9 @@ struct CreateContactFromEmail {
     }
 }
 
-extension CreateContactFromEmail: ActionConvertible, ActionType {
-
-    init(_ action: Action) {
-        self.email = action.payload!["email"] as! String
-    }
-
-    func toAction() -> Action {
-        return Action(type: CreateContactFromEmail.type, payload: ["email": email])
-    }
-}
-
 // MARK: Create From Twitter User
 
-struct CreateContactWithTwitterUser {
+struct CreateContactWithTwitterUser: Action {
     static let type = "CreateContactWithTwitterUser"
     let twitterUser: TwitterUser
 
@@ -42,21 +32,9 @@ struct CreateContactWithTwitterUser {
     }
 }
 
-extension CreateContactWithTwitterUser: ActionConvertible, ActionType {
-
-    init(_ action: Action) {
-        self.twitterUser = TwitterUser(dictionary: action.payload!["twitterUser"] as! [String : AnyObject])
-    }
-
-    func toAction() -> Action {
-        return Action(type: CreateContactWithTwitterUser.type,
-            payload: ["twitterUser": twitterUser.dictionaryRepresentation()])
-    }
-}
-
 // MARK: Create From Twitter User
 
-struct DeleteContact {
+struct DeleteContact: Action {
     static let type = "DeleteContact"
     let contactID: Int
 
@@ -65,22 +43,9 @@ struct DeleteContact {
     }
 }
 
-extension DeleteContact: ActionConvertible, ActionType {
-
-    init(_ action: Action) {
-        self.contactID = action.payload!["contactID"] as! Int
-    }
-
-    func toAction() -> Action {
-        return Action(type: "DeleteContact",
-            payload: ["contactID": contactID])
-    }
-
-}
-
 // MARK: Set Contacts
 
-struct SetContacts {
+struct SetContacts: Action {
     static let type = "SetContacts"
     let contacts: [Contact]
 
@@ -89,17 +54,65 @@ struct SetContacts {
     }
 }
 
-extension SetContacts: ActionConvertible, ActionType {
+extension SetContacts: StandardActionConvertible {
 
-    init(_ action: Action) {
+    init(_ action: StandardAction) {
         self.contacts = (action.payload!["contacts"] as! [[String : AnyObject]]).map {
             return Contact(dictionary: $0)
         }
     }
 
-    func toAction() -> Action {
-        return Action(type: "SetContacts",
-            payload: ["contacts": contacts.map { $0.dictionaryRepresentation() }])
+    func toStandardAction() -> StandardAction {
+        return StandardAction(type: SetContacts.type,
+            payload: ["contacts": contacts.map { $0.dictionaryRepresentation() }],
+            isTypedAction: true)
     }
 
+}
+
+// MARK: Serialization Code
+
+let DataMutationActionsTypeMap: TypeMap = [
+    CreateContactFromEmail.type: CreateContactFromEmail.self,
+    CreateContactWithTwitterUser.type: CreateContactWithTwitterUser.self,
+    DeleteContact.type: DeleteContact.self,
+    SetContacts.type: SetContacts.self
+]
+
+extension CreateContactFromEmail: StandardActionConvertible {
+
+    init(_ action: StandardAction) {
+        self.email = action.payload!["email"] as! String
+    }
+
+    func toStandardAction() -> StandardAction {
+        return StandardAction(type: CreateContactFromEmail.type, payload: ["email": email], isTypedAction: true)
+    }
+}
+
+extension CreateContactWithTwitterUser: StandardActionConvertible {
+
+    init(_ action: StandardAction) {
+        self.twitterUser = TwitterUser(dictionary: action.payload!["twitterUser"] as! [String : AnyObject])
+    }
+
+    func toStandardAction() -> StandardAction {
+        return StandardAction(type: CreateContactWithTwitterUser.type,
+            payload: ["twitterUser": twitterUser.dictionaryRepresentation()],
+            isTypedAction: true)
+    }
+}
+
+extension DeleteContact: StandardActionConvertible {
+
+    init(_ action: StandardAction) {
+        self.contactID = action.payload!["contactID"] as! Int
+    }
+
+    func toStandardAction() -> StandardAction {
+        return StandardAction(type: DeleteContact.type,
+            payload: ["contactID": contactID],
+            isTypedAction: true)
+    }
+    
 }

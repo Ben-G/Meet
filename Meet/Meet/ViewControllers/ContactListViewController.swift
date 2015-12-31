@@ -11,7 +11,6 @@ import ListKit
 import ReactiveCocoa
 import SwiftFlow
 import SwiftFlowRouter
-import SwiftFlowReactiveCocoaExtensions
 
 class ContactTableViewCell: UITableViewCell, ListKitCellProtocol {
     var model: Contact? {

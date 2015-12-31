@@ -9,8 +9,6 @@
 import Foundation
 import SwiftFlow
 import SwiftFlowRouter
-import SwiftFlowReactiveCocoaExtensions
-import SwiftFlowPersistenceNSCoding
 
 struct AppState: StateType, HasNavigationState, HasDataState, HasTwitterAPIState,
         Persistable, HasLocationServiceState {
