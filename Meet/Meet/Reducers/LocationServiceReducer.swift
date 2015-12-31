@@ -14,11 +14,11 @@ struct LocationServiceReducer: Reducer {
     func handleAction(state: HasLocationServiceState, action: Action)
         -> HasLocationServiceState {
             
-        switch action.type {
-        case SetLocationServiceBusy.type:
-            return setLocationServiceBusy(state, busy: SetLocationServiceBusy(action).busy)
-        case SetLocation.type:
-            return setLocation(state, location: SetLocation(action).location)
+        switch action {
+        case let action as SetLocationServiceBusy:
+            return setLocationServiceBusy(state, busy: action.busy)
+        case let action as SetLocation:
+            return setLocation(state, location: action.location)
         default:
             return state
         }

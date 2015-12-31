@@ -9,20 +9,19 @@
 import Foundation
 import SwifteriOS
 import SwiftFlow
-import SwiftFlowReactiveCocoaExtensions
 import Result
 
 struct TwitterAPIReducer: Reducer {
 
     func handleAction(state: HasTwitterAPIState, action: Action) -> HasTwitterAPIState {
-        switch action.type {
-        case SetTwitterClient.type:
-            return setTwitterClient(state, swifter: SetTwitterClient(action).twitterClient)
-        case SetUserSearchResult.type:
+        switch action {
+        case let action as SetTwitterClient:
+            return setTwitterClient(state, swifter: action.twitterClient)
+        case let action as SetUserSearchResult:
             return setUserSearchResults(state,
-                userSearchResults: SetUserSearchResult(action).userSearchResult)
-        case SetUserSearchText.type:
-            return setUserSearchText(state, userSearchText: SetUserSearchText(action).userSearchText)
+                userSearchResults: action.userSearchResult)
+        case let action as SetUserSearchText:
+            return setUserSearchText(state, userSearchText: action.userSearchText)
         default:
             return state
         }

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwiftFlowReactiveCocoaExtensions
 import SwiftFlow
 import SwiftFlowRouter
 

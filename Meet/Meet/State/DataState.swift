@@ -8,7 +8,6 @@
 
 import Foundation
 import SwiftFlow
-import SwiftFlowPersistenceNSCoding
 
 struct DataState: Coding {
     var contacts: [Contact] = []
