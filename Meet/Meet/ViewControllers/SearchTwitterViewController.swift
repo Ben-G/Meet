@@ -11,7 +11,7 @@ import ListKit
 import SwiftFlowRouter
 import SwiftFlow
 
-class SearchTwitterViewController: UIViewController, StoreSubscriber, Routable {
+class SearchTwitterViewController: UIViewController, StoreSubscriber {
 
     static let identifier = "SearchTwitterViewController"
 
@@ -100,6 +100,8 @@ extension SearchTwitterViewController: UITableViewDelegate {
         let twitterUser = dataSource.array[indexPath.row]
 
         store.dispatch( CreateContactWithTwitterUser(twitterUser) )
+        store.dispatch( SearchTwitterScene.SetSelectedTwitterUser(twitterUser) )
+        store.dispatch( pushRouteSegement(GreetTwitterViewController.identifier) )
 //        store.dispatch(
 //            NavigationAction.DismissViewController(presentingViewController:
 //                self.presentingViewController!)
@@ -113,6 +115,35 @@ extension SearchTwitterViewController: UISearchBarDelegate {
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         store.dispatch( SetUserSearchText(searchText) )
         store.dispatch( self.twitterAPIActionCreator.searchUsers(searchText) )
+    }
+
+}
+
+extension SearchTwitterViewController: Routable {
+
+    func pushRouteSegment(routeElementIdentifier: RouteElementIdentifier, completionHandler: RoutingCompletionHandler) -> Routable {
+
+        var navigationState = store.appState as! HasNavigationState
+        var twitterSceneState = store.appState as! HasTwitterSceneState
+
+        if routeElementIdentifier == GreetTwitterViewController.identifier {
+            let greetTwitterViewController = GreetTwitterViewController()
+
+            var newRoute = navigationState.navigationState.route
+            newRoute.append(routeElementIdentifier)
+
+            store.dispatch(SetRouteSpecificData(route: newRoute, data: twitterSceneState.twitterSceneState.selectedTwitterUser!))
+
+            self.navigationController?.pushViewController(greetTwitterViewController, animated: false)
+            // TODO: NavigationController doesn't have a completion hook
+            // Need to create ourselves: http://stackoverflow.com/questions/9906966/completion-handler-for-uinavigationcontroller-pushviewcontrolleranimated
+
+            completionHandler()
+
+            return greetTwitterViewController
+        }
+
+        fatalError()
     }
 
 }

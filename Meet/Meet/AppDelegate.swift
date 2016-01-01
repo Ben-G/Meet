@@ -19,9 +19,14 @@ let typeMaps: [TypeMap] = [
     SwiftFlowRouter.typeMap
 ]
 
+let recording = false
+
 let mainStore =
-RecordingMainStore(reducer: CombinedReducer([NavigationReducer(), DataMutationReducer(),
-    TwitterAPIReducer(), LocationServiceReducer()]), appState: AppState(), typeMaps: typeMaps, recording: "recording.json")
+RecordingMainStore(reducer: CombinedReducer([
+    NavigationReducer(), DataMutationReducer(),
+    TwitterAPIReducer(), LocationServiceReducer(),
+    SearchTwitterScene._Reducer()]),
+    appState: AppState(), typeMaps: typeMaps, recording: recording ? "recording.json" : nil)
 
 var persistenceAdapter = PersistenceAdapter<DataState, AppState>()
 

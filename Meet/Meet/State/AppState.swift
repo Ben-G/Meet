@@ -11,12 +11,14 @@ import SwiftFlow
 import SwiftFlowRouter
 
 struct AppState: StateType, HasNavigationState, HasDataState, HasTwitterAPIState,
-        Persistable, HasLocationServiceState {
+        Persistable, HasLocationServiceState, HasRouteSpecificState, HasTwitterSceneState {
 
     var navigationState = NavigationState()
+    var routeSpecificState: [String: Any] = [:]
     var dataState = persistenceAdapter.hydrateStore() ?? DataState()
     var twitterAPIState = TwitterAPIState()
     var locationServiceState = LocationServiceState()
+    var twitterSceneState = SearchTwitterScene.State()
 
     init() { }
 
@@ -26,14 +28,14 @@ struct AppState: StateType, HasNavigationState, HasDataState, HasTwitterAPIState
     }
 }
 
-extension AppState: Coding {
+// NOTE: once proven the following concepts will likely be moved into Router
 
-    init(dictionary: [String : AnyObject]) {
-        abort()
-    }
+protocol HasRouteSpecificState {
+    var routeSpecificState: [String: Any] { get set }
+}
 
-    func dictionaryRepresentation() -> [String : AnyObject] {
-        abort()
-    }
+typealias Route = [RouteElementIdentifier]
 
+func routeSpecificKey(route: Route) -> String {
+    return route.joinWithSeparator("|")
 }
