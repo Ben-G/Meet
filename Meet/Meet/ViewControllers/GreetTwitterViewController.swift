@@ -15,12 +15,25 @@ protocol GreetTwitterViewControllerState: HasRouteSpecificState, HasNavigationSt
 class GreetTwitterViewController: UIViewController, Routable {
 
     static let identifier = "GreetTwitterViewController"
+    var store = mainStore
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        store.subscribe(self)
+    }
+
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        store.unsubscribe(self)
+    }
 
 }
 
 extension GreetTwitterViewController: StoreSubscriber {
 
-    func newState(state: GreetTwitterViewControllerState) {
+    func newState(state: AppState) {
         guard let selectedTwitterUser = state.routeSpecificState[routeSpecificKey(state.navigationState.route)] as? TwitterUser else { return }
 
         print(selectedTwitterUser.name)

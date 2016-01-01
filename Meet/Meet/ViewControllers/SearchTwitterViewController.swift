@@ -82,10 +82,6 @@ class SearchTwitterViewController: UIViewController, StoreSubscriber {
 
     @IBAction func cancelButtonTapped(sender: AnyObject) {
         store.dispatch( SetUserSearchResult(.Success([])) )
-//        store.dispatch(
-//            NavigationAction.DismissViewController(presentingViewController:
-//                self.presentingViewController!)
-//        )
     }
 
     func retrySearch() {
@@ -102,10 +98,6 @@ extension SearchTwitterViewController: UITableViewDelegate {
         store.dispatch( CreateContactWithTwitterUser(twitterUser) )
         store.dispatch( SearchTwitterScene.SetSelectedTwitterUser(twitterUser) )
         store.dispatch( pushRouteSegement(GreetTwitterViewController.identifier) )
-//        store.dispatch(
-//            NavigationAction.DismissViewController(presentingViewController:
-//                self.presentingViewController!)
-//        )
     }
 
 }
@@ -134,7 +126,7 @@ extension SearchTwitterViewController: Routable {
 
             store.dispatch(SetRouteSpecificData(route: newRoute, data: twitterSceneState.twitterSceneState.selectedTwitterUser!))
 
-            self.navigationController?.pushViewController(greetTwitterViewController, animated: false)
+            self.presentViewController(greetTwitterViewController, animated: true, completion: completionHandler)
             // TODO: NavigationController doesn't have a completion hook
             // Need to create ourselves: http://stackoverflow.com/questions/9906966/completion-handler-for-uinavigationcontroller-pushviewcontrolleranimated
 

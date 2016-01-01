@@ -16,6 +16,7 @@ let typeMaps: [TypeMap] = [
     LocationServiceActionsTypeMap,
     TwitterAPIActionsTypeMap,
     DataMutationActionsTypeMap,
+    RouteDataActionsTypeMap,
     SwiftFlowRouter.typeMap
 ]
 

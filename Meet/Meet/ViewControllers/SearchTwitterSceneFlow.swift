@@ -14,13 +14,13 @@ protocol HasTwitterSceneState {
 
 struct SearchTwitterScene {
 
-// MARK: State
+    // MARK: State
 
     struct State {
         var selectedTwitterUser: TwitterUser?
     }
 
-// MARK: Actions
+    // MARK: Actions
 
     struct SetSelectedTwitterUser: Action {
         var twitterUser: TwitterUser
@@ -30,7 +30,7 @@ struct SearchTwitterScene {
         }
     }
 
-// MARK: Reducer
+    // MARK: Reducer
 
     struct _Reducer: Reducer {
 
@@ -44,5 +44,17 @@ struct SearchTwitterScene {
         }
 
     }
+
+    // MARK: Serialization
+
+//    extension HasTwitterSceneState: StandardActionConvertible {
+//
+//
+//
+//    }
 }
+
+
+
+
 
