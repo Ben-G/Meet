@@ -27,8 +27,10 @@ class SwiftFlowCodableGeneratorTests: XCTestCase {
         let fileURL = testBundle.URLForResource("SetUserSearchText", withExtension: "swiftsourcefile")
         let fileURLString = fileURL!.path!
         let file = File(path: fileURLString)
-        let code = generateActionConvertible(file!)
-        print(code)
+        let convertibleTypes = generateActionConvertible(file!)
+
+        XCTAssertEqual(convertibleTypes.count, 2)
+        XCTAssertEqual(convertibleTypes[0].typeName, "SetUserSearchText")
     }
 
 }

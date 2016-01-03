@@ -8,10 +8,20 @@
 
 import Foundation
 
-struct SetUserSearchText: GenerateCodable {
+struct SetUserSearchText: StandardActionConvertible {
     let userSearchText: String
 
     init(_ userSearchText: String) {
         self.userSearchText = userSearchText
+    }
+}
+
+struct DeleteUser: StandardActionConvertible {
+    var user: User
+    let date: NSDate
+
+    init(_ user: User, date: NSDate) {
+        self.user = user
+        self.date = date
     }
 }
