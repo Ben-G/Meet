@@ -1,0 +1,17 @@
+//
+//  SetUserSearchResutls.swift
+//  Meet
+//
+//  Created by Benjamin Encz on 12/9/15.
+//  Copyright © 2015 DigiTales. All rights reserved.
+//
+
+import Foundation
+
+struct SetUserSearchText: GenerateCodable {
+    let userSearchText: String
+
+    init(_ userSearchText: String) {
+        self.userSearchText = userSearchText
+    }
+}
