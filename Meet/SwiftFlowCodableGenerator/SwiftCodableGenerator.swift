@@ -23,9 +23,54 @@ public func generateActionConvertible(input: File) -> [TypeSerializationInfo] {
     let actionableTypeInfo = actionableStructs!.map {
         TypeSerializationInfo(dictionary: $0 as! XPCDictionary)
     }
-    // Find all of their properties
 
     return actionableTypeInfo
+}
+
+public func generateActionConvertibleImplementation(typeInfo: [TypeSerializationInfo], indentation ind: String = "\t") -> String {
+
+    let implementations: [String] = typeInfo.map {
+        var output = ""
+        output += "extension \($0.typeName): StandardActionConvertible { \n"
+        output += "\(ind)static let type = \"\($0.typeName)\"\n\n"
+        output += generateInit($0) + "\n\n"
+        output += generateConversion($0) + "\n}"
+
+        return output
+    }
+
+    return implementations.joinWithSeparator("\n\n")
+}
+
+public func writeGeneratedCodeToFile(code: String) {
+    let currentDirectory = NSFileManager.defaultManager().currentDirectoryPath
+    try! code.writeToFile("\(currentDirectory)/SwiftFlowCodeGen.swift", atomically: true, encoding: NSUTF8StringEncoding)
+}
+
+private func generateInit(typeInfo: TypeSerializationInfo, indentation ind: String = "\t")
+    -> String {
+
+        var output = ""
+        output += "\(ind)init(_ action: StandardAction) {\n"
+        output += typeInfo.properties.map {
+                    "\(ind)\(ind)self.\($0.propertyName) = decode(action.payload![\"\($0.propertyName)\"]!)"
+                    }.joinWithSeparator("\n")
+        output += "\n\(ind)}"
+
+        return output
+}
+
+private func generateConversion(typeInfo: TypeSerializationInfo, indentation ind: String = "\t") -> String {
+    var output = ""
+    output += "\(ind)func toStandardAction() -> StandardAction {\n"
+    output += "\(ind)\(ind)let payload = ["
+    output +=  typeInfo.properties.map {
+                    "\"\($0.propertyName)\": encode(self.\($0.propertyName))"
+                }.joinWithSeparator(", ")
+    output += "]\n"
+    output +=  "\(ind)\(ind)return StandardAction(type: \(typeInfo.typeName).type, payload: payload, isTypedAction: true) \n\t}"
+
+    return output
 }
 
 private func filterActionConvertibleStructs<T>(element: T) -> Bool {

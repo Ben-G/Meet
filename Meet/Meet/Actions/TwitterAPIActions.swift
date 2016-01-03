@@ -16,7 +16,6 @@ import Result
 // MARK: Set User Search Text
 
 struct SetUserSearchText: Action {
-    static let type = "SetUserSearchText"
     let userSearchText: String
 
     init(_ userSearchText: String) {
@@ -55,15 +54,16 @@ let TwitterAPIActionsTypeMap: TypeMap = [
 ]
 
 extension SetUserSearchText: StandardActionConvertible {
+    static let type = "SetUserSearchText"
 
     init(_ action: StandardAction) {
-        self.userSearchText = action.payload!["userSearchText"] as! String
+        self.userSearchText = decode(action.payload!["userSearchText"]!)
     }
 
     func toStandardAction() -> StandardAction {
-        return StandardAction(type: SetUserSearchText.type, payload: ["userSearchText": self.userSearchText], isTypedAction: true)
+        let payload = ["userSearchText": encode(self.userSearchText)]
+        return StandardAction(type: SetUserSearchText.type, payload: payload, isTypedAction: true)
     }
-    
 }
 
 extension SetTwitterClient: StandardActionConvertible {

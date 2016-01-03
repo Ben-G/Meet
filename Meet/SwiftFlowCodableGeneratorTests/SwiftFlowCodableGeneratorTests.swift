@@ -22,7 +22,7 @@ class SwiftFlowCodableGeneratorTests: XCTestCase {
         super.tearDown()
     }
 
-    func testExample() {
+    func testExtraction() {
         let testBundle = NSBundle(forClass: self.dynamicType)
         let fileURL = testBundle.URLForResource("SetUserSearchText", withExtension: "swiftsourcefile")
         let fileURLString = fileURL!.path!
@@ -31,6 +31,18 @@ class SwiftFlowCodableGeneratorTests: XCTestCase {
 
         XCTAssertEqual(convertibleTypes.count, 2)
         XCTAssertEqual(convertibleTypes[0].typeName, "SetUserSearchText")
+    }
+
+    func testCodeGeneration() {
+        let testBundle = NSBundle(forClass: self.dynamicType)
+        let fileURL = testBundle.URLForResource("SetUserSearchText", withExtension: "swiftsourcefile")
+        let fileURLString = fileURL!.path!
+        let file = File(path: fileURLString)
+        let convertibleTypes = generateActionConvertible(file!)
+
+        let code = generateActionConvertibleImplementation(convertibleTypes)
+        print(code)
+        writeGeneratedCodeToFile(code)
     }
 
 }
