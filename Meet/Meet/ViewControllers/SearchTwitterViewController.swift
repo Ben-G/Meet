@@ -119,12 +119,12 @@ extension SearchTwitterViewController: Routable {
         var twitterSceneState = store.appState as! HasTwitterSceneState
 
         if routeElementIdentifier == GreetTwitterViewController.identifier {
-            let greetTwitterViewController = GreetTwitterViewController()
+            let greetTwitterViewController = UIStoryboard(name: "Main",bundle: nil)
+                        .instantiateViewControllerWithIdentifier("GreetTwitterViewController")
 
-            var newRoute = navigationState.navigationState.route
-            newRoute.append(routeElementIdentifier)
+            let routeSpecificData: [String: AnyObject] = encode(twitterSceneState.twitterSceneState.selectedTwitterUser!)
 
-            store.dispatch(SetRouteSpecificData(route: newRoute, data: twitterSceneState.twitterSceneState.selectedTwitterUser!))
+            store.dispatch(SetRouteSpecificData(route: navigationState.navigationState.route, data: routeSpecificData))
 
             self.presentViewController(greetTwitterViewController, animated: true, completion: completionHandler)
             // TODO: NavigationController doesn't have a completion hook
@@ -132,7 +132,7 @@ extension SearchTwitterViewController: Routable {
 
             completionHandler()
 
-            return greetTwitterViewController
+            return greetTwitterViewController as! Routable
         }
 
         fatalError()

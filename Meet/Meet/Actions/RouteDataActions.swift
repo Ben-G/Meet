@@ -13,14 +13,16 @@ import SwiftFlowRouter
 struct SetRouteSpecificData: Action {
 
     var route: [RouteElementIdentifier]
-    var data: Coding
+    var data: [String: AnyObject]
 
 }
 
 // MARK: Serialization
 
+// need to use literal string here, since static members in generic types
+// are not supported yet
 let RouteDataActionsTypeMap: TypeMap = [
-    SetRouteSpecificData.type: SetRouteSpecificData.self
+    "SetRouteSpecificData": SetRouteSpecificData.self
 ]
 
 extension SetRouteSpecificData: StandardActionConvertible {
@@ -29,13 +31,13 @@ extension SetRouteSpecificData: StandardActionConvertible {
 
     init(_ standardAction: StandardAction) {
         self.route = standardAction.payload!["route"] as! [RouteElementIdentifier]
-        self.data = standardAction.payload!["data"] as! Coding
+        self.data = standardAction.payload!["data"] as! [String: AnyObject]
     }
 
     func toStandardAction() -> StandardAction {
         let payload: [String: AnyObject] = [
             "route": self.route,
-            "data": self.data as! AnyObject
+            "data": self.data
         ]
 
         return StandardAction(type: SetRouteSpecificData.type, payload: payload, isTypedAction: true)

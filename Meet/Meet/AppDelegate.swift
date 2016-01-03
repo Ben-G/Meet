@@ -17,17 +17,19 @@ let typeMaps: [TypeMap] = [
     TwitterAPIActionsTypeMap,
     DataMutationActionsTypeMap,
     RouteDataActionsTypeMap,
-    SwiftFlowRouter.typeMap
+    SwiftFlowRouter.typeMap,
+    SearchTwitterScene.typeMap
 ]
 
-let recording = false
+let replaying = true
 
 let mainStore =
 RecordingMainStore(reducer: CombinedReducer([
     NavigationReducer(), DataMutationReducer(),
     TwitterAPIReducer(), LocationServiceReducer(),
-    SearchTwitterScene._Reducer()]),
-    appState: AppState(), typeMaps: typeMaps, recording: recording ? "recording.json" : nil)
+    SearchTwitterScene._Reducer(),
+    RouteDataReducer()]),
+    appState: AppState(), typeMaps: typeMaps, recording: replaying ? "recording.json" : nil)
 
 var persistenceAdapter = PersistenceAdapter<DataState, AppState>()
 

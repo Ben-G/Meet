@@ -47,3 +47,31 @@ func decode<A: Coding, B: Coding>(dictionary: [String : AnyObject]) -> Result<A,
         abort()
     }
 }
+
+func decode<T: Coding>(any: Any) -> T {
+    return decode(any as! [String: AnyObject])
+}
+
+func decode<T: Coding>(dictionary: [String : AnyObject]) -> T {
+    return T(dictionary: dictionary)
+}
+
+func encode(instance: Coding) -> [String : AnyObject] {
+    return instance.dictionaryRepresentation()
+}
+
+func decode<T: CodingCompatible>(value: AnyObject) -> T {
+    return value as! T
+}
+
+func encode<T: CodingCompatible>(value: T) -> AnyObject {
+    return value as! AnyObject
+}
+
+protocol CodingCompatible {}
+
+extension String: CodingCompatible {}
+extension Int: CodingCompatible {}
+extension Double: CodingCompatible {}
+extension Float: CodingCompatible {}
+extension Bool: CodingCompatible {}

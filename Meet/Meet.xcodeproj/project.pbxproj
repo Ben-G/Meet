@@ -20,6 +20,7 @@
 		258A9D8C1C36046F0004DDA2 /* RouteDataActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258A9D8B1C36046F0004DDA2 /* RouteDataActions.swift */; };
 		258A9D8E1C3607390004DDA2 /* SearchTwitterSceneFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258A9D8D1C3607390004DDA2 /* SearchTwitterSceneFlow.swift */; };
 		258A9D901C360C000004DDA2 /* NavigationActionCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258A9D8F1C360C000004DDA2 /* NavigationActionCreator.swift */; };
+		25E1B3691C3899F30096E36D /* Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E1B3681C3899F30096E36D /* Serialization.swift */; };
 		625E65A11C1247CB0027C288 /* DataMutationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E65A01C1247CB0027C288 /* DataMutationActions.swift */; };
 		625E65A31C124DE60027C288 /* TwitterAPIActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E65A21C124DE60027C288 /* TwitterAPIActions.swift */; };
 		625E65A51C1267BF0027C288 /* LocationServiceActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E65A41C1267BF0027C288 /* LocationServiceActions.swift */; };
@@ -541,6 +542,7 @@
 		258A9D8B1C36046F0004DDA2 /* RouteDataActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteDataActions.swift; sourceTree = "<group>"; };
 		258A9D8D1C3607390004DDA2 /* SearchTwitterSceneFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTwitterSceneFlow.swift; sourceTree = "<group>"; };
 		258A9D8F1C360C000004DDA2 /* NavigationActionCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationActionCreator.swift; sourceTree = "<group>"; };
+		25E1B3681C3899F30096E36D /* Serialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serialization.swift; sourceTree = "<group>"; };
 		624BFC611C0FA4810047637E /* Quick.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quick.xcodeproj; path = Carthage/Checkouts/Quick/Quick.xcodeproj; sourceTree = SOURCE_ROOT; };
 		624BFC7F1C0FA48E0047637E /* Nimble.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nimble.xcodeproj; path = Carthage/Checkouts/Nimble/Nimble.xcodeproj; sourceTree = SOURCE_ROOT; };
 		625E65A01C1247CB0027C288 /* DataMutationActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataMutationActions.swift; sourceTree = "<group>"; };
@@ -670,6 +672,14 @@
 				252C716E1C35C3A20016D025 /* Swifter+Encoding.swift */,
 			);
 			path = External;
+			sourceTree = "<group>";
+		};
+		25E1B32A1C3899EA0096E36D /* SerializationCode */ = {
+			isa = PBXGroup;
+			children = (
+				25E1B3681C3899F30096E36D /* Serialization.swift */,
+			);
+			path = SerializationCode;
 			sourceTree = "<group>";
 		};
 		624BFC621C0FA4810047637E /* Products */ = {
@@ -885,6 +895,7 @@
 		62D3B6BA1BF2FAA80056D509 /* Meet */ = {
 			isa = PBXGroup;
 			children = (
+				25E1B32A1C3899EA0096E36D /* SerializationCode */,
 				252C716B1C35C3250016D025 /* External */,
 				626DA4361BFEA4A700988FC0 /* Frameworks */,
 				6292BEE81C0C160C00CC1B8E /* LocationService */,
@@ -1654,6 +1665,7 @@
 				62D3B6FA1BF3B73A0056D509 /* AddContactViewController.swift in Sources */,
 				252C716D1C35C3300016D025 /* Result+Encoding.swift in Sources */,
 				258A9D8E1C3607390004DDA2 /* SearchTwitterSceneFlow.swift in Sources */,
+				25E1B3691C3899F30096E36D /* Serialization.swift in Sources */,
 				62D3B6F81BF3B72E0056D509 /* ContactListViewController.swift in Sources */,
 				258A9D4B1C3601800004DDA2 /* GreetTwitterViewController.swift in Sources */,
 				6292BEE11C0C07B100CC1B8E /* LocationIndicatorView.swift in Sources */,

@@ -7,12 +7,15 @@
 //
 
 import SwiftFlow
+import SwiftFlowRecorder
 
 protocol HasTwitterSceneState {
     var twitterSceneState: SearchTwitterScene.State { get set }
 }
 
 struct SearchTwitterScene {
+
+    static let typeMap: TypeMap = [SearchTwitterScene.SetSelectedTwitterUser.type: SearchTwitterScene.SetSelectedTwitterUser.self]
 
     // MARK: State
 
@@ -45,16 +48,4 @@ struct SearchTwitterScene {
 
     }
 
-    // MARK: Serialization
-
-//    extension HasTwitterSceneState: StandardActionConvertible {
-//
-//
-//
-//    }
 }
-
-
-
-
-

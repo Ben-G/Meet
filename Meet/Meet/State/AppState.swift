@@ -14,7 +14,7 @@ struct AppState: StateType, HasNavigationState, HasDataState, HasTwitterAPIState
         Persistable, HasLocationServiceState, HasRouteSpecificState, HasTwitterSceneState {
 
     var navigationState = NavigationState()
-    var routeSpecificState: [String: Any] = [:]
+    var routeSpecificState: [String: [String: AnyObject]] = [:]
     var dataState = persistenceAdapter.hydrateStore() ?? DataState()
     var twitterAPIState = TwitterAPIState()
     var locationServiceState = LocationServiceState()
@@ -31,7 +31,7 @@ struct AppState: StateType, HasNavigationState, HasDataState, HasTwitterAPIState
 // NOTE: once proven the following concepts will likely be moved into Router
 
 protocol HasRouteSpecificState {
-    var routeSpecificState: [String: Any] { get set }
+    var routeSpecificState: [String: [String: AnyObject]] { get set }
 }
 
 typealias Route = [RouteElementIdentifier]

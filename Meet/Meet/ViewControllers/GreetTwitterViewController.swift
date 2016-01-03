@@ -10,9 +10,9 @@ import UIKit
 import SwiftFlowRouter
 import SwiftFlow
 
-protocol GreetTwitterViewControllerState: HasRouteSpecificState, HasNavigationState {}
-
 class GreetTwitterViewController: UIViewController, Routable {
+
+    @IBOutlet var twitterLabel: UILabel!
 
     static let identifier = "GreetTwitterViewController"
     var store = mainStore
@@ -34,9 +34,10 @@ class GreetTwitterViewController: UIViewController, Routable {
 extension GreetTwitterViewController: StoreSubscriber {
 
     func newState(state: AppState) {
-        guard let selectedTwitterUser = state.routeSpecificState[routeSpecificKey(state.navigationState.route)] as? TwitterUser else { return }
+        let routeSpecificData = state.routeSpecificState[routeSpecificKey(state.navigationState.route)]!
+        let selectedTwitterUser: TwitterUser = decode(routeSpecificData)
 
-        print(selectedTwitterUser.name)
+        twitterLabel.text = selectedTwitterUser.name
     }
 
 }

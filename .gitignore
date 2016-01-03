@@ -2,6 +2,10 @@
 
 Meet/Meet/Clients/Auth/TwitterKeys.plist
 
+## Mac OS X
+
+.DS_Store
+
 # Xcode
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore

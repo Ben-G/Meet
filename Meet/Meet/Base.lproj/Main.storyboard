@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -20,11 +20,9 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oxM-ZQ-Iog">
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
-                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="oxM-ZQ-Iog" secondAttribute="bottom" id="QoY-Tg-Ojn"/>
@@ -42,6 +40,39 @@
             </objects>
             <point key="canvasLocation" x="1026" y="-145"/>
         </scene>
+        <!--Greet Twitter View Controller-->
+        <scene sceneID="WCZ-Ak-5gG">
+            <objects>
+                <viewController storyboardIdentifier="GreetTwitterViewController" id="7e5-dE-ncO" customClass="GreetTwitterViewController" customModule="Meet" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="INN-PQ-udX"/>
+                        <viewControllerLayoutGuide type="bottom" id="fuU-OH-TLL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="W5a-ex-ir3">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Greet Twitter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZRS-fO-trR">
+                                <rect key="frame" x="250" y="289.5" width="100" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ZRS-fO-trR" firstAttribute="centerX" secondItem="W5a-ex-ir3" secondAttribute="centerX" id="Xh2-kx-GHD"/>
+                            <constraint firstItem="ZRS-fO-trR" firstAttribute="centerY" secondItem="W5a-ex-ir3" secondAttribute="centerY" id="a44-GZ-TFi"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="twitterLabel" destination="ZRS-fO-trR" id="aiV-vC-W54"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eXB-pQ-xmP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="235" y="516"/>
+        </scene>
         <!--Meet-->
         <scene sceneID="KZn-MS-4AI">
             <objects>
@@ -56,7 +87,6 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AXs-Lp-Zjo">
                                 <rect key="frame" x="249" y="255" width="103" height="30"/>
-                                <animations/>
                                 <state key="normal" title="Add via Twitter"/>
                                 <connections>
                                     <action selector="addTwitterButtonTapped:" destination="tmC-Au-bX5" eventType="touchUpInside" id="Jzc-e4-39b"/>
@@ -64,7 +94,6 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8WK-iA-QcY">
                                 <rect key="frame" x="254" y="315" width="92" height="30"/>
-                                <animations/>
                                 <state key="normal" title="Add via Email"/>
                                 <connections>
                                     <action selector="emailIntroButtonTapped:" destination="tmC-Au-bX5" eventType="touchUpInside" id="FjB-EO-SdU"/>
@@ -72,14 +101,12 @@
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wc8-X4-kgB" customClass="LocationIndicatorView" customModule="Meet" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="20" width="600" height="80"/>
-                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="n6v-8J-tQv"/>
                                 </constraints>
                             </view>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="8WK-iA-QcY" firstAttribute="centerY" secondItem="fJN-3l-dqU" secondAttribute="centerY" constant="30" id="3gd-up-zay"/>
@@ -130,7 +157,6 @@
                         <subviews>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Kz0-X5-szv">
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
-                                <animations/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="SDe-YQ-u2H" id="B76-8H-hSt"/>
@@ -138,7 +164,6 @@
                             </searchBar>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kXH-63-3ST">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="05T-H8-yxb"/>
                                 </constraints>
@@ -154,14 +179,12 @@
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="64" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uNT-dW-CqZ">
                                 <rect key="frame" x="0.0" y="108" width="600" height="492"/>
-                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="delegate" destination="SDe-YQ-u2H" id="uom-2b-rWc"/>
                                 </connections>
                             </tableView>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="uNT-dW-CqZ" firstAttribute="top" secondItem="Kz0-X5-szv" secondAttribute="bottom" id="6os-9r-vuK"/>
@@ -199,13 +222,11 @@
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1rc-Tc-kIF">
                                 <rect key="frame" x="40" y="285" width="520" height="30"/>
-                                <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QBU-wZ-BnE">
                                 <rect key="frame" x="284" y="335" width="32" height="30"/>
-                                <animations/>
                                 <state key="normal" title="Intro"/>
                                 <connections>
                                     <action selector="emailIntroButtonTapped:" destination="kyq-01-kYx" eventType="touchUpInside" id="h3R-Gj-ywA"/>
@@ -213,7 +234,6 @@
                             </button>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rph-Rr-ZX9">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="g2U-qV-SNP"/>
                                 </constraints>
@@ -228,7 +248,6 @@
                                 </items>
                             </navigationBar>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="rph-Rr-ZX9" secondAttribute="trailing" id="0IL-L5-5ju"/>
