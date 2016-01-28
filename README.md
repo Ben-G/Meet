@@ -2,6 +2,8 @@
 
 This is a project being built as a proof of concept for the [Swift Flow framework](https://github.com/Swift-Flow/Swift-Flow).
 
+This demo still runs on 0.2 and will soon be updated to the latest release of ReSwift (Swift Flow has been renamed to ReSwift).
+
 #Demo
 
 This project demonstrates some of the capabilites of the Swift Flow framework, including recording and replaying of application state:
@@ -15,7 +17,7 @@ This project demonstrates some of the capabilites of the Swift Flow framework, i
 To install the dependencies run:
 
 ```
-carthage update --no-use-binaries
+carthage update --no-use-binaries --platform iOS
 ```
 
 This project currently doesn't use Carthage binaries [due to this issue with them](https://github.com/Carthage/Carthage/issues/924).
